@@ -11,8 +11,8 @@ env:
 
 on:
   schedule:
-    # Run every day at 14:00 UTC
-    - cron: "0 14 * * *"
+    # Run 12 times a day (every 2 hours) to evenly distribute pins
+    - cron: "0 */2 * * *"
 
   # Allow manual triggering from the GitHub Actions UI
   workflow_dispatch:
