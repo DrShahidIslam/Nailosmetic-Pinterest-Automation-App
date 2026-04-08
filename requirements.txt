@@ -1,0 +1,13 @@
+# Nailosmetic Pinterest Automation Bot — Dependencies
+
+# Google Gemini AI SDK (new package)
+google-genai>=1.0.0
+
+# HTTP requests (SiliconFlow & Pinterest API)
+requests>=2.31.0
+
+# Image processing & design
+Pillow>=10.0.0
+
+# Environment variable management
+python-dotenv>=1.0.0
