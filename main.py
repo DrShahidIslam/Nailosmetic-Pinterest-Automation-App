@@ -144,7 +144,7 @@ Return ONLY valid JSON (no markdown, no code fences) with these exact keys:
 {{
   "board_category": "One of the category keys listed below that BEST matches the generated concept.",
   "title": "A short, catchy, click-worthy Pinterest title (max 100 chars). Use emojis sparingly.",
-  "description": "An SEO-optimized Pinterest description (150-300 chars). Include relevant hashtags like #nailart #nails #naildesign #nailinspiration #manicure etc.",
+  "description": "An SEO-optimized Pinterest description (150-300 chars). You MUST include exactly 10 highly relevant and trending hashtags at the very end (e.g., #nailart #nails #[niche_style]).",
   "image_prompt": "A highly detailed image generation prompt (200-400 chars) describing a close-up photograph of beautifully manicured hands showcasing the nail art concept. Include details about: the specific nail design/pattern/color, hand pose and anatomy, lighting (studio/natural), background, camera angle, and overall aesthetic. The style should be editorial, high-end beauty magazine quality."
 }}
 
