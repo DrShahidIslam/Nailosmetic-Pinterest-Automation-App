@@ -18,6 +18,7 @@ import base64
 import textwrap
 import tempfile
 import requests
+import time
 from pathlib import Path
 from io import BytesIO
 from dotenv import load_dotenv
@@ -156,11 +157,22 @@ Important guidelines for variety:
 - Vary nail shapes: almond, coffin, stiletto, square, oval, round
 - Include trending aesthetics: clean girl, coquette, Y2K, old money, cottagecore, mob wife"""
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=system_prompt,
-    )
-    raw_text = response.text.strip()
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=system_prompt,
+            )
+            raw_text = response.text.strip()
+            break
+        except Exception as e:
+            if attempt < max_retries - 1:
+                print(f"   ⚠️  Gemini API error ({e}), retrying in 5 seconds...")
+                time.sleep(5)
+            else:
+                print(f"❌ Gemini API failed permanently after {max_retries} attempts: {e}")
+                sys.exit(1)
 
     # Clean up potential markdown code fences
     if raw_text.startswith("```"):
