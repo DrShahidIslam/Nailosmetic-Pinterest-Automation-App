@@ -145,7 +145,7 @@ Return ONLY valid JSON (no markdown, no code fences) with these exact keys:
   "board_category": "One of the category keys listed below that BEST matches the generated concept.",
   "title": "A short, catchy, click-worthy Pinterest title (max 100 chars). Use emojis sparingly.",
   "description": "An SEO-optimized Pinterest description (150-300 chars). You MUST include exactly 10 highly relevant and trending hashtags at the very end (e.g., #nailart #nails #[niche_style]).",
-  "image_prompt": "A highly detailed image generation prompt (200-400 chars) describing a close-up photograph of beautifully manicured hands showcasing the nail art concept. Include details about: the specific nail design/pattern/color, hand pose and anatomy, lighting (studio/natural), background, camera angle, and overall aesthetic. The style should be editorial, high-end beauty magazine quality."
+  "image_prompt": "A highly detailed image generation prompt (200-400 chars) describing a macro photograph of beautiful nails. Crucially: force an extreme close-up angle to focus ONLY on the nails, minimizing visible fingers to avoid AI deformities. Explicitly state 'perfect hand anatomy, elegant natural fingers'. Include details about: specific nail design/pattern/color, lighting, background, and aesthetic. Style should be high-end beauty magazine quality."
 }}
 
 Available board categories (pick the BEST match):
@@ -226,7 +226,8 @@ def generate_image_with_siliconflow(image_prompt: str, output_dir: str) -> str:
 
     payload = {
         "model": SILICONFLOW_MODEL,
-        "prompt": image_prompt,
+        "prompt": image_prompt + ", highly detailed, masterpiece, best quality, perfect anatomy, flawless fingers",
+        "negative_prompt": "mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, unnatural hands, bad anatomy, bad proportions, disfigured, blurry, worst quality, low quality",
         "image_size": "768x1024",  # 3:4 vertical aspect ratio supported by Kolors
         "batch_size": 1,
     }
