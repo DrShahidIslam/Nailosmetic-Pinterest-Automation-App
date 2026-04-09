@@ -145,7 +145,7 @@ Return ONLY valid JSON (no markdown, no code fences) with these exact keys:
   "board_category": "One of the category keys listed below that BEST matches the generated concept.",
   "title": "A short, catchy, click-worthy Pinterest title (max 100 chars). Use emojis sparingly.",
   "description": "An SEO-optimized Pinterest description (150-300 chars). You MUST include exactly 10 highly relevant and trending hashtags at the very end (e.g., #nailart #nails #[niche_style]).",
-  "image_prompt": "A highly detailed image generation prompt (200-400 chars) describing a macro photograph of beautiful nails. Crucially: force an extreme close-up angle to focus ONLY on the nails, minimizing visible fingers to avoid AI deformities. Explicitly state 'perfect hand anatomy, elegant natural fingers'. Include details about: specific nail design/pattern/color, lighting, background, and aesthetic. Style should be high-end beauty magazine quality."
+  "image_prompt": "A highly detailed, ultra-macro image generation prompt (200-400 chars). The focal point MUST be the specific nail design, patterns, and textures. Force a tight, close-up shot of the nails themselves, with minimal hand visibility and no distracting background. Use terms like 'high-resolution jewelry photography', 'extreme close-up on nail art', 'sharp focus', 'luxurious editorial beauty photography'. Specify the exact finish (glossy, matte, iridescent) and any 3D elements clearly."
 }}
 
 Available board categories (pick the BEST match):
@@ -275,110 +275,152 @@ def generate_image_with_siliconflow(image_prompt: str, output_dir: str) -> str:
     return image_path
 
 
+# --- Support functions for design ---
+
+def clean_text_for_rendering(text: str) -> str:
+    """
+    Remove emojis and replace special Unicode characters (smart quotes, em-dashes)
+    with their standard ASCII equivalents to prevent 'tofu' in certain fonts.
+    """
+    # Replace smart quotes and dashes
+    replacements = {
+        "—": "-",  # em dash
+        "–": "-",  # en dash
+        "“": '"',  # smart double quote
+        "”": '"',
+        "‘": "'",  # smart single quote
+        "’": "'",
+        "…": "...",
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+
+    # Remove emojis (common source of tofu)
+    # This regex removes most emoji/picto ranges
+    import re
+    emoji_pattern = re.compile("["
+                               "\U0001f600-\U0001f64f"  # emoticons
+                               "\U0001f300-\U0001f5ff"  # symbols & pictographs
+                               "\U0001f680-\U0001f6ff"  # transport & map symbols
+                               "\U0001f1e0-\U0001f1ff"  # flags (iOS)
+                               "\U00002702-\U000027b0"
+                               "\U000024c2-\U0001f251"
+                               "]+", flags=re.UNICODE)
+    cleaned = emoji_pattern.sub("", text)
+    return cleaned.strip()
+
+
 # ============================================================================
 # PHASE 3: THE DESIGNER — Pillow (PIL)
 # ============================================================================
 
 def design_pin_image(image_path: str, title: str, output_dir: str) -> str:
     """
-    Open the raw image, apply a dark gradient overlay at the bottom,
-    and render the title text in a clean white modern font.
-    Returns the path to the final designed image.
+    Open the raw image, apply a sophisticated overlay, and render the title
+    in a premium font with better typography.
     """
-    print("\n🎨 Phase 3: Designing the Pinterest pin with Pillow...")
+    print("\n🎨 Phase 3: Designing the Pinterest pin with Pillow (Premium Style)...")
+
+    # Clean the title to avoid tofu characters
+    title = clean_text_for_rendering(title)
 
     img = Image.open(image_path).convert("RGBA")
     width, height = img.size
 
-    # --- Create gradient overlay at the bottom ---
-    gradient = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    draw_gradient = ImageDraw.Draw(gradient)
+    # --- Create more subtle gradient overlay ---
+    overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    draw_overlay = ImageDraw.Draw(overlay)
 
-    # Gradient covers the bottom 40% of the image
-    gradient_start_y = int(height * 0.60)
-    max_alpha = 200  # Maximum opacity of the dark overlay
-
+    # Gradient covers the bottom 45%
+    gradient_start_y = int(height * 0.55)
     for y in range(gradient_start_y, height):
-        # Progress from 0 to 1 across the gradient zone
         progress = (y - gradient_start_y) / (height - gradient_start_y)
-        alpha = int(max_alpha * progress)
-        draw_gradient.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
+        alpha = int(220 * (progress ** 1.5))  # Non-linear for smoother transition
+        draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
 
-    # Composite the gradient onto the image
-    img = Image.alpha_composite(img, gradient)
+    img = Image.alpha_composite(img, overlay)
 
-    # --- Add title text ---
+    # --- Add title text with premium typography ---
     draw = ImageDraw.Draw(img)
 
-    # Try to load a clean modern font; fall back to default if not available
-    font_size = int(width * 0.065)  # Responsive font size based on image width
-    font = None
+    # Font setup
+    font_size = int(width * 0.075)
+    font_path = "assets/fonts/Montserrat-Bold.ttf"
 
-    # List of common system fonts to try (in order of preference)
-    font_candidates = [
-        # Windows fonts
-        "C:/Windows/Fonts/segoeui.ttf",
-        "C:/Windows/Fonts/arial.ttf",
-        "C:/Windows/Fonts/calibri.ttf",
-        # Linux fonts (GitHub Actions runners)
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
-        "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf",
-        # macOS fonts
-        "/System/Library/Fonts/Helvetica.ttc",
-        "/System/Library/Fonts/SFNSDisplay.ttf",
-    ]
-
-    for font_path in font_candidates:
-        try:
+    try:
+        if os.path.exists(font_path):
             font = ImageFont.truetype(font_path, font_size)
-            break
-        except (OSError, IOError):
-            continue
-
-    if font is None:
-        print("   ⚠️  No TrueType font found, using default bitmap font.")
+            print(f"   ✅ Using premium font: {font_path}")
+        else:
+            # Fallback to high-quality system fonts
+            font_candidates = [
+                # Windows
+                "C:/Windows/Fonts/segoeuib.ttf",  # Segoe UI Bold
+                "C:/Windows/Fonts/corbelb.ttf",   # Corbel Bold
+                "C:/Windows/Fonts/arialbd.ttf",   # Arial Bold
+                # Linux (GitHub Actions / Debian)
+                "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+                "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+                # macOS
+                "/System/Library/Fonts/SFNSDisplay.ttf",
+                "/System/Library/Fonts/Helvetica.ttc",
+            ]
+            font = None
+            for p in font_candidates:
+                try:
+                    font = ImageFont.truetype(p, font_size)
+                    print(f"   ✅ Using system font fallback: {p}")
+                    break
+                except: continue
+            if not font: font = ImageFont.load_default()
+    except Exception as e:
+        print(f"   ⚠️ Font error: {e}. Using default.")
         font = ImageFont.load_default()
 
-    # Word-wrap the title to fit within the image width
-    max_chars_per_line = int(width / (font_size * 0.55))  # Approximate chars per line
+    # Word-wrap the title
+    max_chars_per_line = int(width / (font_size * 0.5))
     wrapped_lines = textwrap.wrap(title, width=max_chars_per_line)
 
-    # Calculate text positioning (centered, near bottom)
-    line_height = font_size + 10
+    # Text Layout Refinement
+    line_spacing = 1.15
+    line_height = int(font_size * line_spacing)
     total_text_height = len(wrapped_lines) * line_height
-    text_y_start = height - total_text_height - int(height * 0.06)  # 6% padding from bottom
+    text_y_start = height - total_text_height - int(height * 0.08)
 
     for i, line in enumerate(wrapped_lines):
-        # Get text bounding box for centering
         bbox = draw.textbbox((0, 0), line, font=font)
         text_width = bbox[2] - bbox[0]
         text_x = (width - text_width) // 2
         text_y = text_y_start + (i * line_height)
 
-        # Draw text shadow for better readability
-        shadow_offset = 2
-        draw.text(
-            (text_x + shadow_offset, text_y + shadow_offset),
-            line,
-            font=font,
-            fill=(0, 0, 0, 180),
-        )
+        # Subtle shadow for depth
+        draw.text((text_x + 2, text_y + 2), line, font=font, fill=(0, 0, 0, 100))
+        # Main white text
+        draw.text((text_x, text_y), line, font=font, fill=(255, 255, 255, 255))
 
-        # Draw main text in white
-        draw.text(
-            (text_x, text_y),
-            line,
-            font=font,
-            fill=(255, 255, 255, 255),
-        )
+    # --- Add Branding Badge (Nailosmetic) ---
+    try:
+        brand_font_size = int(width * 0.035)
+        brand_font = ImageFont.truetype(font_path, brand_font_size) if os.path.exists(font_path) else None
+        if brand_font:
+            brand_text = "Nailosmetic"
+            brand_bbox = draw.textbbox((0, 0), brand_text, font=brand_font)
+            bw, bh = brand_bbox[2] - brand_bbox[0], brand_bbox[3] - brand_bbox[1]
 
-    # Convert back to RGB for JPEG compatibility and save
+            # Draw a pill-shaped background for the brand
+            bg_padding = 15
+            bx = (width - bw) // 2
+            by = height - bh - int(height * 0.03)
+            # draw.rounded_rectangle([(bx - bg_padding, by - 5), (bx + bw + bg_padding, by + bh + 5)], radius=15, fill=(255, 255, 255, 40))
+            draw.text((bx, by), brand_text, font=brand_font, fill=(255, 255, 255, 180))
+    except: pass
+
+    # Save
     final_img = img.convert("RGB")
     final_path = os.path.join(output_dir, "final_pin.jpg")
     final_img.save(final_path, "JPEG", quality=95)
 
-    print(f"   ✅ Final pin saved to: {final_path}")
+    print(f"   ✅ Final stylish pin saved: {final_path}")
     return final_path
 
 
