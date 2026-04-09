@@ -232,10 +232,22 @@ def generate_image_with_siliconflow(image_prompt: str, output_dir: str) -> str:
         "batch_size": 1,
     }
 
-    response = requests.post(SILICONFLOW_API_URL, headers=headers, json=payload, timeout=120)
-
-    if response.status_code != 200:
-        print(f"❌ SiliconFlow API error ({response.status_code}): {response.text[:500]}")
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(SILICONFLOW_API_URL, headers=headers, json=payload, timeout=120)
+            if response.status_code == 200:
+                break
+            else:
+                print(f"   ⚠️  SiliconFlow API error ({response.status_code}): {response.text[:200]}")
+                if attempt < max_retries - 1:
+                    time.sleep(10)
+        except Exception as e:
+            print(f"   ⚠️  SiliconFlow API exception: {e}")
+            if attempt < max_retries - 1:
+                time.sleep(10)
+    else:
+        print(f"❌ SiliconFlow API failed permanently after {max_retries} attempts.")
         sys.exit(1)
 
     result = response.json()
@@ -459,20 +471,33 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
         "Content-Type": "application/json",
     }
 
-    response = requests.post(
-        f"{PINTEREST_API_BASE}/pins",
-        headers=headers,
-        json=pin_payload,
-        timeout=60,
-    )
-
-    if response.status_code in (200, 201):
-        result = response.json()
-        pin_id = result.get("id", "unknown")
-        print(f"   ✅ Pin published successfully! Pin ID: {pin_id}")
-        return result
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(
+                f"{PINTEREST_API_BASE}/pins",
+                headers=headers,
+                json=pin_payload,
+                timeout=60,
+            )
+            if response.status_code in (200, 201):
+                result = response.json()
+                pin_id = result.get("id", "unknown")
+                print(f"   ✅ Pin published successfully! Pin ID: {pin_id}")
+                return result
+            elif response.status_code == 429:
+                print(f"   ⚠️  Pinterest rate limit exceeded. Retrying in 60s...")
+                time.sleep(60)
+            else:
+                print(f"   ⚠️  Pinterest API error ({response.status_code}): {response.text[:200]}")
+                if attempt < max_retries - 1:
+                    time.sleep(10)
+        except Exception as e:
+            print(f"   ⚠️  Pinterest API exception: {e}")
+            if attempt < max_retries - 1:
+                time.sleep(10)
     else:
-        print(f"❌ Pinterest API error ({response.status_code}): {response.text[:500]}")
+        print(f"❌ Pinterest API failed permanently after {max_retries} attempts.")
         sys.exit(1)
 
 
