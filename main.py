@@ -40,7 +40,9 @@ from google import genai
 load_dotenv()  # Load .env file if present (local development)
 
 # API Keys
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+# Supports multiple GEMINI keys (comma-separated). Fallback to solitary key.
+raw_gemini_keys = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
+GEMINI_API_KEYS = [k.strip() for k in raw_gemini_keys.split(",") if k.strip()]
 SILICONFLOW_API_KEY = os.getenv("SILICONFLOW_API_KEY")
 PINTEREST_ACCESS_TOKEN = os.getenv("PINTEREST_ACCESS_TOKEN")
 PINTEREST_REFRESH_TOKEN = os.getenv("PINTEREST_REFRESH_TOKEN")
@@ -86,7 +88,7 @@ PINTEREST_API_BASE = "https://api.pinterest.com/v5"
 def validate_env_vars():
     """Ensure all required environment variables are set."""
     required = {
-        "GEMINI_API_KEY": GEMINI_API_KEY,
+        "GEMINI_API_KEYS": True if GEMINI_API_KEYS else False,
         "SILICONFLOW_API_KEY": SILICONFLOW_API_KEY,
         "PINTEREST_ACCESS_TOKEN": PINTEREST_ACCESS_TOKEN,
     }
@@ -118,7 +120,7 @@ def generate_content_with_gemini() -> dict:
     """
     print("\n🧠 Phase 1: Generating content with Gemini...")
 
-    client = genai.Client(api_key=GEMINI_API_KEY)
+
 
     # Build list of available board categories so Gemini only picks from configured boards
     available_categories = [cat for cat, info in BOARD_MAP.items() if info["board_id"]]
@@ -157,22 +159,36 @@ Important guidelines for variety:
 - Vary nail shapes: almond, coffin, stiletto, square, oval, round
 - Include trending aesthetics: clean girl, coquette, Y2K, old money, cottagecore, mob wife"""
 
-    max_retries = 3
-    for attempt in range(max_retries):
-        try:
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=system_prompt,
-            )
-            raw_text = response.text.strip()
+    max_retries_per_key = 3
+    success = False
+    raw_text = ""
+    current_model = "gemini-2.5-flash"
+    
+    for api_key in GEMINI_API_KEYS:
+        key_preview = f"...{api_key[-4:]}" if len(api_key) > 4 else "***"
+        print(f"   🔄 Attempting generation with API Key ending in {key_preview}")
+        client = genai.Client(api_key=api_key)
+        
+        for attempt in range(max_retries_per_key):
+            try:
+                response = client.models.generate_content(
+                    model=current_model,
+                    contents=system_prompt,
+                )
+                raw_text = response.text.strip()
+                success = True
+                break
+            except Exception as e:
+                wait_time = 15 * (attempt + 1)
+                print(f"   ⚠️  Gemini API error ({e}), retrying {current_model} in {wait_time}s...")
+                time.sleep(wait_time)
+        
+        if success:
             break
-        except Exception as e:
-            if attempt < max_retries - 1:
-                print(f"   ⚠️  Gemini API error ({e}), retrying in 5 seconds...")
-                time.sleep(5)
-            else:
-                print(f"❌ Gemini API failed permanently after {max_retries} attempts: {e}")
-                sys.exit(1)
+            
+    if not success:
+        print(f"❌ Gemini API failed permanently across all provided API keys.")
+        sys.exit(1)
 
     # Clean up potential markdown code fences
     if raw_text.startswith("```"):
