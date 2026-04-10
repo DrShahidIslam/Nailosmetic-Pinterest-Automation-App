@@ -159,29 +159,38 @@ Important guidelines for variety:
 - Vary nail shapes: almond, coffin, stiletto, square, oval, round
 - Include trending aesthetics: clean girl, coquette, Y2K, old money, cottagecore, mob wife"""
 
-    max_retries_per_key = 3
+    models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"]
+    max_retries_per_model = 2
     success = False
     raw_text = ""
-    current_model = "gemini-2.5-flash"
     
     for api_key in GEMINI_API_KEYS:
         key_preview = f"...{api_key[-4:]}" if len(api_key) > 4 else "***"
         print(f"   🔄 Attempting generation with API Key ending in {key_preview}")
         client = genai.Client(api_key=api_key)
         
-        for attempt in range(max_retries_per_key):
-            try:
-                response = client.models.generate_content(
-                    model=current_model,
-                    contents=system_prompt,
-                )
-                raw_text = response.text.strip()
-                success = True
+        for current_model in models_to_try:
+            print(f"   🤖 Trying model: {current_model}")
+            for attempt in range(max_retries_per_model):
+                try:
+                    response = client.models.generate_content(
+                        model=current_model,
+                        contents=system_prompt,
+                    )
+                    raw_text = response.text.strip()
+                    success = True
+                    break
+                except Exception as e:
+                    # If model not found, no point in retrying it
+                    if "404" in str(e):
+                        print(f"   ⚠️  Model {current_model} not found, skipping...")
+                        break
+                    wait_time = 15 * (attempt + 1)
+                    print(f"   ⚠️  Gemini API error ({e}), retrying {current_model} in {wait_time}s...")
+                    time.sleep(wait_time)
+            
+            if success:
                 break
-            except Exception as e:
-                wait_time = 15 * (attempt + 1)
-                print(f"   ⚠️  Gemini API error ({e}), retrying {current_model} in {wait_time}s...")
-                time.sleep(wait_time)
         
         if success:
             break
