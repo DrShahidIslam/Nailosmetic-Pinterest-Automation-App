@@ -72,6 +72,11 @@ BOARD_MAP = {
         "name": "Spring Nail Ideas & Trends",
         "link": "https://nailosmetic.com/spring-nail-designs-inspo/",
     },
+    "summer_vacation": {
+        "board_id": os.getenv("PINTEREST_BOARD_SUMMER", ""),
+        "name": "Summer Vacation Nails & Aesthetic Ideas",
+        "link": "https://nailosmetic.com/summer-vacation-nail-ideas/",
+    },
 }
 
 # Fallback board (aesthetic is the most general)
@@ -132,6 +137,7 @@ def generate_content_with_gemini() -> dict:
         "chrome_glazed": "Chrome nails, glazed donut finish, metallic, pearlescent, reflective, or shiny nail designs",
         "minimalist_clean": "Minimalist, clean girl aesthetic, short nails, neutral tones, milky white, micro-French, subtle elegant designs",
         "spring_trends": "Spring-themed nails: pastels, florals, bright fresh colors, seasonal trendy designs",
+        "summer_vacation": "Summer vacation nails, tropical designs, bright summer colors, beach aesthetics, neon, fruit patterns, warm weather seasonal trends",
     }
 
     categories_prompt = "\n".join(
