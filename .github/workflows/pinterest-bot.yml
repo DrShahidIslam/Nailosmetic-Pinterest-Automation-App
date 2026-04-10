@@ -11,8 +11,8 @@ env:
 
 on:
   schedule:
-    # Run 12 times a day (every 2 hours) to evenly distribute pins
-    - cron: "0 */2 * * *"
+    # Run 6 times a day (every 4 hours) to evenly distribute pins and avoid API rate limits
+    - cron: "0 */4 * * *"
 
   # Allow manual triggering from the GitHub Actions UI
   workflow_dispatch:
@@ -41,6 +41,7 @@ jobs:
       # 4. Run the bot
       - name: 🚀 Run Pinterest Bot
         env:
+          GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
