@@ -159,8 +159,9 @@ Important guidelines for variety:
 - Vary nail shapes: almond, coffin, stiletto, square, oval, round
 - Include trending aesthetics: clean girl, coquette, Y2K, old money, cottagecore, mob wife"""
 
-    models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"]
-    max_retries_per_model = 2
+    import re
+    models_to_try = ["gemini-2.5-flash", "gemini-2.5-flash-lite"]
+    max_retries_per_model = 3
     success = False
     raw_text = ""
     
@@ -181,12 +182,20 @@ Important guidelines for variety:
                     success = True
                     break
                 except Exception as e:
-                    # If model not found, no point in retrying it
-                    if "404" in str(e):
-                        print(f"   ⚠️  Model {current_model} not found, skipping...")
+                    error_str = str(e)
+                    # If model not found or it has 0 limit (unsupported in free tier for this region/account)
+                    if "404" in error_str or "limit: 0" in error_str:
+                        print(f"   ⚠️  Model {current_model} unavailable or zero quota, skipping...")
                         break
+                    
                     wait_time = 15 * (attempt + 1)
-                    print(f"   ⚠️  Gemini API error ({e}), retrying {current_model} in {wait_time}s...")
+                    if "429" in error_str:
+                        match = re.search(r"Please retry in ([\d\.]+)s", error_str)
+                        if match:
+                            requested_delay = float(match.group(1))
+                            wait_time = max(wait_time, requested_delay + 2.0)
+                    
+                    print(f"   ⚠️  Gemini API error ({error_str.split('.')[0]}), retrying {current_model} in {wait_time:.1f}s...")
                     time.sleep(wait_time)
             
             if success:
