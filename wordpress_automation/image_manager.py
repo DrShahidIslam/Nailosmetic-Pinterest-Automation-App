@@ -40,7 +40,7 @@ class ImageManager:
 
         payload = {
             "model": self.model,
-            "prompt": prompt + ", high definition, aesthetic beauty photography, luxury editorial vibe, sharp focus, vibrant colors",
+            "prompt": prompt + ", professional macro commercial photography of a manicure, focus on nail art details, high definition, aesthetic beauty photography, luxury editorial vibe, sharp focus, vibrant colors, soft lighting",
             "negative_prompt": "mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, blurry, worst quality, low quality, watermark, text",
             "image_size": size,
             "batch_size": 1,

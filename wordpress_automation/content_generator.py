@@ -34,10 +34,10 @@ FRAMEWORK REQUIREMENTS:
    - Focus Keyword: The primary keyword for the article.
    - SEO Title: Optimized title for search results (max 60 chars).
    - Meta Description: Compelling summary for search results (120-160 chars).
-3. Featured Image: Wide (16:9) 'luxury holiday' aesthetic prompt + Alt Text.
+3. Featured Image: Wide (16:9) prompt focusing on a luxury lifestyle scene that includes a prominent view of a detailed manicure (e.g., 'A woman's hand holding a designer bag, focusing on the vibrant [color] nails').
 4. Introduction: 2-3 paragraphs. You MUST include exactly one internal link to 'https://nailosmetic.com/{internal_link_slug}/' using natural anchor text.
 5. Content Blocks: A list of 3 to 7 items. Each item must have:
-   - Image Prompt: Macro photography, vertical (4:5) aspect ratio.
+   - Image Prompt: STRICT REQUIREMENT: Must be a macro, extreme closeup shot of a woman's hand/fingers showing the specific nail design in sharp detail. Vertical (4:5) aspect ratio.
    - Image Alt Text: Descriptive.
    - Heading (H2): Trendy name for the design.
    - Paragraph: Engaging description.
