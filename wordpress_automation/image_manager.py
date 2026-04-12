@@ -1,8 +1,7 @@
 import requests
 import os
 import time
-import sys
-from typing import Optional
+from PIL import Image
 
 class ImageManager:
     def __init__(self, siliconflow_api_key: str):
@@ -10,6 +9,15 @@ class ImageManager:
         self.api_url = "https://api.siliconflow.cn/v1/images/generations"
         # We'll use the same model as in the root main.py for consistency
         self.model = "Kwai-Kolors/Kolors"
+
+    def convert_to_webp(self, image_path: str) -> str:
+        """
+        Convert an image to WebP format for SEO optimization.
+        """
+        output_path = image_path.rsplit(".", 1)[0] + ".webp"
+        with Image.open(image_path) as img:
+            img.save(output_path, "WEBP", quality=85)
+        return output_path
 
     def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png") -> str:
         """

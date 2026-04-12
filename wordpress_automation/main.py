@@ -54,58 +54,63 @@ def main():
         
         # Featured Image
         print("🎨 Generating featured image (16:9)...")
-        feat_img_path = str(Path(tmp_dir) / "featured.jpg")
+        feat_img_path = str(Path(tmp_dir) / "featured.png")
         img_mgr.generate_image(plan["featured_image"]["prompt"], "16:9", feat_img_path)
-        feat_media_id = wp.upload_media(feat_img_path, plan["featured_image"]["alt_text"])
-        print(f"✅ Featured image uploaded. ID: {feat_media_id}")
+        
+        # Convert to WebP
+        print("⚡ Converting featured image to WebP...")
+        feat_webp_path = img_mgr.convert_to_webp(feat_img_path)
+        feat_media_id = wp.upload_media(feat_webp_path, plan["featured_image"]["alt_text"])
+        print(f"✅ Featured image (WebP) uploaded. ID: {feat_media_id}")
 
         # Block Images
         html_content = gen.build_html_content(plan)
         
         for i, block in enumerate(plan["blocks"]):
             print(f"🎨 Generating image for '{block['heading']}' (4:5)...")
-            block_img_path = str(Path(tmp_dir) / f"block_{i}.jpg")
+            block_img_path = str(Path(tmp_dir) / f"block_{i}.png")
             img_mgr.generate_image(block["prompt"], "4:5", block_img_path)
-            block_media_id = wp.upload_media(block_img_path, block["alt_text"])
             
-            # Replace placeholder in HTML
-            # We'll use a simple WP Image Block HTML structure
-            img_html = f"""
-            <figure class="wp-block-image size-large">
-                <img src="REPLACE_WP_URL" alt="{block['alt_text']}" class="wp-image-{block_media_id}"/>
-            </figure>
-            """
-            # WP REST API will handle the actual source if we provide the media ID properly, 
-            # but for the content body, we just need to ensure the figure is there.
-            # Actually, to be safe, I'll fetch the uploaded media URL.
+            # Convert to WebP
+            print(f"⚡ Converting block '{block['heading']}' to WebP...")
+            block_webp_path = img_mgr.convert_to_webp(block_img_path)
+            block_media_id = wp.upload_media(block_webp_path, block["alt_text"])
+            
+            # Fetch URL for Kadence image block
             media_info = wp.session.get(f"{wp.api_url}/media/{block_media_id}", headers=wp.headers).json()
             img_url = media_info["source_url"]
-            img_html = img_html.replace("REPLACE_WP_URL", img_url)
             
-            html_content = html_content.replace(f"<!-- IMAGE_PLACEHOLDER_{block['heading']} -->", img_html)
+            # Replace placeholder in Kadence block
+            img_tag = f'<img src="{img_url}" alt="{block["alt_text"]}" class="kb-img wp-image-{block_media_id}"/>'
+            html_content = html_content.replace(f"<!-- IMAGE_PLACEHOLDER_{block['heading']} -->", img_tag)
 
-    # 4. Finalize Category
+    # ... Target Category logic ...
     target_category_ids = []
     if plan["is_new_category"]:
         print(f"🆕 Creating new category: {plan['category_suggestion']}")
         new_cat_id = wp.create_category(plan["category_suggestion"])
         target_category_ids.append(new_cat_id)
     else:
-        # Find ID for suggested existing category
         for cat in wp_cats:
             if cat["name"].lower() == plan["category_suggestion"].lower():
                 target_category_ids.append(cat["id"])
                 break
-        if not target_category_ids: # Fallback
-            target_category_ids.append(wp_cats[0]["id"] if wp_cats else 1)
+        if not target_category_ids: target_category_ids.append(wp_cats[0]["id"] if wp_cats else 1)
 
-    # 5. Create Post
-    print("🚀 Publishing post to WordPress...")
+    # 5. Create Post with RankMath Meta
+    print("🚀 Publishing post to WordPress with RankMath SEO...")
+    rankmath_meta = {
+        "rank_math_title": plan["seo"]["title"],
+        "rank_math_description": plan["seo"]["description"],
+        "rank_math_focus_keyword": plan["seo"]["focus_keyword"]
+    }
+    
     post_result = wp.create_post(
         title=plan["title"],
         content=html_content,
         featured_media_id=feat_media_id,
-        categories=target_category_ids
+        categories=target_category_ids,
+        meta=rankmath_meta
     )
     
     post_url = post_result["link"]

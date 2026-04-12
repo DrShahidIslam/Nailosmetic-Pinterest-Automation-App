@@ -2,6 +2,7 @@ import json
 import random
 import re
 import time
+import uuid
 from typing import Dict, Any, List, Optional
 from google import genai
 
@@ -10,58 +11,72 @@ class ContentGenerator:
         self.api_keys = api_keys
         self.models_to_try = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash", "gemini-1.5-flash"]
 
+    def _generate_kadence_id(self) -> str:
+        """Generates a random Kadence-style unique ID."""
+        return f"{random.randint(100, 999)}_{uuid.uuid4().hex[:6]}-{uuid.uuid4().hex[:2]}"
+
     def generate_article_plan(self, existing_categories: List[str], previous_slugs: List[str]) -> Dict[str, Any]:
         """
-        Use Gemini to generate the article structure, title, and image prompts.
-        Includes robust retry logic and multi-key support.
+        Use Gemini to generate the article structure, title, image prompts, and SEO metadata.
         """
         categories_str = ", ".join(existing_categories)
         internal_link_slug = random.choice(previous_slugs) if previous_slugs else "spring-nail-designs-inspo"
         
         system_prompt = f"""You are a luxury beauty editor for 'Nailosmetic'. 
-Your task is to create a high-quality nail art listicle article following a specific framework.
+Your task is to create a high-quality, SEO-optimized nail art listicle article for a WordPress site using Kadence Blocks and RankMath SEO.
 
 Available WordPress Categories: {categories_str}
 Internal Link Target: https://nailosmetic.com/{internal_link_slug}/
 
 FRAMEWORK REQUIREMENTS:
 1. Title: Catchy, SEO-optimized (e.g., '25+ Stunning Spring Nail Designs...').
-2. Featured Image: Wide (16:9) 'luxury holiday' aesthetic prompt + Alt Text.
-3. Introduction: 2-3 paragraphs. You MUST include exactly one internal link to 'https://nailosmetic.com/{internal_link_slug}/' using natural anchor text.
-4. Content Blocks: A list of 3 to 7 items. Each item must have:
+2. SEO Metadata (RankMath):
+   - Focus Keyword: The primary keyword for the article.
+   - SEO Title: Optimized title for search results (max 60 chars).
+   - Meta Description: Compelling summary for search results (120-160 chars).
+3. Featured Image: Wide (16:9) 'luxury holiday' aesthetic prompt + Alt Text.
+4. Introduction: 2-3 paragraphs. You MUST include exactly one internal link to 'https://nailosmetic.com/{internal_link_slug}/' using natural anchor text.
+5. Content Blocks: A list of 3 to 7 items. Each item must have:
    - Image Prompt: Macro photography, vertical (4:5) aspect ratio.
    - Image Alt Text: Descriptive.
    - Heading (H2): Trendy name for the design.
    - Paragraph: Engaging description.
-   - Bullet Points: 3 specific points (e.g., Vibe, Tip, Products).
-5. Conclusion: A summary encouraging interaction.
-6. Category: Pick the BEST existing category or suggest 1 NEW category only if none fit.
+   - Details: 3 specific points (Vibe, Technique/Pro-Tip, Best Shape/Alternative).
+6. Conclusion: A summary encouraging interaction.
+7. Category: Pick the BEST existing category or suggest 1 NEW category only if none fit.
 
 RETURN ONLY VALID JSON:
 {{
   "title": "string",
-  "category_suggestion": "string (name of category)",
+  "seo": {{
+    "focus_keyword": "string",
+    "title": "string",
+    "description": "string"
+  }},
+  "category_suggestion": "string",
   "is_new_category": boolean,
   "featured_image": {{
-    "prompt": "string (16:9 prompt)",
+    "prompt": "string",
     "alt_text": "string"
   }},
-  "introduction": "string (HTML allowed, include the internal link)",
+  "introduction": "string (plain text or simple HTML)",
   "blocks": [
     {{
       "heading": "string",
-      "prompt": "string (4:5 prompt)",
+      "prompt": "string",
       "alt_text": "string",
       "paragraph": "string",
-      "bullets": ["string", "string", "string"]
+      "details": {{
+         "vibe": "string",
+         "technique": "string",
+         "secondary": "string"
+      }}
     }}
   ],
   "conclusion": "string"
 }}
-
-AESTHETIC NOTE: High definition, aesthetic, luxury editorial vibe. Focus on textures and vibrant colors.
 """
-        
+        # ... logic for Gemini calls (unchanged but using system_prompt)
         success = False
         raw_text = ""
         max_retries_per_model = 3
@@ -84,58 +99,98 @@ AESTHETIC NOTE: High definition, aesthetic, luxury editorial vibe. Focus on text
                         break
                     except Exception as e:
                         error_str = str(e)
-                        # Handle model unavailability or quota exhaustion (permanent per model)
                         if "404" in error_str or "limit: 0" in error_str:
                             print(f"   ⚠️  Model {current_model} unavailable or zero quota, skipping...")
                             break
-                        
-                        # Handle rate limiting with backoff
                         wait_time = 15 * (attempt + 1)
                         if "429" in error_str:
                             match = re.search(r"Please retry in ([\d\.]+)s", error_str)
                             if match:
                                 requested_delay = float(match.group(1))
                                 wait_time = max(wait_time, requested_delay + 2.0)
-                        
-                        print(f"   ⚠️  Gemini API error ({error_str.split('.')[0]}), retrying {current_model} in {wait_time:.1f}s...")
                         time.sleep(wait_time)
-                
-                if success:
-                    break
-            
-            if success:
-                break
-                
-        if not success:
-            raise Exception("❌ Gemini API failed permanently across all provided API keys and models.")
-
-        # Clean potential markdown fences
+                if success: break
+            if success: break
+        if not success: raise Exception("❌ Gemini API failed permanently.")
         raw_text = re.sub(r"```json\s*|\s*```", "", raw_text)
-        
         try:
             return json.loads(raw_text)
         except Exception as e:
             print(f"Error parsing Gemini response: {e}")
-            print(f"Raw response: {raw_text[:500]}...")
             raise e
 
     def build_html_content(self, plan: Dict[str, Any]) -> str:
         """
-        Convert the JSON plan into structured HTML for WordPress.
+        Convert the JSON plan into Kadence Blocks BeautifulSoup-style HTML.
         """
-        html = f"<div class='article-intro'>{plan['introduction']}</div>\n\n"
+        col_id_intro = self._generate_kadence_id()
+        html = f"""<!-- wp:kadence/column {{"uniqueID":"{col_id_intro}"}} -->
+<div class="wp-block-kadence-column kadence-column{col_id_intro}"><div class="kt-inside-inner-col">
+<!-- wp:paragraph -->
+{plan['introduction']}
+<!-- /wp:paragraph -->
+<!-- wp:kadence/tableofcontents {{"uniqueID":"{self._generate_kadence_id()}"}} /-->
+</div></div>
+<!-- /wp:kadence/column -->
+"""
         
         for block in plan['blocks']:
-            html += f"<div class='wp-block-image-text'>\n"
-            html += f"  <!-- IMAGE_PLACEHOLDER_{block['heading']} -->\n" # Placeholder for image replacement later
-            html += f"  <h2>{block['heading']}</h2>\n"
-            html += f"  <p>{block['paragraph']}</p>\n"
-            html += "  <ul>\n"
-            for bullet in block['bullets']:
-                html += f"    <li>{bullet}</li>\n"
-            html += "  </ul>\n"
-            html += "  <div style='height:40px' aria-hidden='true' class='wp-block-spacer'></div>\n"
-            html += f"</div>\n\n"
+            row_id = self._generate_kadence_id()
+            h_id = self._generate_kadence_id()
+            img_id = self._generate_kadence_id()
+            list_id = self._generate_kadence_id()
             
-        html += f"<div class='article-conclusion'>{plan['conclusion']}</div>"
+            html += f"""
+<!-- wp:kadence/column {{"uniqueID":"{self._generate_kadence_id()}"}} -->
+<div class="wp-block-kadence-column"><div class="kt-inside-inner-col">
+<!-- wp:kadence/rowlayout {{"uniqueID":"{row_id}","columns":1,"maxWidth":800}} -->
+<!-- wp:kadence/column {{"uniqueID":"{self._generate_kadence_id()}"}} -->
+<div class="wp-block-kadence-column"><div class="kt-inside-inner-col">
+
+<!-- wp:kadence/advancedheading {{"uniqueID":"{h_id}"}} -->
+<h2 class="kt-adv-heading{h_id} wp-block-kadence-advancedheading">{block['heading']}</h2>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/image {{"uniqueID":"{img_id}"}} -->
+<figure class="wp-block-kadence-image kb-image{img_id}">
+    <!-- IMAGE_PLACEHOLDER_{block['heading']} -->
+</figure>
+<!-- /wp:kadence/image -->
+
+<!-- wp:paragraph -->
+<p>{block['paragraph']}</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:kadence/iconlist {{"uniqueID":"{list_id}"}} -->
+<div class="wp-block-kadence-iconlist kt-svg-icon-list-items{list_id}"><ul class="kt-svg-icon-list">
+    <li class="kt-svg-icon-list-item-wrap"><strong>The Vibe:</strong> {block['details'].get('vibe', '')}</li>
+    <li class="kt-svg-icon-list-item-wrap"><strong>Technique:</strong> {block['details'].get('technique', '')}</li>
+    <li class="kt-svg-icon-list-item-wrap"><strong>Pro Tip:</strong> {block['details'].get('secondary', '')}</li>
+</ul></div>
+<!-- /wp:kadence/iconlist -->
+
+</div></div>
+<!-- /wp:kadence/column -->
+<!-- /wp:kadence/rowlayout -->
+
+<!-- wp:spacer {{"height":"40px"}} -->
+<div style="height:40px" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+</div></div>
+<!-- /wp:kadence/column -->
+"""
+        
+        concl_id = self._generate_kadence_id()
+        html += f"""
+<!-- wp:kadence/column {{"uniqueID":"{concl_id}"}} -->
+<div class="wp-block-kadence-column kadence-column{concl_id}"><div class="kt-inside-inner-col">
+<!-- wp:kadence/advancedheading {{"uniqueID":"{self._generate_kadence_id()}"}} -->
+<h2 class="wp-block-kadence-advancedheading">The Conclusion</h2>
+<!-- /wp:kadence/advancedheading -->
+<!-- wp:paragraph -->
+<p>{plan['conclusion']}</p>
+<!-- /wp:paragraph -->
+</div></div>
+<!-- /wp:kadence/column -->
+"""
         return html
