@@ -2,9 +2,17 @@ import requests
 import base64
 import os
 import time
+import socket
 from typing import Dict, Any, Optional
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+
+# Patch to force IPv4 (avoids "Network is unreachable" issues with IPv6 on some runners)
+_original_getaddrinfo = socket.getaddrinfo
+def _patched_getaddrinfo(*args, **kwargs):
+    responses = _original_getaddrinfo(*args, **kwargs)
+    return [res for res in responses if res[0] == socket.AF_INET]
+socket.getaddrinfo = _patched_getaddrinfo
 
 class WordPressClient:
     def __init__(self, url: str, username: str, app_password: str):
