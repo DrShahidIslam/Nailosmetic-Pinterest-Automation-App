@@ -30,7 +30,7 @@ Internal Link Target: https://nailosmetic.com/{internal_link_slug}/
 
 FRAMEWORK REQUIREMENTS:
 1. Title: Catchy, SEO-optimized (e.g., '25+ Stunning Spring Nail Designs...').
-2. Slug: A short, SEO-friendly URL slug (3-5 words maximum, lowercase-with-dashes).
+2. Slug: A short, SEO-friendly URL slug (3-5 words maximum, lowercase-with-dashes). It MUST include the primary focus keyword.
 3. SEO Metadata (RankMath):
    - Focus Keyword: The primary keyword for the article.
    - SEO Title: Optimized title for search results (max 60 chars).
