@@ -21,16 +21,17 @@ def main():
     wp_url = os.getenv("WORDPRESS_URL", "https://nailosmetic.com")
     wp_user = os.getenv("WORDPRESS_USER", "shahidislam14@outlook.com")
     wp_pass = os.getenv("WORDPRESS_APP_PASSWORD", "fRSd sQwI 2iQc Fkyq eMn7 qvOw")
-    gemini_key = os.getenv("GEMINI_API_KEYS", "").split(",")[0] or os.getenv("GEMINI_API_KEY")
+    gemini_keys_raw = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
+    gemini_keys = [k.strip() for k in gemini_keys_raw.split(",") if k.strip()]
     silicon_key = os.getenv("SILICONFLOW_API_KEY")
     
-    if not all([wp_url, wp_user, wp_pass, gemini_key, silicon_key]):
+    if not all([wp_url, wp_user, wp_pass, gemini_keys, silicon_key]):
         print("❌ Missing required environment variables. Check .env")
         sys.exit(1)
 
     # Initialize Clients
     wp = WordPressClient(wp_url, wp_user, wp_pass)
-    gen = ContentGenerator(gemini_key)
+    gen = ContentGenerator(gemini_keys)
     img_mgr = ImageManager(silicon_key)
 
     # 1. Fetch Categories and History
