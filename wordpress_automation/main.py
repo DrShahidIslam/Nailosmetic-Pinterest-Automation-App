@@ -78,7 +78,7 @@ def main():
             # WP REST API will handle the actual source if we provide the media ID properly, 
             # but for the content body, we just need to ensure the figure is there.
             # Actually, to be safe, I'll fetch the uploaded media URL.
-            media_info = requests.get(f"{wp.api_url}/media/{block_media_id}", headers=wp.headers).json()
+            media_info = wp.session.get(f"{wp.api_url}/media/{block_media_id}", headers=wp.headers).json()
             img_url = media_info["source_url"]
             img_html = img_html.replace("REPLACE_WP_URL", img_url)
             
