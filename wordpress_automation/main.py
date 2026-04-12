@@ -16,6 +16,7 @@ from image_manager import ImageManager
 def main():
     print("🌸 Nailosmetic WordPress Automation Starting...")
     load_dotenv()
+    import time
     
     # Config
     wp_url = os.getenv("WORDPRESS_URL", "https://nailosmetic.com")
@@ -29,27 +30,24 @@ def main():
         print("❌ Missing required environment variables. Check .env")
         sys.exit(1)
 
-    # Initialize Clients
+    # ===== STEP 0: WordPress Health Check (before using any paid APIs) =====
+    print("🔌 Checking WordPress connectivity FIRST (before using any API credits)...")
     wp = WordPressClient(wp_url, wp_user, wp_pass)
-    gen = ContentGenerator(gemini_keys)
-    img_mgr = ImageManager(silicon_key)
-
-    # 1. Fetch Categories and History (with connection warmup)
-    print("📊 Fetching metadata...")
+    
     wp_cats = None
     max_connection_attempts = 5
     for attempt in range(1, max_connection_attempts + 1):
         try:
             wp_cats = wp.get_categories()
-            print(f"   ✅ Connected to WordPress on attempt {attempt}")
+            print(f"   ✅ WordPress is reachable! Connected on attempt {attempt}. Found {len(wp_cats)} categories.")
             break
         except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout) as e:
             if attempt == max_connection_attempts:
-                print(f"   ❌ Could not connect to WordPress after {max_connection_attempts} attempts. Exiting.")
+                print(f"   ❌ WordPress is UNREACHABLE after {max_connection_attempts} attempts.")
+                print(f"   ❌ Aborting to save API credits. No Gemini or SiliconFlow calls were made.")
                 sys.exit(1)
             wait = 30 * attempt  # 30s, 60s, 90s, 120s
             print(f"   ⚠️  Connection attempt {attempt}/{max_connection_attempts} failed. Retrying in {wait}s...")
-            import time
             time.sleep(wait)
     
     cat_names = [c["name"] for c in wp_cats]
@@ -57,6 +55,10 @@ def main():
     history_path = Path(__file__).parent.parent / "shared" / "history.json"
     with open(history_path, "r") as f:
         previous_slugs = json.load(f)
+
+    # ===== Now safe to initialize paid API clients =====
+    gen = ContentGenerator(gemini_keys)
+    img_mgr = ImageManager(silicon_key)
 
     # 2. Generate Article Plan
     print("🧠 Generating high-quality article plan...")
