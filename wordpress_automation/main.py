@@ -34,9 +34,24 @@ def main():
     gen = ContentGenerator(gemini_keys)
     img_mgr = ImageManager(silicon_key)
 
-    # 1. Fetch Categories and History
+    # 1. Fetch Categories and History (with connection warmup)
     print("📊 Fetching metadata...")
-    wp_cats = wp.get_categories()
+    wp_cats = None
+    max_connection_attempts = 5
+    for attempt in range(1, max_connection_attempts + 1):
+        try:
+            wp_cats = wp.get_categories()
+            print(f"   ✅ Connected to WordPress on attempt {attempt}")
+            break
+        except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout) as e:
+            if attempt == max_connection_attempts:
+                print(f"   ❌ Could not connect to WordPress after {max_connection_attempts} attempts. Exiting.")
+                sys.exit(1)
+            wait = 30 * attempt  # 30s, 60s, 90s, 120s
+            print(f"   ⚠️  Connection attempt {attempt}/{max_connection_attempts} failed. Retrying in {wait}s...")
+            import time
+            time.sleep(wait)
+    
     cat_names = [c["name"] for c in wp_cats]
     
     history_path = Path(__file__).parent.parent / "shared" / "history.json"

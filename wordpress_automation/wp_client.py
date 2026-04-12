@@ -27,8 +27,8 @@ class WordPressClient:
         
         # Configure a robust retry strategy for network glitches
         retry_strategy = Retry(
-            total=3,  # 3 retries
-            backoff_factor=1,  # Wait 1s, 2s, 4s between attempts
+            total=3,
+            backoff_factor=5,  # Wait 5s, 10s, 20s between attempts
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=["HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"]
         )
@@ -36,6 +36,9 @@ class WordPressClient:
         self.session = requests.Session()
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
+        
+        # Set a default timeout (connect=30s, read=60s) so we don't hang forever
+        self.default_timeout = (30, 60)
 
     def upload_media(self, file_path: str, alt_text: str = "") -> int:
         """
@@ -54,7 +57,7 @@ class WordPressClient:
             }
             # Note: We don't set Content-Type header manually here, 
             # requests will set multipart/form-data with boundary automatically.
-            response = self.session.post(url, headers=self.headers, files=files)
+            response = self.session.post(url, headers=self.headers, files=files, timeout=self.default_timeout)
 
         if response.status_code != 201:
             raise Exception(f"Failed to upload media: {response.status_code} - {response.text}")
@@ -70,7 +73,7 @@ class WordPressClient:
     def _update_media_alt_text(self, media_id: int, alt_text: str):
         url = f"{self.api_url}/media/{media_id}"
         data = {"alt_text": alt_text}
-        self.session.post(url, headers=self.headers, json=data)
+        self.session.post(url, headers=self.headers, json=data, timeout=self.default_timeout)
 
     def create_post(self, title: str, content: str, featured_media_id: Optional[int] = None, categories: Optional[list] = None, meta: Optional[dict] = None, slug: Optional[str] = None, status: str = "publish") -> Dict[str, Any]:
         """
@@ -91,7 +94,7 @@ class WordPressClient:
         if slug:
             payload["slug"] = slug
 
-        response = self.session.post(url, headers=self.headers, json=payload)
+        response = self.session.post(url, headers=self.headers, json=payload, timeout=self.default_timeout)
         
         if response.status_code != 201:
             raise Exception(f"Failed to create post: {response.status_code} - {response.text}")
@@ -104,7 +107,7 @@ class WordPressClient:
         """
         url = f"{self.api_url}/categories"
         params = {"per_page": 100}
-        response = self.session.get(url, headers=self.headers, params=params)
+        response = self.session.get(url, headers=self.headers, params=params, timeout=self.default_timeout)
         if response.status_code == 200:
             return response.json()
         return []
@@ -115,7 +118,7 @@ class WordPressClient:
         """
         url = f"{self.api_url}/categories"
         payload = {"name": name}
-        response = self.session.post(url, headers=self.headers, json=payload)
+        response = self.session.post(url, headers=self.headers, json=payload, timeout=self.default_timeout)
         if response.status_code == 201:
             return response.json()["id"]
         elif response.status_code == 400: # Probably already exists
