@@ -21,6 +21,8 @@ jobs:
   publish-pin:
     name: Generate & Publish Nail Art Pin
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to update links_queue.json
 
     steps:
       # 1. Check out the repository
@@ -54,3 +56,12 @@ jobs:
           PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
         run: python main.py
+
+      # 5. Commit shared data changes
+      - name: 💾 Commit consumed links
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add shared/links_queue.json
+          git commit -m "📌 Consumed dynamic link from queue [skip ci]" || echo "No changes to commit"
+          git push

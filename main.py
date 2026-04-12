@@ -613,8 +613,26 @@ def main():
             category = DEFAULT_BOARD_CATEGORY
             board_info = BOARD_MAP[category]
 
-        target_board_id = board_info["board_id"]
+        # --- DYNAMIC LINK INJECTION ---
+        queue_path = Path("shared/links_queue.json")
         destination_link = board_info["link"]
+        
+        if queue_path.exists():
+            try:
+                with open(queue_path, "r") as f:
+                    queue = json.load(f)
+                if queue:
+                    queued_item = queue.pop(0) # FIFO: Get the oldest dynamic link
+                    destination_link = queued_item["url"]
+                    print(f"   🔥 Dynamic Link Found: {destination_link}")
+                    
+                    # Update queue file
+                    with open(queue_path, "w") as f:
+                        json.dump(queue, f, indent=4)
+            except Exception as e:
+                print(f"   ⚠️ Error reading links_queue.json: {e}. Using fallback link.")
+
+        target_board_id = board_info["board_id"]
         print(f"\n   🎯 Routing pin to: {board_info['name']}")
 
         # Phase 2: Generate image with SiliconFlow

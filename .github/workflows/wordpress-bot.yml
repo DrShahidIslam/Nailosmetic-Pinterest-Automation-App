@@ -1,0 +1,61 @@
+# ============================================================
+# Nailosmetic WordPress Automation — GitHub Actions Workflow
+# ============================================================
+# This workflow runs the WordPress bot twice a day.
+# It generates an article and pushes it to your site.
+
+name: 📝 Daily WordPress Article
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+on:
+  schedule:
+    # Run twice a day (e.g., 08:00 and 20:00 UTC)
+    - cron: "0 8,20 * * *"
+
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  publish-article:
+    name: Generate & Publish WordPress Article
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to update history.json and links_queue.json
+
+    steps:
+      # 1. Check out the repository
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      # 3. Install dependencies
+      - name: 📦 Install dependencies
+        run: pip install -r requirements.txt
+
+      # 4. Run the WordPress bot
+      - name: 🚀 Run WordPress Bot
+        env:
+          GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          WORDPRESS_URL: ${{ secrets.WORDPRESS_URL }}
+          WORDPRESS_USER: ${{ secrets.WORDPRESS_USER }}
+          WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
+        run: python wordpress_automation/main.py
+
+      # 5. Commit shared data changes
+      - name: 💾 Commit updated history and queue
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add shared/*.json
+          git commit -m "📝 Update history and link queue [skip ci]" || echo "No changes to commit"
+          git push
