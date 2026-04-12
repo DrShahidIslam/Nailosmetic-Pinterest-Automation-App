@@ -164,11 +164,17 @@ RETURN ONLY VALID JSON:
 <!-- /wp:paragraph -->
 
 <!-- wp:kadence/iconlist {{"uniqueID":"{list_id}"}} -->
-<div class="wp-block-kadence-iconlist kt-svg-icon-list-items{list_id}"><ul class="kt-svg-icon-list">
-    <li class="kt-svg-icon-list-item-wrap"><strong>The Vibe:</strong> {block['details'].get('vibe', '')}</li>
-    <li class="kt-svg-icon-list-item-wrap"><strong>Technique:</strong> {block['details'].get('technique', '')}</li>
-    <li class="kt-svg-icon-list-item-wrap"><strong>Pro Tip:</strong> {block['details'].get('secondary', '')}</li>
-</ul></div>
+<div class="wp-block-kadence-iconlist kt-svg-icon-list-items kt-svg-icon-list-items{list_id} kt-svg-icon-list-columns-1 alignnone"><ul class="kt-svg-icon-list"><!-- wp:kadence/listitem {{"uniqueID":"{self._generate_kadence_id()}"}} -->
+<li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>The Vibe:</strong> {block['details'].get('vibe', '')}</span></li>
+<!-- /wp:kadence/listitem -->
+
+<!-- wp:kadence/listitem {{"uniqueID":"{self._generate_kadence_id()}"}} -->
+<li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>Technique:</strong> {block['details'].get('technique', '')}</span></li>
+<!-- /wp:kadence/listitem -->
+
+<!-- wp:kadence/listitem {{"uniqueID":"{self._generate_kadence_id()}"}} -->
+<li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>Pro Tip:</strong> {block['details'].get('secondary', '')}</span></li>
+<!-- /wp:kadence/listitem --></ul></div>
 <!-- /wp:kadence/iconlist -->
 
 </div></div>
