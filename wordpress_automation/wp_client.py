@@ -64,7 +64,7 @@ class WordPressClient:
         data = {"alt_text": alt_text}
         self.session.post(url, headers=self.headers, json=data)
 
-    def create_post(self, title: str, content: str, featured_media_id: Optional[int] = None, categories: Optional[list] = None, meta: Optional[dict] = None, status: str = "publish") -> Dict[str, Any]:
+    def create_post(self, title: str, content: str, featured_media_id: Optional[int] = None, categories: Optional[list] = None, meta: Optional[dict] = None, slug: Optional[str] = None, status: str = "publish") -> Dict[str, Any]:
         """
         Create a new post in WordPress.
         """
@@ -80,6 +80,8 @@ class WordPressClient:
             payload["categories"] = categories
         if meta:
             payload["meta"] = meta
+        if slug:
+            payload["slug"] = slug
 
         response = self.session.post(url, headers=self.headers, json=payload)
         

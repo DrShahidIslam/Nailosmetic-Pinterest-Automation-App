@@ -110,7 +110,8 @@ def main():
         content=html_content,
         featured_media_id=feat_media_id,
         categories=target_category_ids,
-        meta=rankmath_meta
+        meta=rankmath_meta,
+        slug=plan.get("slug")
     )
     
     post_url = post_result["link"]
