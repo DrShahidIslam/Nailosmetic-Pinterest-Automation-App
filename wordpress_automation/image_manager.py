@@ -40,8 +40,8 @@ class ImageManager:
 
         payload = {
             "model": self.model,
-            "prompt": prompt + ", professional macro commercial photography of a manicure, focus on nail art details, high definition, aesthetic beauty photography, luxury editorial vibe, sharp focus, vibrant colors, soft lighting",
-            "negative_prompt": "mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, blurry, worst quality, low quality, watermark, text",
+            "prompt": prompt + ", extreme close-up of woman's hand showing nail art design, manicure is the main subject, detailed nail polish texture visible, professional nail salon photography, studio lighting, sharp focus on fingernails, beauty editorial",
+            "negative_prompt": "no nails, missing nails, no hands, no fingers, faceless, full body, landscape, scenery, food, objects without hands, mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, blurry, worst quality, low quality, watermark, text, logo",
             "image_size": size,
             "batch_size": 1,
         }
