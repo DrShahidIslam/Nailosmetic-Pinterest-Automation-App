@@ -15,16 +15,25 @@ class ContentGenerator:
         """Generates a random Kadence-style unique ID."""
         return f"{random.randint(100, 999)}_{uuid.uuid4().hex[:6]}-{uuid.uuid4().hex[:2]}"
 
-    def generate_article_plan(self, existing_categories: List[str], previous_slugs: List[str]) -> Dict[str, Any]:
+    def generate_article_plan(self, existing_categories: List[str], previous_slugs: List[str], topic: str = None) -> Dict[str, Any]:
         """
         Use Gemini to generate the article structure, title, image prompts, and SEO metadata.
+        If a topic is provided, the article will be based on that specific high-demand topic.
         """
         categories_str = ", ".join(existing_categories)
         internal_link_slug = random.choice(previous_slugs) if previous_slugs else "spring-nail-designs-inspo"
         
+        topic_instruction = ""
+        if topic:
+            topic_instruction = f"""
+MANDATORY TOPIC: You MUST write the article about "{topic}". 
+The title, all content blocks, all image prompts, and SEO metadata must be directly about "{topic}".
+Do NOT deviate from this topic. This is a high-demand search term that real users are searching for.
+"""
+        
         system_prompt = f"""You are a luxury beauty editor for 'Nailosmetic'. 
 Your task is to create a high-quality, SEO-optimized nail art listicle article for a WordPress site using Kadence Blocks and RankMath SEO.
-
+{topic_instruction}
 Available WordPress Categories: {categories_str}
 Internal Link Target: https://nailosmetic.com/{internal_link_slug}/
 

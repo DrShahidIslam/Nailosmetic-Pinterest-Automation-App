@@ -56,13 +56,40 @@ def main():
     with open(history_path, "r") as f:
         previous_slugs = json.load(f)
 
+    # ===== Pick a high-demand topic from the topic bank =====
+    topic_bank_path = Path(__file__).parent.parent / "shared" / "topic_bank.json"
+    used_topics_path = Path(__file__).parent.parent / "shared" / "used_topics.json"
+    
+    chosen_topic = None
+    if topic_bank_path.exists():
+        with open(topic_bank_path, "r") as f:
+            all_topics = json.load(f)
+        
+        # Load used topics
+        used_topics = []
+        if used_topics_path.exists():
+            with open(used_topics_path, "r") as f:
+                used_topics = json.load(f)
+        
+        # Find topics we haven't written about yet
+        available_topics = [t for t in all_topics if t not in used_topics]
+        
+        if available_topics:
+            import random as rng
+            chosen_topic = rng.choice(available_topics)
+            print(f"🎯 High-demand topic selected: \"{chosen_topic}\"")
+        else:
+            print("📋 All topics in bank have been used! Gemini will pick a fresh topic.")
+    else:
+        print("📋 No topic bank found. Gemini will pick a topic on its own.")
+
     # ===== Now safe to initialize paid API clients =====
     gen = ContentGenerator(gemini_keys)
     img_mgr = ImageManager(silicon_key)
 
     # 2. Generate Article Plan
     print("🧠 Generating high-quality article plan...")
-    plan = gen.generate_article_plan(cat_names, previous_slugs)
+    plan = gen.generate_article_plan(cat_names, previous_slugs, topic=chosen_topic)
     print(f"📌 Title: {plan['title']}")
 
     # 3. Handle Images and WordPress Media
@@ -147,6 +174,18 @@ def main():
     queue.append({"url": post_url, "category": plan["category_suggestion"]})
     with open(queue_path, "w") as f:
         json.dump(queue, f, indent=4)
+
+    # Mark topic as used so we don't repeat it
+    if chosen_topic:
+        used_topics_path = Path(__file__).parent.parent / "shared" / "used_topics.json"
+        used_topics = []
+        if used_topics_path.exists():
+            with open(used_topics_path, "r") as f:
+                used_topics = json.load(f)
+        used_topics.append(chosen_topic)
+        with open(used_topics_path, "w") as f:
+            json.dump(used_topics, f, indent=4)
+        print(f"📋 Topic \"{chosen_topic}\" marked as used.")
 
     print("✅ All done!")
 
