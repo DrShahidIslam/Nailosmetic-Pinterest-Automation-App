@@ -11,8 +11,8 @@ env:
 
 on:
   schedule:
-    # Run 6 times a day (every 4 hours) to evenly distribute pins and avoid API rate limits
-    - cron: "0 */4 * * *"
+    # Run 8 times a day (every 3 hours) to meet your goal and maximize visibility
+    - cron: "0 */3 * * *"
 
   # Allow manual triggering from the GitHub Actions UI
   workflow_dispatch:

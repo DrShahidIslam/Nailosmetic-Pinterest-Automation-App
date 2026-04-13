@@ -171,7 +171,13 @@ def main():
     queue_path = Path(__file__).parent.parent / "shared" / "links_queue.json"
     with open(queue_path, "r") as f:
         queue = json.load(f)
-    queue.append({"url": post_url, "category": plan["category_suggestion"]})
+    
+    queue.append({
+        "url": post_url, 
+        "category": plan["category_suggestion"],
+        "topic": chosen_topic
+    })
+    
     with open(queue_path, "w") as f:
         json.dump(queue, f, indent=4)
 

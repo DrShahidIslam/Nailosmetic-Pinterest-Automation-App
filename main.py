@@ -116,16 +116,15 @@ def validate_env_vars():
 # PHASE 1: THE BRAIN — Gemini API
 # ============================================================================
 
-def generate_content_with_gemini() -> dict:
+def generate_content_with_gemini(topic: str = None) -> dict:
     """
-    Use Google Gemini to generate a JSON payload containing:
-      - title: A catchy Pinterest title for a nail art pin
-      - description: An SEO-optimized Pinterest description
-      - image_prompt: A highly detailed prompt for image generation
+    Use Google Gemini to generate a JSON payload.
+    If a topic is provided, the content will be centered on that specific trending keyword.
     """
-    print("\n🧠 Phase 1: Generating content with Gemini...")
-
-
+    if topic:
+        print(f"\n🧠 Phase 1: Generating content for trend: \"{topic}\"...")
+    else:
+        print("\n🧠 Phase 1: Generating content with Gemini (free-style)...")
 
     # Build list of available board categories so Gemini only picks from configured boards
     available_categories = [cat for cat, info in BOARD_MAP.items() if info["board_id"]]
@@ -145,9 +144,18 @@ def generate_content_with_gemini() -> dict:
         for cat in available_categories
     )
 
+    topic_instruction = ""
+    if topic:
+        topic_instruction = f"""
+MANDATORY CONTEXT: The pin must be about "{topic}". 
+- The title must capture the essence of "{topic}".
+- The description must use "{topic}" as the primary focus keyword.
+- The image_prompt must describe a detailed nail design that represents "{topic}".
+"""
+
     system_prompt = f"""You are a creative social media strategist specializing in nail art and beauty content for Pinterest.
 Your task is to come up with a UNIQUE, trendy nail art concept and provide content for a Pinterest pin.
-
+{topic_instruction}
 Return ONLY valid JSON (no markdown, no code fences) with these exact keys:
 {{
   "board_category": "One of the category keys listed below that BEST matches the generated concept.",
@@ -600,12 +608,59 @@ def main():
     with tempfile.TemporaryDirectory() as tmp_dir:
         print(f"\n📁 Working directory: {tmp_dir}")
 
-        # Phase 1: Generate content with Gemini
-        content = generate_content_with_gemini()
+        # --- TOPIC & LINK RESOLUTION ---
+        queue_path = Path("shared/links_queue.json")
+        topic_bank_path = Path("shared/topic_bank.json")
+        used_topics_path = Path("shared/used_topics.json")
+        
+        chosen_topic = None
+        destination_link = None
+        
+        # 1. Try to get topic and link from WordPress Queue
+        if queue_path.exists():
+            try:
+                with open(queue_path, "r") as f:
+                    queue = json.load(f)
+                if queue:
+                    queued_item = queue.pop(0) # FIFO
+                    destination_link = queued_item.get("url")
+                    chosen_topic = queued_item.get("topic")
+                    print(f"   🔥 Synchronizing with WordPress Article: {destination_link}")
+                    print(f"   🎯 Topic from Queue: \"{chosen_topic}\"")
+                    
+                    # Update queue file
+                    with open(queue_path, "w") as f:
+                        json.dump(queue, f, indent=4)
+            except Exception as e:
+                print(f"   ⚠️ Error reading links_queue.json: {e}")
 
-        # Resolve the target board and destination link
+        # 2. If no queued item, pick a fresh topic from the bank
+        if not chosen_topic and topic_bank_path.exists():
+            try:
+                with open(topic_bank_path, "r") as f:
+                    topic_bank = json.load(f)
+                
+                used_topics = []
+                if used_topics_path.exists():
+                    with open(used_topics_path, "r") as f:
+                        used_topics = json.load(f)
+                
+                available_topics = [t for t in topic_bank if t not in used_topics]
+                if available_topics:
+                    chosen_topic = random.choice(available_topics)
+                    print(f"   🎯 High-demand topic selected from bank: \"{chosen_topic}\"")
+                else:
+                    print("   📋 Topic bank exhausted! Picking a random topic to avoid failure.")
+                    chosen_topic = random.choice(topic_bank)
+            except Exception as e:
+                print(f"   ⚠️ Error loading topic bank: {e}")
+
+        # Phase 1: Generate content with Gemini (using the specific trend if available)
+        content = generate_content_with_gemini(topic=chosen_topic)
+
+        # Resolve the target board
         category = content["board_category"]
-        board_info = BOARD_MAP[category]
+        board_info = BOARD_MAP.get(category, BOARD_MAP[DEFAULT_BOARD_CATEGORY])
 
         # If the chosen board isn't configured, fall back to default
         if not board_info["board_id"]:
@@ -613,24 +668,10 @@ def main():
             category = DEFAULT_BOARD_CATEGORY
             board_info = BOARD_MAP[category]
 
-        # --- DYNAMIC LINK INJECTION ---
-        queue_path = Path("shared/links_queue.json")
-        destination_link = board_info["link"]
-        
-        if queue_path.exists():
-            try:
-                with open(queue_path, "r") as f:
-                    queue = json.load(f)
-                if queue:
-                    queued_item = queue.pop(0) # FIFO: Get the oldest dynamic link
-                    destination_link = queued_item["url"]
-                    print(f"   🔥 Dynamic Link Found: {destination_link}")
-                    
-                    # Update queue file
-                    with open(queue_path, "w") as f:
-                        json.dump(queue, f, indent=4)
-            except Exception as e:
-                print(f"   ⚠️ Error reading links_queue.json: {e}. Using fallback link.")
+        # Use fallback link if not set by queue
+        if not destination_link:
+            destination_link = board_info["link"]
+            print(f"   🔗 Using default board link: {destination_link}")
 
         target_board_id = board_info["board_id"]
         print(f"\n   🎯 Routing pin to: {board_info['name']}")
@@ -650,6 +691,22 @@ def main():
             final_image_path, content["title"], content["description"],
             board_id=target_board_id, destination_link=destination_link
         )
+
+        # Mark topic as used so we don't repeat it soon
+        if chosen_topic:
+            try:
+                used_topics = []
+                if used_topics_path.exists():
+                    with open(used_topics_path, "r") as f:
+                        used_topics = json.load(f)
+                
+                if chosen_topic not in used_topics:
+                    used_topics.append(chosen_topic)
+                    with open(used_topics_path, "w") as f:
+                        json.dump(used_topics, f, indent=4)
+                    print(f"   📋 Topic \"{chosen_topic}\" marked as used.")
+            except Exception as e:
+                print(f"   ⚠️ Error updating used topics: {e}")
 
     print("\n" + "=" * 60)
     print("✨ Pipeline complete! Your nail art pin is live on Pinterest.")
