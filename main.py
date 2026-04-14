@@ -156,22 +156,22 @@ MANDATORY CONTEXT: The pin must be about "{topic}".
     system_prompt = f"""You are a creative social media strategist specializing in nail art and beauty content for Pinterest.
 Your task is to come up with a UNIQUE, trendy nail art concept and provide content for a Pinterest pin.
 {topic_instruction}
-Return ONLY valid JSON (no markdown, no code fences) with these exact keys:
+
+RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys:
 {{
-  "board_category": "One of the category keys listed below that BEST matches the generated concept.",
+  "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content. If the topic is about Spring, it MUST be 'spring_trends'. If it's about Summer, it MUST be 'summer_vacation'. If it's minimal/clean, use 'minimalist_clean'.",
   "title": "A short, catchy, click-worthy Pinterest title (max 100 chars). Use emojis sparingly.",
-  "description": "An SEO-optimized Pinterest description (150-300 chars). You MUST include exactly 10 highly relevant and trending hashtags at the very end (e.g., #nailart #nails #[niche_style]).",
+  "description": "An SEO-optimized Pinterest description (150-300 chars). Mention the board category theme naturally. You MUST include exactly 10 highly relevant and trending hashtags at the very end (e.g., #nailart #nails #[niche_style]).",
   "image_prompt": "A highly detailed, ultra-macro image generation prompt (200-400 chars). The focal point MUST be the specific nail design, patterns, and textures. Force a tight, close-up shot of the nails themselves, with minimal hand visibility and no distracting background. Use terms like 'high-resolution jewelry photography', 'extreme close-up on nail art', 'sharp focus', 'luxurious editorial beauty photography'. Specify the exact finish (glossy, matte, iridescent) and any 3D elements clearly."
 }}
 
-Available board categories (pick the BEST match):
+Available board categories (pick the MOST relevant key):
 {categories_prompt}
 
-Important guidelines for variety:
-- Rotate between ALL the categories above — do not always pick the same one
-- Mix styles: minimalist, maximalist, 3D art, chrome, glazed, French tips, ombré, abstract, geometric
-- Vary nail shapes: almond, coffin, stiletto, square, oval, round
-- Include trending aesthetics: clean girl, coquette, Y2K, old money, cottagecore, mob wife"""
+Important guidelines for category selection:
+- If a topic matches a specific seasonal or stylistic category above, you MUST choose that category.
+- Avoid using '{DEFAULT_BOARD_CATEGORY}' as a catch-all if a more specific category exists.
+- Ensure the 'board_category' value in your JSON response is EXACTLY one of the keys listed above."""
 
     import re
     models_to_try = ["gemini-2.5-flash", "gemini-2.5-flash-lite"]

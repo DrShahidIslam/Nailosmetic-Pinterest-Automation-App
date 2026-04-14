@@ -45,7 +45,7 @@ FRAMEWORK REQUIREMENTS:
    - SEO Title: Optimized title for search results (max 60 chars).
    - Meta Description: Compelling summary for search results (120-160 chars).
 3. Featured Image: Wide (16:9) prompt. MUST show a close-up of a woman's beautifully manicured hand in a luxury setting (e.g., holding a cocktail, resting on marble, touching silk fabric). The NAILS must be the focal point of the image.
-4. Introduction: Return as a JSON array of exactly 2 paragraph strings. The first paragraph sets the scene. The second paragraph MUST include exactly one internal link to 'https://nailosmetic.com/{internal_link_slug}/' using natural anchor text.
+4. Introduction: Return as a JSON array of exactly 2 paragraph strings. The first paragraph sets the scene. The second paragraph MUST include exactly one internal link to 'https://nailosmetic.com/{internal_link_slug}/' using an HTML anchor tag with natural anchor text (e.g., <a href="https://nailosmetic.com/{internal_link_slug}/">Check out our guide on spring nail art</a>).
 5. Content Blocks: A list of 3 to 7 items. Each item must have:
    - Image Prompt: CRITICAL — Every prompt MUST describe a close-up or macro shot of a real woman's hand/fingers with the specific nail art design clearly visible. Describe the nail shape (almond, coffin, stiletto, square), the colors, the finish (glossy, matte, chrome), and the specific design pattern. The nails MUST be the main subject. Example: 'Extreme macro close-up of almond-shaped nails with a glossy chrome rose gold finish, one accent nail with tiny dried flowers encapsulated in clear gel, soft natural lighting, 4:5 aspect ratio'.
    - Image Alt Text: Descriptive.
