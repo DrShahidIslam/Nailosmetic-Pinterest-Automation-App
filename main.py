@@ -161,6 +161,7 @@ RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys:
 {{
   "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content. If the topic is about Spring, it MUST be 'spring_trends'. If it's about Summer, it MUST be 'summer_vacation'. If it's minimal/clean, use 'minimalist_clean'.",
   "title": "A short, catchy, click-worthy Pinterest title (max 100 chars). Use emojis sparingly.",
+  "overlay_text": "A tiny, very catchy 3-5 word phrase for the text overlay on the image itself (e.g., 'Spring Nail Inspo', 'Trending Chrome Nails').",
   "description": "An SEO-optimized Pinterest description (150-300 chars). Mention the board category theme naturally. You MUST include exactly 10 highly relevant and trending hashtags at the very end (e.g., #nailart #nails #[niche_style]).",
   "image_prompt": "A highly detailed, ultra-macro image generation prompt (200-400 chars). The focal point MUST be the specific nail design, patterns, and textures. Force a tight, close-up shot of the nails themselves, with minimal hand visibility and no distracting background. Use terms like 'high-resolution jewelry photography', 'extreme close-up on nail art', 'sharp focus', 'luxurious editorial beauty photography'. Specify the exact finish (glossy, matte, iridescent) and any 3D elements clearly."
 }}
@@ -237,7 +238,7 @@ Important guidelines for category selection:
         sys.exit(1)
 
     # Validate required keys
-    for key in ("board_category", "title", "description", "image_prompt"):
+    for key in ("board_category", "title", "overlay_text", "description", "image_prompt"):
         if key not in content:
             print(f"❌ Gemini response missing key: '{key}'")
             sys.exit(1)
@@ -362,15 +363,15 @@ def clean_text_for_rendering(text: str) -> str:
 # PHASE 3: THE DESIGNER — Pillow (PIL)
 # ============================================================================
 
-def design_pin_image(image_path: str, title: str, output_dir: str) -> str:
+def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str:
     """
-    Open the raw image, apply a sophisticated overlay, and render the title
-    in a premium font with better typography.
+    Open the raw image, apply a sophisticated overlay, and render the text
+    in a premium font with better typography, plus a CTA and branding.
     """
     print("\n🎨 Phase 3: Designing the Pinterest pin with Pillow (Premium Style)...")
 
-    # Clean the title to avoid tofu characters
-    title = clean_text_for_rendering(title)
+    # Clean the overlay_text to avoid tofu characters
+    overlay_text = clean_text_for_rendering(overlay_text)
 
     img = Image.open(image_path).convert("RGBA")
     width, height = img.size
@@ -393,7 +394,7 @@ def design_pin_image(image_path: str, title: str, output_dir: str) -> str:
 
     # Font setup
     font_size = int(width * 0.075)
-    font_path = "assets/fonts/Montserrat-Bold.ttf"
+    font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")
 
     try:
         if os.path.exists(font_path):
@@ -425,15 +426,16 @@ def design_pin_image(image_path: str, title: str, output_dir: str) -> str:
         print(f"   ⚠️ Font error: {e}. Using default.")
         font = ImageFont.load_default()
 
-    # Word-wrap the title
+    # Word-wrap the overlay text
     max_chars_per_line = int(width / (font_size * 0.5))
-    wrapped_lines = textwrap.wrap(title, width=max_chars_per_line)
+    wrapped_lines = textwrap.wrap(overlay_text, width=max_chars_per_line)
 
     # Text Layout Refinement
     line_spacing = 1.15
     line_height = int(font_size * line_spacing)
     total_text_height = len(wrapped_lines) * line_height
-    text_y_start = height - total_text_height - int(height * 0.08)
+    # Leave room at bottom for CTA and branding
+    text_y_start = height - total_text_height - int(height * 0.18)
 
     for i, line in enumerate(wrapped_lines):
         bbox = draw.textbbox((0, 0), line, font=font)
@@ -446,21 +448,36 @@ def design_pin_image(image_path: str, title: str, output_dir: str) -> str:
         # Main white text
         draw.text((text_x, text_y), line, font=font, fill=(255, 255, 255, 255))
 
+    # --- Add Call to Action (CTA) ---
+    cta_text = "Tap for the tutorial"
+    try:
+        cta_font_size = int(width * 0.045)
+        cta_font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")
+        cta_font = ImageFont.truetype(cta_font_path, cta_font_size) if os.path.exists(cta_font_path) else font
+        
+        cta_bbox = draw.textbbox((0, 0), cta_text, font=cta_font)
+        cta_w = cta_bbox[2] - cta_bbox[0]
+        cta_x = (width - cta_w) // 2
+        cta_y = text_y_start + total_text_height + int(height * 0.03)
+        
+        draw.text((cta_x + 1, cta_y + 1), cta_text, font=cta_font, fill=(0, 0, 0, 150))
+        draw.text((cta_x, cta_y), cta_text, font=cta_font, fill=(255, 220, 220, 255)) # Soft pink CTA
+    except: pass
+
     # --- Add Branding Badge (Nailosmetic) ---
     try:
         brand_font_size = int(width * 0.035)
-        brand_font = ImageFont.truetype(font_path, brand_font_size) if os.path.exists(font_path) else None
+        brand_font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Regular.ttf")
+        brand_font = ImageFont.truetype(brand_font_path, brand_font_size) if os.path.exists(brand_font_path) else font
         if brand_font:
-            brand_text = "Nailosmetic"
+            brand_text = "nailosmetic.com"
             brand_bbox = draw.textbbox((0, 0), brand_text, font=brand_font)
             bw, bh = brand_bbox[2] - brand_bbox[0], brand_bbox[3] - brand_bbox[1]
 
-            # Draw a pill-shaped background for the brand
-            bg_padding = 15
             bx = (width - bw) // 2
             by = height - bh - int(height * 0.03)
-            # draw.rounded_rectangle([(bx - bg_padding, by - 5), (bx + bw + bg_padding, by + bh + 5)], radius=15, fill=(255, 255, 255, 40))
-            draw.text((bx, by), brand_text, font=brand_font, fill=(255, 255, 255, 180))
+            # Use regular spacing and subtle opacity
+            draw.text((bx, by), brand_text, font=brand_font, fill=(255, 255, 255, 160))
     except: pass
 
     # Save
@@ -683,7 +700,7 @@ def main():
 
         # Phase 3: Design the pin with Pillow
         final_image_path = design_pin_image(
-            raw_image_path, content["title"], tmp_dir
+            raw_image_path, content["overlay_text"], tmp_dir
         )
 
         # Phase 4: Publish to Pinterest
