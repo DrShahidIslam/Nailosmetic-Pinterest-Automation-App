@@ -251,6 +251,15 @@ Important guidelines for category selection:
     board_info = BOARD_MAP[content["board_category"]]
     print(f"   📋 Board: {board_info['name']} ({content['board_category']})")
     print(f"   📌 Title: {content['title']}")
+    
+    # Enforce basic SEO tags
+    if "#nailart" not in content["description"].lower():
+        content["description"] += " #nailart"
+    if "#nails" not in content["description"].lower():
+        content["description"] += " #nails"
+    if "#nailosmetic" not in content["description"].lower():
+        content["description"] += " #nailosmetic"
+
     print(f"   📝 Description: {content['description'][:80]}...")
     print(f"   🎨 Image Prompt: {content['image_prompt'][:80]}...")
     return content
@@ -273,10 +282,12 @@ def generate_image_with_siliconflow(image_prompt: str, output_dir: str) -> str:
         "Content-Type": "application/json",
     }
 
+    enhanced_prompt = "Extreme close-up macro photography of fingernails, elegant nail polish and nail art, " + image_prompt + ", highly detailed, masterpiece, best quality, perfect anatomy"
+    
     payload = {
         "model": SILICONFLOW_MODEL,
-        "prompt": image_prompt + ", highly detailed, masterpiece, best quality, perfect anatomy, flawless fingers",
-        "negative_prompt": "mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, unnatural hands, bad anatomy, bad proportions, disfigured, blurry, worst quality, low quality",
+        "prompt": enhanced_prompt,
+        "negative_prompt": "flowers without nails, no nails, mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, unnatural hands, bad anatomy, bad proportions, disfigured, blurry, worst quality, low quality",
         "image_size": "768x1024",  # 3:4 vertical aspect ratio supported by Kolors
         "batch_size": 1,
     }
@@ -426,9 +437,43 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
         print(f"   ⚠️ Font error: {e}. Using default.")
         font = ImageFont.load_default()
 
-    # Word-wrap the overlay text
-    max_chars_per_line = int(width / (font_size * 0.5))
-    wrapped_lines = textwrap.wrap(overlay_text, width=max_chars_per_line)
+    # Dynamic text wrapping using PIL textbbox
+    margin = int(width * 0.08)
+    max_text_width = width - (2 * margin)
+    
+    # Scale down font if there's a huge word
+    longest_word = max(overlay_text.split(), key=len) if overlay_text.split() else ""
+    while font_size > 20: # Prevent font from getting completely unreadable
+        bbox = draw.textbbox((0, 0), longest_word, font=font)
+        if (bbox[2] - bbox[0]) < max_text_width:
+            break
+        font_size -= 4
+        try:
+            if hasattr(font, 'path'): # if it's a FreeTypeFont
+                font = ImageFont.truetype(font.path, font_size)
+        except:
+            break
+
+    words = overlay_text.split()
+    wrapped_lines = []
+    current_line = []
+    
+    for word in words:
+        current_line.append(word)
+        line_text = " ".join(current_line)
+        bbox = draw.textbbox((0, 0), line_text, font=font)
+        line_width = bbox[2] - bbox[0]
+        
+        if line_width > max_text_width:
+            if len(current_line) == 1:
+                wrapped_lines.append(current_line.pop())
+            else:
+                current_line.pop()
+                wrapped_lines.append(" ".join(current_line))
+                current_line = [word]
+                
+    if current_line:
+        wrapped_lines.append(" ".join(current_line))
 
     # Text Layout Refinement
     line_spacing = 1.15
