@@ -52,49 +52,136 @@ PINTEREST_APP_SECRET = os.getenv("PINTEREST_APP_SECRET")
 # Board routing: maps each content category to its Pinterest board ID and blog link.
 # The Gemini prompt will classify each generated pin into one of these categories.
 BOARD_MAP = {
+    # --- Nail Boards ---
     "aesthetic_nail_art": {
         "board_id": os.getenv("PINTEREST_BOARD_AESTHETIC", ""),
         "name": "Aesthetic Nail Art & Designs",
+        "niche": "nails",
         "link": "https://nailosmetic.com/creative-3d-aesthetic-nail-art/",
     },
     "chrome_glazed": {
         "board_id": os.getenv("PINTEREST_BOARD_CHROME", ""),
         "name": "Chrome & Glazed Donut Nails",
+        "niche": "nails",
         "link": "https://nailosmetic.com/chrome-glazed-donut-nails/",
     },
     "minimalist_clean": {
         "board_id": os.getenv("PINTEREST_BOARD_MINIMALIST", ""),
         "name": "Minimalist & Clean Girl Nails",
+        "niche": "nails",
         "link": "https://nailosmetic.com/minimalist-clean-girl-nails/",
     },
     "spring_trends": {
         "board_id": os.getenv("PINTEREST_BOARD_SPRING", ""),
         "name": "Spring Nail Ideas & Trends",
+        "niche": "nails",
         "link": "https://nailosmetic.com/spring-nail-designs-inspo/",
     },
     "summer_vacation": {
         "board_id": os.getenv("PINTEREST_BOARD_SUMMER", ""),
         "name": "Summer Vacation Nails & Aesthetic Ideas",
+        "niche": "nails",
         "link": "https://nailosmetic.com/summer-vacation-nail-ideas/",
+    },
+    # --- Hair & Beauty Boards ---
+    "hair_aesthetics": {
+        "board_id": os.getenv("PINTEREST_BOARD_HAIR", ""),
+        "name": "Ethereal & Clean Hair Aesthetics",
+        "niche": "hair_beauty",
+        "link": "https://nailosmetic.com/",
+    },
+    "beauty_skincare": {
+        "board_id": os.getenv("PINTEREST_BOARD_BEAUTY", ""),
+        "name": "Luxury Beauty & Skincare Inspo",
+        "niche": "hair_beauty",
+        "link": "https://nailosmetic.com/",
+    },
+    # --- Home & Garden Boards ---
+    "home_decor": {
+        "board_id": os.getenv("PINTEREST_BOARD_HOME", ""),
+        "name": "Minimalist & Modern Home Decor",
+        "niche": "home_garden",
+        "link": "https://nailosmetic.com/",
+    },
+    "garden_outdoor": {
+        "board_id": os.getenv("PINTEREST_BOARD_GARDEN", ""),
+        "name": "Zen Garden & Outdoor Living",
+        "niche": "home_garden",
+        "link": "https://nailosmetic.com/",
+    },
+    # --- Fashion & Style Boards ---
+    "fashion_style": {
+        "board_id": os.getenv("PINTEREST_BOARD_FASHION", ""),
+        "name": "Chic & Timeless Fashion Style",
+        "niche": "fashion_style",
+        "link": "https://nailosmetic.com/",
     },
 }
 
 # Fallback board (aesthetic is the most general)
 DEFAULT_BOARD_CATEGORY = "aesthetic_nail_art"
 
-# Engaging Call-to-Action (CTA) variations for the nail niche
-# These are randomly selected for each pin to keep content fresh and drive saves/clicks.
-CTA_OPTIONS = [
-    "Save for your next salon visit",
-    "Inspo for your next mani",
-    "Show this to your nail tech",
-    "Save this for your nail board",
-    "Perfect for your next set",
-    "Add to your nail inspiration",
-    "Your next mani is here",
-    "Screenshot for your nail tech",
-    "Future nail goals right here"
-]
+# Niche weights for weighted random selection (must sum to 1.0)
+# 40% nails (proven performer), 20% hair, 20% home, 20% fashion
+NICHE_WEIGHTS = {
+    "nails": 0.40,
+    "hair_beauty": 0.20,
+    "home_garden": 0.20,
+    "fashion_style": 0.20,
+}
+
+# Niche-specific CTA options
+CTA_OPTIONS = {
+    "nails": [
+        "Save for your next salon visit",
+        "Inspo for your next mani",
+        "Show this to your nail tech",
+        "Save this for your nail board",
+        "Perfect for your next set",
+        "Your next mani is here",
+        "Screenshot for your nail tech",
+    ],
+    "hair_beauty": [
+        "Save for your next salon visit",
+        "Show this to your stylist",
+        "Your next look is here",
+        "Hair goals right here",
+        "Save this for your next appointment",
+        "Bookmark this hairstyle",
+    ],
+    "home_garden": [
+        "Save this for your dream home",
+        "Pin for your next project",
+        "Home inspo you need to save",
+        "Your space deserves this",
+        "Bookmark for your renovation",
+        "Save for your next DIY weekend",
+    ],
+    "fashion_style": [
+        "Save this outfit idea",
+        "Your next look is here",
+        "Add to your style board",
+        "Outfit inspo for your closet",
+        "Save for your next shopping trip",
+        "Bookmark this look",
+    ],
+}
+
+# Niche-specific image prompt prefixes for SiliconFlow
+IMAGE_PROMPT_PREFIXES = {
+    "nails": "Extreme close-up macro photography of fingernails, elegant nail polish and nail art, ",
+    "hair_beauty": "High-fashion portrait photography of hair and hairstyle, editorial beauty shot, soft golden hour lighting, 85mm lens, ",
+    "home_garden": "Interior design photography, wide angle, natural lighting, cozy warm atmosphere, high-end lifestyle magazine style, ",
+    "fashion_style": "Editorial fashion photography, street style, clean minimal backdrop, natural lighting, outfit-focused composition, ",
+}
+
+# Niche-specific negative prompts for SiliconFlow
+IMAGE_NEGATIVE_PROMPTS = {
+    "nails": "flowers without nails, no nails, mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, unnatural hands, bad anatomy, bad proportions, disfigured, blurry, worst quality, low quality",
+    "hair_beauty": "bad anatomy, disfigured, deformed face, extra limbs, blurry, worst quality, low quality, watermark, text",
+    "home_garden": "people, humans, bad architecture, blurry, worst quality, low quality, watermark, text, cluttered",
+    "fashion_style": "bad anatomy, disfigured, deformed, extra limbs, blurry, worst quality, low quality, watermark, text",
+}
 
 # SiliconFlow API config
 SILICONFLOW_API_URL = "https://api.siliconflow.cn/v1/images/generations"
@@ -130,27 +217,41 @@ def validate_env_vars():
 # PHASE 1: THE BRAIN — Gemini API
 # ============================================================================
 
-def generate_content_with_gemini(topic: str = None) -> dict:
+def generate_content_with_gemini(topic: str = None, niche: str = "nails") -> dict:
     """
     Use Google Gemini to generate a JSON payload.
     If a topic is provided, the content will be centered on that specific trending keyword.
+    The niche parameter controls which board categories and prompt style to use.
     """
     if topic:
-        print(f"\n🧠 Phase 1: Generating content for trend: \"{topic}\"...")
+        print(f"\n🧠 Phase 1: Generating content for trend: \"{topic}\" (niche: {niche})...")
     else:
-        print("\n🧠 Phase 1: Generating content with Gemini (free-style)...")
+        print(f"\n🧠 Phase 1: Generating content with Gemini (niche: {niche}, free-style)...")
 
-    # Build list of available board categories so Gemini only picks from configured boards
-    available_categories = [cat for cat, info in BOARD_MAP.items() if info["board_id"]]
+    # Build list of available board categories filtered by niche
+    available_categories = [
+        cat for cat, info in BOARD_MAP.items()
+        if info["board_id"] and info.get("niche") == niche
+    ]
+    # Fallback: if no boards for this niche, use all configured boards
     if not available_categories:
-        available_categories = list(BOARD_MAP.keys())  # fallback to all
+        available_categories = [cat for cat, info in BOARD_MAP.items() if info["board_id"]]
 
     category_descriptions = {
+        # Nails
         "aesthetic_nail_art": "Creative, artistic, 3D, maximalist, abstract, geometric, or editorial nail art designs",
         "chrome_glazed": "Chrome nails, glazed donut finish, metallic, pearlescent, reflective, or shiny nail designs",
         "minimalist_clean": "Minimalist, clean girl aesthetic, short nails, neutral tones, milky white, micro-French, subtle elegant designs",
         "spring_trends": "Spring-themed nails: pastels, florals, bright fresh colors, seasonal trendy designs",
-        "summer_vacation": "Summer vacation nails, tropical designs, bright summer colors, beach aesthetics, neon, fruit patterns, warm weather seasonal trends",
+        "summer_vacation": "Summer vacation nails, tropical designs, bright summer colors, beach aesthetics, neon, fruit patterns",
+        # Hair & Beauty
+        "hair_aesthetics": "Hairstyle inspiration, trending hair looks, braids, updos, hair color trends, salon-quality styles",
+        "beauty_skincare": "Beauty tips, skincare routines, makeup looks, luxury beauty products, glowing skin aesthetics",
+        # Home & Garden
+        "home_decor": "Interior design, minimalist decor, modern living spaces, cozy home aesthetics, room makeover ideas",
+        "garden_outdoor": "Garden design, outdoor living, flower arrangements, patio ideas, landscaping, zen garden aesthetics",
+        # Fashion
+        "fashion_style": "Outfit inspiration, street style, seasonal fashion trends, capsule wardrobe, chic and timeless looks",
     }
 
     categories_prompt = "\n".join(
@@ -158,35 +259,58 @@ def generate_content_with_gemini(topic: str = None) -> dict:
         for cat in available_categories
     )
 
+    # Niche-specific prompt instructions
+    niche_prompts = {
+        "nails": {
+            "role": "a creative social media strategist specializing in nail art and beauty content for Pinterest",
+            "task": "come up with a UNIQUE, trendy nail art concept and provide content for a Pinterest pin",
+            "image_guide": "A highly detailed, ultra-macro image generation prompt (200-400 chars). The focal point MUST be the specific nail design, patterns, and textures. Force a tight, close-up shot of the nails themselves, with minimal hand visibility and no distracting background. Use terms like 'high-resolution jewelry photography', 'extreme close-up on nail art', 'sharp focus'. Specify the exact finish (glossy, matte, iridescent) and any 3D elements clearly.",
+        },
+        "hair_beauty": {
+            "role": "a creative social media strategist specializing in hair styling, beauty trends, and aesthetic content for Pinterest",
+            "task": "come up with a UNIQUE, trendy hairstyle or beauty concept and provide content for a Pinterest pin",
+            "image_guide": "A highly detailed portrait photography prompt (200-400 chars). Focus on the hairstyle, hair texture, and styling. Describe the hair type, length, color, and specific style (braids, curls, updo, etc). Use terms like 'editorial beauty photography', 'soft golden hour lighting', '85mm portrait lens', 'salon-quality finish'. Include atmosphere and setting details.",
+        },
+        "home_garden": {
+            "role": "a creative social media strategist specializing in interior design, home decor, and garden aesthetics for Pinterest",
+            "task": "come up with a UNIQUE, trendy home decor or garden design concept and provide content for a Pinterest pin",
+            "image_guide": "A highly detailed interior/exterior photography prompt (200-400 chars). Focus on the space, materials, colors, and atmosphere. Use terms like 'Architectural Digest style photography', 'natural ambient lighting', 'wide-angle lens', 'cozy warm atmosphere'. Describe specific furniture, plants, textures, and design elements.",
+        },
+        "fashion_style": {
+            "role": "a creative social media strategist specializing in fashion, outfit styling, and trend forecasting for Pinterest",
+            "task": "come up with a UNIQUE, trendy outfit or fashion concept and provide content for a Pinterest pin",
+            "image_guide": "A highly detailed fashion photography prompt (200-400 chars). Focus on the outfit composition, styling, colors, and silhouette. Use terms like 'editorial street style photography', 'clean minimal backdrop', 'natural lighting', 'outfit-focused composition'. Describe specific garments, accessories, and the overall aesthetic vibe.",
+        },
+    }
+
+    niche_config = niche_prompts.get(niche, niche_prompts["nails"])
+
     topic_instruction = ""
     if topic:
         topic_instruction = f"""
 MANDATORY CONTEXT: The pin must be about "{topic}". 
 - The title must capture the essence of "{topic}".
 - The description must use "{topic}" as the primary focus keyword.
-- The image_prompt must describe a detailed nail design that represents "{topic}".
+- The image_prompt must describe a detailed visual that represents "{topic}".
 """
 
-    system_prompt = f"""You are a creative social media strategist specializing in nail art and beauty content for Pinterest.
-Your task is to come up with a UNIQUE, trendy nail art concept and provide content for a Pinterest pin.
+    system_prompt = f"""You are {niche_config['role']}.
+Your task is to {niche_config['task']}.
 {topic_instruction}
 
 RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys:
 {{
-  "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content. If the topic is about Spring, it MUST be 'spring_trends'. If it's about Summer, it MUST be 'summer_vacation'. If it's minimal/clean, use 'minimalist_clean'.",
+  "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content.",
   "title": "A short, catchy, click-worthy Pinterest title (max 100 chars). Use emojis sparingly.",
-  "overlay_text": "A tiny, very catchy 3-5 word phrase for the text overlay on the image itself (e.g., 'Spring Nail Inspo', 'Trending Chrome Nails').",
-  "description": "An SEO-optimized Pinterest description (150-300 chars). Mention the board category theme naturally. You MUST include exactly 10 highly relevant and trending hashtags at the very end (e.g., #nailart #nails #[niche_style]).",
-  "image_prompt": "A highly detailed, ultra-macro image generation prompt (200-400 chars). The focal point MUST be the specific nail design, patterns, and textures. Force a tight, close-up shot of the nails themselves, with minimal hand visibility and no distracting background. Use terms like 'high-resolution jewelry photography', 'extreme close-up on nail art', 'sharp focus', 'luxurious editorial beauty photography'. Specify the exact finish (glossy, matte, iridescent) and any 3D elements clearly."
+  "overlay_text": "A tiny, very catchy 3-5 word phrase for the text overlay on the image itself.",
+  "description": "An SEO-optimized Pinterest description (150-300 chars). You MUST include exactly 10 highly relevant and trending hashtags at the very end.",
+  "image_prompt": "{niche_config['image_guide']}"
 }}
 
 Available board categories (pick the MOST relevant key):
 {categories_prompt}
 
-Important guidelines for category selection:
-- If a topic matches a specific seasonal or stylistic category above, you MUST choose that category.
-- Avoid using '{DEFAULT_BOARD_CATEGORY}' as a catch-all if a more specific category exists.
-- Ensure the 'board_category' value in your JSON response is EXACTLY one of the keys listed above."""
+Ensure the 'board_category' value in your JSON response is EXACTLY one of the keys listed above."""
 
     import re
     models_to_try = ["gemini-2.5-flash", "gemini-2.5-flash-lite"]
@@ -266,13 +390,16 @@ Important guidelines for category selection:
     print(f"   📋 Board: {board_info['name']} ({content['board_category']})")
     print(f"   📌 Title: {content['title']}")
     
-    # Enforce basic SEO tags
-    if "#nailart" not in content["description"].lower():
-        content["description"] += " #nailart"
-    if "#nails" not in content["description"].lower():
-        content["description"] += " #nails"
-    if "#nailosmetic" not in content["description"].lower():
-        content["description"] += " #nailosmetic"
+    # Enforce basic SEO tags based on niche
+    niche_hashtags = {
+        "nails": ["#nailart", "#nails"],
+        "hair_beauty": ["#hairstyle", "#hairinspo"],
+        "home_garden": ["#homedecor", "#interiordesign"],
+        "fashion_style": ["#fashion", "#outfitinspo"],
+    }
+    for tag in niche_hashtags.get(niche, ["#aesthetic"]):
+        if tag not in content["description"].lower():
+            content["description"] += f" {tag}"
 
     print(f"   📝 Description: {content['description'][:80]}...")
     print(f"   🎨 Image Prompt: {content['image_prompt'][:80]}...")
@@ -283,25 +410,28 @@ Important guidelines for category selection:
 # PHASE 2: THE ARTIST — SiliconFlow API (FLUX.1-schnell)
 # ============================================================================
 
-def generate_image_with_siliconflow(image_prompt: str, output_dir: str) -> str:
+def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
     """
-    Send the image prompt to SiliconFlow's FLUX.1-schnell model.
-    Downloads the generated vertical (9:16) image to a local file.
+    Send the image prompt to SiliconFlow's Kolors model.
+    Downloads the generated vertical image to a local file.
+    Uses niche-specific prompt prefixes and negative prompts.
     Returns the path to the downloaded image.
     """
-    print("\n🎨 Phase 2: Generating image with SiliconFlow (FLUX.1-schnell)...")
+    print(f"\n🎨 Phase 2: Generating image with SiliconFlow (niche: {niche})...")
 
     headers = {
         "Authorization": f"Bearer {SILICONFLOW_API_KEY}",
         "Content-Type": "application/json",
     }
 
-    enhanced_prompt = "Extreme close-up macro photography of fingernails, elegant nail polish and nail art, " + image_prompt + ", highly detailed, masterpiece, best quality, perfect anatomy"
+    prefix = IMAGE_PROMPT_PREFIXES.get(niche, IMAGE_PROMPT_PREFIXES["nails"])
+    negative = IMAGE_NEGATIVE_PROMPTS.get(niche, IMAGE_NEGATIVE_PROMPTS["nails"])
+    enhanced_prompt = prefix + image_prompt + ", highly detailed, masterpiece, best quality"
     
     payload = {
         "model": SILICONFLOW_MODEL,
         "prompt": enhanced_prompt,
-        "negative_prompt": "flowers without nails, no nails, mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, unnatural hands, bad anatomy, bad proportions, disfigured, blurry, worst quality, low quality",
+        "negative_prompt": negative,
         "image_size": "768x1024",  # 3:4 vertical aspect ratio supported by Kolors
         "batch_size": 1,
     }
@@ -508,7 +638,9 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
         draw.text((text_x, text_y), line, font=font, fill=(255, 255, 255, 255))
 
     # --- Add Call to Action (CTA) ---
-    cta_text = random.choice(CTA_OPTIONS)
+    cta_niche = getattr(design_pin_image, '_current_niche', 'nails')
+    cta_list = CTA_OPTIONS.get(cta_niche, CTA_OPTIONS["nails"])
+    cta_text = random.choice(cta_list)
     try:
         cta_font_size = int(width * 0.045)
         cta_font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")
@@ -529,7 +661,7 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
         brand_font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Regular.ttf")
         brand_font = ImageFont.truetype(brand_font_path, brand_font_size) if os.path.exists(brand_font_path) else font
         if brand_font:
-            brand_text = "nailosmetic.com"
+            brand_text = "Aesthetic Daily"
             brand_bbox = draw.textbbox((0, 0), brand_text, font=brand_font)
             bw, bh = brand_bbox[2] - brand_bbox[0], brand_bbox[3] - brand_bbox[1]
 
@@ -671,10 +803,17 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
 # MAIN PIPELINE
 # ============================================================================
 
+def select_niche_weighted() -> str:
+    """Select a niche using weighted random distribution."""
+    niches = list(NICHE_WEIGHTS.keys())
+    weights = list(NICHE_WEIGHTS.values())
+    return random.choices(niches, weights=weights, k=1)[0]
+
+
 def main():
     """Execute the full automation pipeline."""
     print("=" * 60)
-    print("🌸 Nailosmetic Pinterest Automation Bot")
+    print("✨ Aesthetic Daily — Pinterest Automation Bot v2.0")
     print("=" * 60)
 
     # Validate environment
@@ -690,6 +829,7 @@ def main():
         used_topics_path = Path("shared/used_topics.json")
         
         chosen_topic = None
+        chosen_niche = None
         destination_link = None
         
         # 1. Try to get topic and link from WordPress Queue
@@ -698,11 +838,21 @@ def main():
                 with open(queue_path, "r") as f:
                     queue = json.load(f)
                 if queue:
-                    queued_item = queue.pop(0) # FIFO
+                    queued_item = queue.pop(0)  # FIFO
                     destination_link = queued_item.get("url")
                     chosen_topic = queued_item.get("topic")
+                    # Determine niche from the queued category
+                    queued_category = queued_item.get("category", "").lower()
+                    if "hair" in queued_category or "beauty" in queued_category:
+                        chosen_niche = "hair_beauty"
+                    elif "home" in queued_category or "garden" in queued_category:
+                        chosen_niche = "home_garden"
+                    elif "fashion" in queued_category or "style" in queued_category:
+                        chosen_niche = "fashion_style"
+                    else:
+                        chosen_niche = "nails"
                     print(f"   🔥 Synchronizing with WordPress Article: {destination_link}")
-                    print(f"   🎯 Topic from Queue: \"{chosen_topic}\"")
+                    print(f"   🎯 Topic from Queue: \"{chosen_topic}\" (niche: {chosen_niche})")
                     
                     # Update queue file
                     with open(queue_path, "w") as f:
@@ -710,7 +860,7 @@ def main():
             except Exception as e:
                 print(f"   ⚠️ Error reading links_queue.json: {e}")
 
-        # 2. If no queued item, pick a fresh topic from the bank
+        # 2. If no queued item, pick a niche and fresh topic from the bank
         if not chosen_topic and topic_bank_path.exists():
             try:
                 with open(topic_bank_path, "r") as f:
@@ -721,18 +871,53 @@ def main():
                     with open(used_topics_path, "r") as f:
                         used_topics = json.load(f)
                 
-                available_topics = [t for t in topic_bank if t not in used_topics]
-                if available_topics:
-                    chosen_topic = random.choice(available_topics)
-                    print(f"   🎯 High-demand topic selected from bank: \"{chosen_topic}\"")
+                # New niche-aware topic bank format (dict of niche -> list)
+                if isinstance(topic_bank, dict):
+                    # Select niche via weighted random
+                    chosen_niche = select_niche_weighted()
+                    niche_topics = topic_bank.get(chosen_niche, [])
+                    
+                    # Also merge gardening into home_garden
+                    if chosen_niche == "home_garden":
+                        niche_topics = niche_topics + topic_bank.get("gardening", [])
+                    
+                    available_topics = [t for t in niche_topics if t not in used_topics]
+                    if available_topics:
+                        chosen_topic = random.choice(available_topics)
+                        print(f"   🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\"")
+                    else:
+                        # Niche exhausted, try any available topic
+                        all_available = []
+                        for niche_key, topics in topic_bank.items():
+                            for t in topics:
+                                if t not in used_topics:
+                                    all_available.append((niche_key, t))
+                        if all_available:
+                            chosen_niche, chosen_topic = random.choice(all_available)
+                            print(f"   📋 {chosen_niche} exhausted. Fallback topic: \"{chosen_topic}\"")
+                        else:
+                            print("   📋 All topics exhausted! Picking random.")
+                            chosen_niche = select_niche_weighted()
+                            niche_topics = topic_bank.get(chosen_niche, [])
+                            chosen_topic = random.choice(niche_topics) if niche_topics else None
                 else:
-                    print("   📋 Topic bank exhausted! Picking a random topic to avoid failure.")
-                    chosen_topic = random.choice(topic_bank)
+                    # Legacy flat list format (backwards compatible)
+                    chosen_niche = "nails"
+                    available_topics = [t for t in topic_bank if t not in used_topics]
+                    if available_topics:
+                        chosen_topic = random.choice(available_topics)
+                        print(f"   🎯 High-demand topic selected: \"{chosen_topic}\"")
+                    else:
+                        chosen_topic = random.choice(topic_bank)
             except Exception as e:
                 print(f"   ⚠️ Error loading topic bank: {e}")
 
-        # Phase 1: Generate content with Gemini (using the specific trend if available)
-        content = generate_content_with_gemini(topic=chosen_topic)
+        # Default niche if not set
+        if not chosen_niche:
+            chosen_niche = "nails"
+
+        # Phase 1: Generate content with Gemini (niche-aware)
+        content = generate_content_with_gemini(topic=chosen_topic, niche=chosen_niche)
 
         # Resolve the target board
         category = content["board_category"]
@@ -750,14 +935,16 @@ def main():
             print(f"   🔗 Using default board link: {destination_link}")
 
         target_board_id = board_info["board_id"]
-        print(f"\n   🎯 Routing pin to: {board_info['name']}")
+        print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
 
-        # Phase 2: Generate image with SiliconFlow
+        # Phase 2: Generate image with SiliconFlow (niche-aware)
         raw_image_path = generate_image_with_siliconflow(
-            content["image_prompt"], tmp_dir
+            content["image_prompt"], tmp_dir, niche=chosen_niche
         )
 
         # Phase 3: Design the pin with Pillow
+        # Pass niche info to design function via attribute for CTA selection
+        design_pin_image._current_niche = chosen_niche
         final_image_path = design_pin_image(
             raw_image_path, content["overlay_text"], tmp_dir
         )
@@ -785,7 +972,7 @@ def main():
                 print(f"   ⚠️ Error updating used topics: {e}")
 
     print("\n" + "=" * 60)
-    print("✨ Pipeline complete! Your nail art pin is live on Pinterest.")
+    print(f"✨ Pipeline complete! Your {chosen_niche} pin is live on Pinterest.")
     print("=" * 60)
 
 

@@ -14,14 +14,15 @@ from content_generator import ContentGenerator
 from image_manager import ImageManager
 
 def main():
-    print("🌸 Nailosmetic WordPress Automation Starting...")
+    print("✨ Aesthetic Daily — WordPress Automation Starting...")
     load_dotenv()
     import time
+    import random as rng
     
     # Config
     wp_url = os.getenv("WORDPRESS_URL", "https://nailosmetic.com")
-    wp_user = os.getenv("WORDPRESS_USER", "shahidislam14@outlook.com")
-    wp_pass = os.getenv("WORDPRESS_APP_PASSWORD", "fRSd sQwI 2iQc Fkyq eMn7 qvOw")
+    wp_user = os.getenv("WORDPRESS_USER", "")
+    wp_pass = os.getenv("WORDPRESS_APP_PASSWORD", "")
     gemini_keys_raw = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
     gemini_keys = [k.strip() for k in gemini_keys_raw.split(",") if k.strip()]
     silicon_key = os.getenv("SILICONFLOW_API_KEY")
@@ -56,11 +57,21 @@ def main():
     with open(history_path, "r") as f:
         previous_slugs = json.load(f)
 
-    # ===== Pick a high-demand topic from the topic bank =====
+    # ===== Pick a niche and high-demand topic from the topic bank =====
+    # Niche weights: 40% nails, 20% hair, 20% home, 20% fashion
+    NICHE_WEIGHTS = {
+        "nails": 0.40,
+        "hair_beauty": 0.20,
+        "home_garden": 0.20,
+        "fashion_style": 0.20,
+    }
+    
     topic_bank_path = Path(__file__).parent.parent / "shared" / "topic_bank.json"
     used_topics_path = Path(__file__).parent.parent / "shared" / "used_topics.json"
     
     chosen_topic = None
+    chosen_niche = "nails"  # default
+    
     if topic_bank_path.exists():
         with open(topic_bank_path, "r") as f:
             all_topics = json.load(f)
@@ -71,15 +82,42 @@ def main():
             with open(used_topics_path, "r") as f:
                 used_topics = json.load(f)
         
-        # Find topics we haven't written about yet
-        available_topics = [t for t in all_topics if t not in used_topics]
-        
-        if available_topics:
-            import random as rng
-            chosen_topic = rng.choice(available_topics)
-            print(f"🎯 High-demand topic selected: \"{chosen_topic}\"")
+        if isinstance(all_topics, dict):
+            # Niche-keyed format: pick niche then topic
+            niches = list(NICHE_WEIGHTS.keys())
+            weights = list(NICHE_WEIGHTS.values())
+            chosen_niche = rng.choices(niches, weights=weights, k=1)[0]
+            
+            niche_topics = all_topics.get(chosen_niche, [])
+            # Merge gardening into home_garden
+            if chosen_niche == "home_garden":
+                niche_topics = niche_topics + all_topics.get("gardening", [])
+            
+            available_topics = [t for t in niche_topics if t not in used_topics]
+            if available_topics:
+                chosen_topic = rng.choice(available_topics)
+                print(f"🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\"")
+            else:
+                # Try any niche
+                for nk, topics in all_topics.items():
+                    avail = [t for t in topics if t not in used_topics]
+                    if avail:
+                        chosen_niche = nk
+                        chosen_topic = rng.choice(avail)
+                        print(f"📋 {chosen_niche} fallback topic: \"{chosen_topic}\"")
+                        break
+                if not chosen_topic:
+                    print("📋 All topics used! Picking random.")
+                    chosen_topic = rng.choice(niche_topics) if niche_topics else None
         else:
-            print("📋 All topics in bank have been used! Gemini will pick a fresh topic.")
+            # Legacy flat list format
+            chosen_niche = "nails"
+            available_topics = [t for t in all_topics if t not in used_topics]
+            if available_topics:
+                chosen_topic = rng.choice(available_topics)
+                print(f"🎯 High-demand topic selected: \"{chosen_topic}\"")
+            else:
+                print("📋 All topics in bank have been used! Gemini will pick a fresh topic.")
     else:
         print("📋 No topic bank found. Gemini will pick a topic on its own.")
 
@@ -87,9 +125,9 @@ def main():
     gen = ContentGenerator(gemini_keys)
     img_mgr = ImageManager(silicon_key)
 
-    # 2. Generate Article Plan
-    print("🧠 Generating high-quality article plan...")
-    plan = gen.generate_article_plan(cat_names, previous_slugs, topic=chosen_topic)
+    # 2. Generate Article Plan (niche-aware)
+    print(f"🧠 Generating high-quality {chosen_niche} article plan...")
+    plan = gen.generate_article_plan(cat_names, previous_slugs, topic=chosen_topic, niche=chosen_niche)
     print(f"📌 Title: {plan['title']}")
 
     # 3. Handle Images and WordPress Media
@@ -175,7 +213,8 @@ def main():
     queue.append({
         "url": post_url, 
         "category": plan["category_suggestion"],
-        "topic": chosen_topic
+        "topic": chosen_topic,
+        "niche": chosen_niche
     })
     
     with open(queue_path, "w") as f:
@@ -193,7 +232,8 @@ def main():
             json.dump(used_topics, f, indent=4)
         print(f"📋 Topic \"{chosen_topic}\" marked as used.")
 
-    print("✅ All done!")
+    print(f"✅ All done! ({chosen_niche} article published)")
+
 
 if __name__ == "__main__":
     main()
