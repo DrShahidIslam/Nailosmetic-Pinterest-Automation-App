@@ -168,19 +168,21 @@ CTA_OPTIONS = {
 }
 
 # Niche-specific image prompt prefixes for SiliconFlow
+# These FORCE the correct subject into every generated image, preventing topic-only generation.
 IMAGE_PROMPT_PREFIXES = {
-    "nails": "Extreme close-up macro photography of fingernails, elegant nail polish and nail art, ",
-    "hair_beauty": "High-fashion portrait photography of hair and hairstyle, editorial beauty shot, soft golden hour lighting, 85mm lens, ",
-    "home_garden": "Interior design photography, wide angle, natural lighting, cozy warm atmosphere, high-end lifestyle magazine style, ",
-    "fashion_style": "Editorial fashion photography, street style, clean minimal backdrop, natural lighting, outfit-focused composition, ",
+    "nails": "Extreme close-up macro photograph of a real woman's hand showing beautiful fingernails with nail art design. The nails are the main focal subject of the image. The nail art style is: ",
+    "hair_beauty": "Professional portrait photograph of a real woman showing her hairstyle. The hair is the main focal subject of the image. The woman has beautiful, styled hair. The hairstyle is: ",
+    "home_garden": "Professional interior design photograph of a real room or garden space. The space is the main focal subject. Architectural Digest style, natural ambient lighting. The design concept is: ",
+    "fashion_style": "Professional fashion photograph of a real woman wearing a complete outfit. The outfit is the main focal subject. Editorial street style, clean backdrop. The outfit style is: ",
 }
 
 # Niche-specific negative prompts for SiliconFlow
+# Explicitly block the most common failure modes per niche.
 IMAGE_NEGATIVE_PROMPTS = {
-    "nails": "flowers without nails, no nails, mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, unnatural hands, bad anatomy, bad proportions, disfigured, blurry, worst quality, low quality",
-    "hair_beauty": "bad anatomy, disfigured, deformed face, extra limbs, blurry, worst quality, low quality, watermark, text",
-    "home_garden": "people, humans, bad architecture, blurry, worst quality, low quality, watermark, text, cluttered",
-    "fashion_style": "bad anatomy, disfigured, deformed, extra limbs, blurry, worst quality, low quality, watermark, text",
+    "nails": "no hands, no nails, no fingers, hands without nails, nails not visible, flowers only, objects only, just patterns without hands, mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, bad anatomy, bad proportions, disfigured, blurry, worst quality, low quality, watermark, text",
+    "hair_beauty": "no person, no hair, bald, faceless, no head, bad anatomy, disfigured, deformed face, extra limbs, mutated, blurry, worst quality, low quality, watermark, text, cartoon, anime",
+    "home_garden": "no room, empty void, people, humans, faces, bad architecture, impossible geometry, blurry, worst quality, low quality, watermark, text, cartoon, anime",
+    "fashion_style": "no person, no clothes, naked, nude, faceless mannequin, bad anatomy, disfigured, deformed, extra limbs, blurry, worst quality, low quality, watermark, text, cartoon, anime",
 }
 
 # SiliconFlow API config
@@ -264,22 +266,22 @@ def generate_content_with_gemini(topic: str = None, niche: str = "nails") -> dic
         "nails": {
             "role": "a creative social media strategist specializing in nail art and beauty content for Pinterest",
             "task": "come up with a UNIQUE, trendy nail art concept and provide content for a Pinterest pin",
-            "image_guide": "A highly detailed, ultra-macro image generation prompt (200-400 chars). The focal point MUST be the specific nail design, patterns, and textures. Force a tight, close-up shot of the nails themselves, with minimal hand visibility and no distracting background. Use terms like 'high-resolution jewelry photography', 'extreme close-up on nail art', 'sharp focus'. Specify the exact finish (glossy, matte, iridescent) and any 3D elements clearly.",
+            "image_guide": "A highly detailed image generation prompt (200-400 chars). MANDATORY RULE: The image MUST show a real woman's hand/fingers with painted nails as the PRIMARY SUBJECT. The nails must be clearly visible and take up at least 60% of the image. If the topic mentions a theme (e.g., 'dew drop', 'butterfly', 'floral'), the theme must appear AS A NAIL ART DESIGN ON THE NAILS, NOT as a standalone object. Describe: nail shape (almond/coffin/stiletto/square), colors, finish (glossy/matte/chrome), specific design pattern ON the nails. Use terms like 'extreme macro close-up of nail art on real fingers', 'high-resolution jewelry photography of manicured nails'.",
         },
         "hair_beauty": {
             "role": "a creative social media strategist specializing in hair styling, beauty trends, and aesthetic content for Pinterest",
             "task": "come up with a UNIQUE, trendy hairstyle or beauty concept and provide content for a Pinterest pin",
-            "image_guide": "A highly detailed portrait photography prompt (200-400 chars). Focus on the hairstyle, hair texture, and styling. Describe the hair type, length, color, and specific style (braids, curls, updo, etc). Use terms like 'editorial beauty photography', 'soft golden hour lighting', '85mm portrait lens', 'salon-quality finish'. Include atmosphere and setting details.",
+            "image_guide": "A highly detailed portrait photography prompt (200-400 chars). MANDATORY RULE: The image MUST show a real woman with her HAIR/HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the topic names a style (e.g., 'fulani braids', 'prom updo'), the woman must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details, hair accessories if any. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens', 'salon-quality finish'.",
         },
         "home_garden": {
             "role": "a creative social media strategist specializing in interior design, home decor, and garden aesthetics for Pinterest",
             "task": "come up with a UNIQUE, trendy home decor or garden design concept and provide content for a Pinterest pin",
-            "image_guide": "A highly detailed interior/exterior photography prompt (200-400 chars). Focus on the space, materials, colors, and atmosphere. Use terms like 'Architectural Digest style photography', 'natural ambient lighting', 'wide-angle lens', 'cozy warm atmosphere'. Describe specific furniture, plants, textures, and design elements.",
+            "image_guide": "A highly detailed interior/exterior photography prompt (200-400 chars). MANDATORY RULE: The image MUST show a real, fully decorated ROOM or GARDEN SPACE as the PRIMARY SUBJECT. The space must look realistic, lived-in, and styled. If the topic names a specific element (e.g., 'front porch flower pots', 'drainage ideas'), that element must be shown IN CONTEXT within a full space — never as an isolated object on a white background. Describe: room type, materials, color palette, furniture, plants, lighting mood. Use terms like 'Architectural Digest photography', 'wide-angle interior shot', 'natural ambient lighting'.",
         },
         "fashion_style": {
             "role": "a creative social media strategist specializing in fashion, outfit styling, and trend forecasting for Pinterest",
             "task": "come up with a UNIQUE, trendy outfit or fashion concept and provide content for a Pinterest pin",
-            "image_guide": "A highly detailed fashion photography prompt (200-400 chars). Focus on the outfit composition, styling, colors, and silhouette. Use terms like 'editorial street style photography', 'clean minimal backdrop', 'natural lighting', 'outfit-focused composition'. Describe specific garments, accessories, and the overall aesthetic vibe.",
+            "image_guide": "A highly detailed fashion photography prompt (200-400 chars). MANDATORY RULE: The image MUST show a real woman WEARING a complete outfit as the PRIMARY SUBJECT. The outfit must be fully visible from head to at least mid-thigh. If the topic names a style (e.g., 'casual brunch outfit', 'spring jeans outfit'), the woman must be wearing that EXACT style of outfit. Describe: specific garments (top, bottom, shoes), colors, accessories, fabrics. Use terms like 'editorial street style photography', 'full-body outfit shot', 'clean minimal backdrop', 'natural lighting'.",
         },
     }
 
@@ -287,11 +289,18 @@ def generate_content_with_gemini(topic: str = None, niche: str = "nails") -> dic
 
     topic_instruction = ""
     if topic:
+        # Niche-specific topic framing to prevent literal interpretation
+        niche_topic_context = {
+            "nails": f"The topic \"{topic}\" describes a NAIL ART STYLE/THEME. The image must show this as a design ON fingernails, not as a standalone object.",
+            "hair_beauty": f"The topic \"{topic}\" describes a HAIRSTYLE or BEAUTY LOOK. The image must show a person wearing/displaying this look.",
+            "home_garden": f"The topic \"{topic}\" describes a HOME/GARDEN DESIGN CONCEPT. The image must show this concept implemented in a real space.",
+            "fashion_style": f"The topic \"{topic}\" describes an OUTFIT or FASHION STYLE. The image must show a person wearing this style.",
+        }
         topic_instruction = f"""
 MANDATORY CONTEXT: The pin must be about "{topic}". 
 - The title must capture the essence of "{topic}".
 - The description must use "{topic}" as the primary focus keyword.
-- The image_prompt must describe a detailed visual that represents "{topic}".
+- {niche_topic_context.get(niche, '')}
 """
 
     system_prompt = f"""You are {niche_config['role']}.

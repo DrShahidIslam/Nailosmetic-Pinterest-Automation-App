@@ -1,7 +1,7 @@
 # ============================================================
-# Nailosmetic WordPress Automation — GitHub Actions Workflow
+# Aesthetic Daily WordPress Automation — GitHub Actions Workflow
 # ============================================================
-# This workflow runs the WordPress bot twice a day.
+# This workflow runs the WordPress bot three times a day.
 # It generates an article and pushes it to your site.
 
 name: 📝 Daily WordPress Article
@@ -11,8 +11,8 @@ env:
 
 on:
   schedule:
-    # Run twice a day (e.g., 08:00 and 20:00 UTC)
-    - cron: "0 8,20 * * *"
+    # Run 3 times a day (06:00, 14:00, 22:00 UTC)
+    - cron: "0 6,14,22 * * *"
 
   # Allow manual triggering
   workflow_dispatch:
