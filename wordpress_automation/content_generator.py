@@ -44,8 +44,8 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
             "hair_beauty": {
                 "role": "a celebrity hairstylist and beauty editor for 'Aesthetic Daily'",
                 "article_type": "a high-quality, SEO-optimized hairstyle and beauty listicle article",
-                "featured_image_guide": "Wide (16:9) prompt. MUST show a portrait of a real woman with stunning, styled hair as the focal point. Soft editorial lighting, salon-quality finish. The HAIR and hairstyle must be clearly visible.",
-                "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real woman with her HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the heading names a style (e.g., 'fulani braids', 'prom updo'), the woman must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens'.",
+                "featured_image_guide": "Wide (16:9) prompt. MUST show a portrait of a real person with stunning, styled hair as the focal point. Soft editorial lighting, salon-quality finish. The HAIR and hairstyle must be clearly visible.",
+                "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real person with their HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the heading names a style (e.g., 'fulani braids', 'prom updo'), the person must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens'.",
                 "block_details": "The Vibe, Styling Technique, Best Face Shape/Hair Type",
             },
             "home_garden": {

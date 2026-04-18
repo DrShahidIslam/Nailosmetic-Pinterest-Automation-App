@@ -171,7 +171,7 @@ CTA_OPTIONS = {
 # These FORCE the correct subject into every generated image, preventing topic-only generation.
 IMAGE_PROMPT_PREFIXES = {
     "nails": "Extreme close-up macro photograph of a real woman's hand showing beautiful fingernails with nail art design. The nails are the main focal subject of the image. The nail art style is: ",
-    "hair_beauty": "Professional portrait photograph of a real woman showing her hairstyle. The hair is the main focal subject of the image. The woman has beautiful, styled hair. The hairstyle is: ",
+    "hair_beauty": "Professional portrait photograph of a real person showing their hairstyle. The hair is the main focal subject of the image. Beautiful, styled hair. The hairstyle is: ",
     "home_garden": "Professional interior design photograph of a real room or garden space. The space is the main focal subject. Architectural Digest style, natural ambient lighting. The design concept is: ",
     "fashion_style": "Professional fashion photograph of a real woman wearing a complete outfit. The outfit is the main focal subject. Editorial street style, clean backdrop. The outfit style is: ",
 }
@@ -180,7 +180,7 @@ IMAGE_PROMPT_PREFIXES = {
 # Explicitly block the most common failure modes per niche.
 IMAGE_NEGATIVE_PROMPTS = {
     "nails": "no hands, no nails, no fingers, hands without nails, nails not visible, flowers only, objects only, just patterns without hands, mutated hands, poorly drawn hands, extra fingers, missing fingers, malformed hands, deformed fingers, bad anatomy, bad proportions, disfigured, blurry, worst quality, low quality, watermark, text",
-    "hair_beauty": "no person, no hair, bald, faceless, no head, bad anatomy, disfigured, deformed face, extra limbs, mutated, blurry, worst quality, low quality, watermark, text, cartoon, anime",
+    "hair_beauty": "no person, no hair, bald, faceless, no head, bad anatomy, disfigured, deformed face, extra limbs, mutated, blurry, worst quality, low quality, watermark, text, cartoon, anime, multiple people",
     "home_garden": "no room, empty void, people, humans, faces, bad architecture, impossible geometry, blurry, worst quality, low quality, watermark, text, cartoon, anime",
     "fashion_style": "no person, no clothes, naked, nude, faceless mannequin, bad anatomy, disfigured, deformed, extra limbs, blurry, worst quality, low quality, watermark, text, cartoon, anime",
 }
@@ -271,7 +271,7 @@ def generate_content_with_gemini(topic: str = None, niche: str = "nails") -> dic
         "hair_beauty": {
             "role": "a creative social media strategist specializing in hair styling, beauty trends, and aesthetic content for Pinterest",
             "task": "come up with a UNIQUE, trendy hairstyle or beauty concept and provide content for a Pinterest pin",
-            "image_guide": "A highly detailed portrait photography prompt (200-400 chars). MANDATORY RULE: The image MUST show a real woman with her HAIR/HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the topic names a style (e.g., 'fulani braids', 'prom updo'), the woman must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details, hair accessories if any. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens', 'salon-quality finish'.",
+            "image_guide": "A highly detailed portrait photography prompt (200-400 chars). MANDATORY RULE: The image MUST show a real person with their HAIR/HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the topic names a style (e.g., 'fulani braids', 'prom updo'), the person must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details, hair accessories if any. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens', 'salon-quality finish'.",
         },
         "home_garden": {
             "role": "a creative social media strategist specializing in interior design, home decor, and garden aesthetics for Pinterest",
