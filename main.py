@@ -82,6 +82,20 @@ BOARD_MAP = {
 # Fallback board (aesthetic is the most general)
 DEFAULT_BOARD_CATEGORY = "aesthetic_nail_art"
 
+# Engaging Call-to-Action (CTA) variations for the nail niche
+# These are randomly selected for each pin to keep content fresh and drive saves/clicks.
+CTA_OPTIONS = [
+    "Save for your next salon visit",
+    "Inspo for your next mani",
+    "Show this to your nail tech",
+    "Save this for your nail board",
+    "Perfect for your next set",
+    "Add to your nail inspiration",
+    "Your next mani is here",
+    "Screenshot for your nail tech",
+    "Future nail goals right here"
+]
+
 # SiliconFlow API config
 SILICONFLOW_API_URL = "https://api.siliconflow.cn/v1/images/generations"
 SILICONFLOW_MODEL = "Kwai-Kolors/Kolors"
@@ -494,7 +508,7 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
         draw.text((text_x, text_y), line, font=font, fill=(255, 255, 255, 255))
 
     # --- Add Call to Action (CTA) ---
-    cta_text = "Tap for the tutorial"
+    cta_text = random.choice(CTA_OPTIONS)
     try:
         cta_font_size = int(width * 0.045)
         cta_font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")
