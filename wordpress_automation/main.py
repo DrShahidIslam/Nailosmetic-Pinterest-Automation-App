@@ -220,6 +220,22 @@ def main():
     with open(queue_path, "w") as f:
         json.dump(queue, f, indent=4)
 
+    # Also save to persistent published links history (used by Pinterest bot for smart link fallback)
+    published_path = Path(__file__).parent.parent / "shared" / "published_links.json"
+    published = []
+    if published_path.exists():
+        with open(published_path, "r") as f:
+            published = json.load(f)
+    published.append({
+        "url": post_url,
+        "category": plan["category_suggestion"],
+        "niche": chosen_niche,
+        "topic": chosen_topic,
+        "slug": post_slug
+    })
+    with open(published_path, "w") as f:
+        json.dump(published, f, indent=4)
+
     # Mark topic as used so we don't repeat it
     if chosen_topic:
         used_topics_path = Path(__file__).parent.parent / "shared" / "used_topics.json"

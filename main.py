@@ -940,8 +940,24 @@ def main():
 
         # Use fallback link if not set by queue
         if not destination_link:
-            destination_link = board_info["link"]
-            print(f"   🔗 Using default board link: {destination_link}")
+            # Smart fallback: find the most recent published article for this niche
+            published_links_path = Path("shared/published_links.json")
+            if published_links_path.exists():
+                try:
+                    with open(published_links_path, "r") as f:
+                        published = json.load(f)
+                    # Find articles matching this niche (newest first)
+                    niche_articles = [p for p in reversed(published) if p.get("niche") == chosen_niche]
+                    if niche_articles:
+                        destination_link = niche_articles[0]["url"]
+                        print(f"   🔗 Smart fallback: using latest {chosen_niche} article: {destination_link}")
+                except Exception as e:
+                    print(f"   ⚠️ Error reading published_links.json: {e}")
+            
+            # Final fallback: use board default link
+            if not destination_link:
+                destination_link = board_info["link"]
+                print(f"   🔗 Using default board link: {destination_link}")
 
         target_board_id = board_info["board_id"]
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
