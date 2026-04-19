@@ -64,11 +64,11 @@ jobs:
         run: python main.py
 
       # 5. Commit shared data changes
-      - name: 💾 Commit shared data updates
+      - name: 💾 Commit updated history and queue
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git pull --rebase origin main || true
           git add shared/*.json
-          git commit -m "📌 Update queue and used topics [skip ci]" || echo "No changes to commit"
+          git commit -m "📝 Update history and link queue [skip ci]" || exit 0
+          git pull --rebase origin main
           git push
