@@ -17,6 +17,10 @@ on:
   # Allow manual triggering from the GitHub Actions UI
   workflow_dispatch:
 
+concurrency:
+  group: bot-data-sync
+  cancel-in-progress: false
+
 jobs:
   publish-pin:
     name: Generate & Publish Nail Art Pin

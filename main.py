@@ -937,9 +937,21 @@ def main():
                     print(f"   🔥 Synchronizing with WordPress Article: {destination_link}")
                     print(f"   🎯 Topic from Queue: \"{chosen_topic}\" (niche: {chosen_niche})")
                     
-                    # Update queue file
-                    with open(queue_path, "w") as f:
-                        json.dump(queue, f, indent=4)
+                    # Remove the item we just processed
+                    try:
+                        # RE-LOAD right before saving to be merge-safe
+                        fresh_queue = []
+                        if queue_path.exists():
+                            with open(queue_path, "r") as f:
+                                fresh_queue = json.load(f)
+                        
+                        # Find and remove the item that matches our URL
+                        fresh_queue = [item for item in fresh_queue if item.get("url") != destination_link]
+                        
+                        with open(queue_path, "w") as f:
+                            json.dump(fresh_queue, f, indent=4)
+                    except Exception as e:
+                        print(f"   ⚠️ Error updating links_queue.json: {e}")
             except Exception as e:
                 print(f"   ⚠️ Error reading links_queue.json: {e}")
 

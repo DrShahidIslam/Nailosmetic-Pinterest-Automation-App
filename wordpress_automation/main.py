@@ -203,39 +203,59 @@ def main():
 
     # 6. Update History and Queue
     print("📝 Updating history and Pinterest queue...")
-    previous_slugs.append(post_slug)
-    with open(history_path, "w") as f:
-        json.dump(previous_slugs, f, indent=4)
+    try:
+        current_slugs = []
+        if history_path.exists():
+            with open(history_path, "r") as f:
+                current_slugs = json.load(f)
         
-    queue_path = Path(__file__).parent.parent / "shared" / "links_queue.json"
-    with open(queue_path, "r") as f:
-        queue = json.load(f)
-    
-    queue.append({
-        "url": post_url, 
-        "category": plan["category_suggestion"],
-        "topic": chosen_topic,
-        "niche": chosen_niche
-    })
-    
-    with open(queue_path, "w") as f:
-        json.dump(queue, f, indent=4)
+        if post_slug not in current_slugs:
+            current_slugs.append(post_slug)
+            with open(history_path, "w") as f:
+                json.dump(current_slugs, f, indent=4)
+    except Exception as e:
+        print(f"   ⚠️ Error updating history: {e}")
+        
+    try:
+        queue_path = Path(__file__).parent.parent / "shared" / "links_queue.json"
+        queue = []
+        if queue_path.exists():
+            with open(queue_path, "r") as f:
+                queue = json.load(f)
+        
+        queue.append({
+            "url": post_url, 
+            "category": plan["category_suggestion"],
+            "topic": chosen_topic,
+            "niche": chosen_niche
+        })
+        
+        with open(queue_path, "w") as f:
+            json.dump(queue, f, indent=4)
+    except Exception as e:
+        print(f"   ⚠️ Error updating queue: {e}")
 
     # Also save to persistent published links history (used by Pinterest bot for smart link fallback)
-    published_path = Path(__file__).parent.parent / "shared" / "published_links.json"
-    published = []
-    if published_path.exists():
-        with open(published_path, "r") as f:
-            published = json.load(f)
-    published.append({
-        "url": post_url,
-        "category": plan["category_suggestion"],
-        "niche": chosen_niche,
-        "topic": chosen_topic,
-        "slug": post_slug
-    })
-    with open(published_path, "w") as f:
-        json.dump(published, f, indent=4)
+    try:
+        published_path = Path(__file__).parent.parent / "shared" / "published_links.json"
+        published = []
+        if published_path.exists():
+            with open(published_path, "r") as f:
+                published = json.load(f)
+        
+        # Check if already exists to prevent duplicates
+        if not any(p.get("url") == post_url for p in published):
+            published.append({
+                "url": post_url,
+                "category": plan["category_suggestion"],
+                "niche": chosen_niche,
+                "topic": chosen_topic,
+                "slug": post_slug
+            })
+            with open(published_path, "w") as f:
+                json.dump(published, f, indent=4)
+    except Exception as e:
+        print(f"   ⚠️ Error updating published links: {e}")
 
     # Mark topic as used so we don't repeat it
     if chosen_topic:

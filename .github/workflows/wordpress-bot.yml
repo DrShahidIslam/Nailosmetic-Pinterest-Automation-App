@@ -17,6 +17,10 @@ on:
   # Allow manual triggering
   workflow_dispatch:
 
+concurrency:
+  group: bot-data-sync
+  cancel-in-progress: false
+
 jobs:
   publish-article:
     name: Generate & Publish WordPress Article
