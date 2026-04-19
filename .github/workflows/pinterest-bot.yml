@@ -11,8 +11,8 @@ env:
 
 on:
   schedule:
-    # Run 8 times a day (every 3 hours) to meet your goal and maximize visibility
-    - cron: "0 */3 * * *"
+    # Run 12 times a day (every 2 hours) — 4 niches need more coverage
+    - cron: "0 */2 * * *"
 
   # Allow manual triggering from the GitHub Actions UI
   workflow_dispatch:
