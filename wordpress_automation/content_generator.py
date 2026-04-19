@@ -40,7 +40,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a close-up of a real woman's beautifully manicured hand in a luxury setting (e.g., holding a cocktail, resting on marble). The NAILS with nail art must be the focal point — never generate flowers, objects, or textures without nails visible.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real woman's hand/fingers with the specific nail art design as the PRIMARY SUBJECT. The nails must take up at least 60 percent of the image. If the heading mentions a theme (e.g., 'dew drop', 'butterfly', 'floral'), that theme must appear AS A DESIGN PAINTED ON THE NAILS, not as a standalone object. Describe: nail shape (almond/coffin/stiletto/square), colors, finish (glossy/matte/chrome), specific pattern ON the nails. Example: 'Extreme macro close-up of almond nails with glossy chrome rose gold finish, one accent nail with tiny dried flowers encapsulated in clear gel'.",
                 "block_details": "Vibe, Technique/Pro-Tip, Best Shape/Alternative",
-                "mandatory_category": "Nails and Manicure",
+                "mandatory_category": "Aesthetic & Art, Chrome & Glazed, Minimalist & Clean Girl, or Seasonal Trends (Use 'Nails and Manicure' only as fallback)",
             },
             "hair_beauty": {
                 "role": "a celebrity hairstylist and beauty editor for 'Aesthetic Daily'",
