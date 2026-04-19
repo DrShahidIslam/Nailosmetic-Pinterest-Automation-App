@@ -940,17 +940,49 @@ def main():
 
         # Use fallback link if not set by queue
         if not destination_link:
-            # Smart fallback: find the most recent published article for this niche
+            # Smart fallback: find the MOST RELEVANT published article for this pin's topic
             published_links_path = Path("shared/published_links.json")
             if published_links_path.exists():
                 try:
                     with open(published_links_path, "r") as f:
                         published = json.load(f)
-                    # Find articles matching this niche (newest first)
-                    niche_articles = [p for p in reversed(published) if p.get("niche") == chosen_niche]
-                    if niche_articles:
-                        destination_link = niche_articles[0]["url"]
-                        print(f"   🔗 Smart fallback: using latest {chosen_niche} article: {destination_link}")
+                    
+                    # Filter to same niche first
+                    niche_articles = [p for p in published if p.get("niche") == chosen_niche]
+                    
+                    if niche_articles and chosen_topic:
+                        # Score each article by keyword overlap with the pin topic
+                        pin_keywords = set(chosen_topic.lower().split())
+                        best_score = 0
+                        best_article = None
+                        
+                        for article in niche_articles:
+                            article_keywords = set()
+                            # Check topic field
+                            if article.get("topic"):
+                                article_keywords.update(article["topic"].lower().split())
+                            # Check slug field (slugs use dashes as word separators)
+                            if article.get("slug"):
+                                article_keywords.update(article["slug"].lower().replace("-", " ").split())
+                            
+                            # Score = number of matching keywords
+                            overlap = len(pin_keywords & article_keywords)
+                            if overlap > best_score:
+                                best_score = overlap
+                                best_article = article
+                        
+                        if best_article and best_score > 0:
+                            destination_link = best_article["url"]
+                            print(f"   🔗 Relevant match (score {best_score}): {destination_link}")
+                        elif niche_articles:
+                            # No keyword match, but same niche — use latest
+                            destination_link = niche_articles[-1]["url"]
+                            print(f"   🔗 Niche fallback (latest {chosen_niche}): {destination_link}")
+                    elif niche_articles:
+                        # No topic to match against, use latest in niche
+                        destination_link = niche_articles[-1]["url"]
+                        print(f"   🔗 Niche fallback (latest {chosen_niche}): {destination_link}")
+                        
                 except Exception as e:
                     print(f"   ⚠️ Error reading published_links.json: {e}")
             
