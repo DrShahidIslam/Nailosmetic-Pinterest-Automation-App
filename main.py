@@ -44,6 +44,7 @@ load_dotenv()  # Load .env file if present (local development)
 raw_gemini_keys = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
 GEMINI_API_KEYS = [k.strip() for k in raw_gemini_keys.split(",") if k.strip()]
 SILICONFLOW_API_KEY = os.getenv("SILICONFLOW_API_KEY")
+HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 PINTEREST_ACCESS_TOKEN = os.getenv("PINTEREST_ACCESS_TOKEN")
 PINTEREST_REFRESH_TOKEN = os.getenv("PINTEREST_REFRESH_TOKEN")
 PINTEREST_APP_ID = os.getenv("PINTEREST_APP_ID")
@@ -189,6 +190,9 @@ IMAGE_NEGATIVE_PROMPTS = {
 SILICONFLOW_API_URL = "https://api.siliconflow.cn/v1/images/generations"
 SILICONFLOW_MODEL = "Kwai-Kolors/Kolors"
 
+# Hugging Face API config
+HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell"
+
 # Pinterest API base (Production mode)
 PINTEREST_API_BASE = "https://api.pinterest.com/v5"
 
@@ -197,7 +201,7 @@ def validate_env_vars():
     """Ensure all required environment variables are set."""
     required = {
         "GEMINI_API_KEYS": True if GEMINI_API_KEYS else False,
-        "SILICONFLOW_API_KEY": SILICONFLOW_API_KEY,
+        "HUGGINGFACE_API_KEY": HUGGINGFACE_API_KEY,  # Primary
         "PINTEREST_ACCESS_TOKEN": PINTEREST_ACCESS_TOKEN,
     }
     missing = [k for k, v in required.items() if not v]
@@ -419,14 +423,62 @@ Ensure the 'board_category' value in your JSON response is EXACTLY one of the ke
 # PHASE 2: THE ARTIST — SiliconFlow API (FLUX.1-schnell)
 # ============================================================================
 
+def generate_image_with_huggingface(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
+    """
+    Send the image prompt to Hugging Face Inference API (FLUX.1-schnell).
+    Downloads the generated image to a local file.
+    """
+    print(f"\n🎨 Phase 2: Generating image with Hugging Face (niche: {niche})...")
+
+    headers = {
+        "Authorization": f"Bearer {HUGGINGFACE_API_KEY}",
+    }
+
+    prefix = IMAGE_PROMPT_PREFIXES.get(niche, IMAGE_PROMPT_PREFIXES["nails"])
+    enhanced_prompt = prefix + image_prompt + ", high quality, ultra realistic, masterpiece, aesthetic"
+    
+    payload = {
+        "inputs": enhanced_prompt,
+        "parameters": {
+            "num_inference_steps": 4, # Schnell is optimized for few steps
+        }
+    }
+
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = requests.post(HUGGINGFACE_API_URL, headers=headers, json=payload, timeout=60)
+            if response.status_code == 200:
+                image_path = os.path.join(output_dir, "raw_ai_image.png")
+                with open(image_path, "wb") as f:
+                    f.write(response.content)
+                print(f"   ✅ Image saved to: {image_path}")
+                return image_path
+            elif response.status_code == 503: # Model loading
+                estimated_time = 20
+                try: estimated_time = response.json().get("estimated_time", 20)
+                except: pass
+                print(f"   ⏳ Model is loading, waiting {estimated_time}s...")
+                time.sleep(estimated_time)
+            else:
+                print(f"   ⚠️  Hugging Face API error ({response.status_code}): {response.text[:200]}")
+                time.sleep(10)
+        except Exception as e:
+            print(f"   ⚠️  Hugging Face API exception: {e}")
+            time.sleep(10)
+    
+    raise Exception("Hugging Face API failed")
+
+
 def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
+    # (Existing function content, but return instead of sys.exit if part of a fallback chain)
+    # ... (I'll keep it as is but wrap it safely)
     """
     Send the image prompt to SiliconFlow's Kolors model.
-    Downloads the generated vertical image to a local file.
-    Uses niche-specific prompt prefixes and negative prompts.
-    Returns the path to the downloaded image.
     """
     print(f"\n🎨 Phase 2: Generating image with SiliconFlow (niche: {niche})...")
+    if not SILICONFLOW_API_KEY:
+        raise Exception("SiliconFlow API key missing")
 
     headers = {
         "Authorization": f"Bearer {SILICONFLOW_API_KEY}",
@@ -441,51 +493,74 @@ def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: s
         "model": SILICONFLOW_MODEL,
         "prompt": enhanced_prompt,
         "negative_prompt": negative,
-        "image_size": "768x1024",  # 3:4 vertical aspect ratio supported by Kolors
+        "image_size": "768x1024",
         "batch_size": 1,
     }
 
-    max_retries = 3
-    for attempt in range(max_retries):
-        try:
-            response = requests.post(SILICONFLOW_API_URL, headers=headers, json=payload, timeout=120)
-            if response.status_code == 200:
-                break
-            else:
-                print(f"   ⚠️  SiliconFlow API error ({response.status_code}): {response.text[:200]}")
-                if attempt < max_retries - 1:
-                    time.sleep(10)
-        except Exception as e:
-            print(f"   ⚠️  SiliconFlow API exception: {e}")
-            if attempt < max_retries - 1:
-                time.sleep(10)
+    response = requests.post(SILICONFLOW_API_URL, headers=headers, json=payload, timeout=120)
+    if response.status_code == 200:
+        image_url = response.json()["images"][0]["url"]
+        img_response = requests.get(image_url, timeout=60)
+        image_path = os.path.join(output_dir, "raw_ai_image.png")
+        with open(image_path, "wb") as f:
+            f.write(img_response.content)
+        return image_path
     else:
-        print(f"❌ SiliconFlow API failed permanently after {max_retries} attempts.")
-        sys.exit(1)
+        raise Exception(f"SiliconFlow failed: {response.status_code}")
 
-    result = response.json()
 
-    # Extract image URL from the response
+def generate_image_with_pollinations(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
+    """
+    Zero-key fallback using Pollinations.ai.
+    Uses the Flux model for high quality.
+    """
+    print(f"\n🎨 Phase 2: Generating image with Pollinations (niche: {niche})...")
+    
+    prefix = IMAGE_PROMPT_PREFIXES.get(niche, IMAGE_PROMPT_PREFIXES["nails"])
+    # Seed for some randomness
+    seed = random.randint(0, 999999)
+    # Pollinations URL format: https://image.pollinations.ai/prompt/{prompt}?width={w}&height={h}&model=flux&seed={seed}
+    import urllib.parse
+    encoded_prompt = urllib.parse.quote(prefix + image_prompt)
+    url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=768&height=1024&model=flux&nologo=true&seed={seed}"
+    
     try:
-        image_url = result["images"][0]["url"]
-    except (KeyError, IndexError):
-        print(f"❌ Unexpected SiliconFlow response format: {json.dumps(result, indent=2)[:500]}")
+        response = requests.get(url, timeout=60)
+        if response.status_code == 200:
+            image_path = os.path.join(output_dir, "raw_ai_image.png")
+            with open(image_path, "wb") as f:
+                f.write(response.content)
+            print(f"   ✅ Image saved to: {image_path} (via Pollinations)")
+            return image_path
+    except Exception as e:
+        print(f"   ⚠️ Pollinations failed: {e}")
+    
+    raise Exception("Pollinations failed")
+
+
+def generate_image_master(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
+    """
+    Master function to try multiple backends in order of preference.
+    """
+    # 1. Try Hugging Face
+    try:
+        return generate_image_with_huggingface(image_prompt, output_dir, niche)
+    except Exception as e:
+        print(f"   ⚠️ Hugging Face fallback triggered: {e}")
+
+    # 2. Try SiliconFlow (if key exists)
+    if SILICONFLOW_API_KEY:
+        try:
+            return generate_image_with_siliconflow(image_prompt, output_dir, niche)
+        except Exception as e:
+            print(f"   ⚠️ SiliconFlow fallback triggered: {e}")
+
+    # 3. Try Pollinations (last resort, no key)
+    try:
+        return generate_image_with_pollinations(image_prompt, output_dir, niche)
+    except Exception as e:
+        print(f"   ❌ All image generation backends failed.")
         sys.exit(1)
-
-    print(f"   🖼️  Image URL received. Downloading...")
-
-    # Download the image
-    img_response = requests.get(image_url, timeout=60)
-    if img_response.status_code != 200:
-        print(f"❌ Failed to download image: {img_response.status_code}")
-        sys.exit(1)
-
-    image_path = os.path.join(output_dir, "raw_nail_art.png")
-    with open(image_path, "wb") as f:
-        f.write(img_response.content)
-
-    print(f"   ✅ Image saved to: {image_path}")
-    return image_path
 
 
 # --- Support functions for design ---
@@ -994,8 +1069,8 @@ def main():
         target_board_id = board_info["board_id"]
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
 
-        # Phase 2: Generate image with SiliconFlow (niche-aware)
-        raw_image_path = generate_image_with_siliconflow(
+        # Phase 2: Generate image with fallbacks
+        raw_image_path = generate_image_master(
             content["image_prompt"], tmp_dir, niche=chosen_niche
         )
 
