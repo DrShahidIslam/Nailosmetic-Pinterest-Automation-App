@@ -40,6 +40,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a close-up of a real woman's beautifully manicured hand in a luxury setting (e.g., holding a cocktail, resting on marble). The NAILS with nail art must be the focal point — never generate flowers, objects, or textures without nails visible.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real woman's hand/fingers with the specific nail art design as the PRIMARY SUBJECT. The nails must take up at least 60 percent of the image. If the heading mentions a theme (e.g., 'dew drop', 'butterfly', 'floral'), that theme must appear AS A DESIGN PAINTED ON THE NAILS, not as a standalone object. Describe: nail shape (almond/coffin/stiletto/square), colors, finish (glossy/matte/chrome), specific pattern ON the nails. Example: 'Extreme macro close-up of almond nails with glossy chrome rose gold finish, one accent nail with tiny dried flowers encapsulated in clear gel'.",
                 "block_details": "Vibe, Technique/Pro-Tip, Best Shape/Alternative",
+                "mandatory_category": "Nails and Manicure",
             },
             "hair_beauty": {
                 "role": "a celebrity hairstylist and beauty editor for 'Aesthetic Daily'",
@@ -47,6 +48,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a portrait of a real person with stunning, styled hair as the focal point. Soft editorial lighting, salon-quality finish. The HAIR and hairstyle must be clearly visible.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real person with their HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the heading names a style (e.g., 'fulani braids', 'prom updo'), the person must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens'.",
                 "block_details": "The Vibe, Styling Technique, Best Face Shape/Hair Type",
+                "mandatory_category": "Hair & Beauty",
             },
             "home_garden": {
                 "role": "an interior design and lifestyle editor for 'Aesthetic Daily'",
@@ -54,6 +56,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a beautifully designed, fully decorated interior space or garden. The SPACE must be the focal point, styled like Architectural Digest. Wide-angle composition, natural ambient lighting.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real, fully decorated ROOM or GARDEN SPACE as the PRIMARY SUBJECT. The space must look realistic, lived-in, and styled — never an isolated object on a white background. If the heading names a specific element (e.g., 'front porch flower pots'), that element must be shown IN CONTEXT within a full space. Describe: room type, materials, color palette, furniture, plants, lighting mood. Use terms like 'Architectural Digest photography', 'wide-angle interior shot'.",
                 "block_details": "The Vibe, DIY Difficulty/Pro-Tip, Budget Range/Alternative",
+                "mandatory_category": "Home & Garden",
             },
             "fashion_style": {
                 "role": "a fashion editor and trend forecaster for 'Aesthetic Daily'",
@@ -61,6 +64,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a real woman wearing a complete, stylish outfit in a clean editorial setting. The OUTFIT must be the focal point, fully visible from head to mid-thigh.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real woman WEARING a complete outfit as the PRIMARY SUBJECT. The outfit must be fully visible. If the heading names a style (e.g., 'casual brunch outfit'), the woman must be wearing that EXACT style. Describe: specific garments (top, bottom, shoes), colors, accessories, fabrics. Use terms like 'editorial street style photography', 'full-body outfit shot', 'clean minimal backdrop'.",
                 "block_details": "The Vibe, Styling Tip, Occasion/Season",
+                "mandatory_category": "Styles & Fashion",
             },
             "gardening": {
                 "role": "a garden design and outdoor living editor for 'Aesthetic Daily'",
@@ -68,6 +72,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a beautiful, real garden, patio, or outdoor space. Lush plants, natural sunlight, zen atmosphere. Wide-angle landscape photography. The GARDEN must be the focal subject.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real garden space, plant arrangement, or outdoor design feature IN CONTEXT within a full landscape — never an isolated plant on a white background. Focus on plants, textures, hardscaping, and natural lighting. Describe: plant species, arrangement style, surrounding landscape, time of day lighting.",
                 "block_details": "The Vibe, Growing/DIY Tip, Climate Zone/Alternative",
+                "mandatory_category": "Home & Garden",
             },
         }
         
@@ -95,7 +100,7 @@ FRAMEWORK REQUIREMENTS:
    - Paragraph: Engaging description.
    - Details: 3 specific points ({config['block_details']}).
 6. Conclusion: A summary encouraging interaction.
-7. Category: Pick the BEST existing category or suggest 1 NEW category only if none fit.
+7. Category: You MUST select "{config['mandatory_category']}" as the category if it exists in the available categories list. Do NOT use "Aesthetic & Art" or "Seasonal Trends" for Hair, Fashion, or Home content; those are for Nails only. If you suggest a sub-category (like "Chrome & Glazed"), ensure the main category is also assigned if possible (though return only the best sub-category string here).
 
 RETURN ONLY VALID JSON:
 {{
