@@ -11,3 +11,6 @@ Pillow>=10.0.0
 
 # Environment variable management
 python-dotenv>=1.0.0
+
+# Hugging Face official library
+huggingface_hub>=0.20.0

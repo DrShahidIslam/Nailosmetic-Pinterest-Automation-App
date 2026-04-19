@@ -3,12 +3,14 @@ import os
 import time
 import random
 from PIL import Image
+from huggingface_hub import InferenceClient
 
 class ImageManager:
     def __init__(self, hf_api_key: str = None, siliconflow_api_key: str = None):
         self.hf_api_key = hf_api_key
         self.silicon_key = siliconflow_api_key
-        self.hf_url = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell"
+        # Official client is better than raw requests
+        self.client = InferenceClient(token=hf_api_key) if hf_api_key else None
         self.silicon_url = "https://api.siliconflow.cn/v1/images/generations"
         self.silicon_model = "Kwai-Kolors/Kolors"
 
@@ -22,26 +24,34 @@ class ImageManager:
         return output_path
 
     def _generate_huggingface(self, prompt: str, output_path: str) -> str:
-        if not self.hf_api_key:
-            raise Exception("Hugging Face key missing")
+        if not self.client:
+            raise Exception("Hugging Face key/client missing")
         
-        headers = {"Authorization": f"Bearer {self.hf_api_key}"}
-        payload = {
-            "inputs": prompt + ", high quality, ultra realistic, masterpiece, aesthetic 4k",
-            "parameters": {"num_inference_steps": 4}
-        }
+        enhanced_prompt = prompt + ", high quality, ultra realistic, masterpiece, aesthetic 4k"
         
-        for _ in range(3):
-            resp = requests.post(self.hf_url, headers=headers, json=payload, timeout=60)
-            if resp.status_code == 200:
-                with open(output_path, "wb") as f:
-                    f.write(resp.content)
-                return output_path
-            elif resp.status_code == 503:
-                time.sleep(20)
-            else:
-                break
-        raise Exception(f"HF Failed: {resp.status_code}")
+        # We try Flux first, then SDXL as a robust backup
+        models = ["black-forest-labs/FLUX.1-schnell", "stabilityai/stable-diffusion-xl-base-1.0"]
+        
+        for model_id in models:
+            print(f"   🤖 Trying HF model: {model_id}")
+            for _ in range(2):
+                try:
+                    image = self.client.text_to_image(enhanced_prompt, model=model_id)
+                    image.save(output_path)
+                    print(f"   ✅ Successfully used {model_id}")
+                    return output_path
+                except Exception as e:
+                    err_str = str(e)
+                    if "503" in err_str or "loading" in err_str.lower():
+                        print(f"   ⏳ Model {model_id} is loading, waiting 20s...")
+                        time.sleep(20)
+                    elif "404" in err_str:
+                        print(f"   ⚠️ Model {model_id} not reachable, skipping...")
+                        break # Try next model
+                    else:
+                        print(f"   ⚠️ HF Error: {err_str[:100]}")
+                        time.sleep(5)
+        raise Exception("All HF models failed")
 
     def _generate_siliconflow(self, prompt: str, size: str, output_path: str) -> str:
         if not self.silicon_key:

@@ -32,6 +32,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 # --- Phase 1 import (Gemini) ---
 from google import genai
+from huggingface_hub import InferenceClient
 
 # ============================================================================
 # CONFIGURATION
@@ -425,49 +426,47 @@ Ensure the 'board_category' value in your JSON response is EXACTLY one of the ke
 
 def generate_image_with_huggingface(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
     """
-    Send the image prompt to Hugging Face Inference API (FLUX.1-schnell).
-    Downloads the generated image to a local file.
+    Send the image prompt to Hugging Face Inference API using InferenceClient.
+    Prioritizes FLUX.1-schnell.
     """
     print(f"\n🎨 Phase 2: Generating image with Hugging Face (niche: {niche})...")
-
-    headers = {
-        "Authorization": f"Bearer {HUGGINGFACE_API_KEY}",
-    }
-
+    
+    client = InferenceClient(token=HUGGINGFACE_API_KEY)
+    
     prefix = IMAGE_PROMPT_PREFIXES.get(niche, IMAGE_PROMPT_PREFIXES["nails"])
-    enhanced_prompt = prefix + image_prompt + ", high quality, ultra realistic, masterpiece, aesthetic"
+    enhanced_prompt = prefix + image_prompt + ", high quality, ultra realistic, masterpiece, aesthetic 8k"
     
-    payload = {
-        "inputs": enhanced_prompt,
-        "parameters": {
-            "num_inference_steps": 4, # Schnell is optimized for few steps
-        }
-    }
+    image_path = os.path.join(output_dir, "raw_ai_image.png")
+    
+    models_to_try = [
+        "black-forest-labs/FLUX.1-schnell",
+        "stabilityai/stable-diffusion-xl-base-1.0" # Robust fallback
+    ]
 
-    max_retries = 3
-    for attempt in range(max_retries):
-        try:
-            response = requests.post(HUGGINGFACE_API_URL, headers=headers, json=payload, timeout=60)
-            if response.status_code == 200:
-                image_path = os.path.join(output_dir, "raw_ai_image.png")
-                with open(image_path, "wb") as f:
-                    f.write(response.content)
-                print(f"   ✅ Image saved to: {image_path}")
+    for model_id in models_to_try:
+        print(f"   🤖 Trying HF model: {model_id}")
+        max_retries = 2
+        for attempt in range(max_retries):
+            try:
+                # Use simple __call__ or text_to_image
+                image = client.text_to_image(enhanced_prompt, model=model_id)
+                image.save(image_path)
+                print(f"   ✅ Image saved successfully using {model_id}")
                 return image_path
-            elif response.status_code == 503: # Model loading
-                estimated_time = 20
-                try: estimated_time = response.json().get("estimated_time", 20)
-                except: pass
-                print(f"   ⏳ Model is loading, waiting {estimated_time}s...")
-                time.sleep(estimated_time)
-            else:
-                print(f"   ⚠️  Hugging Face API error ({response.status_code}): {response.text[:200]}")
-                time.sleep(10)
-        except Exception as e:
-            print(f"   ⚠️  Hugging Face API exception: {e}")
-            time.sleep(10)
+            except Exception as e:
+                err_str = str(e)
+                if "503" in err_str or "loading" in err_str.lower():
+                    print(f"   ⏳ Model {model_id} is loading, waiting 20s...")
+                    time.sleep(20)
+                elif "404" in err_str:
+                    print(f"   ⚠️ Model {model_id} not reachable via public API, skipping...")
+                    break
+                else:
+                    print(f"   ⚠️ HF Error with {model_id}: {err_str[:100]}")
+                    if attempt < max_retries - 1:
+                        time.sleep(10)
     
-    raise Exception("Hugging Face API failed")
+    raise Exception("Hugging Face API failed for all models")
 
 
 def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
