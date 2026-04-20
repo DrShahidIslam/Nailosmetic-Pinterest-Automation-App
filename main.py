@@ -319,7 +319,8 @@ RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys:
   "title": "A short, catchy, click-worthy Pinterest title (max 100 chars). Use emojis sparingly.",
   "overlay_text": "A tiny, very catchy 3-5 word phrase for the text overlay on the image itself.",
   "description": "An SEO-optimized Pinterest description (150-300 chars). You MUST include exactly 10 highly relevant and trending hashtags at the very end.",
-  "image_prompt": "{niche_config['image_guide']}"
+  "image_prompt": "{niche_config['image_guide']}",
+  "alt_text": "A highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects) for Pinterest accessibility. Focus on visual details, not SEO keywords."
 }}
 
 Available board categories (pick the MOST relevant key):
@@ -817,7 +818,7 @@ def refresh_pinterest_token() -> str:
         return PINTEREST_ACCESS_TOKEN
 
 
-def publish_to_pinterest(image_path: str, title: str, description: str, board_id: str, destination_link: str) -> dict:
+def publish_to_pinterest(image_path: str, title: str, description: str, board_id: str, destination_link: str, alt_text: str = "") -> dict:
     """
     Upload the final pin image to Pinterest.
     Uses base64 encoding for the image upload.
@@ -841,6 +842,7 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
         "title": title[:100],  # Pinterest title limit
         "description": description[:500],  # Pinterest description limit
         "link": destination_link,
+        "alt_text": alt_text[:500],  # Pinterest alt text limit
         "media_source": {
             "source_type": "image_base64",
             "content_type": "image/jpeg",
@@ -1095,7 +1097,8 @@ def main():
         # Phase 4: Publish to Pinterest
         result = publish_to_pinterest(
             final_image_path, content["title"], content["description"],
-            board_id=target_board_id, destination_link=destination_link
+            board_id=target_board_id, destination_link=destination_link,
+            alt_text=content.get("alt_text", "")
         )
 
         # Mark topic as used so we don't repeat it soon
