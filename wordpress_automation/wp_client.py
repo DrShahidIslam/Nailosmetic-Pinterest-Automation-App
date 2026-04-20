@@ -7,12 +7,24 @@ from typing import Dict, Any, Optional
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-# Patch to force IPv4 (avoids "Network is unreachable" issues with IPv6 on some runners)
+# Optional patch to force IPv4 (avoids "Network is unreachable" issues with IPv6 on some runners)
 _original_getaddrinfo = socket.getaddrinfo
-def _patched_getaddrinfo(*args, **kwargs):
-    responses = _original_getaddrinfo(*args, **kwargs)
-    return [res for res in responses if res[0] == socket.AF_INET]
-socket.getaddrinfo = _patched_getaddrinfo
+
+def force_ipv4_patch():
+    """
+    Apply a global patch to force socket.getaddrinfo to only return IPv4 addresses.
+    This helps in environments where IPv6 is configured but has no route to the internet.
+    """
+    def _patched_getaddrinfo(*args, **kwargs):
+        responses = _original_getaddrinfo(*args, **kwargs)
+        ipv4_responses = [res for res in responses if res[0] == socket.AF_INET]
+        return ipv4_responses if ipv4_responses else responses
+    socket.getaddrinfo = _patched_getaddrinfo
+    print("   🔧 [NETWORKING] IPv4-only patch applied.")
+
+def remove_ipv4_patch():
+    """Restores original getaddrinfo."""
+    socket.getaddrinfo = _original_getaddrinfo
 
 class WordPressClient:
     def __init__(self, url: str, username: str, app_password: str):
@@ -25,10 +37,15 @@ class WordPressClient:
             "Authorization": f"Basic {self.auth}"
         }
         
+        # Default behavior: try standard connection first. 
+        # If WORDPRESS_FORCE_IPV4 is set, we apply the patch immediately.
+        if os.getenv("WORDPRESS_FORCE_IPV4", "false").lower() == "true":
+            force_ipv4_patch()
+
         # Configure a robust retry strategy for network glitches
         retry_strategy = Retry(
             total=3,
-            backoff_factor=5,  # Wait 5s, 10s, 20s between attempts
+            backoff_factor=2,  # Faster retries internally (2s, 4s, 8s)
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=["HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"]
         )
@@ -108,9 +125,54 @@ class WordPressClient:
         url = f"{self.api_url}/categories"
         params = {"per_page": 100}
         response = self.session.get(url, headers=self.headers, params=params, timeout=self.default_timeout)
-        if response.status_code == 200:
-            return response.json()
-        return []
+        response.raise_for_status() # Raise error for 4xx or 5xx
+        return response.json()
+
+    def test_connection(self) -> Dict[str, Any]:
+        """
+        Performs a diagnostic connection test.
+        Returns a dict with success status and detailed error message if any.
+        """
+        domain = self.api_url.split("//")[-1].split("/")[0]
+        result = {"success": False, "error": None, "ipv4_forced": False}
+        
+        try:
+            # 1. DNS Check
+            socket.gethostbyname(domain)
+        except socket.gaierror as e:
+            result["error"] = f"DNS Resolution Failed: {e}"
+            return result
+
+        try:
+            # 2. API Reachability
+            self.get_categories()
+            result["success"] = True
+            return result
+        except requests.exceptions.SSLError as e:
+            result["error"] = f"SSL/HTTPS Error (possible proxy or firewall issue): {e}"
+        except requests.exceptions.ConnectTimeout as e:
+            result["error"] = f"Connection Timeout (server didn't respond in time): {e}"
+        except requests.exceptions.ConnectionError as e:
+            # Check if it's "Network is unreachable"
+            err_msg = str(e)
+            if "Network is unreachable" in err_msg or "unreachable" in err_msg.lower():
+                result["error"] = f"Network Unreachable (IPv6 issue?): {e}"
+                # Try to auto-apply IPv4 patch and retry once internally
+                print("   ⚠️  Network unreachable detected. Attempting IPv4-only fallback...")
+                force_ipv4_patch()
+                result["ipv4_forced"] = True
+                try:
+                    self.get_categories()
+                    result["success"] = True
+                    return result
+                except Exception as e2:
+                    result["error"] = f"Retry with IPv4 failed: {e2}"
+            else:
+                result["error"] = f"Network Connection Error: {e}"
+        except Exception as e:
+            result["error"] = f"Unexpected Error: {e}"
+            
+        return result
 
     def create_category(self, name: str) -> int:
         """

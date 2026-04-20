@@ -86,8 +86,19 @@ def main():
     hf_keys_raw = os.getenv("HUGGINGFACE_API_KEYS", "") or os.getenv("HUGGINGFACE_API_KEY", "")
     hf_keys = [k.strip() for k in hf_keys_raw.split(",") if k.strip()]
     
-    if not any([wp_url, wp_user, wp_pass, gemini_keys, hf_keys]):
-        print("❌ Missing required environment variables (WordPress or Gemini/HuggingFace). Check .env")
+    # Required variables check
+    required_vars = {
+        "WORDPRESS_URL": wp_url,
+        "WORDPRESS_USER": wp_user,
+        "WORDPRESS_APP_PASSWORD": wp_pass,
+        "GEMINI_API_KEYS": gemini_keys,
+        "HUGGINGFACE_API_KEYS": hf_keys
+    }
+    
+    missing = [name for name, val in required_vars.items() if not val]
+    if missing:
+        print(f"❌ Missing required environment variables: {', '.join(missing)}")
+        print("   Check your .env file or GitHub Secrets.")
         sys.exit(1)
 
     # ===== STEP 0: WordPress Health Check (before using any paid APIs) =====
@@ -97,17 +108,22 @@ def main():
     wp_cats = None
     max_connection_attempts = 5
     for attempt in range(1, max_connection_attempts + 1):
-        try:
+        test = wp.test_connection()
+        if test["success"]:
             wp_cats = wp.get_categories()
             print(f"   ✅ WordPress is reachable! Connected on attempt {attempt}. Found {len(wp_cats)} categories.")
             break
-        except (requests.exceptions.ConnectionError, requests.exceptions.ConnectTimeout) as e:
+        else:
             if attempt == max_connection_attempts:
                 print(f"   ❌ WordPress is UNREACHABLE after {max_connection_attempts} attempts.")
+                print(f"   ❌ ERROR DETAIL: {test['error']}")
                 print(f"   ❌ Aborting to save API credits. No Gemini or SiliconFlow calls were made.")
                 sys.exit(1)
+            
             wait = 30 * attempt  # 30s, 60s, 90s, 120s
-            print(f"   ⚠️  Connection attempt {attempt}/{max_connection_attempts} failed. Retrying in {wait}s...")
+            print(f"   ⚠️  Connection attempt {attempt}/{max_connection_attempts} failed.")
+            print(f"   ⚠️  REASON: {test['error']}")
+            print(f"   ⚠️  Retrying in {wait}s...")
             time.sleep(wait)
     
     cat_names = [c["name"] for c in wp_cats]
