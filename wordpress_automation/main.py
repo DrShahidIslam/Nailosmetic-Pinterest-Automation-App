@@ -83,9 +83,10 @@ def main():
     gemini_keys_raw = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
     gemini_keys = [k.strip() for k in gemini_keys_raw.split(",") if k.strip()]
     silicon_key = os.getenv("SILICONFLOW_API_KEY")
-    hf_key = os.getenv("HUGGINGFACE_API_KEY")
+    hf_keys_raw = os.getenv("HUGGINGFACE_API_KEYS", "") or os.getenv("HUGGINGFACE_API_KEY", "")
+    hf_keys = [k.strip() for k in hf_keys_raw.split(",") if k.strip()]
     
-    if not all([wp_url, wp_user, wp_pass, gemini_keys, hf_key]):
+    if not any([wp_url, wp_user, wp_pass, gemini_keys, hf_keys]):
         print("❌ Missing required environment variables (WordPress or Gemini/HuggingFace). Check .env")
         sys.exit(1)
 
@@ -181,7 +182,7 @@ def main():
 
     # ===== Now safe to initialize paid API clients =====
     gen = ContentGenerator(gemini_keys)
-    img_mgr = ImageManager(hf_api_key=hf_key, siliconflow_api_key=silicon_key)
+    img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key)
 
     # 2. Generate Article Plan (niche-aware)
     print(f"🧠 Generating high-quality {chosen_niche} article plan...")

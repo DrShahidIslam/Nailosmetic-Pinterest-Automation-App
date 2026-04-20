@@ -46,7 +46,10 @@ load_dotenv()  # Load .env file if present (local development)
 raw_gemini_keys = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
 GEMINI_API_KEYS = [k.strip() for k in raw_gemini_keys.split(",") if k.strip()]
 SILICONFLOW_API_KEY = os.getenv("SILICONFLOW_API_KEY")
-HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
+raw_hf_keys = os.getenv("HUGGINGFACE_API_KEYS", "") or os.getenv("HUGGINGFACE_API_KEY", "")
+HUGGINGFACE_API_KEYS = [k.strip() for k in raw_hf_keys.split(",") if k.strip()]
+# For backward compatibility in some local functions
+HUGGINGFACE_API_KEY = HUGGINGFACE_API_KEYS[0] if HUGGINGFACE_API_KEYS else None
 PINTEREST_ACCESS_TOKEN = os.getenv("PINTEREST_ACCESS_TOKEN")
 PINTEREST_REFRESH_TOKEN = os.getenv("PINTEREST_REFRESH_TOKEN")
 PINTEREST_APP_ID = os.getenv("PINTEREST_APP_ID")
@@ -203,7 +206,7 @@ def validate_env_vars():
     """Ensure all required environment variables are set."""
     required = {
         "GEMINI_API_KEYS": True if GEMINI_API_KEYS else False,
-        "HUGGINGFACE_API_KEY": HUGGINGFACE_API_KEY,  # Primary
+        "HUGGINGFACE_API_KEYS": True if HUGGINGFACE_API_KEYS else False,
         "PINTEREST_ACCESS_TOKEN": PINTEREST_ACCESS_TOKEN,
     }
     missing = [k for k, v in required.items() if not v]
