@@ -50,7 +50,7 @@ class SmartJSON:
                 with open(path, "r", encoding="utf-8") as f:
                     existing_data = json.load(f)
             except Exception as e:
-                print(f"   ⚠️ Warning: Could not read {file_path}: {e}")
+                print(f"   Warning: Could not read {file_path}: {e}")
         
         # 2. Merge logic
         if existing_data is None:

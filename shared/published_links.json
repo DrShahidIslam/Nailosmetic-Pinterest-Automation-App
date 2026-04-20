@@ -1,54 +1,5 @@
 [
     {
-        "url": "https://nailosmetic.com/creative-3d-aesthetic-nail-art/",
-        "category": "Nail Art",
-        "niche": "nails",
-        "topic": "aesthetic nail art",
-        "slug": "creative-3d-aesthetic-nail-art"
-    },
-    {
-        "url": "https://nailosmetic.com/chrome-glazed-donut-nails/",
-        "category": "Nail Art",
-        "niche": "nails",
-        "topic": "chrome glazed donut nails",
-        "slug": "chrome-glazed-donut-nails"
-    },
-    {
-        "url": "https://nailosmetic.com/minimalist-clean-girl-nails/",
-        "category": "Nail Art",
-        "niche": "nails",
-        "topic": "minimalist clean girl nails",
-        "slug": "minimalist-clean-girl-nails"
-    },
-    {
-        "url": "https://nailosmetic.com/spring-nail-designs-inspo/",
-        "category": "Nail Art",
-        "niche": "nails",
-        "topic": "spring nail designs",
-        "slug": "spring-nail-designs-inspo"
-    },
-    {
-        "url": "https://nailosmetic.com/summer-vacation-nail-ideas/",
-        "category": "Nail Art",
-        "niche": "nails",
-        "topic": "summer vacation nail ideas",
-        "slug": "summer-vacation-nail-ideas"
-    },
-    {
-        "url": "https://nailosmetic.com/japanese-nail-designs/",
-        "category": "Aesthetic & Art",
-        "niche": "nails",
-        "topic": "japanese nail designs",
-        "slug": "japanese-nail-designs"
-    },
-    {
-        "url": "https://nailosmetic.com/spring-bar-outfit-ideas/",
-        "category": "Styles & Fashion",
-        "niche": "fashion_style",
-        "topic": "spring bar outfit",
-        "slug": "spring-bar-outfit-ideas"
-    },
-    {
         "url": "https://nailosmetic.com/perfect-leggings-outfits/",
         "category": "Styles & Fashion",
         "niche": "fashion_style",
@@ -63,6 +14,13 @@
         "slug": "spring-nail-ideas-chic"
     },
     {
+        "url": "https://nailosmetic.com/spring-bar-outfit-ideas/",
+        "category": "Styles & Fashion",
+        "niche": "fashion_style",
+        "topic": "15+ Chic Spring Bar Outfits for Effortless Evening Style",
+        "slug": "spring-bar-outfit-ideas"
+    },
+    {
         "url": "https://nailosmetic.com/elegant-updo-hairstyles/",
         "category": "Hair & Beauty",
         "niche": "hair_beauty",
@@ -75,6 +33,13 @@
         "niche": "hair_beauty",
         "topic": "15 Effortless Wash and Go Curly Hair Styles You Need to Try",
         "slug": "wash-go-curly-hair-styles"
+    },
+    {
+        "url": "https://nailosmetic.com/japanese-nail-designs/",
+        "category": "Aesthetic & Art",
+        "niche": "nails",
+        "topic": "15 Exquisite Japanese Nail Designs: A Guide to Elevated Manicures",
+        "slug": "japanese-nail-designs"
     },
     {
         "url": "https://nailosmetic.com/san-francisco-outfits-spring/",
@@ -173,5 +138,40 @@
         "niche": "nails",
         "topic": "7 Exquisite Holiday Nail Art Designs to Elevate Your Festive Season",
         "slug": "7-exquisite-holiday-nail-art-designs"
+    },
+    {
+        "url": "https://nailosmetic.com/summer-vacation-nail-ideas/",
+        "category": "Seasonal Trends",
+        "niche": "nails",
+        "topic": "Hot Summer Vacation Nail Ideas for 2026",
+        "slug": "summer-vacation-nail-ideas"
+    },
+    {
+        "url": "https://nailosmetic.com/creative-3d-aesthetic-nail-art/",
+        "category": "Aesthetic & Art",
+        "niche": "nails",
+        "topic": "15 Creative 3D Nail Art Ideas and Modern French Tips",
+        "slug": "creative-3d-aesthetic-nail-art"
+    },
+    {
+        "url": "https://nailosmetic.com/chrome-glazed-donut-nails/",
+        "category": "Chrome & Glazed",
+        "niche": "nails",
+        "topic": "10 Stunning Chrome & Glazed Donut Nail Designs to Try Now",
+        "slug": "chrome-glazed-donut-nails"
+    },
+    {
+        "url": "https://nailosmetic.com/minimalist-clean-girl-nails/",
+        "category": "Minimalist & Clean Girl",
+        "niche": "nails",
+        "topic": "15 Minimalist \u201cClean Girl\u201d Nail Designs for Everyday Wear",
+        "slug": "minimalist-clean-girl-nails"
+    },
+    {
+        "url": "https://nailosmetic.com/spring-nail-designs-inspo/",
+        "category": "Seasonal Trends",
+        "niche": "nails",
+        "topic": "25+ Stunning Spring Nail Designs You Will Obsess Over in 2026",
+        "slug": "spring-nail-designs-inspo"
     }
 ]
