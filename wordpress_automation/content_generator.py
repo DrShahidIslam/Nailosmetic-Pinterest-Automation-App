@@ -100,7 +100,9 @@ FRAMEWORK REQUIREMENTS:
    - Paragraph: Engaging description.
    - Details: 3 specific points ({config['block_details']}).
 6. Conclusion: A summary encouraging interaction.
-7. Category: You MUST select "{config['mandatory_category']}" as the category if it exists in the available categories list. Do NOT use "Aesthetic & Art" or "Seasonal Trends" for Hair, Fashion, or Home content; those are for Nails only. If you suggest a sub-category (like "Chrome & Glazed"), ensure the main category is also assigned if possible (though return only the best sub-category string here).
+7. Category: You MUST select "{config['mandatory_category']}" as the category. 
+   - CATEGORY RESTRICTION: The categories "Aesthetic & Art", "Chrome & Glazed", "Minimalist & Clean Girl", and "Seasonal Trends" are STRICTLY for NAIL content only. Do NOT use them for Hair, Fashion, or Home content under any circumstances.
+   - If this is a NAIL article, you may use the specialized sub-categories, but "Styles & Fashion" or "Hair & Beauty" are strictly forbidden for nails.
 
 RETURN ONLY VALID JSON:
 {{
@@ -113,6 +115,7 @@ RETURN ONLY VALID JSON:
   }},
   "category_suggestion": "MANDATORY: string",
   "is_new_category": "MANDATORY: boolean",
+  "category_logic": "Briefly explain why this category matches the niche and is not a nail-specific category (for non-nail articles).",
   "featured_image": {{
     "prompt": "string",
     "alt_text": "string"
