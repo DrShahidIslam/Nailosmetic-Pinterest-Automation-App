@@ -12,6 +12,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 from wp_client import WordPressClient
 from content_generator import ContentGenerator
 from image_manager import ImageManager
+from shared_data_manager import SmartJSON
 
 def main():
     print("✨ Aesthetic Daily — WordPress Automation Starting...")
@@ -167,20 +168,32 @@ def main():
             img_tag = f'<img src="{img_url}" alt="{block["alt_text"]}" class="kb-img wp-image-{block_media_id}"/>'
             html_content = html_content.replace(f"<!-- IMAGE_PLACEHOLDER_{block['heading']} -->", img_tag)
 
-    # ... Target Category logic ...
+    # 5. Determine Target Categories
     target_category_ids = []
-    if plan["is_new_category"]:
-        print(f"🆕 Creating new category: {plan['category_suggestion']}")
-        new_cat_id = wp.create_category(plan["category_suggestion"])
-        target_category_ids.append(new_cat_id)
-    else:
+    category_suggestion = plan.get("category_suggestion", "Nails and Manicure")
+    is_new = plan.get("is_new_category", False)
+
+    if is_new:
+        print(f"🆕 Creating new category: {category_suggestion}")
+        try:
+            new_cat_id = wp.create_category(category_suggestion)
+            target_category_ids.append(new_cat_id)
+        except Exception as e:
+            print(f"   ⚠️ Error creating category: {e}. Falling back to search.")
+            # Fallback to search if creation fails or if it already exists
+            is_new = False 
+
+    if not is_new:
         for cat in wp_cats:
-            if cat["name"].lower() == plan["category_suggestion"].lower():
+            if cat["name"].lower() == category_suggestion.lower():
                 target_category_ids.append(cat["id"])
                 break
-        if not target_category_ids: target_category_ids.append(wp_cats[0]["id"] if wp_cats else 1)
+        
+        if not target_category_ids:
+            print(f"   ⚠️ Category '{category_suggestion}' not found. Using first available.")
+            target_category_ids.append(wp_cats[0]["id"] if wp_cats else 1)
 
-    # 5. Create Post with RankMath Meta
+    # 6. Create Post with RankMath Meta
     print("🚀 Publishing post to WordPress with RankMath SEO...")
     rankmath_meta = {
         "rank_math_title": plan["seo"]["title"],
@@ -203,70 +216,31 @@ def main():
 
     # 6. Update History and Queue
     print("📝 Updating history and Pinterest queue...")
-    try:
-        current_slugs = []
-        if history_path.exists():
-            with open(history_path, "r") as f:
-                current_slugs = json.load(f)
+    history_path = Path(__file__).parent.parent / "shared" / "history.json"
+    SmartJSON.update_file(history_path, [post_slug])
         
-        if post_slug not in current_slugs:
-            current_slugs.append(post_slug)
-            with open(history_path, "w") as f:
-                json.dump(current_slugs, f, indent=4)
-    except Exception as e:
-        print(f"   ⚠️ Error updating history: {e}")
-        
-    try:
-        queue_path = Path(__file__).parent.parent / "shared" / "links_queue.json"
-        queue = []
-        if queue_path.exists():
-            with open(queue_path, "r") as f:
-                queue = json.load(f)
-        
-        queue.append({
-            "url": post_url, 
-            "category": plan["category_suggestion"],
-            "topic": chosen_topic,
-            "niche": chosen_niche
-        })
-        
-        with open(queue_path, "w") as f:
-            json.dump(queue, f, indent=4)
-    except Exception as e:
-        print(f"   ⚠️ Error updating queue: {e}")
+    queue_path = Path(__file__).parent.parent / "shared" / "links_queue.json"
+    SmartJSON.update_file(queue_path, [{
+        "url": post_url, 
+        "category": plan.get("category_suggestion", "Nails and Manicure"),
+        "topic": chosen_topic,
+        "niche": chosen_niche
+    }])
 
     # Also save to persistent published links history (used by Pinterest bot for smart link fallback)
-    try:
-        published_path = Path(__file__).parent.parent / "shared" / "published_links.json"
-        published = []
-        if published_path.exists():
-            with open(published_path, "r") as f:
-                published = json.load(f)
-        
-        # Check if already exists to prevent duplicates
-        if not any(p.get("url") == post_url for p in published):
-            published.append({
-                "url": post_url,
-                "category": plan["category_suggestion"],
-                "niche": chosen_niche,
-                "topic": chosen_topic,
-                "slug": post_slug
-            })
-            with open(published_path, "w") as f:
-                json.dump(published, f, indent=4)
-    except Exception as e:
-        print(f"   ⚠️ Error updating published links: {e}")
+    published_path = Path(__file__).parent.parent / "shared" / "published_links.json"
+    SmartJSON.update_file(published_path, [{
+        "url": post_url,
+        "category": plan.get("category_suggestion", "Nails and Manicure"),
+        "niche": chosen_niche,
+        "topic": chosen_topic,
+        "slug": post_slug
+    }])
 
     # Mark topic as used so we don't repeat it
     if chosen_topic:
         used_topics_path = Path(__file__).parent.parent / "shared" / "used_topics.json"
-        used_topics = []
-        if used_topics_path.exists():
-            with open(used_topics_path, "r") as f:
-                used_topics = json.load(f)
-        used_topics.append(chosen_topic)
-        with open(used_topics_path, "w") as f:
-            json.dump(used_topics, f, indent=4)
+        SmartJSON.update_file(used_topics_path, [chosen_topic])
         print(f"📋 Topic \"{chosen_topic}\" marked as used.")
 
     print(f"✅ All done! ({chosen_niche} article published)")

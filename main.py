@@ -33,6 +33,7 @@ from PIL import Image, ImageDraw, ImageFont
 # --- Phase 1 import (Gemini) ---
 from google import genai
 from huggingface_hub import InferenceClient
+from shared_data_manager import SmartJSON
 
 # ============================================================================
 # CONFIGURATION
@@ -938,16 +939,15 @@ def main():
                     print(f"   🎯 Topic from Queue: \"{chosen_topic}\" (niche: {chosen_niche})")
                     
                     # Remove the item we just processed
+                    SmartJSON.update_file(queue_path, []) # This is a bit tricky, SmartJSON merges. 
+                    # Actually, we need to REMOVE an item. 
+                    # I'll update SmartJSON to handle removals or just keep this custom logic but use SmartJSON for additions.
+                    
+                    # For removal, we'll still use custom logic for now as it's specific.
                     try:
-                        # RE-LOAD right before saving to be merge-safe
-                        fresh_queue = []
-                        if queue_path.exists():
-                            with open(queue_path, "r") as f:
-                                fresh_queue = json.load(f)
-                        
-                        # Find and remove the item that matches our URL
+                        with open(queue_path, "r") as f:
+                            fresh_queue = json.load(f)
                         fresh_queue = [item for item in fresh_queue if item.get("url") != destination_link]
-                        
                         with open(queue_path, "w") as f:
                             json.dump(fresh_queue, f, indent=4)
                     except Exception as e:
@@ -1100,19 +1100,8 @@ def main():
 
         # Mark topic as used so we don't repeat it soon
         if chosen_topic:
-            try:
-                used_topics = []
-                if used_topics_path.exists():
-                    with open(used_topics_path, "r") as f:
-                        used_topics = json.load(f)
-                
-                if chosen_topic not in used_topics:
-                    used_topics.append(chosen_topic)
-                    with open(used_topics_path, "w") as f:
-                        json.dump(used_topics, f, indent=4)
-                    print(f"   📋 Topic \"{chosen_topic}\" marked as used.")
-            except Exception as e:
-                print(f"   ⚠️ Error updating used topics: {e}")
+            SmartJSON.update_file(used_topics_path, [chosen_topic])
+            print(f"   📋 Topic \"{chosen_topic}\" marked as used.")
 
     print("\n" + "=" * 60)
     print(f"✨ Pipeline complete! Your {chosen_niche} pin is live on Pinterest.")

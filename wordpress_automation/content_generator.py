@@ -111,8 +111,8 @@ RETURN ONLY VALID JSON:
     "title": "string",
     "description": "string"
   }},
-  "category_suggestion": "string",
-  "is_new_category": boolean,
+  "category_suggestion": "MANDATORY: string",
+  "is_new_category": "MANDATORY: boolean",
   "featured_image": {{
     "prompt": "string",
     "alt_text": "string"

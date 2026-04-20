@@ -74,5 +74,14 @@ jobs:
           git config --local user.name "GitHub Action"
           git add shared/*.json
           git commit -m "📝 Update history and link queue [skip ci]" || exit 0
-          git pull --rebase origin main
+          
+          # Use a robust pull strategy: pull remote changes, then re-merge our data
+          git pull --rebase origin main || (
+            echo "⚠️ Conflict detected! Running Smart Merge..."
+            git rebase --abort
+            git pull origin main
+            python shared_data_manager.py --sync-all
+            git add shared/*.json
+            git commit -m "📝 Resolve data conflicts [skip ci]"
+          )
           git push
