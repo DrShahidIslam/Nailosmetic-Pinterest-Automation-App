@@ -746,7 +746,7 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
         brand_font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Regular.ttf")
         brand_font = ImageFont.truetype(brand_font_path, brand_font_size) if os.path.exists(brand_font_path) else font
         if brand_font:
-            brand_text = "Aesthetic Daily"
+            brand_text = "Nailosmetic"
             brand_bbox = draw.textbbox((0, 0), brand_text, font=brand_font)
             bw, bh = brand_bbox[2] - brand_bbox[0], brand_bbox[3] - brand_bbox[1]
 
@@ -899,7 +899,7 @@ def select_niche_weighted() -> str:
 def main():
     """Execute the full automation pipeline."""
     print("=" * 60)
-    print("✨ Aesthetic Daily — Pinterest Automation Bot v2.0")
+    print("✨ Nailosmetic — Pinterest Automation Bot v2.0")
     print("=" * 60)
 
     # Validate environment

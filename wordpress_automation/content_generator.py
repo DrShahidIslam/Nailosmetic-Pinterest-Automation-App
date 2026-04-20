@@ -35,7 +35,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
         # Niche-specific prompt configurations
         niche_configs = {
             "nails": {
-                "role": "a luxury beauty editor for 'Aesthetic Daily'",
+                "role": "a luxury beauty editor for 'Nailosmetic'",
                 "article_type": "a high-quality, SEO-optimized nail art listicle article",
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a close-up of a real woman's beautifully manicured hand in a luxury setting (e.g., holding a cocktail, resting on marble). The NAILS with nail art must be the focal point — never generate flowers, objects, or textures without nails visible.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real woman's hand/fingers with the specific nail art design as the PRIMARY SUBJECT. The nails must take up at least 60 percent of the image. If the heading mentions a theme (e.g., 'dew drop', 'butterfly', 'floral'), that theme must appear AS A DESIGN PAINTED ON THE NAILS, not as a standalone object. Describe: nail shape (almond/coffin/stiletto/square), colors, finish (glossy/matte/chrome), specific pattern ON the nails. Example: 'Extreme macro close-up of almond nails with glossy chrome rose gold finish, one accent nail with tiny dried flowers encapsulated in clear gel'.",
@@ -43,7 +43,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "mandatory_category": "Aesthetic & Art, Chrome & Glazed, Minimalist & Clean Girl, or Seasonal Trends (Use 'Nails and Manicure' only as fallback)",
             },
             "hair_beauty": {
-                "role": "a celebrity hairstylist and beauty editor for 'Aesthetic Daily'",
+                "role": "a celebrity hairstylist and beauty editor for 'Nailosmetic'",
                 "article_type": "a high-quality, SEO-optimized hairstyle and beauty listicle article",
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a portrait of a real person with stunning, styled hair as the focal point. Soft editorial lighting, salon-quality finish. The HAIR and hairstyle must be clearly visible.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real person with their HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the heading names a style (e.g., 'fulani braids', 'prom updo'), the person must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens'.",
@@ -51,7 +51,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "mandatory_category": "Hair & Beauty",
             },
             "home_garden": {
-                "role": "an interior design and lifestyle editor for 'Aesthetic Daily'",
+                "role": "an interior design and lifestyle editor for 'Nailosmetic'",
                 "article_type": "a high-quality, SEO-optimized home decor or garden design listicle article",
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a beautifully designed, fully decorated interior space or garden. The SPACE must be the focal point, styled like Architectural Digest. Wide-angle composition, natural ambient lighting.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real, fully decorated ROOM or GARDEN SPACE as the PRIMARY SUBJECT. The space must look realistic, lived-in, and styled — never an isolated object on a white background. If the heading names a specific element (e.g., 'front porch flower pots'), that element must be shown IN CONTEXT within a full space. Describe: room type, materials, color palette, furniture, plants, lighting mood. Use terms like 'Architectural Digest photography', 'wide-angle interior shot'.",
@@ -59,7 +59,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "mandatory_category": "Home & Garden",
             },
             "fashion_style": {
-                "role": "a fashion editor and trend forecaster for 'Aesthetic Daily'",
+                "role": "a fashion editor and trend forecaster for 'Nailosmetic'",
                 "article_type": "a high-quality, SEO-optimized fashion and outfit listicle article",
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a real woman wearing a complete, stylish outfit in a clean editorial setting. The OUTFIT must be the focal point, fully visible from head to mid-thigh.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real woman WEARING a complete outfit as the PRIMARY SUBJECT. The outfit must be fully visible. If the heading names a style (e.g., 'casual brunch outfit'), the woman must be wearing that EXACT style. Describe: specific garments (top, bottom, shoes), colors, accessories, fabrics. Use terms like 'editorial street style photography', 'full-body outfit shot', 'clean minimal backdrop'.",
@@ -67,7 +67,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "mandatory_category": "Styles & Fashion",
             },
             "gardening": {
-                "role": "a garden design and outdoor living editor for 'Aesthetic Daily'",
+                "role": "a garden design and outdoor living editor for 'Nailosmetic'",
                 "article_type": "a high-quality, SEO-optimized gardening and outdoor living listicle article",
                 "featured_image_guide": "Wide (16:9) prompt. MUST show a beautiful, real garden, patio, or outdoor space. Lush plants, natural sunlight, zen atmosphere. Wide-angle landscape photography. The GARDEN must be the focal subject.",
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real garden space, plant arrangement, or outdoor design feature IN CONTEXT within a full landscape — never an isolated plant on a white background. Focus on plants, textures, hardscaping, and natural lighting. Describe: plant species, arrangement style, surrounding landscape, time of day lighting.",
@@ -226,17 +226,17 @@ RETURN ONLY VALID JSON:
 <div class="wp-block-kadence-column"><div class="kt-inside-inner-col">
 
 <!-- wp:kadence/advancedheading {{"uniqueID":"{h_id}"}} -->
-<h2 class="kt-adv-heading{h_id} wp-block-kadence-advancedheading">{block['heading']}</h2>
+<h2 class="kt-adv-heading{h_id} wp-block-kadence-advancedheading">{block.get('heading', 'Section Idea')}</h2>
 <!-- /wp:kadence/advancedheading -->
 
 <!-- wp:kadence/image {{"uniqueID":"{img_id}"}} -->
 <figure class="wp-block-kadence-image kb-image{img_id}">
-    <!-- IMAGE_PLACEHOLDER_{block['heading']} -->
+    <!-- IMAGE_PLACEHOLDER_{block.get('heading', 'no-heading')} -->
 </figure>
 <!-- /wp:kadence/image -->
 
 <!-- wp:paragraph -->
-<p>{block['paragraph']}</p>
+<p>{block.get('paragraph', '')}</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:kadence/iconlist {{"uniqueID":"{list_id}"}} -->
@@ -244,12 +244,15 @@ RETURN ONLY VALID JSON:
 <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>The Vibe:</strong> {block['details'].get('vibe', '')}</span></li>
 <!-- /wp:kadence/listitem -->
 
-<!-- wp:kadence/listitem {{"uniqueID":"{self._generate_kadence_id()}"}} -->
-<li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>Technique:</strong> {block['details'].get('technique', '')}</span></li>
+<li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>The Vibe:</strong> {block.get('details', {}).get('vibe', '')}</span></li>
 <!-- /wp:kadence/listitem -->
 
 <!-- wp:kadence/listitem {{"uniqueID":"{self._generate_kadence_id()}"}} -->
-<li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>Pro Tip:</strong> {block['details'].get('secondary', '')}</span></li>
+<li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>Technique:</strong> {block.get('details', {}).get('technique', '')}</span></li>
+<!-- /wp:kadence/listitem -->
+
+<!-- wp:kadence/listitem {{"uniqueID":"{self._generate_kadence_id()}"}} -->
+<li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>Pro-Tip:</strong> {block.get('details', {}).get('secondary', '')}</span></li>
 <!-- /wp:kadence/listitem --></ul></div>
 <!-- /wp:kadence/iconlist -->
 

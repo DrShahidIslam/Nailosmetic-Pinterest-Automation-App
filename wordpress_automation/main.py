@@ -71,7 +71,7 @@ def validate_and_fix_category(title: str, current_category: str, chosen_niche: s
     return current_category
 
 def main():
-    print("✨ Aesthetic Daily — WordPress Automation Starting...")
+    print("✨ Nailosmetic — WordPress Automation Starting...")
     load_dotenv()
     import time
     import random as rng
