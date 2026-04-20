@@ -4,13 +4,15 @@ import time
 import random
 from PIL import Image
 from huggingface_hub import InferenceClient
+from typing import Dict, Any, List, Optional
 
 class ImageManager:
-    def __init__(self, hf_api_key: str = None, siliconflow_api_key: str = None):
-        self.hf_api_key = hf_api_key
+    def __init__(self, hf_api_keys: List[str] = None, siliconflow_api_key: str = None):
+        """
+        Initialize the ImageManager with multi-key support for Hugging Face.
+        """
+        self.hf_api_keys = hf_api_keys or []
         self.silicon_key = siliconflow_api_key
-        # Official client is better than raw requests
-        self.client = InferenceClient(token=hf_api_key) if hf_api_key else None
         self.silicon_url = "https://api.siliconflow.cn/v1/images/generations"
         self.silicon_model = "Kwai-Kolors/Kolors"
 
@@ -23,40 +25,46 @@ class ImageManager:
             img.save(output_path, "WEBP", quality=85)
         return output_path
 
-    def _generate_huggingface(self, prompt: str, output_path: str) -> str:
-        if not self.client:
-            raise Exception("Hugging Face key/client missing")
-        
+    def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png", prefer_kolors: bool = False) -> str:
+        """
+        The 'Brilliant' Orchestrator with customizable priority.
+        If prefer_kolors=True (WP Bot): Kolors -> Flux -> Pollinations
+        If prefer_kolors=False (Pinterest Bot): Flux -> Kolors -> Pollinations
+        """
         enhanced_prompt = prompt + ", high quality, ultra realistic, masterpiece, aesthetic 4k"
-        
-        # We try Flux first, then SDXL as a robust backup
-        models = ["black-forest-labs/FLUX.1-schnell", "stabilityai/stable-diffusion-xl-base-1.0"]
-        
-        for model_id in models:
-            print(f"   🤖 Trying HF model: {model_id}")
-            for _ in range(2):
-                try:
-                    image = self.client.text_to_image(enhanced_prompt, model=model_id)
-                    image.save(output_path)
-                    print(f"   ✅ Successfully used {model_id}")
-                    return output_path
-                except Exception as e:
-                    err_str = str(e)
-                    if "503" in err_str or "loading" in err_str.lower():
-                        print(f"   ⏳ Model {model_id} is loading, waiting 20s...")
-                        time.sleep(20)
-                    elif "404" in err_str:
-                        print(f"   ⚠️ Model {model_id} not reachable, skipping...")
-                        break # Try next model
-                    else:
-                        print(f"   ⚠️ HF Error: {err_str[:100]}")
-                        time.sleep(5)
-        raise Exception("All HF models failed")
+        model_id = "black-forest-labs/FLUX.1-schnell"
+
+        # Plan A for WordPress (Elite Bot) - Priority Kolors
+        if prefer_kolors and self.silicon_key:
+            try:
+                print("   🎨 Attempting SiliconFlow (Kolors) - WP Priority...")
+                size_sf = "768x1024" if aspect_ratio == "4:5" else "1024x1024"
+                return self._generate_siliconflow(prompt, size_sf, output_path)
+            except Exception as e:
+                print(f"   ⚠️ SiliconFlow failed, trying Flux: {str(e)[:50]}")
+
+        # Plan A for Pinterest (or Fallback for WP) - Flux Cycling
+        if self.hf_api_keys:
+            try:
+                print(f"   🎨 Attempting FLUX with {len(self.hf_api_keys)} keys...")
+                return self._generate_priority_flux(prompt, output_path)
+            except Exception as e:
+                print(f"   ⚠️ Flux cycling failed: {str(e)[:50]}")
+
+        # Plan B for Pinterest (Fallback) - Kolors
+        if not prefer_kolors and self.silicon_key:
+            try:
+                print("   🎨 Attempting SiliconFlow (Kolors) - Fallback...")
+                size_sf = "768x1024" if aspect_ratio == "4:5" else "1024x1024"
+                return self._generate_siliconflow(prompt, size_sf, output_path)
+            except Exception as e:
+                print(f"   ⚠️ SiliconFlow fallback failed: {str(e)[:50]}")
+
+        # 3. Last Resort: Pollinations (Zero-cost, Unlimited)
+        print("   🎨 Attempting Pollinations (Zero-cost Fallback)...")
+        return self._generate_pollinations(prompt, aspect_ratio, output_path)
 
     def _generate_siliconflow(self, prompt: str, size: str, output_path: str) -> str:
-        if not self.silicon_key:
-            raise Exception("SiliconFlow key missing")
-        
         headers = {
             "Authorization": f"Bearer {self.silicon_key}",
             "Content-Type": "application/json",
@@ -78,41 +86,14 @@ class ImageManager:
         raise Exception(f"SiliconFlow Failed: {resp.status_code}")
 
     def _generate_pollinations(self, prompt: str, aspect_ratio: str, output_path: str) -> str:
-        # 16:9 -> 1024x576, else 768x1024
-        w, h = (1024, 576) if aspect_ratio == "16:9" else (768, 1024)
+        w, h = (1024, 768) if aspect_ratio == "16:9" else (768, 1024)
         seed = random.randint(0, 999999)
         import urllib.parse
         encoded = urllib.parse.quote(prompt)
         url = f"https://image.pollinations.ai/prompt/{encoded}?width={w}&height={h}&model=flux&nologo=true&seed={seed}"
-        
         resp = requests.get(url, timeout=60)
         if resp.status_code == 200:
             with open(output_path, "wb") as f:
                 f.write(resp.content)
             return output_path
         raise Exception(f"Pollinations Failed: {resp.status_code}")
-
-    def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png") -> str:
-        """
-        Generate an image using available backends with fallback logic.
-        """
-        size = "1024x576" if aspect_ratio == "16:9" else "768x1024"
-        
-        # 1. Hugging Face
-        try:
-            return self._generate_huggingface(prompt, output_path)
-        except Exception as e:
-            print(f"⚠️ HF Fallback: {e}")
-
-        # 2. SiliconFlow
-        try:
-            return self._generate_siliconflow(prompt, size, output_path)
-        except Exception as e:
-            print(f"⚠️ SiliconFlow Fallback: {e}")
-
-        # 3. Pollinations
-        try:
-            return self._generate_pollinations(prompt, aspect_ratio, output_path)
-        except Exception as e:
-            print(f"❌ All image generation failed: {e}")
-            raise e
