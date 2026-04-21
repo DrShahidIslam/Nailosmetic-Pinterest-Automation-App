@@ -25,9 +25,10 @@ from shared_data_manager import SmartJSON
 
 def validate_and_fix_category(title: str, current_category: str, chosen_niche: str) -> str:
     """
-    The Authoritative Gatekeeper: Ensures articles are filed correctly based on the source niche.
-    For non-nail niches, it forces the correct broad category.
-    For the nail niche, it enforces nail-specific subcategories.
+    The Authoritative Gatekeeper (Bi-Directional):
+    1. Forces Niche-mapped categories for Hair, Home, and Fashion.
+    2. Strictly blocks non-nail niches from using specialized Nail categories.
+    3. Strictly blocks Nail topics from using "Authority" categories (Fashion/Hair/Home).
     """
     title_lower = title.lower()
     
@@ -42,36 +43,51 @@ def validate_and_fix_category(title: str, current_category: str, chosen_niche: s
     # Define nail subcategories that are FORBIDDEN for other niches
     NAIL_SPECIFIC_CATS = ["Aesthetic & Art", "Chrome & Glazed", "Minimalist & Clean Girl", "Seasonal Trends", "Nails and Manicure"]
     
-    # Define keywords for the "Janitor" fallback (catches leaks across niches)
+    # Define keywords for the "Janitor" fallback
     nail_exclusion = ["nail", "mani", "polish", "pedi", "acrylic"]
     hair_keywords = ["hair", "hairstyle", "haircut", "bob", "updo", "braid", "shaggy"]
     home_keywords = ["decor", "home", "garden", "patio", "backyard", "pond", "curb appeal", "interior", "oasis"]
     fashion_keywords = ["outfit", "wear", "fashion", "look", "leggings", "dress", "style"]
 
-    # --- 1. Authoritative Override (Niche-based) ---
+    # --- 1. Nail Niche Bi-Directional Logic ---
+    if chosen_niche == "nails":
+        # Rule: Nail articles MUST stay in nail categories.
+        # If Gemini suggests one of the 'Authority' niches, force it back.
+        if current_category in ["Styles & Fashion", "Hair & Beauty", "Home & Garden"]:
+            print(f"   [GATEKEEPER] Nail article leaked into '{current_category}'. Forcing 'Aesthetic & Art' fallback.")
+            return "Aesthetic & Art"
+        
+        # Rule: If it's a nail post but got 'Uncategorized'
+        if current_category not in NAIL_SPECIFIC_CATS:
+            return "Aesthetic & Art"
+            
+        return current_category
+
+    # --- 2. Authority Niche Bi-Directional Logic ---
     if chosen_niche in NICHE_TO_CATEGORY:
         target_cat = NICHE_TO_CATEGORY[chosen_niche]
-        if current_category != target_cat:
-            print(f"   [GATEKEEPER] Niche is '{chosen_niche}'. Forcing category '{target_cat}' (was '{current_category}').")
+        
+        # Rule: Non-nail articles MUST NOT use nail categories.
+        if current_category in NAIL_SPECIFIC_CATS:
+            print(f"   [GATEKEEPER] {chosen_niche} article leaked into '{current_category}'. Forcing '{target_cat}'.")
             return target_cat
+            
+        # Rule: Ensure it's in its primary niche category (e.g., Home stays in Home)
+        if current_category != target_cat:
+            print(f"   [GATEKEEPER] Forcing '{target_cat}' for {chosen_niche} niche.")
+            return target_cat
+            
         return current_category
 
-    # --- 2. Nail Niche Enforcement ---
-    if chosen_niche == "nails":
-        # If a nail post accidentally got a non-nail category
-        if current_category not in NAIL_SPECIFIC_CATS:
-            print(f"   [GATEKEEPER] Nail niche article found in '{current_category}'. Forcing 'Aesthetic & Art'.")
-            return "Aesthetic & Art"
-        return current_category
-
-    # --- 3. The Janitor (Keyword-based Fallback for double-safety) ---
-    # Hair in Nails?
+    # --- 3. The 'Janitor' Fallback (Keyword-based safety) ---
     if any(k in title_lower for k in hair_keywords) and not any(k in title_lower for k in nail_exclusion):
         return "Hair & Beauty"
     
-    # Home in Nails?
     if any(k in title_lower for k in home_keywords) and not any(k in title_lower for k in nail_exclusion):
         return "Home & Garden"
+        
+    if any(k in title_lower for k in fashion_keywords) and not any(k in title_lower for k in nail_exclusion):
+        return "Styles & Fashion"
 
     return current_category
 
