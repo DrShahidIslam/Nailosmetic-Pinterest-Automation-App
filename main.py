@@ -130,10 +130,10 @@ DEFAULT_BOARD_CATEGORY = "aesthetic_nail_art"
 # Niche weights for weighted random selection (must sum to 1.0)
 # 40% nails (proven performer), 20% hair, 20% home, 20% fashion
 NICHE_WEIGHTS = {
-    "nails": 0.40,
-    "hair_beauty": 0.20,
-    "home_garden": 0.20,
-    "fashion_style": 0.20,
+    "nails": 0.25,
+    "hair_beauty": 0.25,
+    "home_garden": 0.25,
+    "fashion_style": 0.25,
 }
 
 # Niche-specific CTA options

@@ -6,6 +6,15 @@ import requests
 from pathlib import Path
 from dotenv import load_dotenv
 
+# Fix Unicode output on Windows terminals
+if sys.stdout.encoding.lower() != 'utf-8':
+    try:
+        import io
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+    except (AttributeError, io.UnsupportedOperation):
+        pass
+
 # Add root to sys.path to allow sharing resources if needed
 sys.path.append(str(Path(__file__).parent.parent))
 
@@ -16,58 +25,54 @@ from shared_data_manager import SmartJSON
 
 def validate_and_fix_category(title: str, current_category: str, chosen_niche: str) -> str:
     """
-    Surgically validates and fixes the category based on programmatic rules.
-    Prevents 'authority' content (Fashion/Hair/Home) from leaking into Nail categories.
-    Ensures 'nail' content explicitly uses nail subcategories.
+    The Authoritative Gatekeeper: Ensures articles are filed correctly based on the source niche.
+    For non-nail niches, it forces the correct broad category.
+    For the nail niche, it enforces nail-specific subcategories.
     """
     title_lower = title.lower()
     
-    # Define keywords and exclusions
+    # Authoritative mapping for "Authority" niches
+    NICHE_TO_CATEGORY = {
+        "hair_beauty": "Hair & Beauty",
+        "home_garden": "Home & Garden",
+        "gardening": "Home & Garden",
+        "fashion_style": "Styles & Fashion"
+    }
+
+    # Define nail subcategories that are FORBIDDEN for other niches
+    NAIL_SPECIFIC_CATS = ["Aesthetic & Art", "Chrome & Glazed", "Minimalist & Clean Girl", "Seasonal Trends", "Nails and Manicure"]
+    
+    # Define keywords for the "Janitor" fallback (catches leaks across niches)
     nail_exclusion = ["nail", "mani", "polish", "pedi", "acrylic"]
-    
-    fashion_keywords = ["outfit", "wear", "leggings", "fashion", "style guide", "wardrobe", "chic"]
-    hair_keywords = ["hair", "updo", "curly", "braid", "hairstyles", "salon", "style", "blowout"]
-    home_keywords = ["decor", "home", "garden", "patio", "living", "interior", "room", "kitchen"]
+    hair_keywords = ["hair", "hairstyle", "haircut", "bob", "updo", "braid", "shaggy"]
+    home_keywords = ["decor", "home", "garden", "patio", "backyard", "pond", "curb appeal", "interior", "oasis"]
+    fashion_keywords = ["outfit", "wear", "fashion", "look", "leggings", "dress", "style"]
 
-    # --- 1. Authority Niche Guardrails ---
-    
-    # Priority A: Check the actual chosen niche first (reduces false positives)
-    if chosen_niche == "fashion_style":
-        if any(k in title_lower for k in fashion_keywords) and not any(k in title_lower for k in nail_exclusion):
-            return "Styles & Fashion"
-            
-    if chosen_niche == "hair_beauty":
-        if any(k in title_lower for k in hair_keywords) and not any(k in title_lower for k in nail_exclusion):
-            return "Hair & Beauty"
-            
-    if chosen_niche == "home_garden":
-        if any(k in title_lower for k in home_keywords) and not any(k in title_lower for k in nail_exclusion):
-            return "Home & Garden"
+    # --- 1. Authoritative Override (Niche-based) ---
+    if chosen_niche in NICHE_TO_CATEGORY:
+        target_cat = NICHE_TO_CATEGORY[chosen_niche]
+        if current_category != target_cat:
+            print(f"   [GATEKEEPER] Niche is '{chosen_niche}'. Forcing category '{target_cat}' (was '{current_category}').")
+            return target_cat
+        return current_category
 
-    # Priority B: Catch leaks from OTHER niches (the 'Janitor' logic)
-    # We use stricter keywords here to avoid cross-niche false matches
-    
-    # Fashion Leak? (Must have "outfit" or "fashion" - "look" is too risky for general leaks)
-    if any(k in title_lower for k in ["outfit", "fashion", "leggings"]) and not any(k in title_lower for k in nail_exclusion):
-        print(f"   [GUARDRAIL] Detected Fashion leak in '{title}'. Forcing 'Styles & Fashion'.")
-        return "Styles & Fashion"
+    # --- 2. Nail Niche Enforcement ---
+    if chosen_niche == "nails":
+        # If a nail post accidentally got a non-nail category
+        if current_category not in NAIL_SPECIFIC_CATS:
+            print(f"   [GATEKEEPER] Nail niche article found in '{current_category}'. Forcing 'Aesthetic & Art'.")
+            return "Aesthetic & Art"
+        return current_category
 
-    # Hair Leak? (Must have "hair" or "hairstyles")
-    if any(k in title_lower for k in ["hair", "hairstyles", "updo"]) and not any(k in title_lower for k in nail_exclusion):
-        print(f"   [GUARDRAIL] Detected Hair leak in '{title}'. Forcing 'Hair & Beauty'.")
+    # --- 3. The Janitor (Keyword-based Fallback for double-safety) ---
+    # Hair in Nails?
+    if any(k in title_lower for k in hair_keywords) and not any(k in title_lower for k in nail_exclusion):
         return "Hair & Beauty"
-
-    # Home Leak?
-    if any(k in title_lower for k in ["decor", "interior", "patio"]) and not any(k in title_lower for k in nail_exclusion):
-        print(f"   [GUARDRAIL] Detected Home leak in '{title}'. Forcing 'Home & Garden'.")
+    
+    # Home in Nails?
+    if any(k in title_lower for k in home_keywords) and not any(k in title_lower for k in nail_exclusion):
         return "Home & Garden"
 
-    # --- 2. Nail Subcategory Enforcement ---
-    if chosen_niche == "nails":
-        if current_category in ["Styles & Fashion", "Hair & Beauty", "Home & Garden", "Uncategorized"]:
-            print(f"   [GUARDRAIL] Nail niche content found in '{current_category}'. Forcing 'Aesthetic & Art' fallback.")
-            return "Aesthetic & Art"
-            
     return current_category
 
 def main():
@@ -126,7 +131,8 @@ def main():
             print(f"   ⚠️  Retrying in {wait}s...")
             time.sleep(wait)
     
-    cat_names = [c["name"] for c in wp_cats]
+    import html
+    cat_names = [html.unescape(c["name"]) for c in wp_cats]
     
     history_path = Path(__file__).parent.parent / "shared" / "history.json"
     with open(history_path, "r") as f:
@@ -212,7 +218,7 @@ def main():
         # Featured Image
         print("🎨 Generating featured image (16:9)...")
         feat_img_path = str(Path(tmp_dir) / "featured.png")
-        img_mgr.generate_image(plan["featured_image"]["prompt"], "16:9", feat_img_path)
+        img_mgr.generate_image(plan["featured_image"]["prompt"], "16:9", feat_img_path, prefer_kolors=True)
         
         # Convert to WebP
         print("⚡ Converting featured image to WebP...")
@@ -226,7 +232,7 @@ def main():
         for i, block in enumerate(plan["blocks"]):
             print(f"🎨 Generating image for '{block['heading']}' (4:5)...")
             block_img_path = str(Path(tmp_dir) / f"block_{i}.png")
-            img_mgr.generate_image(block["prompt"], "4:5", block_img_path)
+            img_mgr.generate_image(block["prompt"], "4:5", block_img_path, prefer_kolors=True)
             
             # Convert to WebP
             print(f"⚡ Converting block '{block['heading']}' to WebP...")
@@ -262,7 +268,7 @@ def main():
 
     if not is_new:
         for cat in wp_cats:
-            if cat["name"].lower() == category_suggestion.lower():
+            if html.unescape(cat["name"]).lower() == category_suggestion.lower():
                 target_category_ids.append(cat["id"])
                 break
         

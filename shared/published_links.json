@@ -194,5 +194,19 @@
         "niche": "nails",
         "topic": "The Ultimate 2025 Guide to Sustainable & Biodegradable Nail Art Trends",
         "slug": "sustainable-biodegradable-nail-art-trends"
+    },
+    {
+        "url": "https://nailosmetic.com/wolf-cut-hairstyles-guide/",
+        "category": "Hair & Beauty",
+        "niche": "hair_beauty",
+        "topic": "wolf cut hairstyle",
+        "slug": "wolf-cut-hairstyles-guide"
+    },
+    {
+        "url": "https://nailosmetic.com/tire-garden-ideas/",
+        "category": "Home & Garden",
+        "niche": "home_garden",
+        "topic": "tire garden",
+        "slug": "tire-garden-ideas"
     }
 ]

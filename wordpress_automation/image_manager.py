@@ -64,6 +64,27 @@ class ImageManager:
         print("   🎨 Attempting Pollinations (Zero-cost Fallback)...")
         return self._generate_pollinations(prompt, aspect_ratio, output_path)
 
+    def _generate_priority_flux(self, prompt: str, output_path: str) -> str:
+        """
+        Cycles through available HF API keys to generate an image via FLUX.1-schnell.
+        """
+        from huggingface_hub import InferenceClient
+        errors = []
+        for i, key in enumerate(self.hf_api_keys):
+            try:
+                client = InferenceClient(api_key=key)
+                image = client.text_to_image(
+                    prompt,
+                    model="black-forest-labs/FLUX.1-schnell"
+                )
+                image.save(output_path)
+                print(f"    Success with HF Key {i+1}/{len(self.hf_api_keys)}")
+                return output_path
+            except Exception as e:
+                errors.append(f"Key {i+1} failed: {str(e)[:50]}")
+        
+        raise Exception(f"All Flux keys failed: {'; '.join(errors)}")
+
     def _generate_siliconflow(self, prompt: str, size: str, output_path: str) -> str:
         headers = {
             "Authorization": f"Bearer {self.silicon_key}",
