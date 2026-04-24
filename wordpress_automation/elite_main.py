@@ -37,8 +37,20 @@ def run_elite_flow():
     gen = EliteGenerator(gemini_keys)
     img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key)
 
-    # 1. Discover Topics
-    opportunities = td.discover_opportunity_topics(niche="nail art and beauty trends 2026-2027")
+    # 1. Select Niche based on core topics
+    import random
+    NICHE_WEIGHTS = {
+        "nail art and beauty": 0.40,
+        "hairstyles and beauty": 0.20,
+        "home decor and garden": 0.20,
+        "fashion and outfit style": 0.20,
+    }
+    niches = list(NICHE_WEIGHTS.keys())
+    weights = list(NICHE_WEIGHTS.values())
+    chosen_niche = random.choices(niches, weights=weights, k=1)[0]
+    
+    # 2. Discover Topics for the chosen niche
+    opportunities = td.discover_opportunity_topics(niche=f"{chosen_niche} trends 2026-2027")
     
     if not opportunities:
         print("⚠️  Discovery hit a quota limit. Using a 'Hand-Picked Gold Mine' fallback topic.")
@@ -132,11 +144,20 @@ def run_elite_flow():
             history_path = Path(__file__).parent.parent / "shared" / "history.json"
             SmartJSON.update_file(history_path, [post_slug])
                 
+            # Map chosen niche to short code for history
+            niche_map = {
+                "nail art and beauty": "nails",
+                "hairstyles and beauty": "hair_beauty",
+                "home decor and garden": "home_garden",
+                "fashion and outfit style": "fashion_style"
+            }
+            short_niche = niche_map.get(chosen_niche, "nails")
+
             published_path = Path(__file__).parent.parent / "shared" / "published_links.json"
             SmartJSON.update_file(published_path, [{
                 "url": post_url,
                 "category": "blogs",
-                "niche": "nails",
+                "niche": short_niche,
                 "topic": topic_data["topic"],
                 "slug": post_slug
             }])
