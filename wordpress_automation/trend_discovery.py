@@ -32,7 +32,7 @@ class TrendDiscovery:
         Your goal is to find 3 'Gold Mine' blog post topics for the '{niche}' industry.
         
         A 'Gold Mine' topic must meet these criteria:
-        1. HIGH INTEREST: People are actively searching for this in 2024-2025.
+        1. HIGH INTEREST: People are actively searching for this in 2026-2027.
         2. LOW COMPETITION: High-domain authority sites (Vogue, Byrdie) haven't deeply covered this yet, OR the Top 10 results are currently dominated by forums like Reddit, Quora, or Pinterest.
         3. ENTITY RICH: A topic that allows us to mention specific brands, materials, and techniques.
         

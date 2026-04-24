@@ -38,14 +38,14 @@ def run_elite_flow():
     img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key)
 
     # 1. Discover Topics
-    opportunities = td.discover_opportunity_topics(niche="nail art and beauty trends 2025")
+    opportunities = td.discover_opportunity_topics(niche="nail art and beauty trends 2026-2027")
     
     if not opportunities:
         print("⚠️  Discovery hit a quota limit. Using a 'Hand-Picked Gold Mine' fallback topic.")
         topic_data = {
-            "topic": "The Ultimate 2025 Guide to 3D Nail Art: Techniques, Tools, and Trend Inspo",
-            "entities": ["3D Nail Art", "Builder Gel", "Manicure 2025", "Nail Extensions"],
-            "target_keywords": ["3d nail art trends", "sculpted nails 2025", "nail art guide"]
+            "topic": "The Ultimate 2026-2027 Guide to 3D Nail Art: Techniques, Tools, and Trend Inspo",
+            "entities": ["3D Nail Art", "Builder Gel", "Manicure 2026", "Nail Extensions"],
+            "target_keywords": ["3d nail art trends", "sculpted nails 2026", "nail art guide"]
         }
     else:
         # Pick the top one
