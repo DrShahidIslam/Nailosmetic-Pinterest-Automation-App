@@ -6,6 +6,10 @@ import requests
 import json
 import sys
 from datetime import datetime, timedelta
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 

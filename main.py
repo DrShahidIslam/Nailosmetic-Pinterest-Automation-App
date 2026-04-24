@@ -1003,7 +1003,42 @@ def main():
                         niche_topics = niche_topics + topic_bank.get("gardening", [])
                     
                     available_topics = [t for t in niche_topics if t not in used_topics]
-                    if available_topics:
+                    
+                    # --- TREND PRIORITIZATION ---
+                    trends_path = Path("shared/niche_trends.json")
+                    trending_matches = []
+                    
+                    if trends_path.exists() and available_topics:
+                        try:
+                            with open(trends_path, "r") as f:
+                                all_trends = json.load(f)
+                            
+                            # Get trends for this niche
+                            niche_trend_data = all_trends.get(chosen_niche, [])
+                            
+                            # Find overlap and score
+                            available_set = {t.lower() for t in available_topics}
+                            for trend in niche_trend_data:
+                                kw = trend.get("keyword", "").lower()
+                                if kw in available_set:
+                                    # Score based on MoM growth
+                                    trending_matches.append({
+                                        "topic": kw,
+                                        "growth": trend.get("growth_mom", 0)
+                                    })
+                            
+                            # Sort by growth (highest first)
+                            trending_matches.sort(key=lambda x: x["growth"], reverse=True)
+                        except Exception as e:
+                            print(f"   ⚠️ Error processing trends: {e}")
+
+                    if trending_matches:
+                        # Pick from the top 5 trending items for variety, or just the best one
+                        # Let's take the top 3 and pick one randomly
+                        top_count = min(3, len(trending_matches))
+                        chosen_topic = random.choice([item["topic"] for item in trending_matches[:top_count]])
+                        print(f"   🔥 TRENDING TOPIC: \"{chosen_topic}\" (Niche: {chosen_niche})")
+                    elif available_topics:
                         chosen_topic = random.choice(available_topics)
                         print(f"   🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\"")
                     else:

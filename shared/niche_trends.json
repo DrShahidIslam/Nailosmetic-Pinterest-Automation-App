@@ -1,1002 +1,2699 @@
 {
     "nails": [
         {
+            "keyword": "spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nail ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nail inspo",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "french tip nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "pink nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nails design",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "short nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "spring break nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "almond nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "april nails",
-            "growth_mom": 600,
-            "growth_yoy": 60
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "tuscan nails 2000s",
-            "growth_mom": 500,
-            "growth_yoy": 10001
+            "keyword": "simple nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "summer toe nails",
-            "growth_mom": 300,
-            "growth_yoy": 100
+            "keyword": "polka dot nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "spring abstract nails",
-            "growth_mom": 300,
-            "growth_yoy": -10
+            "keyword": "spring nails 2026",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "edgy spring nails",
-            "growth_mom": 300,
-            "growth_yoy": 80
+            "keyword": "birthday nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "bright spring nails",
-            "growth_mom": 200,
-            "growth_yoy": -80
-        },
-        {
-            "keyword": "spring nails fruit",
-            "growth_mom": 200,
-            "growth_yoy": 600
-        },
-        {
-            "keyword": "solid color spring nails",
-            "growth_mom": 200,
-            "growth_yoy": 30
-        },
-        {
-            "keyword": "red spring nails",
-            "growth_mom": 200,
-            "growth_yoy": -2
-        },
-        {
-            "keyword": "spring solid color nails",
-            "growth_mom": 200,
-            "growth_yoy": 80
-        },
-        {
-            "keyword": "french spring nails",
-            "growth_mom": 200,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "black spring nails",
-            "growth_mom": 200,
-            "growth_yoy": -2
-        },
-        {
-            "keyword": "solid spring nails",
-            "growth_mom": 200,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "orange spring nails",
-            "growth_mom": 200,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "baddie spring nails",
-            "growth_mom": 200,
-            "growth_yoy": 100
-        },
-        {
-            "keyword": "spring nails 2026 ideas",
-            "growth_mom": 200,
-            "growth_yoy": 10001
-        },
-        {
-            "keyword": "teal spring nails",
-            "growth_mom": 200,
-            "growth_yoy": -10
-        },
-        {
-            "keyword": "white spring nails",
-            "growth_mom": 200,
-            "growth_yoy": 1
-        },
-        {
-            "keyword": "cute spring nail ideas",
-            "growth_mom": 200,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "spring red nails",
-            "growth_mom": 200,
-            "growth_yoy": 9
-        },
-        {
-            "keyword": "pucci nails",
-            "growth_mom": 200,
-            "growth_yoy": 10001
-        },
-        {
-            "keyword": "dnd spring nail colors",
-            "growth_mom": 200,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "summer nail designs",
-            "growth_mom": 200,
-            "growth_yoy": 200
-        },
-        {
-            "keyword": "spring nails solid color",
-            "growth_mom": 100,
-            "growth_yoy": 50
-        },
-        {
-            "keyword": "spring checkered nails",
-            "growth_mom": 100,
-            "growth_yoy": 600
-        },
-        {
-            "keyword": "yellow blueberry nails",
-            "growth_mom": 100,
-            "growth_yoy": 1500
-        },
-        {
-            "keyword": "natural spring nails",
-            "growth_mom": 100,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "spring chrome nails",
-            "growth_mom": 100,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "cute spring nails square",
-            "growth_mom": 100,
-            "growth_yoy": 200
-        },
-        {
-            "keyword": "spring nails red",
-            "growth_mom": 100,
-            "growth_yoy": 6
-        },
-        {
-            "keyword": "spring nail ideas 2026",
-            "growth_mom": 100,
-            "growth_yoy": 10001
-        },
-        {
-            "keyword": "easy spring nails",
-            "growth_mom": 100,
-            "growth_yoy": 40
-        },
-        {
-            "keyword": "short nail designs spring",
-            "growth_mom": 100,
-            "growth_yoy": 30
-        },
-        {
-            "keyword": "butter yellow nails",
-            "growth_mom": 100,
-            "growth_yoy": 300
-        },
-        {
-            "keyword": "basic spring nails",
-            "growth_mom": 100,
-            "growth_yoy": 9
-        },
-        {
-            "keyword": "spring blue nails",
-            "growth_mom": 100,
-            "growth_yoy": 9
-        },
-        {
-            "keyword": "spring nails french",
-            "growth_mom": 100,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "short square nails spring",
-            "growth_mom": 100,
-            "growth_yoy": 100
+            "keyword": "blue nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
             "keyword": "yellow nails",
-            "growth_mom": 90,
-            "growth_yoy": 50
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nail designs",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "spring nail ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "red nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "short nail designs",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nail art",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "black nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "vacation nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "white nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "cute nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nails ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "prom nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "baddie nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "purple nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "square nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "april nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring nails solid color",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "yellow nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring checkered nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "neutral spring nails",
-            "growth_mom": 90,
-            "growth_yoy": -40
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "spring simple nails",
-            "growth_mom": 90,
-            "growth_yoy": 40
+            "keyword": "yellow blueberry nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "nails 2026 trends spring",
-            "growth_mom": 80,
-            "growth_yoy": 10001
+            "keyword": "bright spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "nail ideas spring",
-            "growth_mom": 60,
-            "growth_yoy": 300
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "natural spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring chrome nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring nails fruit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cute spring nails square",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "nail designs spring",
-            "growth_mom": 50,
-            "growth_yoy": 10
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "solid color spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring nails red",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "red spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring nail ideas 2026",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring solid color nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "easy spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "tuscan nails 2000s",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "nails 2026 trends spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "french spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "short nail designs spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "butter yellow nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "black spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "solid spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "orange spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "summer toe nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "baddie spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring nails 2026 ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "teal spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "white spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "basic spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring blue nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring abstract nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring nails french",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "short square nails spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cute spring nail ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring red nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "pucci nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "dnd spring nail colors",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "summer nail designs",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring simple nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "edgy spring nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "april nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "coachella nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "may nails ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "coachella nails ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mother\u2019s day nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mother\u2019s day nails design",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mothers day nails ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mothers day nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cinco de mayo nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "stagecoach nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "memorial day nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "may nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "morgan wallen nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "may birthday nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "taurus birthday nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "spring/summer nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "edc nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "$b nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "graduation nail",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "april nail colors",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "country concert nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "taurus nails designs",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "simple prom nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fun summer nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "graduation nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "white graduation nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom nails almond",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "nail inspo prom",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "graduation nail inspo",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "pink prom nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "simple graduation nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom nails white",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom nails simple",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cute prom nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "grad nail ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "coral almond nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "white prom nails",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
         }
     ],
     "hair_beauty": [
         {
-            "keyword": "prom hairstyles black women",
-            "growth_mom": 500,
-            "growth_yoy": 600
+            "keyword": "hairstyles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "short hair style",
-            "growth_mom": 300,
-            "growth_yoy": 300
+            "keyword": "braided hairstyles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "fulani braid inspo",
-            "growth_mom": 200,
-            "growth_yoy": 2500
+            "keyword": "hair styles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "curly hairstyles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
             "keyword": "prom hairstyles",
-            "growth_mom": 100,
-            "growth_yoy": -30
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "cute hairstyles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "half up half down hair",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "hair",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "makeup",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "braids",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "fulani braids",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "hair color ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "blonde hair",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "prom hair",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "quick weave hairstyles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "natural hairstyles for black women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "ponytail hairstyles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "natural hair styles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "short hair styles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "prom hairstyles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "fulani braid inspo",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "prom hairstyles black women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "short hair style",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "princess peach makeup",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "coachella makeup",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom hairstyles",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "bunny makeup",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "bunny makeup look",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "graduation makeup ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom eye makeup",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "hairstyles for track meets",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom hair tutorial",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom hair half up half down",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom makeup tutorial",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "easy prom hairstyles to do yourself",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
         }
     ],
     "home_garden": [
         {
-            "keyword": "cottage core farmhouse aesthetic",
-            "growth_mom": 400,
-            "growth_yoy": 2500
+            "keyword": "pink wallpaper",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "dollar tree solar light ideas",
-            "growth_mom": 400,
-            "growth_yoy": -60
+            "keyword": "bedroom ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "island theme",
-            "growth_mom": 300,
-            "growth_yoy": -20
+            "keyword": "room ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "purple rentry divider png",
-            "growth_mom": 300,
-            "growth_yoy": 10001
+            "keyword": "white",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "diy wood trellis",
-            "growth_mom": 300,
-            "growth_yoy": 8
+            "keyword": "bathroom ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "vintage terracotta pots",
-            "growth_mom": 300,
-            "growth_yoy": 200
+            "keyword": "bedroom",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "drainage ideas",
-            "growth_mom": 200,
-            "growth_yoy": 3500
+            "keyword": "room decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "front porch flower pots",
-            "growth_mom": 200,
-            "growth_yoy": 30
+            "keyword": "pink background",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "blue rentry divider png",
-            "growth_mom": 200,
-            "growth_yoy": 10001
+            "keyword": "color",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "pink rentry divider lace",
-            "growth_mom": 200,
-            "growth_yoy": 10001
+            "keyword": "blue wallpaper",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "diy grill station cheap",
-            "growth_mom": 200,
-            "growth_yoy": 100
+            "keyword": "bathroom decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "concrete front steps makeover",
-            "growth_mom": 200,
-            "growth_yoy": 30
+            "keyword": "color palette",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "carpenter bee trap",
-            "growth_mom": 200,
-            "growth_yoy": -60
+            "keyword": "baby shower ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "concrete slab patio makeover",
-            "growth_mom": 200,
-            "growth_yoy": 20
+            "keyword": "living room decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "drainage around house",
-            "growth_mom": 200,
-            "growth_yoy": 4000
+            "keyword": "white background",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "diy wood planter box",
-            "growth_mom": 200,
-            "growth_yoy": 200
+            "keyword": "dorm room ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "beach hacks kids",
-            "growth_mom": 200,
-            "growth_yoy": -20
+            "keyword": "apartment decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "poop shelf chicken coop",
-            "growth_mom": 100,
-            "growth_yoy": 1000
+            "keyword": "rentry dividers",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "black rentry dividers",
-            "growth_mom": 100,
-            "growth_yoy": 10001
+            "keyword": "room inspo",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "flower bed ideas in front of house",
-            "growth_mom": 100,
-            "growth_yoy": 100
+            "keyword": "laundry room ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "brown rentry dividers",
-            "growth_mom": 100,
-            "growth_yoy": 10001
+            "keyword": "room",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "teal layout",
-            "growth_mom": 100,
-            "growth_yoy": 10001
+            "keyword": "bedroom decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "landscaping ideas for front of house",
-            "growth_mom": 100,
-            "growth_yoy": 400
+            "keyword": "backyard ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "front porch rug layering",
-            "growth_mom": 100,
-            "growth_yoy": -20
+            "keyword": "small bathroom ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "diy water table for kids",
-            "growth_mom": 100,
-            "growth_yoy": 8
+            "keyword": "bathroom",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "low retaining wall ideas",
-            "growth_mom": 100,
-            "growth_yoy": -40
+            "keyword": "pipe cleaner flowers",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "diy patio table",
-            "growth_mom": 100,
-            "growth_yoy": 0
+            "keyword": "room decor ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "rock river bed landscape design",
-            "growth_mom": 100,
-            "growth_yoy": -20
+            "keyword": "purple wallpaper",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "wildflower centerpieces round table",
-            "growth_mom": 100,
-            "growth_yoy": -20
+            "keyword": "closet organization ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "luxury mobile homes",
-            "growth_mom": 100,
-            "growth_yoy": -20
+            "keyword": "master bedrooms decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "rock landscaping ideas",
-            "growth_mom": 100,
-            "growth_yoy": 20
+            "keyword": "hello kitty wallpaper",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "pool float storage",
-            "growth_mom": 100,
-            "growth_yoy": -30
+            "keyword": "adopt me house ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "blue layout",
-            "growth_mom": 90,
-            "growth_yoy": 6500
+            "keyword": "coffee bar ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "diy outdoor shower ideas simple",
-            "growth_mom": 90,
-            "growth_yoy": 400
+            "keyword": "light pink",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "pink layout",
-            "growth_mom": 80,
-            "growth_yoy": 3000
-        },
-        {
-            "keyword": "garden labels diy",
-            "growth_mom": 80,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "hog wire fence ideas",
-            "growth_mom": 80,
-            "growth_yoy": 300
-        },
-        {
-            "keyword": "low maintenance flower bed ideas",
-            "growth_mom": 80,
-            "growth_yoy": 200
-        },
-        {
-            "keyword": "green rentry dividers",
-            "growth_mom": 80,
-            "growth_yoy": 10001
+            "keyword": "vanity",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
             "keyword": "front yard landscaping ideas",
-            "growth_mom": 80,
-            "growth_yoy": 90
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "blue background",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "apartment inspiration",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "lock screen",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "home decor ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "diy",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "entryway ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "bathroom decor ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "wallpaper ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "green wallpaper",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "bed",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "diy room decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "green background",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "room inspo ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "wall decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "poop shelf chicken coop",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "island theme",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "drainage ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "front porch flower pots",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "pink rentry divider",
-            "growth_mom": 70,
-            "growth_yoy": 10001
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "flower beds in front of house",
-            "growth_mom": 70,
-            "growth_yoy": -50
-        },
-        {
-            "keyword": "spring flowers wallpaper",
-            "growth_mom": 60,
-            "growth_yoy": 4
-        },
-        {
-            "keyword": "cute campsite setup",
-            "growth_mom": 60,
-            "growth_yoy": 700
-        },
-        {
-            "keyword": "chalk obstacle course",
-            "growth_mom": 60,
-            "growth_yoy": 60
+            "keyword": "black rentry dividers",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "cheap fence ideas budget",
-            "growth_mom": 50,
-            "growth_yoy": 800
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "orange rentry divider",
-            "growth_mom": 50,
-            "growth_yoy": 10001
+            "keyword": "blue rentry divider png",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "diy truck bed storage",
-            "growth_mom": 40,
-            "growth_yoy": 300
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "blue layout",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "pink rentry divider lace",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "flower bed ideas in front of house",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "purple rentry divider png",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cottage core farmhouse aesthetic",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring flowers wallpaper",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "brown rentry dividers",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "pink layout",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "landscaping ideas",
-            "growth_mom": 40,
-            "growth_yoy": 30
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "diy wood trellis",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "diy grill station cheap",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "flower beds in front of house",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "teal layout",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "landscaping ideas for front of house",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "concrete front steps makeover",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "diy outdoor shower ideas simple",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "garden labels diy",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "carpenter bee trap",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "front porch rug layering",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "diy water table for kids",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "hog wire fence ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "low maintenance flower bed ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "green rentry dividers",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "low retaining wall ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "concrete slab patio makeover",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "diy patio table",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "rock river bed landscape design",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "wildflower centerpieces round table",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "drainage around house",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "orange rentry divider",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "dollar tree solar light ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "luxury mobile homes",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "cheap patio floor ideas",
-            "growth_mom": 40,
-            "growth_yoy": -30
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "front yard landscaping ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "diy wood planter box",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "beach hacks kids",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "rock landscaping ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cute campsite setup",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "chalk obstacle course",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "vintage terracotta pots",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "pool float storage",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "\u0441\u0438\u0440\u0435\u043d\u044c",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "may calendar ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "4th of july front porch decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer home decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "frat coolers ideas formal",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "tire projects",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer mantle decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer door decorations",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cooler painting ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer tablescapes",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer kitchen decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "frat coolers ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fourth of july decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer front porch decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "dawn dish soap and vinegar for weeds",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "turkey fan mount ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "bright summer wallpaper",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer mantel decorating ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "patriotic decorations",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "frat paddle ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "white board calendar ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "may calendar",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer porch ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "bee bath diy",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "patriotic flower arrangements",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer living room decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer wreaths for front door",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "folding napkins",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "how to fold napkins",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer porch decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "dorm must haves",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "may color palette",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "june calendar",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "backyard seating area",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "lemon centerpiece ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "pink and blue dorm",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "blue dorm room ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "diy brick patio",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer centerpieces",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cloth napkin folding ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "yard sale set up ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "homemade trellis ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fall baby shower themes",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "diy fountain ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "napkin folding",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer porch signs",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "beach design",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "deck around above ground pool",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "diy garden decor",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
         }
     ],
     "fashion_style": [
         {
+            "keyword": "outfit ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "spring outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "prom dresses",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "outfit inspo",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "business casual outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "graduation dress",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "easter outfit women",
-            "growth_mom": 700,
-            "growth_yoy": 200
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "spring cold weather outfit",
-            "growth_mom": 300,
-            "growth_yoy": -30
+            "keyword": "y2k outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "tulip farm outfit",
-            "growth_mom": 300,
-            "growth_yoy": 200
+            "keyword": "birthday outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "tropical y2k outfits",
-            "growth_mom": 200,
-            "growth_yoy": 4000
+            "keyword": "shoes",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "spring bar outfit",
-            "growth_mom": 200,
-            "growth_yoy": -9
+            "keyword": "outfit ideas for school",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "casual date night outfit spring",
-            "growth_mom": 200,
-            "growth_yoy": -10
+            "keyword": "country concert outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "spring night out outfit",
-            "growth_mom": 200,
-            "growth_yoy": 1
+            "keyword": "disney outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "summer bitmoji outfits",
-            "growth_mom": 200,
-            "growth_yoy": -4
+            "keyword": "casual outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "casual brunch outfit spring",
-            "growth_mom": 200,
-            "growth_yoy": 10
+            "keyword": "going out outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "clothes",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "business casual outfits for women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "dresses",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "concert outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "spring outfits 2026",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "church outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "curtain bangs",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "vacation outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "coachella outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "rainy day outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "dress",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "prom dress",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "calico hair",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "2000s fashion",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "summer fits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "date night outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "y2k",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "rave outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "capri pants outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "concert outfit ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "outfits for school",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "club outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "easter outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "belly button piercing",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "work outfits women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
             "keyword": "baseball game outfit",
-            "growth_mom": 200,
-            "growth_yoy": 40
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "zoo outfit spring",
-            "growth_mom": 200,
-            "growth_yoy": -40
+            "keyword": "2016 outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "bedazzled stuff aesthetic",
-            "growth_mom": 200,
-            "growth_yoy": 4500
+            "keyword": "hiking outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "spring dinner outfit",
-            "growth_mom": 200,
-            "growth_yoy": 30
+            "keyword": "ariana grande",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "dc outfits washington spring",
-            "growth_mom": 200,
-            "growth_yoy": -20
+            "keyword": "winter outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "tulip field outfit",
-            "growth_mom": 200,
-            "growth_yoy": 100
+            "keyword": "nose piercing",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "cute summer bitmoji outfits",
-            "growth_mom": 200,
-            "growth_yoy": -40
+            "keyword": "brunch outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "barrel jeans outfit spring",
-            "growth_mom": 100,
-            "growth_yoy": 200
+            "keyword": "bracelet ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "flower field outfit",
-            "growth_mom": 100,
-            "growth_yoy": 80
+            "keyword": "skirt outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
         },
         {
-            "keyword": "jelly shoes outfit",
-            "growth_mom": 100,
-            "growth_yoy": 100
-        },
-        {
-            "keyword": "jeans outfit spring",
-            "growth_mom": 100,
-            "growth_yoy": -10
-        },
-        {
-            "keyword": "casual spring outfit",
-            "growth_mom": 100,
-            "growth_yoy": -9
-        },
-        {
-            "keyword": "perfect leggings",
-            "growth_mom": 100,
-            "growth_yoy": 50
-        },
-        {
-            "keyword": "summer 2026 outfits",
-            "growth_mom": 100,
-            "growth_yoy": 10001
-        },
-        {
-            "keyword": "cool spring day outfit",
-            "growth_mom": 100,
-            "growth_yoy": 300
-        },
-        {
-            "keyword": "jelly flats outfit",
-            "growth_mom": 100,
-            "growth_yoy": 300
-        },
-        {
-            "keyword": "easy spring outfits",
-            "growth_mom": 100,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "jeans and flip flops outfit",
-            "growth_mom": 100,
-            "growth_yoy": 500
-        },
-        {
-            "keyword": "brunch outfit spring",
-            "growth_mom": 100,
-            "growth_yoy": -40
-        },
-        {
-            "keyword": "airmax 95 outfit",
-            "growth_mom": 100,
-            "growth_yoy": 200
-        },
-        {
-            "keyword": "spring casual outfits women",
-            "growth_mom": 100,
-            "growth_yoy": 30
+            "keyword": "tropical y2k outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "spring jeans outfit",
-            "growth_mom": 90,
-            "growth_yoy": -5
-        },
-        {
-            "keyword": "leggings outfit spring",
-            "growth_mom": 90,
-            "growth_yoy": 8
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "alt spring outfits",
-            "growth_mom": 80,
-            "growth_yoy": 200
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "cute spring outfit",
-            "growth_mom": 80,
-            "growth_yoy": 20
+            "keyword": "easter outfit women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "san francisco outfits spring",
-            "growth_mom": 80,
-            "growth_yoy": 200
+            "keyword": "barrel jeans outfit spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "spring outfits for women",
-            "growth_mom": 70,
-            "growth_yoy": 400
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring bar outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "casual date night outfit spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring night out outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "flower field outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "jelly shoes outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "leggings outfit spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "jeans outfit spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "summer bitmoji outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "spring outfits jeans",
-            "growth_mom": 70,
-            "growth_yoy": 10
-        },
-        {
-            "keyword": "casual spring outfits women",
-            "growth_mom": 70,
-            "growth_yoy": 70
-        },
-        {
-            "keyword": "spring cardigan outfit",
-            "growth_mom": 70,
-            "growth_yoy": -10
-        },
-        {
-            "keyword": "spring brunch outfit",
-            "growth_mom": 70,
-            "growth_yoy": 10
-        },
-        {
-            "keyword": "chill spring outfits",
-            "growth_mom": 70,
-            "growth_yoy": 40
-        },
-        {
-            "keyword": "comfy spring outfits lazy days",
-            "growth_mom": 70,
-            "growth_yoy": -30
-        },
-        {
-            "keyword": "samba jane shoes outfit",
-            "growth_mom": 70,
-            "growth_yoy": 10001
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "universal fits",
-            "growth_mom": 60,
-            "growth_yoy": 1000
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "casual spring outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "casual spring outfits women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "perfect leggings",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "midsize spring outfits",
-            "growth_mom": 60,
-            "growth_yoy": 20
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "casual mom outfits spring",
-            "growth_mom": 60,
-            "growth_yoy": 80
+            "keyword": "spring cardigan outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "spring corporate outfits",
-            "growth_mom": 60,
-            "growth_yoy": 400
+            "keyword": "casual brunch outfit spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
-            "keyword": "tankini y2k",
-            "growth_mom": 60,
-            "growth_yoy": 2500
+            "keyword": "baseball game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "summer 2026 outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring cold weather outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "casual spring outfits",
-            "growth_mom": 50,
-            "growth_yoy": -30
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "casual mom outfits spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cool spring day outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring brunch outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cute spring outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "bedazzled stuff aesthetic",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring dinner outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "jelly flats outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring corporate outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "chill spring outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "easy spring outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "comfy spring outfits lazy days",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "tulip farm outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "samba jane shoes outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
         },
         {
             "keyword": "casual outfits spring",
-            "growth_mom": 50,
-            "growth_yoy": -7
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "jeans and flip flops outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "tankini y2k",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "dc outfits washington spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "brunch outfit spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "airmax 95 outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "tulip field outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "san francisco outfits spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "spring casual outfits women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cute summer bitmoji outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "jelly sandals outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "coachella outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cap and gown poses",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "yankee game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "baseball game outfit cold",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "60 degree weather outfit spring",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "rainy day spring outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "keeneland outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "red sox game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mother\u2019s day outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "texas rangers game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "braves game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mothers day outfit ideas black women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "coachella outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mothers day outfit ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "texas rangers outfit women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fetcherx search",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "baseball game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "yankee game outfit women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "masters outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mothers day outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "rosalina costume",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "rainy day outfit summer",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cubs game outfit women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer rainy day outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cold weather spring outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mt joy concert outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mariners game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "coachella",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "yankees game outfit women",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cute spring fits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "memorial day outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom jewelry silver",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "red sox outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "grey day concert outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "phillies game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cold baseball game outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "princess daisy costume",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "masters outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "derby hats diy ideas",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "coachella theme party outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "spring rainy day outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "prom jewelry gold",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer designs",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "princess peach costume",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cute prom pictures",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "country thunder outfits",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "yoshi costume",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "senior bar crawl shirts",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "red rocks concert outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "indy 500 outfit",
+            "growth_mom": 0,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
         }
     ],
-    "gardening": [
-        {
-            "keyword": "walkable ground cover",
-            "growth_mom": 400,
-            "growth_yoy": -60
-        },
-        {
-            "keyword": "mini farm",
-            "growth_mom": 300,
-            "growth_yoy": 200
-        },
-        {
-            "keyword": "patio flowers",
-            "growth_mom": 300,
-            "growth_yoy": -60
-        },
-        {
-            "keyword": "drainage ideas",
-            "growth_mom": 200,
-            "growth_yoy": 3500
-        },
-        {
-            "keyword": "front porch flower pots",
-            "growth_mom": 200,
-            "growth_yoy": 30
-        },
-        {
-            "keyword": "river rock landscaping",
-            "growth_mom": 200,
-            "growth_yoy": 9
-        },
-        {
-            "keyword": "concrete block garden beds",
-            "growth_mom": 200,
-            "growth_yoy": 200
-        },
-        {
-            "keyword": "flower pots outdoor",
-            "growth_mom": 200,
-            "growth_yoy": -30
-        },
-        {
-            "keyword": "hydrangea landscaping ideas",
-            "growth_mom": 200,
-            "growth_yoy": 90
-        },
-        {
-            "keyword": "shade garden design layout",
-            "growth_mom": 200,
-            "growth_yoy": -60
-        },
-        {
-            "keyword": "diy paver patio cheap",
-            "growth_mom": 200,
-            "growth_yoy": 100
-        },
-        {
-            "keyword": "mulch landscaping ideas",
-            "growth_mom": 200,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "limelight hydrangea landscaping",
-            "growth_mom": 200,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "tire flower planters",
-            "growth_mom": 200,
-            "growth_yoy": 40
-        },
-        {
-            "keyword": "cheap trellis ideas",
-            "growth_mom": 200,
-            "growth_yoy": 60
-        },
-        {
-            "keyword": "poop shelf chicken coop",
-            "growth_mom": 100,
-            "growth_yoy": 1000
-        },
-        {
-            "keyword": "vegetable planting calendar",
-            "growth_mom": 100,
-            "growth_yoy": 100
-        },
-        {
-            "keyword": "flower bed ideas in front of house",
-            "growth_mom": 100,
-            "growth_yoy": 100
-        },
-        {
-            "keyword": "tire garden",
-            "growth_mom": 100,
-            "growth_yoy": 100
-        },
-        {
-            "keyword": "boxwood landscaping",
-            "growth_mom": 100,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "diy ponds backyard",
-            "growth_mom": 100,
-            "growth_yoy": 100
-        },
-        {
-            "keyword": "flower bed borders",
-            "growth_mom": 100,
-            "growth_yoy": -5
-        },
-        {
-            "keyword": "zinnias in pots",
-            "growth_mom": 100,
-            "growth_yoy": 300
-        },
-        {
-            "keyword": "tulip farm",
-            "growth_mom": 100,
-            "growth_yoy": 60
-        },
-        {
-            "keyword": "berms landscaping ideas",
-            "growth_mom": 100,
-            "growth_yoy": -30
-        },
-        {
-            "keyword": "low retaining wall ideas",
-            "growth_mom": 100,
-            "growth_yoy": -40
-        },
-        {
-            "keyword": "rock river bed landscape design",
-            "growth_mom": 100,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "full sun container plants",
-            "growth_mom": 100,
-            "growth_yoy": -40
-        },
-        {
-            "keyword": "raspberry trellis ideas",
-            "growth_mom": 100,
-            "growth_yoy": -10
-        },
-        {
-            "keyword": "flower bed edging",
-            "growth_mom": 100,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "rock landscaping ideas",
-            "growth_mom": 100,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "downspout drainage ideas",
-            "growth_mom": 100,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "shed murals outdoor",
-            "growth_mom": 100,
-            "growth_yoy": 100
-        },
-        {
-            "keyword": "landscaping around trees",
-            "growth_mom": 90,
-            "growth_yoy": 30
-        },
-        {
-            "keyword": "butterfly puddler diy",
-            "growth_mom": 90,
-            "growth_yoy": 40
-        },
-        {
-            "keyword": "deer proof garden fence",
-            "growth_mom": 80,
-            "growth_yoy": 300
-        },
-        {
-            "keyword": "evergreen groundcover",
-            "growth_mom": 80,
-            "growth_yoy": 20
-        },
-        {
-            "keyword": "garden labels diy",
-            "growth_mom": 80,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "hog wire fence ideas",
-            "growth_mom": 80,
-            "growth_yoy": 300
-        },
-        {
-            "keyword": "low maintenance flower bed ideas",
-            "growth_mom": 80,
-            "growth_yoy": 200
-        },
-        {
-            "keyword": "cucumber trellis",
-            "growth_mom": 80,
-            "growth_yoy": 10
-        },
-        {
-            "keyword": "front yard landscaping ideas",
-            "growth_mom": 80,
-            "growth_yoy": 90
-        },
-        {
-            "keyword": "mailbox garden",
-            "growth_mom": 80,
-            "growth_yoy": -20
-        },
-        {
-            "keyword": "endless summer hydrangea",
-            "growth_mom": 70,
-            "growth_yoy": -10
-        },
-        {
-            "keyword": "flower beds in front of house",
-            "growth_mom": 70,
-            "growth_yoy": -50
-        },
-        {
-            "keyword": "cheap fence ideas budget",
-            "growth_mom": 50,
-            "growth_yoy": 800
-        },
-        {
-            "keyword": "mailbox landscaping full sun",
-            "growth_mom": 50,
-            "growth_yoy": -70
-        },
-        {
-            "keyword": "landscaping ideas",
-            "growth_mom": 40,
-            "growth_yoy": 30
-        },
-        {
-            "keyword": "woodland garden",
-            "growth_mom": 40,
-            "growth_yoy": 80
-        },
-        {
-            "keyword": "full sun perennial garden plan",
-            "growth_mom": 40,
-            "growth_yoy": 1500
-        }
-    ]
+    "gardening": []
 }
