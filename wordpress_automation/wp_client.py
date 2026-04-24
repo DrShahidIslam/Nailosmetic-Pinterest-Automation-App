@@ -42,10 +42,10 @@ class WordPressClient:
         if os.getenv("WORDPRESS_FORCE_IPV4", "false").lower() == "true":
             force_ipv4_patch()
 
-        # Configure a robust retry strategy for network glitches
+        # Configure a robust retry strategy for network glitches and rate limits
         retry_strategy = Retry(
-            total=5,
-            backoff_factor=3,  # Faster retries internally (3s, 6s, 12s, 24s)
+            total=10,
+            backoff_factor=5,  # 5s, 10s, 20s, 40s, 80s... 
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=["HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"]
         )
@@ -83,6 +83,7 @@ class WordPressClient:
         
         # Update Alt Text (WP REST API sometimes needs a separate update for alt text)
         if alt_text:
+            time.sleep(5) # ⏳ Added delay to prevent 429 after initial upload
             self._update_media_alt_text(media_id, alt_text)
             
         return media_id

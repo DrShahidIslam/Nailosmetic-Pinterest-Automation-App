@@ -1,0 +1,76 @@
+# ============================================================
+# Elite Blog Automation — GitHub Actions Workflow
+# ============================================================
+# This workflow runs the Elite long-form blog generator.
+# Scheduled to run every 3rd day.
+
+name: 🏆 Elite Blog Generation
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+on:
+  schedule:
+    # Run at 09:00 UTC every 3rd day
+    - cron: "0 9 */3 * *"
+
+  # Allow manual triggering
+  workflow_dispatch:
+
+concurrency:
+  group: bot-data-sync
+  cancel-in-progress: false
+
+jobs:
+  publish-elite:
+    name: Generate & Publish Elite Blog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      # 1. Check out the repository
+      - name: 📥 Checkout repository
+         uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      # 3. Install dependencies
+      - name: 📦 Install dependencies
+        run: pip install -r requirements.txt
+
+      # 4. Run the Elite Bot
+      - name: 🚀 Run Elite Bot
+        env:
+          GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          HUGGINGFACE_API_KEYS: ${{ secrets.HUGGINGFACE_API_KEYS }}
+          WORDPRESS_URL: ${{ secrets.WORDPRESS_URL }}
+          WORDPRESS_USER: ${{ secrets.WORDPRESS_USER }}
+          WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
+        run: python wordpress_automation/elite_main.py
+
+      # 5. Commit shared data changes (crucial for internal linking sync)
+      - name: 💾 Commit updated history and banks
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add shared/*.json
+          git commit -m "🏆 Update history from Elite blog [skip ci]" || exit 0
+          
+          # Smart Merge to avoid losing data from the regular bot
+          git pull --rebase origin main || (
+            git rebase --abort
+            git fetch origin main
+            python shared_data_manager.py --resolve-conflicts
+            git add shared/*.json
+            git commit -m "📝 Resolve Elite data conflicts [skip ci]"
+            git pull origin main --no-rebase -s recursive -X ours
+          )
+          git push
