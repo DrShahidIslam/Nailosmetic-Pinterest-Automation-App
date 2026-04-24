@@ -37,6 +37,11 @@ def run_elite_flow():
     gen = EliteGenerator(gemini_keys)
     img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key)
 
+    # 0. Load Historical Data for Internal Linking
+    history_path = Path(__file__).parent.parent / "shared" / "history.json"
+    history_data = SmartJSON.read_file(history_path)
+    previous_slugs = history_data if isinstance(history_data, list) else []
+
     # 1. Select Niche based on core topics
     import random
     NICHE_WEIGHTS = {
@@ -65,8 +70,8 @@ def run_elite_flow():
     
     print(f"🎯 Selected Topic: {topic_data['topic']}")
 
-    # 2. Generate Elite Blog Data
-    blog_data = gen.generate_elite_blog(topic_data)
+    # 3. Generate Elite Blog Data
+    blog_data = gen.generate_elite_blog(topic_data, previous_slugs)
     
     # 3. Handle Images and Media
     with tempfile.TemporaryDirectory() as tmp_dir:

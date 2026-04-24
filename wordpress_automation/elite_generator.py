@@ -15,24 +15,29 @@ class EliteGenerator:
     def _get_client(self, api_key):
         return genai.Client(api_key=api_key)
 
-    def generate_elite_blog(self, topic_data: Dict[str, Any]) -> Dict[str, Any]:
+    def generate_elite_blog(self, topic_data: Dict[str, Any], previous_slugs: List[str]) -> Dict[str, Any]:
         """
-        Main orchestration for elite long-form content.
-        1. Outline
-        2. Section-by-section drafting
-        3. Humanization pass
+        Main orchestration for elite long-form content with internal linking.
         """
         topic = topic_data["topic"]
+        internal_link_slug = random.choice(previous_slugs) if previous_slugs else "spring-nail-designs-inspo"
+        homepage_url = "https://nailosmetic.com/"
+        article_url = f"https://nailosmetic.com/{internal_link_slug}/"
+        
         print(f"🚀 Generating Elite Blog Article for: {topic}...")
         
         # Step 1: Generate Detailed Outline
-        outline = self._generate_outline(topic, topic_data.get("entities", []))
+        outline = self._generate_outline(topic, topic_data.get("entities", []), homepage_url)
         
         # Step 2: Generate Content for each section
         full_article = []
         for i, section in enumerate(outline["sections"]):
             print(f"   ✍️  Drafting Section {i+1}/{len(outline['sections'])}: {section['heading']}")
-            draft = self._generate_section(topic, section, full_article)
+            
+            # Pass the internal article link to the 3rd or 4th section for natural placement
+            target_link = article_url if i == 3 else None
+            
+            draft = self._generate_section(topic, section, full_article, target_link)
             full_article.append({
                 "heading": section["heading"],
                 "content": draft["text"],
@@ -57,10 +62,13 @@ class EliteGenerator:
         
         return blog_data
 
-    def _generate_outline(self, topic: str, entities: List[str]) -> Dict[str, Any]:
+    def _generate_outline(self, topic: str, entities: List[str], homepage_url: str) -> Dict[str, Any]:
         prompt = f"""
         You are an Elite Content Architect for 'Nailosmetic'. 
         Structure a 1500-word comprehensive, authoritative blog guide about: "{topic}".
+        
+        INTERNAL LINKING:
+        - The introduction MUST naturally link to the homepage: {homepage_url}
         
         GOALS:
         - SEO: High keyword density (natural), optimized H2/H3.
@@ -111,16 +119,21 @@ class EliteGenerator:
                     continue
         raise Exception(f"Could not parse outline JSON. Errors: {errors[:2]}")
 
-    def _generate_section(self, topic: str, section: Dict[str, Any], previous_sections: List[Dict]) -> Dict[str, Any]:
+    def _generate_section(self, topic: str, section: Dict[str, Any], previous_sections: List[Dict], target_link: Optional[str] = None) -> Dict[str, Any]:
         # Context from previous sections to avoid repetition
         context = "\n".join([f"Previous section: {s['heading']}" for s in previous_sections])
         
+        link_instruction = ""
+        if target_link:
+            link_instruction = f"INTERNAL LINKING: You MUST naturally include exactly one internal link to '{target_link}' using an HTML anchor tag with relevant anchor text."
+
         prompt = f"""
         You are a top-tier human author for 'Nailosmetic'. 
         Write a deep-dive, 200-300 word section for the article "{topic}".
         SECTION HEADING: "{section['heading']}"
         SECTION GOAL: "{section['goal']}"
         PREFERRED FORMAT: "{section['preferred_format']}"
+        {link_instruction}
         
         STRICT WRITING RULES:
         1. READABILITY: Conversational but premium.
