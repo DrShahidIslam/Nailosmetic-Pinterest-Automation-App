@@ -44,8 +44,8 @@ class WordPressClient:
 
         # Configure a robust retry strategy for network glitches
         retry_strategy = Retry(
-            total=3,
-            backoff_factor=2,  # Faster retries internally (2s, 4s, 8s)
+            total=5,
+            backoff_factor=3,  # Faster retries internally (3s, 6s, 12s, 24s)
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=["HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"]
         )

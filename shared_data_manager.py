@@ -77,6 +77,8 @@ class SmartJSON:
 
 if __name__ == "__main__":
     import sys
+    import subprocess
+
     if len(sys.argv) > 1 and sys.argv[1] == "--sync-all":
         print("🔄 Performing Smart Sync of all shared data files...")
         shared_dir = Path(__file__).parent / "shared"
@@ -86,9 +88,40 @@ if __name__ == "__main__":
             
         json_files = list(shared_dir.glob("*.json"))
         for jf in json_files:
-            # Running update_file with empty list/dict just triggers the load-merge-save 
-            # logic which effectively resolves simple "additions" based conflicts
-            # if we use this right after a git pull conflict.
             print(f"   📂 Syncing {jf.name}...")
             SmartJSON.update_file(jf, []) 
         print("✅ Sync complete.")
+
+    elif len(sys.argv) > 1 and sys.argv[1] == "--resolve-conflicts":
+        print("🔄 Resolving Git conflicts for shared data files...")
+        shared_dir = Path(__file__).parent / "shared"
+        if not shared_dir.exists():
+            sys.exit(1)
+
+        for jf in shared_dir.glob("*.json"):
+            try:
+                # Get remote version
+                remote_str = subprocess.check_output(["git", "show", f"origin/main:shared/{jf.name}"]).decode("utf-8")
+                remote_data = json.loads(remote_str)
+                
+                # Get local version from HEAD
+                local_str = subprocess.check_output(["git", "show", f"HEAD:shared/{jf.name}"]).decode("utf-8")
+                local_data = json.loads(local_str)
+                
+                # Merge logic
+                if isinstance(remote_data, list) and isinstance(local_data, list):
+                    merged_data = SmartJSON.merge_lists(remote_data, local_data)
+                elif isinstance(remote_data, dict) and isinstance(local_data, dict):
+                    merged_data = {**remote_data, **local_data}
+                else:
+                    merged_data = local_data # fallback
+
+                # Write resolved data
+                with open(jf, "w", encoding="utf-8") as f:
+                    json.dump(merged_data, f, indent=4)
+                print(f"   ✅ Merged {jf.name} successfully.")
+            except Exception as e:
+                print(f"   ❌ Failed to merge {jf.name}: {e}")
+                
+        print("✅ Conflict resolution complete.")
+

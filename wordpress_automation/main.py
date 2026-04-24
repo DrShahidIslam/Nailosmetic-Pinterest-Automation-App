@@ -241,6 +241,7 @@ def main():
         feat_webp_path = img_mgr.convert_to_webp(feat_img_path)
         feat_media_id = wp.upload_media(feat_webp_path, plan["featured_image"]["alt_text"])
         print(f"✅ Featured image (WebP) uploaded. ID: {feat_media_id}")
+        time.sleep(5)  # ⏳ Added delay to prevent 429 Too Many Requests
 
         # Block Images
         html_content = gen.build_html_content(plan)
@@ -254,6 +255,7 @@ def main():
             print(f"⚡ Converting block '{block['heading']}' to WebP...")
             block_webp_path = img_mgr.convert_to_webp(block_img_path)
             block_media_id = wp.upload_media(block_webp_path, block["alt_text"])
+            time.sleep(5)  # ⏳ Added delay to prevent 429 Too Many Requests
             
             # Fetch URL for Kadence image block
             media_info = wp.session.get(f"{wp.api_url}/media/{block_media_id}", headers=wp.headers).json()
