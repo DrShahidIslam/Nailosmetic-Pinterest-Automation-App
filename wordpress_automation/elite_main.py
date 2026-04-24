@@ -40,10 +40,10 @@ def run_elite_flow():
     # 1. Select Niche based on core topics
     import random
     NICHE_WEIGHTS = {
-        "nail art and beauty": 0.40,
-        "hairstyles and beauty": 0.20,
-        "home decor and garden": 0.20,
-        "fashion and outfit style": 0.20,
+        "nail art and beauty": 0.25,
+        "hairstyles and beauty": 0.25,
+        "home decor and garden": 0.25,
+        "fashion and outfit style": 0.25,
     }
     niches = list(NICHE_WEIGHTS.keys())
     weights = list(NICHE_WEIGHTS.values())
