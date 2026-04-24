@@ -36,7 +36,8 @@ class EliteGenerator:
             full_article.append({
                 "heading": section["heading"],
                 "content": draft["text"],
-                "image_prompt": draft.get("image_prompt", "")
+                "image_prompt": draft.get("image_metadata", {}).get("prompt", ""),
+                "alt_text": draft.get("image_metadata", {}).get("alt_text", "")
             })
             
         # Step 3: Meta and Final Wrap
@@ -76,13 +77,13 @@ class EliteGenerator:
         
         RETURN ONLY VALID JSON:
         {{
-          "introduction": "A compelling 150-word hook that sets the stage",
+          "introduction": "A compelling 150-word hook that sets the stage (Current year is 2026)",
           "seo_description": "Meta description (max 155 chars)",
           "meta_title": "SEO Title (max 60 chars)",
           "slug": "url-slug-using-3-5-keywords-only",
           "featured_image": {{
             "prompt": "A detailed 16:9 image prompt for the featured image",
-            "alt_text": "Descriptive alt text"
+            "alt_text": "Descriptive alt text for visually impaired"
           }},
           "sections": [
             {{
@@ -134,8 +135,11 @@ class EliteGenerator:
         
         RETURN ONLY VALID JSON:
         {{
-          "text": "The full section content (use HTML for lists/tables if requested)",
-          "image_prompt": "{'A detailed 4:5 image prompt for this section' if section.get('has_image') else 'NONE'}"
+          "text": "The full section content (DO NOT repeat the heading here. Use HTML for lists/tables if requested)",
+          "image_metadata": {{
+            "prompt": "{'A detailed 4:5 image prompt' if section.get('has_image') else 'NONE'}",
+            "alt_text": "{'Highly descriptive alt text' if section.get('has_image') else 'NONE'}"
+          }}
         }}
         """
         errors = []

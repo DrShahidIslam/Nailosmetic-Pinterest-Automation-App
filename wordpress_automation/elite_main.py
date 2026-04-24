@@ -82,7 +82,9 @@ def run_elite_flow():
             
             print("⚡ Converting Featured Image to WebP...")
             feat_webp_path = img_mgr.convert_to_webp(feat_img_path)
-            feat_media_id = wp.upload_media(feat_webp_path, blog_data["featured_image"].get("alt_text", blog_data["title"]))
+            # Use AI-provided alt text
+            feat_alt = blog_data["featured_image"].get("alt_text", blog_data["title"])
+            feat_media_id = wp.upload_media(feat_webp_path, feat_alt)
             time.sleep(5) # ⏳ Prevent 429
 
         html_content = gen.build_elite_html(blog_data)
@@ -96,8 +98,8 @@ def run_elite_flow():
                 print(f"⚡ Converting {section['heading']} to WebP...")
                 webp_path = img_mgr.convert_to_webp(img_path)
                 
-                # Fetch alt text
-                alt_text = f"Detailed imagery of {section['heading']} in {blog_data['title']}"
+                # Use AI-provided alt text for better SEO/Accessibility
+                alt_text = section.get("alt_text") or f"Detailed imagery of {section['heading']}"
                 media_id = wp.upload_media(webp_path, alt_text)
                 time.sleep(5) # ⏳ Prevent 429
                 
