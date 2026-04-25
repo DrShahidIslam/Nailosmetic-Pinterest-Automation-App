@@ -9,6 +9,19 @@ class SmartJSON:
     """
 
     @staticmethod
+    def read_file(file_path):
+        """Safely read and return JSON data from a file. Returns [] if missing or invalid."""
+        path = Path(file_path)
+        if not path.exists():
+            return []
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"   Warning: Could not read {file_path}: {e}")
+            return []
+
+    @staticmethod
     def merge_lists(existing, new_items):
         """Union of two lists, preserving order of existing items."""
         seen = set()
