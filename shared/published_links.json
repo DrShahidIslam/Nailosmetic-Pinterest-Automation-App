@@ -264,5 +264,12 @@
         "niche": "home_garden",
         "topic": "drainage ideas",
         "slug": "genius-drainage-ideas"
+    },
+    {
+        "url": "https://nailosmetic.com/essential-clothes-guide/",
+        "category": "Styles & Fashion",
+        "niche": "fashion_style",
+        "topic": "clothes",
+        "slug": "essential-clothes-guide"
     }
 ]
