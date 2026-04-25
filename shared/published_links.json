@@ -257,5 +257,12 @@
         "niche": "hair_beauty",
         "topic": "chocolate brown hair",
         "slug": "chocolate-brown-hair-styles"
+    },
+    {
+        "url": "https://nailosmetic.com/genius-drainage-ideas/",
+        "category": "Home & Garden",
+        "niche": "home_garden",
+        "topic": "drainage ideas",
+        "slug": "genius-drainage-ideas"
     }
 ]
