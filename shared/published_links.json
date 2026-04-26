@@ -271,5 +271,12 @@
         "niche": "fashion_style",
         "topic": "clothes",
         "slug": "essential-clothes-guide"
+    },
+    {
+        "url": "https://nailosmetic.com/front-yard-landscaping-ideas/",
+        "category": "Home & Garden",
+        "niche": "home_garden",
+        "topic": "front yard landscaping ideas",
+        "slug": "front-yard-landscaping-ideas"
     }
 ]
