@@ -46,7 +46,7 @@ def validate_and_fix_category(title: str, current_category: str, chosen_niche: s
     # Define keywords for the "Janitor" fallback
     nail_exclusion = ["nail", "mani", "polish", "pedi", "acrylic"]
     hair_keywords = ["hair", "hairstyle", "haircut", "bob", "updo", "braid", "shaggy"]
-    home_keywords = ["decor", "home", "garden", "patio", "backyard", "pond", "curb appeal", "interior", "oasis"]
+    home_keywords = ["decor", "home", "garden", "patio", "backyard", "pond", "curb appeal", "interior", "oasis", "bedroom", "bedding", "bedset", "duvet", "comforter"]
     fashion_keywords = ["outfit", "wear", "fashion", "look", "leggings", "dress", "style"]
 
     # --- 1. Nail Niche Bi-Directional Logic ---
@@ -73,6 +73,12 @@ def validate_and_fix_category(title: str, current_category: str, chosen_niche: s
             return target_cat
             
         # Rule: Ensure it's in its primary niche category (e.g., Home stays in Home)
+        # Specialized check for Bedroom subcategory
+        bedroom_keywords = ["bedroom", "bedding", "bedset", "duvet", "comforter", "sleep sanctuary", "bedscaping"]
+        if chosen_niche == "home_garden" and any(k in title_lower for k in bedroom_keywords):
+            target_cat = "Bedroom Decor"
+            print(f"   [GATEKEEPER] Bedroom topic detected. Forcing 'Bedroom Decor'.")
+        
         if current_category != target_cat:
             print(f"   [GATEKEEPER] Forcing '{target_cat}' for {chosen_niche} niche.")
             return target_cat

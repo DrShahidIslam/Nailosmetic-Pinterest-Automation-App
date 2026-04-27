@@ -115,6 +115,12 @@ BOARD_MAP = {
         "niche": "home_garden",
         "link": "https://nailosmetic.com/",
     },
+    "bedroom_bedding": {
+        "board_id": os.getenv("PINTEREST_BOARD_BEDDING", ""),
+        "name": "Bedroom Decor Ideas | Cozy & Luxury Bedding",
+        "niche": "home_garden",
+        "link": "https://nailosmetic.com/",
+    },
     # --- Fashion & Style Boards ---
     "fashion_style": {
         "board_id": os.getenv("PINTEREST_BOARD_FASHION", ""),
@@ -162,6 +168,9 @@ CTA_OPTIONS = {
         "Your space deserves this",
         "Bookmark for your renovation",
         "Save for your next DIY weekend",
+        "Save for your dream bedroom",
+        "Your bed deserves this",
+        "Pin for your bedroom makeover",
     ],
     "fashion_style": [
         "Save this outfit idea",
@@ -261,6 +270,7 @@ def generate_content_with_gemini(topic: str = None, niche: str = "nails") -> dic
         # Home & Garden
         "home_decor": "Interior design, minimalist decor, modern living spaces, cozy home aesthetics, room makeover ideas",
         "garden_outdoor": "Garden design, outdoor living, flower arrangements, patio ideas, landscaping, zen garden aesthetics",
+        "bedroom_bedding": "Luxury bedding, cozy bedroom aesthetics, duvet and comforter sets, throw pillow styling, bed layering, bedscaping, wedding gift bedding ideas, elegant sleep sanctuary design, bedroom makeover",
         # Fashion
         "fashion_style": "Outfit inspiration, street style, seasonal fashion trends, capsule wardrobe, chic and timeless looks",
     }
