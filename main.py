@@ -316,22 +316,25 @@ def generate_content_with_gemini(topic: str = None, niche: str = "nails") -> dic
             "fashion_style": f"The topic \"{topic}\" describes an OUTFIT or FASHION STYLE. The image must show a person wearing this style.",
         }
         topic_instruction = f"""
-MANDATORY CONTEXT: The pin must be about "{topic}". 
-- The title must capture the essence of "{topic}".
-- The description must use "{topic}" as the primary focus keyword.
+MANDATORY CONTEXT: The pin must focus on the trend/topic: "{topic}". 
+- Ensure your chosen Annotated Keywords are highly relevant to "{topic}".
+- The title must capture the essence of "{topic}" while strictly following the annotated keyword placement rule.
+- The description must seamlessly integrate "{topic}" alongside your chosen annotated keywords.
 - {niche_topic_context.get(niche, '')}
 """
 
     system_prompt = f"""You are {niche_config['role']}.
-Your task is to {niche_config['task']}.
+First, identify 3 to 5 highly specific 'Pinterest Annotated Keywords' (e.g., 'milky clean girl nails', 'minimalist aesthetic bedroom', etc.) that have high search volume for {f'the topic "{topic}"' if topic else f'the {niche.replace("_", " ")} niche'}.
+Then, your task is to {niche_config['task']} based on these annotated keywords.
 {topic_instruction}
 
-RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys:
+RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys in this order:
 {{
+  "annotated_keywords": ["List exactly 3 to 5 highly specific Pinterest Annotated Keywords you identified here."],
   "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content.",
-  "title": "A short, catchy, click-worthy Pinterest title (max 100 chars). Use emojis sparingly.",
+  "title": "A catchy Pinterest title (max 100 chars) that strictly starts with your primary annotated keyword. Use emojis sparingly.",
   "overlay_text": "A tiny, very catchy 3-5 word phrase for the text overlay on the image itself.",
-  "description": "An SEO-optimized Pinterest description (150-300 chars). You MUST include exactly 10 highly relevant and trending hashtags at the very end.",
+  "description": "An SEO-optimized description (150-300 chars) that naturally weaves in your 3 to 5 annotated keywords in the first two sentences. You MUST include exactly 10 highly relevant and trending hashtags at the very end.",
   "image_prompt": "{niche_config['image_guide']}",
   "alt_text": "A highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects) for Pinterest accessibility. Focus on visual details, not SEO keywords."
 }}
