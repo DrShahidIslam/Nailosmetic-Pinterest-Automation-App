@@ -362,5 +362,12 @@
         "niche": "fashion_style",
         "topic": "casual spring outfit",
         "slug": "casual-spring-outfit-ideas"
+    },
+    {
+        "url": "https://nailosmetic.com/small-bathroom-ideas/",
+        "category": "Home & Garden",
+        "niche": "home_garden",
+        "topic": "small bathroom ideas",
+        "slug": "small-bathroom-ideas"
     }
 ]
