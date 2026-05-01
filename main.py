@@ -332,8 +332,8 @@ RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys in th
 {{
   "annotated_keywords": ["List exactly 3 to 5 highly specific Pinterest Annotated Keywords you identified here."],
   "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content.",
-  "title": "A catchy Pinterest title (max 100 chars) that strictly starts with your primary annotated keyword. Use emojis sparingly.",
-  "overlay_text": "A tiny, very catchy 3-5 word phrase for the text overlay on the image itself.",
+  "title": "A high-CTR 'Click-Gap' title (max 100 chars). It MUST strictly start with your primary annotated keyword, but follow it with a hook that creates a 'curiosity gap' or promises a 'secret' (e.g., 'Minimalist Clean Girl Nails: The Exact Polish for the Viral Look'). Force the user to click to find out more. Use emojis sparingly.",
+  "overlay_text": "A tiny, very catchy 3-5 word phrase for the text overlay on the image itself. Make it click-worthy (e.g., 'Get the Exact Polish').",
   "description": "An SEO-optimized description (150-300 chars) that naturally weaves in your 3 to 5 annotated keywords in the first two sentences. You MUST include exactly 10 highly relevant and trending hashtags at the very end.",
   "image_prompt": "{niche_config['image_guide']}",
   "alt_text": "A highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects) for Pinterest accessibility. Focus on visual details, not SEO keywords."

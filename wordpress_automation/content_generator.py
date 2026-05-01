@@ -85,7 +85,7 @@ Available WordPress Categories: {categories_str}
 Internal Link Target: https://nailosmetic.com/{internal_link_slug}/
 
 FRAMEWORK REQUIREMENTS:
-1. Title: Catchy, SEO-optimized (e.g., '25+ Stunning Ideas...').
+1. Title: Catchy, SEO-optimized, and hook-driven (e.g., '3 Secret Rules for Minimalist Nails', '7 Viral Hacks for...'). It should match the curiosity-gap style of Pinterest pins.
 2. Slug: A short, SEO-friendly URL slug (3-5 words maximum, lowercase-with-dashes). It MUST include the primary focus keyword.
 3. SEO Metadata (RankMath):
    - Focus Keyword: The primary keyword for the article.
