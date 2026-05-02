@@ -653,35 +653,51 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     img = Image.open(image_path).convert("RGBA")
     width, height = img.size
 
+    # --- Layout Selection ---
+    layouts = ['bottom_fade', 'center_box', 'top_fade', 'solid_block']
+    layout_style = random.choice(layouts)
+    print(f"   📐 Selected layout style: {layout_style}")
+
     # Font setup
     draw = ImageDraw.Draw(img)
     font_size = int(width * 0.075)
-    font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")
+    
+    if layout_style == 'center_box':
+        primary_fonts = ["C:/Windows/Fonts/impact.ttf", "C:/Windows/Fonts/arialbd.ttf"]
+        font_size = int(width * 0.085) # slightly larger for impact
+    elif layout_style == 'solid_block':
+        primary_fonts = ["C:/Windows/Fonts/georgiab.ttf", "C:/Windows/Fonts/timesbd.ttf"]
+    else:
+        primary_fonts = [os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")]
 
-    try:
-        if os.path.exists(font_path):
-            font = ImageFont.truetype(font_path, font_size)
-            print(f"   ✅ Using premium font: {font_path}")
-        else:
-            font_candidates = [
-                "C:/Windows/Fonts/segoeuib.ttf",
-                "C:/Windows/Fonts/corbelb.ttf",
-                "C:/Windows/Fonts/arialbd.ttf",
-                "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
-                "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-                "/System/Library/Fonts/SFNSDisplay.ttf",
-                "/System/Library/Fonts/Helvetica.ttc",
-            ]
-            font = None
-            for p in font_candidates:
-                try:
-                    font = ImageFont.truetype(p, font_size)
-                    print(f"   ✅ Using system font fallback: {p}")
-                    break
-                except: continue
-            if not font: font = ImageFont.load_default()
-    except Exception as e:
-        print(f"   ⚠️ Font error: {e}. Using default.")
+    font = None
+    for p in primary_fonts:
+        try:
+            if os.path.exists(p):
+                font = ImageFont.truetype(p, font_size)
+                print(f"   ✅ Using layout-specific font: {p}")
+                break
+        except: continue
+        
+    if not font:
+        font_candidates = [
+            "C:/Windows/Fonts/segoeuib.ttf",
+            "C:/Windows/Fonts/corbelb.ttf",
+            "C:/Windows/Fonts/arialbd.ttf",
+            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+            "/System/Library/Fonts/SFNSDisplay.ttf",
+            "/System/Library/Fonts/Helvetica.ttc",
+        ]
+        for p in font_candidates:
+            try:
+                font = ImageFont.truetype(p, font_size)
+                print(f"   ✅ Using system font fallback: {p}")
+                break
+            except: continue
+            
+    if not font:
+        print(f"   ⚠️ Font error. Using default.")
         font = ImageFont.load_default()
 
     # Dynamic text wrapping using PIL textbbox
@@ -714,11 +730,7 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
                 current_line = [word]
     if current_line: wrapped_lines.append(" ".join(current_line))
 
-    # --- Layout Selection ---
-    layouts = ['bottom_fade', 'center_box', 'top_fade', 'solid_block']
-    layout_style = random.choice(layouts)
-    print(f"   📐 Selected layout style: {layout_style}")
-
+    # (Layout is already selected at the top)
     overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     draw_overlay = ImageDraw.Draw(overlay)
 
