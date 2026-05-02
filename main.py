@@ -663,10 +663,11 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     font_size = int(width * 0.075)
     
     if layout_style == 'center_box':
-        primary_fonts = ["C:/Windows/Fonts/impact.ttf", "C:/Windows/Fonts/arialbd.ttf"]
+        primary_fonts = [os.path.join(os.path.dirname(__file__), "fonts", "Anton-Regular.ttf")]
         font_size = int(width * 0.085) # slightly larger for impact
     elif layout_style == 'solid_block':
-        primary_fonts = ["C:/Windows/Fonts/georgiab.ttf", "C:/Windows/Fonts/timesbd.ttf"]
+        # Montserrat works beautifully for editorial blocks
+        primary_fonts = [os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")]
     else:
         primary_fonts = [os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")]
 
