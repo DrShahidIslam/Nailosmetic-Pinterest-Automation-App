@@ -653,23 +653,8 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     img = Image.open(image_path).convert("RGBA")
     width, height = img.size
 
-    # --- Create more subtle gradient overlay ---
-    overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
-    draw_overlay = ImageDraw.Draw(overlay)
-
-    # Gradient covers the bottom 45%
-    gradient_start_y = int(height * 0.55)
-    for y in range(gradient_start_y, height):
-        progress = (y - gradient_start_y) / (height - gradient_start_y)
-        alpha = int(220 * (progress ** 1.5))  # Non-linear for smoother transition
-        draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
-
-    img = Image.alpha_composite(img, overlay)
-
-    # --- Add title text with premium typography ---
-    draw = ImageDraw.Draw(img)
-
     # Font setup
+    draw = ImageDraw.Draw(img)
     font_size = int(width * 0.075)
     font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")
 
@@ -678,16 +663,12 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
             font = ImageFont.truetype(font_path, font_size)
             print(f"   ✅ Using premium font: {font_path}")
         else:
-            # Fallback to high-quality system fonts
             font_candidates = [
-                # Windows
-                "C:/Windows/Fonts/segoeuib.ttf",  # Segoe UI Bold
-                "C:/Windows/Fonts/corbelb.ttf",   # Corbel Bold
-                "C:/Windows/Fonts/arialbd.ttf",   # Arial Bold
-                # Linux (GitHub Actions / Debian)
+                "C:/Windows/Fonts/segoeuib.ttf",
+                "C:/Windows/Fonts/corbelb.ttf",
+                "C:/Windows/Fonts/arialbd.ttf",
                 "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
                 "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-                # macOS
                 "/System/Library/Fonts/SFNSDisplay.ttf",
                 "/System/Library/Fonts/Helvetica.ttc",
             ]
@@ -707,29 +688,23 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     margin = int(width * 0.08)
     max_text_width = width - (2 * margin)
     
-    # Scale down font if there's a huge word
     longest_word = max(overlay_text.split(), key=len) if overlay_text.split() else ""
-    while font_size > 20: # Prevent font from getting completely unreadable
+    while font_size > 20:
         bbox = draw.textbbox((0, 0), longest_word, font=font)
-        if (bbox[2] - bbox[0]) < max_text_width:
-            break
+        if (bbox[2] - bbox[0]) < max_text_width: break
         font_size -= 4
         try:
-            if hasattr(font, 'path'): # if it's a FreeTypeFont
-                font = ImageFont.truetype(font.path, font_size)
-        except:
-            break
+            if hasattr(font, 'path'): font = ImageFont.truetype(font.path, font_size)
+        except: break
 
     words = overlay_text.split()
     wrapped_lines = []
     current_line = []
-    
     for word in words:
         current_line.append(word)
         line_text = " ".join(current_line)
         bbox = draw.textbbox((0, 0), line_text, font=font)
         line_width = bbox[2] - bbox[0]
-        
         if line_width > max_text_width:
             if len(current_line) == 1:
                 wrapped_lines.append(current_line.pop())
@@ -737,26 +712,62 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
                 current_line.pop()
                 wrapped_lines.append(" ".join(current_line))
                 current_line = [word]
-                
-    if current_line:
-        wrapped_lines.append(" ".join(current_line))
+    if current_line: wrapped_lines.append(" ".join(current_line))
 
-    # Text Layout Refinement
+    # --- Layout Selection ---
+    layouts = ['bottom_fade', 'center_box', 'top_fade', 'solid_block']
+    layout_style = random.choice(layouts)
+    print(f"   📐 Selected layout style: {layout_style}")
+
+    overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    draw_overlay = ImageDraw.Draw(overlay)
+
     line_spacing = 1.15
     line_height = int(font_size * line_spacing)
     total_text_height = len(wrapped_lines) * line_height
-    # Leave room at bottom for CTA and branding
-    text_y_start = height - total_text_height - int(height * 0.18)
+    
+    # Calculate text start Y based on layout
+    if layout_style == 'bottom_fade':
+        gradient_start_y = int(height * 0.55)
+        for y in range(gradient_start_y, height):
+            progress = (y - gradient_start_y) / (height - gradient_start_y)
+            alpha = int(220 * (progress ** 1.5))
+            draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
+        text_y_start = height - total_text_height - int(height * 0.18)
+
+    elif layout_style == 'top_fade':
+        gradient_end_y = int(height * 0.40)
+        for y in range(0, gradient_end_y):
+            progress = 1.0 - (y / gradient_end_y)
+            alpha = int(220 * (progress ** 1.5))
+            draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
+        text_y_start = int(height * 0.10)
+
+    elif layout_style == 'center_box':
+        box_padding_y = int(height * 0.05)
+        box_padding_x = int(width * 0.05)
+        box_h = total_text_height + (box_padding_y * 2) + int(height * 0.06) 
+        box_y = (height - box_h) // 2
+        draw_overlay.rectangle([(margin - box_padding_x, box_y), (width - margin + box_padding_x, box_y + box_h)], fill=(0, 0, 0, 170))
+        text_y_start = box_y + box_padding_y
+
+    elif layout_style == 'solid_block':
+        block_h = total_text_height + int(height * 0.20)
+        block_y = height - block_h
+        draw_overlay.rectangle([(0, block_y), (width, height)], fill=(20, 20, 20, 255)) 
+        text_y_start = block_y + int(height * 0.05)
+
+    img = Image.alpha_composite(img, overlay)
+    draw = ImageDraw.Draw(img)
 
     for i, line in enumerate(wrapped_lines):
         bbox = draw.textbbox((0, 0), line, font=font)
         text_width = bbox[2] - bbox[0]
         text_x = (width - text_width) // 2
         text_y = text_y_start + (i * line_height)
-
-        # Subtle shadow for depth
-        draw.text((text_x + 2, text_y + 2), line, font=font, fill=(0, 0, 0, 100))
-        # Main white text
+        
+        if layout_style in ['bottom_fade', 'top_fade']:
+            draw.text((text_x + 2, text_y + 2), line, font=font, fill=(0, 0, 0, 150))
         draw.text((text_x, text_y), line, font=font, fill=(255, 255, 255, 255))
 
     # --- Add Call to Action (CTA) ---
@@ -771,10 +782,14 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
         cta_bbox = draw.textbbox((0, 0), cta_text, font=cta_font)
         cta_w = cta_bbox[2] - cta_bbox[0]
         cta_x = (width - cta_w) // 2
-        cta_y = text_y_start + total_text_height + int(height * 0.03)
         
-        draw.text((cta_x + 1, cta_y + 1), cta_text, font=cta_font, fill=(0, 0, 0, 150))
-        draw.text((cta_x, cta_y), cta_text, font=cta_font, fill=(255, 220, 220, 255)) # Soft pink CTA
+        if layout_style == 'top_fade': cta_y = text_y_start + total_text_height + int(height * 0.02)
+        elif layout_style == 'center_box': cta_y = text_y_start + total_text_height + int(height * 0.02)
+        else: cta_y = text_y_start + total_text_height + int(height * 0.03)
+            
+        if layout_style in ['bottom_fade', 'top_fade']:
+            draw.text((cta_x + 1, cta_y + 1), cta_text, font=cta_font, fill=(0, 0, 0, 150))
+        draw.text((cta_x, cta_y), cta_text, font=cta_font, fill=(255, 200, 200, 255))
     except: pass
 
     # --- Add Branding Badge (Nailosmetic) ---
@@ -789,7 +804,12 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
 
             bx = (width - bw) // 2
             by = height - bh - int(height * 0.03)
-            # Use regular spacing and subtle opacity
+            
+            if layout_style == 'top_fade':
+                # Add a subtle dark bar behind branding if the bottom is unshaded
+                draw_bar = ImageDraw.Draw(img, "RGBA")
+                draw_bar.rectangle([(bx - 15, by - 5), (bx + bw + 15, by + bh + 5)], fill=(0, 0, 0, 120))
+                
             draw.text((bx, by), brand_text, font=brand_font, fill=(255, 255, 255, 160))
     except: pass
 
