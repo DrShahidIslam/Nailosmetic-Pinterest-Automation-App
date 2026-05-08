@@ -502,5 +502,12 @@
         "niche": "nails",
         "topic": "cinco de mayo nails",
         "slug": "cinco-de-mayo-nails"
+    },
+    {
+        "url": "https://nailosmetic.com/ultimate-box-braids-styles/",
+        "category": "Hair & Beauty",
+        "niche": "hair_beauty",
+        "topic": "box braids styles",
+        "slug": "ultimate-box-braids-styles"
     }
 ]
