@@ -341,7 +341,7 @@ Available board categories (pick the MOST relevant key):
 Ensure the 'board_category' value in your JSON response is EXACTLY one of the keys listed above."""
 
     import re
-    models_to_try = ["gemini-2.5-flash", "gemini-2.5-flash-lite"]
+    models_to_try = ["gemini-3.1-flash-lite-preview", "gemini-2.0-flash", "gemini-1.5-flash"]
     max_retries_per_model = 3
     success = False
     raw_text = ""
@@ -840,15 +840,26 @@ def refresh_pinterest_token() -> str:
     Attempt to refresh the Pinterest access token using the refresh token.
     Returns the new access token if successful, or the existing one.
     """
-    if not all([PINTEREST_REFRESH_TOKEN, PINTEREST_APP_ID, PINTEREST_APP_SECRET]):
-        print("   ℹ️  No refresh token credentials found. Using existing access token.")
+    global PINTEREST_ACCESS_TOKEN, PINTEREST_REFRESH_TOKEN
+
+    # Clean potential quotes from credentials
+    r_token = str(PINTEREST_REFRESH_TOKEN or "").strip("'").strip('"')
+    a_id = str(PINTEREST_APP_ID or "").strip("'").strip('"')
+    a_secret = str(PINTEREST_APP_SECRET or "").strip("'").strip('"')
+
+    if not all([r_token, a_id, a_secret]):
+        missing = []
+        if not r_token: missing.append("REFRESH_TOKEN")
+        if not a_id: missing.append("APP_ID")
+        if not a_secret: missing.append("APP_SECRET")
+        print(f"   ℹ️  Missing Pinterest credentials for refresh: {', '.join(missing)}. Using existing access token.")
         return PINTEREST_ACCESS_TOKEN
 
     print("   🔄 Attempting to refresh Pinterest access token...")
 
     # Pinterest requires HTTP Basic Auth with client_id:client_secret
     credentials = base64.b64encode(
-        f"{PINTEREST_APP_ID}:{PINTEREST_APP_SECRET}".encode()
+        f"{a_id}:{a_secret}".encode()
     ).decode()
 
     headers = {
@@ -858,29 +869,38 @@ def refresh_pinterest_token() -> str:
 
     data = {
         "grant_type": "refresh_token",
-        "refresh_token": PINTEREST_REFRESH_TOKEN,
+        "refresh_token": r_token,
     }
 
-    response = requests.post(
-        f"{PINTEREST_API_BASE}/oauth/token",
-        headers=headers,
-        data=data,
-        timeout=30,
-    )
+    try:
+        response = requests.post(
+            f"{PINTEREST_API_BASE}/oauth/token",
+            headers=headers,
+            data=data,
+            timeout=30,
+        )
 
-    if response.status_code == 200:
-        tokens = response.json()
-        new_access_token = tokens.get("access_token", PINTEREST_ACCESS_TOKEN)
-        new_refresh_token = tokens.get("refresh_token")
+        if response.status_code == 200:
+            tokens = response.json()
+            new_access_token = tokens.get("access_token", PINTEREST_ACCESS_TOKEN)
+            new_refresh_token = tokens.get("refresh_token")
 
-        if new_refresh_token:
-            print("   ✅ Token refreshed successfully!")
-            print(f"   ⚠️  NEW REFRESH TOKEN received. Update your secrets!")
-            print(f"   New refresh token: {new_refresh_token[:10]}...")
+            # Update global state for this run
+            PINTEREST_ACCESS_TOKEN = new_access_token
+            if new_refresh_token:
+                PINTEREST_REFRESH_TOKEN = new_refresh_token
+                print("   ✅ Token refreshed successfully!")
+                print(f"   ⚠️  NEW REFRESH TOKEN received. Update your secrets/env!")
+                print(f"   New refresh token: {new_refresh_token[:10]}...")
+            else:
+                print("   ✅ Access token refreshed successfully!")
 
-        return new_access_token
-    else:
-        print(f"   ⚠️  Token refresh failed ({response.status_code}). Using existing token.")
+            return new_access_token
+        else:
+            print(f"   ⚠️  Token refresh failed ({response.status_code}): {response.text[:200]}")
+            return PINTEREST_ACCESS_TOKEN
+    except Exception as e:
+        print(f"   ⚠️  Exception during token refresh: {e}")
         return PINTEREST_ACCESS_TOKEN
 
 
@@ -898,6 +918,9 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
     # Read and encode the image as base64
     with open(image_path, "rb") as f:
         image_data = base64.b64encode(f.read()).decode("utf-8")
+
+    # Clean access token
+    clean_access_token = str(access_token).strip("'").strip('"')
 
     print(f"   🔗 Destination link: {destination_link}")
     print(f"   📋 Board ID: {board_id}")
@@ -917,7 +940,7 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
     }
 
     headers = {
-        "Authorization": f"Bearer {access_token}",
+        "Authorization": f"Bearer {clean_access_token}",
         "Content-Type": "application/json",
     }
 

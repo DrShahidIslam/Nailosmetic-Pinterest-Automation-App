@@ -9,7 +9,7 @@ from google import genai
 class ContentGenerator:
     def __init__(self, api_keys: List[str]):
         self.api_keys = api_keys
-        self.models_to_try = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash", "gemini-1.5-flash"]
+        self.models_to_try = ["gemini-3.1-flash-lite-preview", "gemini-2.0-flash", "gemini-1.5-flash"]
 
     def _generate_kadence_id(self) -> str:
         """Generates a random Kadence-style unique ID."""
