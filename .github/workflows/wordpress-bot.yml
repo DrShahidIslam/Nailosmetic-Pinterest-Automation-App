@@ -1,7 +1,7 @@
 # ============================================================
 # Aesthetic Daily WordPress Automation — GitHub Actions Workflow
 # ============================================================
-# This workflow runs the WordPress bot three times a day.
+# This workflow runs the WordPress bot twice a day.
 # It generates an article and pushes it to your site.
 
 name: 📝 Daily WordPress Article
@@ -11,8 +11,8 @@ env:
 
 on:
   schedule:
-    # Run 3 times a day (06:00, 14:00, 22:00 UTC)
-    - cron: "0 6,14,22 * * *"
+    # Run 2 times a day (09:00, 21:00 UTC) to meet the daily article target
+    - cron: "0 9,21 * * *"
 
   # Allow manual triggering
   workflow_dispatch:
