@@ -558,5 +558,12 @@
         "niche": "fashion_style",
         "topic": "winter outfits",
         "slug": "chic-winter-outfits-trends"
+    },
+    {
+        "url": "https://nailosmetic.com/coquette-nail-designs/",
+        "category": "Aesthetic & Art",
+        "niche": "nails",
+        "topic": "coquette nail designs",
+        "slug": "coquette-nail-designs"
     }
 ]
