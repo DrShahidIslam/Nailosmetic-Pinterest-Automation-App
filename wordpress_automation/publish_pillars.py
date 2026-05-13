@@ -19,6 +19,7 @@ import json
 import time
 import tempfile
 from pathlib import Path
+from typing import Dict
 
 # Fix Unicode on Windows runners
 if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':

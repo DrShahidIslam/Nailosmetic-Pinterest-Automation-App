@@ -91,19 +91,25 @@ FRAMEWORK REQUIREMENTS:
    - Focus Keyword: The primary keyword for the article.
    - SEO Title: Optimized title for search results (max 60 chars).
    - Meta Description: Compelling summary for search results (120-160 chars).
-3. Featured Image: {config['featured_image_guide']}
-4. Introduction: Return as a JSON array of exactly 2 paragraph strings. The first paragraph sets the scene. The second paragraph MUST include exactly one internal link to 'https://nailosmetic.com/{internal_link_slug}/' using an HTML anchor tag with natural anchor text (e.g., <a href="https://nailosmetic.com/{internal_link_slug}/">Check out our latest inspiration guide</a>).
-5. Content Blocks: A list of 3 to 7 items. Each item must have:
+4. Featured Image: {config['featured_image_guide']}
+5. Introduction: Return as a JSON array of exactly 2 paragraph strings. The first paragraph sets the scene and must be at least 80 words. The second paragraph MUST include exactly one internal link to 'https://nailosmetic.com/{internal_link_slug}/' using an HTML anchor tag with natural anchor text (e.g., <a href="https://nailosmetic.com/{internal_link_slug}/">Check out our latest inspiration guide</a>).
+6. Content Blocks: A list of EXACTLY 7 items (no fewer). Each item must have:
    - Image Prompt: {config['block_image_guide']}
    - Image Alt Text: Descriptive.
-   - Heading (H2): Trendy name for the design/concept.
-   - Paragraph: Engaging description.
+   - Heading (H2): At least 3 of the 7 headings MUST be phrased as a question (e.g., "What Is the Best Nail Shape for Chrome Nails?", "How Do You Get That Viral Glass Nail Look?", "Which Colors Are Trending for Summer Nails?"). The remaining headings can be trendy name-style.
+   - Paragraph: Engaging description of at least 100 words per block. Include at least 2 external links across the full set of 7 blocks — link to authoritative beauty/lifestyle sources (e.g., Allure, Byrdie, InStyle, Vogue, Healthline, Good Housekeeping) using HTML anchor tags. Spread the external links naturally across different blocks.
    - Details: 3 specific points ({config['block_details']}).
-6. Conclusion: A summary encouraging interaction.
-7. Category: You MUST select "{config['mandatory_category']}" as the category. 
+7. Conclusion: A strong summary of at least 80 words, encouraging interaction and reinforcing the focus keyword.
+8. FAQ Section: Provide EXACTLY 5 Frequently Asked Questions relevant to the focus keyword and article topic. Each FAQ must have:
+   - A question phrased exactly as a real user would type it into Google or ask an AI assistant.
+   - A clear, direct answer of 2-4 sentences that fully answers the question without fluff.
+   This section is critical for Google featured snippets and AI answer engines (ChatGPT, Perplexity, Gemini).
+9. Category: You MUST select "{config['mandatory_category']}" as the category. 
    - CATEGORY RESTRICTION: The categories "Aesthetic & Art", "Chrome & Glazed", "Minimalist & Clean Girl", and "Seasonal Trends" are STRICTLY for NAIL content only. Do NOT use them for Hair, Fashion, or Home content under any circumstances.
    - If this is a NAIL article, you may use the specialized sub-categories, but "Styles & Fashion" or "Hair & Beauty" are strictly forbidden for nails.
-8. Alt Text: For every "alt_text" field, provide a highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects, lighting). Avoid generic SEO padding; focus on helping a visually impaired user see the image in their mind.
+10. Alt Text: For every "alt_text" field, provide a highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects, lighting). Avoid generic SEO padding; focus on helping a visually impaired user see the image in their mind.
+
+WORD COUNT: The total article body (introduction + all 7 block paragraphs + conclusion) MUST be at least 1,200 words. Do not cut paragraphs short to save tokens — length and depth are required for SEO ranking.
 
 RETURN ONLY VALID JSON:
 {{
@@ -121,13 +127,13 @@ RETURN ONLY VALID JSON:
     "prompt": "string",
     "alt_text": "string"
   }},
-  "introduction": ["string (first paragraph)", "string (second paragraph with internal link)"],
+  "introduction": ["string (first paragraph, 80+ words)", "string (second paragraph with internal link)"],
   "blocks": [
     {{
-      "heading": "string",
+      "heading": "string (at least 3 of 7 must be question-format)",
       "prompt": "string",
       "alt_text": "string",
-      "paragraph": "string",
+      "paragraph": "string (100+ words, include external authority links in 2 of the 7 blocks)",
       "details": {{
          "vibe": "string",
          "technique": "string",
@@ -135,7 +141,13 @@ RETURN ONLY VALID JSON:
       }}
     }}
   ],
-  "conclusion": "string"
+  "faqs": [
+    {{
+      "question": "string (phrased as a real user search query)",
+      "answer": "string (2-4 clear sentences that fully answer the question)"
+    }}
+  ],
+  "conclusion": "string (80+ words)"
 }}
 """
         # ... logic for Gemini calls (unchanged but using system_prompt)
@@ -269,12 +281,50 @@ RETURN ONLY VALID JSON:
 <!-- wp:kadence/column {{"uniqueID":"{concl_id}"}} -->
 <div class="wp-block-kadence-column kadence-column{concl_id}"><div class="kt-inside-inner-col">
 <!-- wp:kadence/advancedheading {{"uniqueID":"{self._generate_kadence_id()}"}} -->
-<h2 class="wp-block-kadence-advancedheading">The Conclusion</h2>
+<h2 class="wp-block-kadence-advancedheading">Final Thoughts</h2>
 <!-- /wp:kadence/advancedheading -->
 <!-- wp:paragraph -->
 <p>{plan['conclusion']}</p>
 <!-- /wp:paragraph -->
 </div></div>
+<!-- /wp:kadence/column -->
+"""
+
+        # ── FAQ Section (AEO / Featured Snippet optimised) ──────────────────
+        faqs = plan.get("faqs", [])
+        if faqs:
+            faq_col_id = self._generate_kadence_id()
+            faq_heading_id = self._generate_kadence_id()
+            html += f"""
+<!-- wp:kadence/column {{"uniqueID":"{faq_col_id}"}} -->
+<div class="wp-block-kadence-column kadence-column{faq_col_id}"><div class="kt-inside-inner-col">
+<!-- wp:kadence/advancedheading {{"uniqueID":"{faq_heading_id}"}} -->
+<h2 class="wp-block-kadence-advancedheading">Frequently Asked Questions</h2>
+<!-- /wp:kadence/advancedheading -->
+"""
+            for faq in faqs:
+                faq_item_id = self._generate_kadence_id()
+                q = faq.get("question", "").replace('"', '&quot;')
+                a = faq.get("answer", "")
+                html += f"""<!-- wp:kadence/pane {{"uniqueID":"{faq_item_id}","title":"{q}"}} -->
+<div class="wp-block-kadence-pane kt-accordion-pane kt-accordion-pane-{faq_item_id}">
+<div class="kt-accordion-header-wrap">
+<button class="kt-accordion-header kt-blocks-accordion-header kt-accordion-header-{faq_item_id}" aria-expanded="false">
+<span class="kt-blocks-accordion-title">{faq.get('question', '')}</span>
+</button>
+</div>
+<div class="kt-accordion-panel kt-accordion-panel-{faq_item_id}" role="region">
+<div class="kt-accordion-panel-inner">
+<!-- wp:paragraph -->
+<p>{a}</p>
+<!-- /wp:paragraph -->
+</div>
+</div>
+</div>
+<!-- /wp:kadence/pane -->
+
+"""
+            html += """</div></div>
 <!-- /wp:kadence/column -->
 """
         return html
