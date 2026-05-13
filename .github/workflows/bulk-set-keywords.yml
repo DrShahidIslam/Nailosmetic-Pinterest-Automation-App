@@ -1,26 +1,27 @@
 # ============================================================
-# Bulk Focus Keyword Setter — GitHub Actions Workflow
+# Bulk Resave Posts — GitHub Actions Workflow
 # ============================================================
-# One-shot workflow that sets Rank Math focus keywords on all
-# existing posts that are missing one. Run manually via
-# workflow_dispatch. Safe to re-run — skips posts that already
-# have a keyword set.
+# Forces Rank Math to recalculate SEO scores on all existing
+# posts by touch-resaving each one (fires the save_post hook).
+#
+# Run manually once via workflow_dispatch.
+# Safe to re-run — idempotent, no data is changed.
 # ============================================================
 
-name: 🔑 Bulk Set Focus Keywords
+name: 🔄 Bulk Resave Posts (Rank Math Fix)
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
-  workflow_dispatch:  # Manual trigger only — run once
+  workflow_dispatch:  # Manual trigger only
 
 jobs:
-  set-keywords:
-    name: Set Focus Keywords on All Posts
+  resave-posts:
+    name: Touch-Resave All Posts to Trigger Rank Math
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: 📥 Checkout repository
@@ -35,11 +36,9 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install -r requirements.txt
 
-      - name: 🔑 Run Bulk Focus Keyword Setter
+      - name: 🔄 Run Bulk Resave
         env:
-          GEMINI_API_KEYS: ${{ secrets.GEMINI_API_KEYS }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           WORDPRESS_URL: ${{ secrets.WORDPRESS_URL }}
           WORDPRESS_USER: ${{ secrets.WORDPRESS_USER }}
           WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
-        run: python wordpress_automation/bulk_set_focus_keywords.py
+        run: python wordpress_automation/bulk_resave_posts.py
