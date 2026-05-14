@@ -57,7 +57,7 @@ def get_all_posts(wp: WordPressClient) -> List[Dict]:
         if not batch:
             break
         all_posts.extend(batch)
-        print(f"   📄 Page {page} — {len(batch)} posts ({len(all_posts)} total)")
+        print(f"   Page {page} - {len(batch)} posts ({len(all_posts)} total)")
         if len(batch) < per_page:
             break
         page += 1
@@ -88,7 +88,7 @@ def touch_resave(wp: WordPressClient, post: Dict) -> bool:
 # MAIN
 # ─────────────────────────────────────────────────────────────────────────────
 def main():
-    print("🔄 Nailosmetic — Bulk Resave Posts (Rank Math Score Fix)")
+    print("Nailosmetic -- Bulk Resave Posts (Rank Math Score Fix)")
     print("=" * 60)
 
     wp_url  = os.getenv("WORDPRESS_URL", "https://nailosmetic.com")
@@ -96,31 +96,31 @@ def main():
     wp_pass = os.getenv("WORDPRESS_APP_PASSWORD", "")
 
     if not all([wp_user, wp_pass]):
-        print("❌ Missing WORDPRESS_USER or WORDPRESS_APP_PASSWORD")
+        print("ERROR: Missing WORDPRESS_USER or WORDPRESS_APP_PASSWORD")
         sys.exit(1)
 
     wp = WordPressClient(wp_url, wp_user, wp_pass)
 
-    # ── Connectivity check (same pattern as other bots) ────────────────────
-    print("🔌 Checking WordPress connectivity...")
+    # -- Connectivity check (same pattern as other bots) --------------------
+    print("Checking WordPress connectivity...")
     for attempt in range(5):
         test = wp.test_connection()
         if test["success"]:
-            print(f"   ✅ Connected on attempt {attempt + 1}")
+            print(f"   SUCCESS! Connected on attempt {attempt + 1}")
             break
         wait = 30 * (attempt + 1)
-        print(f"   ⚠️  Attempt {attempt+1}/5 failed: {test['error']} — retry in {wait}s")
+        print(f"   WARNING: Attempt {attempt+1}/5 failed: {test['error']} -- retry in {wait}s")
         time.sleep(wait)
     else:
-        print("❌ WordPress unreachable. Aborting.")
+        print("ERROR: WordPress unreachable. Aborting.")
         sys.exit(1)
 
-    # ── Fetch all posts ────────────────────────────────────────────────────
-    print("\n📥 Fetching all published posts...")
+    # -- Fetch all posts ----------------------------------------------------
+    print("\nFetching all published posts...")
     posts = get_all_posts(wp)
-    print(f"✅ {len(posts)} posts found.\n")
+    print(f"DONE: {len(posts)} posts found.\n")
 
-    # ── Resave each post ───────────────────────────────────────────────────
+    # -- Resave each post ---------------------------------------------------
     succeeded = 0
     failed    = 0
 
@@ -134,10 +134,10 @@ def main():
 
         ok = touch_resave(wp, post)
         if ok:
-            print(f"   ✅ Resaved — Rank Math score will now compute")
+            print(f"   SUCCESS! Resaved -- Rank Math score will now compute")
             succeeded += 1
         else:
-            print(f"   ❌ Failed for post ID {post_id}")
+            print(f"   FAILED for post ID {post_id}")
             failed += 1
 
         # Rate limit: ~2s between each to avoid overloading WP

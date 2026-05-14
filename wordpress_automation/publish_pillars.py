@@ -294,15 +294,24 @@ def main():
     print("✍️  Writing sections...")
     section_bodies = []
     previous_headings = []
+    remaining_links = config["cluster_urls"].copy()
+    
     for i, section in enumerate(outline["sections"]):
         print(f"   Section {i+1}/{len(outline['sections'])}: {section['heading'][:50]}...")
+        
+        # Pick 2 links for this section if it's an even index
+        current_links = []
+        if i % 2 == 0 and remaining_links:
+            current_links = remaining_links[:2]
+            remaining_links = remaining_links[2:]
+            
         body = generate_section_body(
             api_keys=gemini_keys,
             pillar_title=config["title"],
             keyword=config["keyword"],
             section=section,
             previous_headings=previous_headings,
-            cluster_urls=config["cluster_urls"],
+            cluster_urls=current_links,
             section_index=i,
         )
         section_bodies.append(body)

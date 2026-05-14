@@ -155,8 +155,8 @@ def generate_section_body(
     """Generate 300-400 word body text for one section."""
     context = ", ".join(previous_headings) if previous_headings else "None yet"
 
-    # Pick 1-2 cluster URLs to embed in this section
-    link_targets = random.sample(cluster_urls, min(2, len(cluster_urls))) if cluster_urls else []
+    # Pick 1-2 cluster URLs to embed in this section (only if they are available)
+    link_targets = cluster_urls[:2] if cluster_urls else []
     link_instruction = ""
     if link_targets and section_index % 2 == 0:  # alternate sections get links
         links_str = " and ".join([f'<a href="{u}">{Path(u.rstrip("/")).name.replace("-", " ").title()}</a>' for u in link_targets])
