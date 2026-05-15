@@ -1,10 +1,15 @@
 {
-  "next_index": 1,
+  "next_index": 2,
   "published": [
     {
       "index": 0,
       "slug": "nail-art-designs-ultimate-guide",
       "url": "https://nailosmetic.com/nail-art-designs-ultimate-guide/"
+    },
+    {
+      "index": 1,
+      "slug": "chrome-nails-complete-guide",
+      "url": "https://nailosmetic.com/chrome-nails-complete-guide/"
     }
   ]
 }
