@@ -22,7 +22,16 @@ class ContentGenerator:
         The niche parameter controls the content style and image generation approach.
         """
         categories_str = ", ".join(existing_categories)
-        internal_link_slug = random.choice(previous_slugs) if previous_slugs else "spring-nail-designs-inspo"
+        
+        # Pick 3 unique internal links if possible
+        available_links = previous_slugs if previous_slugs else ["spring-nail-designs-inspo"]
+        internal_links = random.sample(available_links, min(3, len(available_links)))
+        
+        # Ensure we have at least 3 strings even if duplicates
+        while len(internal_links) < 3:
+            internal_links.append(random.choice(available_links))
+        
+        link1, link2, link3 = [f"https://nailosmetic.com/{s}/" for s in internal_links]
         
         topic_instruction = ""
         if topic:
@@ -82,7 +91,9 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
 Your task is to create {config['article_type']} for a WordPress site using Kadence Blocks and RankMath SEO.
 {topic_instruction}
 Available WordPress Categories: {categories_str}
-Internal Link Target: https://nailosmetic.com/{internal_link_slug}/
+INTERNAL LINK 1: {link1}
+INTERNAL LINK 2: {link2}
+INTERNAL LINK 3: {link3}
 
 FRAMEWORK REQUIREMENTS:
 1. Title: Catchy, SEO-optimized, and hook-driven (e.g., '3 Secret Rules for Minimalist Nails', '7 Viral Hacks for...'). It should match the curiosity-gap style of Pinterest pins.
@@ -92,12 +103,15 @@ FRAMEWORK REQUIREMENTS:
    - SEO Title: Optimized title for search results (max 60 chars).
    - Meta Description: Compelling summary for search results (120-160 chars).
 4. Featured Image: {config['featured_image_guide']}
-5. Introduction: Return as a JSON array of exactly 2 paragraph strings. The first paragraph sets the scene and must be at least 80 words. The second paragraph MUST include exactly one internal link to 'https://nailosmetic.com/{internal_link_slug}/' using an HTML anchor tag with natural anchor text (e.g., <a href="https://nailosmetic.com/{internal_link_slug}/">Check out our latest inspiration guide</a>).
+5. Introduction: Return as a JSON array of exactly 2 paragraph strings. The first paragraph sets the scene and must be at least 80 words. The second paragraph MUST include exactly one internal link to '{link1}' using an HTML anchor tag with natural anchor text.
 6. Content Blocks: A list of EXACTLY 7 items (no fewer). Each item must have:
    - Image Prompt: {config['block_image_guide']}
    - Image Alt Text: Descriptive.
-   - Heading (H2): At least 3 of the 7 headings MUST be phrased as a question (e.g., "What Is the Best Nail Shape for Chrome Nails?", "How Do You Get That Viral Glass Nail Look?", "Which Colors Are Trending for Summer Nails?"). The remaining headings can be trendy name-style.
-   - Paragraph: Engaging description of at least 100 words per block. Include at least 2 external links across the full set of 7 blocks — link to authoritative beauty/lifestyle sources (e.g., Allure, Byrdie, InStyle, Vogue, Healthline, Good Housekeeping) using HTML anchor tags. Spread the external links naturally across different blocks.
+   - Heading (H2): At least 3 of the 7 headings MUST be phrased as a question. The remaining headings can be trendy name-style.
+   - Paragraph: Engaging description of at least 100 words per block. 
+     - INTERNAL LINKS: Include 'INTERNAL LINK 2' ({link2}) and 'INTERNAL LINK 3' ({link3}) naturally across two different blocks (one link per block).
+     - EXTERNAL LINKS: Include at least 3 external links across the full set of 7 blocks — link to authoritative beauty/lifestyle sources (e.g., Allure, Byrdie, InStyle, Vogue, Healthline, Good Housekeeping) using HTML anchor tags. 
+     - Spread all links naturally so they don't look forced.
    - Details: 3 specific points ({config['block_details']}).
 7. Conclusion: A strong summary of at least 80 words, encouraging interaction and reinforcing the focus keyword.
 8. FAQ Section: Provide EXACTLY 5 Frequently Asked Questions relevant to the focus keyword and article topic. Each FAQ must have:
