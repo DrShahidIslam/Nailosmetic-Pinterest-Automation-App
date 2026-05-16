@@ -1,5 +1,5 @@
 {
-  "next_index": 2,
+  "next_index": 3,
   "published": [
     {
       "index": 0,
@@ -10,6 +10,11 @@
       "index": 1,
       "slug": "chrome-nails-complete-guide",
       "url": "https://nailosmetic.com/chrome-nails-complete-guide/"
+    },
+    {
+      "index": 2,
+      "slug": "spring-outfits-women-guide",
+      "url": "https://nailosmetic.com/spring-outfits-women-guide/"
     }
   ]
 }
