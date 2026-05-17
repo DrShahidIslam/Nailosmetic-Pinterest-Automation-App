@@ -20,7 +20,11 @@ def main():
     print("4. Copy ONLY the code part (abc123def456...).")
     print(f"========================================")
     
-    code = input("\nEnter the authorization code: ").strip()
+    import sys
+    if len(sys.argv) > 1:
+        code = sys.argv[1].strip()
+    else:
+        code = input("\nEnter the authorization code: ").strip()
     
     if not code:
         print("No code entered. Exiting.")
