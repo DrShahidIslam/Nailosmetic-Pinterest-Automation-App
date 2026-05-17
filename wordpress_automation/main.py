@@ -259,12 +259,18 @@ def main():
         # Featured Image
         print("🎨 Generating featured image (16:9)...")
         feat_img_path = str(Path(tmp_dir) / "featured.png")
-        img_mgr.generate_image(plan["featured_image"]["prompt"], "16:9", feat_img_path, prefer_kolors=True)
+        feat_prompt = "A high-end aesthetic nail design"
+        feat_alt = "Featured image"
+        if "featured_image" in plan:
+            feat_prompt = plan["featured_image"].get("prompt") or plan["featured_image"].get("image_prompt") or feat_prompt
+            feat_alt = plan["featured_image"].get("alt_text") or plan["featured_image"].get("alt") or plan.get("title") or feat_alt
+            
+        img_mgr.generate_image(feat_prompt, "16:9", feat_img_path, prefer_kolors=True)
         
         # Convert to WebP
         print("⚡ Converting featured image to WebP...")
         feat_webp_path = img_mgr.convert_to_webp(feat_img_path)
-        feat_media_id = wp.upload_media(feat_webp_path, plan["featured_image"]["alt_text"])
+        feat_media_id = wp.upload_media(feat_webp_path, feat_alt)
         print(f"✅ Featured image (WebP) uploaded. ID: {feat_media_id}")
         time.sleep(5)  # ⏳ Added delay to prevent 429 Too Many Requests
 
@@ -274,12 +280,16 @@ def main():
         for i, block in enumerate(plan["blocks"]):
             print(f"🎨 Generating image for '{block['heading']}' (4:5)...")
             block_img_path = str(Path(tmp_dir) / f"block_{i}.png")
-            img_mgr.generate_image(block["prompt"], "4:5", block_img_path, prefer_kolors=True)
+            block_prompt = block.get("prompt") or block.get("image_prompt") or f"A high-end aesthetic nail design for {block['heading']}"
+            
+            img_mgr.generate_image(block_prompt, "4:5", block_img_path, prefer_kolors=True)
             
             # Convert to WebP
             print(f"⚡ Converting block '{block['heading']}' to WebP...")
             block_webp_path = img_mgr.convert_to_webp(block_img_path)
-            block_media_id = wp.upload_media(block_webp_path, block["alt_text"])
+            
+            block_alt = block.get("alt_text") or block.get("alt") or block.get("heading") or "Nailosmetic blog image"
+            block_media_id = wp.upload_media(block_webp_path, block_alt)
             time.sleep(5)  # ⏳ Added delay to prevent 429 Too Many Requests
             
             # Fetch URL for Kadence image block
@@ -287,7 +297,7 @@ def main():
             img_url = media_info["source_url"]
             
             # Replace placeholder in Kadence block
-            img_tag = f'<img src="{img_url}" alt="{block["alt_text"]}" class="kb-img wp-image-{block_media_id}"/>'
+            img_tag = f'<img src="{img_url}" alt="{block_alt}" class="kb-img wp-image-{block_media_id}"/>'
             html_content = html_content.replace(f"<!-- IMAGE_PLACEHOLDER_{block['heading']} -->", img_tag)
 
     # 5. Determine Target Categories

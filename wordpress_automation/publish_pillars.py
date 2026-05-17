@@ -326,9 +326,16 @@ def main():
         # Featured image — FLUX first, Kolors second, Pollinations last
         print("🎨 Generating featured image (16:9) via FLUX → Kolors → Pollinations...")
         feat_path = str(Path(tmp_dir) / "featured.png")
-        img_mgr.generate_image(outline["featured_image"]["prompt"], "16:9", feat_path, prefer_kolors=False)
+        
+        feat_prompt = "A beautiful aesthetic nail design"
+        feat_alt = "Featured image"
+        if "featured_image" in outline:
+            feat_prompt = outline["featured_image"].get("prompt") or outline["featured_image"].get("image_prompt") or feat_prompt
+            feat_alt = outline["featured_image"].get("alt_text") or outline["featured_image"].get("alt") or feat_alt
+            
+        img_mgr.generate_image(feat_prompt, "16:9", feat_path, prefer_kolors=False)
         feat_webp = img_mgr.convert_to_webp(feat_path)
-        feat_media_id = wp.upload_media(feat_webp, outline["featured_image"]["alt_text"])
+        feat_media_id = wp.upload_media(feat_webp, feat_alt)
         print(f"   ✅ Featured image uploaded. ID: {feat_media_id}")
         time.sleep(5)
 
