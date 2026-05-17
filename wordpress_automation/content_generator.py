@@ -23,8 +23,18 @@ class ContentGenerator:
         """
         categories_str = ", ".join(existing_categories)
         
-        # Pick 3 unique internal links if possible
-        available_links = previous_slugs if previous_slugs else ["spring-nail-designs-inspo"]
+        # Niche-specific default link fallbacks
+        niche_fallbacks = {
+            "nails": "spring-nail-designs-inspo",
+            "hair_beauty": "goddess-braids-ideas",
+            "home_garden": "bedscaping-ideas-home-decor",
+            "fashion_style": "casual-brunch-outfits-aesthetic",
+            "gardening": "flower-bed-ideas-front-house"
+        }
+        fallback_slug = niche_fallbacks.get(niche, "spring-nail-designs-inspo")
+        
+        # Pick 3 unique internal links if possible from the niche-filtered slugs
+        available_links = previous_slugs if previous_slugs else [fallback_slug]
         internal_links = random.sample(available_links, min(3, len(available_links)))
         
         # Ensure we have at least 3 strings even if duplicates
@@ -41,7 +51,7 @@ The title, all content blocks, all image prompts, and SEO metadata must be direc
 Do NOT deviate from this topic. This is a high-demand search term that real users are searching for.
 """
         
-        # Niche-specific prompt configurations
+        # Niche-specific prompt configurations with isolated external link targets
         niche_configs = {
             "nails": {
                 "role": "a luxury beauty editor for 'Nailosmetic'",
@@ -50,6 +60,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real woman's hand/fingers with the specific nail art design as the PRIMARY SUBJECT. The nails must take up at least 60 percent of the image. If the heading mentions a theme (e.g., 'dew drop', 'butterfly', 'floral'), that theme must appear AS A DESIGN PAINTED ON THE NAILS, not as a standalone object. Describe: nail shape (almond/coffin/stiletto/square), colors, finish (glossy/matte/chrome), specific pattern ON the nails. Example: 'Extreme macro close-up of almond nails with glossy chrome rose gold finish, one accent nail with tiny dried flowers encapsulated in clear gel'.",
                 "block_details": "Vibe, Technique/Pro-Tip, Best Shape/Alternative",
                 "mandatory_category": "Aesthetic & Art, Chrome & Glazed, Minimalist & Clean Girl, or Seasonal Trends (Use 'Nails and Manicure' only as fallback)",
+                "external_sources": "Allure (allure.com), Byrdie (byrdie.com), InStyle (instyle.com), Vogue (vogue.com), Harper's Bazaar (harpersbazaar.com)"
             },
             "hair_beauty": {
                 "role": "a celebrity hairstylist and beauty editor for 'Nailosmetic'",
@@ -58,6 +69,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real person with their HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the heading names a style (e.g., 'fulani braids', 'prom updo'), the person must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens'.",
                 "block_details": "The Vibe, Styling Technique, Best Face Shape/Hair Type",
                 "mandatory_category": "Hair & Beauty",
+                "external_sources": "Allure (allure.com), Byrdie (byrdie.com), InStyle (instyle.com), Vogue (vogue.com), Cosmopolitan (cosmopolitan.com)"
             },
             "home_garden": {
                 "role": "an interior design and lifestyle editor for 'Nailosmetic'",
@@ -66,6 +78,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real, fully decorated ROOM or GARDEN SPACE as the PRIMARY SUBJECT. The space must look realistic, lived-in, and styled — never an isolated object on a white background. If the heading names a specific element (e.g., 'front porch flower pots'), that element must be shown IN CONTEXT within a full space. Describe: room type, materials, color palette, furniture, plants, lighting mood. Use terms like 'Architectural Digest photography', 'wide-angle interior shot'.",
                 "block_details": "The Vibe, DIY Difficulty/Pro-Tip, Budget Range/Alternative",
                 "mandatory_category": "Home & Garden",
+                "external_sources": "Architectural Digest (architecturaldigest.com), HGTV (hgtv.com), Better Homes & Gardens (bhg.com), The Spruce (thespruce.com), Good Housekeeping (goodhousekeeping.com)"
             },
             "fashion_style": {
                 "role": "a fashion editor and trend forecaster for 'Nailosmetic'",
@@ -74,6 +87,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real woman WEARING a complete outfit as the PRIMARY SUBJECT. The outfit must be fully visible. If the heading names a style (e.g., 'casual brunch outfit'), the woman must be wearing that EXACT style. Describe: specific garments (top, bottom, shoes), colors, accessories, fabrics. Use terms like 'editorial street style photography', 'full-body outfit shot', 'clean minimal backdrop'.",
                 "block_details": "The Vibe, Styling Tip, Occasion/Season",
                 "mandatory_category": "Styles & Fashion",
+                "external_sources": "Vogue (vogue.com), Elle (elle.com), InStyle (instyle.com), Harper's Bazaar (harpersbazaar.com), Cosmopolitan (cosmopolitan.com)"
             },
             "gardening": {
                 "role": "a garden design and outdoor living editor for 'Nailosmetic'",
@@ -82,6 +96,7 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
                 "block_image_guide": "MANDATORY RULE: Every prompt MUST show a real garden space, plant arrangement, or outdoor design feature IN CONTEXT within a full landscape — never an isolated plant on a white background. Focus on plants, textures, hardscaping, and natural lighting. Describe: plant species, arrangement style, surrounding landscape, time of day lighting.",
                 "block_details": "The Vibe, Growing/DIY Tip, Climate Zone/Alternative",
                 "mandatory_category": "Home & Garden",
+                "external_sources": "Better Homes & Gardens (bhg.com), The Spruce (thespruce.com), Fine Gardening (finegardening.com), RHS (rhs.org.uk), Gardeners' World (gardenersworld.com)"
             },
         }
         
@@ -94,7 +109,7 @@ Available WordPress Categories: {categories_str}
 INTERNAL LINK 1: {link1}
 INTERNAL LINK 2: {link2}
 INTERNAL LINK 3: {link3}
-
+ 
 FRAMEWORK REQUIREMENTS:
 1. Title: Catchy, SEO-optimized, and hook-driven (e.g., '3 Secret Rules for Minimalist Nails', '7 Viral Hacks for...'). It should match the curiosity-gap style of Pinterest pins.
 2. Slug: A short, SEO-friendly URL slug (3-5 words maximum, lowercase-with-dashes). It MUST include the primary focus keyword.
@@ -110,7 +125,7 @@ FRAMEWORK REQUIREMENTS:
    - Heading (H2): At least 3 of the 7 headings MUST be phrased as a question. The remaining headings can be trendy name-style.
    - Paragraph: Engaging description of at least 100 words per block. 
      - INTERNAL LINKS: Include 'INTERNAL LINK 2' ({link2}) and 'INTERNAL LINK 3' ({link3}) naturally across two different blocks (one link per block).
-     - EXTERNAL LINKS: Include at least 3 external links across the full set of 7 blocks — link to authoritative beauty/lifestyle sources (e.g., Allure, Byrdie, InStyle, Vogue, Healthline, Good Housekeeping) using HTML anchor tags. 
+     - EXTERNAL LINKS: Include at least 3 external links across the full set of 7 blocks — link STRICTLY to authoritative {niche}-specific sources (e.g., {config['external_sources']}) using HTML anchor tags. Do NOT link to off-topic sources (e.g. no hair links in gardening or nails in decor).
      - Spread all links naturally so they don't look forced.
    - Details: 3 specific points ({config['block_details']}).
 7. Conclusion: A strong summary of at least 80 words, encouraging interaction and reinforcing the focus keyword.
@@ -309,18 +324,14 @@ RETURN ONLY VALID JSON:
         if faqs:
             faq_col_id = self._generate_kadence_id()
             faq_heading_id = self._generate_kadence_id()
-            html += f"""
-<!-- wp:kadence/column {{"uniqueID":"{faq_col_id}"}} -->
-<div class="wp-block-kadence-column kadence-column{faq_col_id}"><div class="kt-inside-inner-col">
-<!-- wp:kadence/advancedheading {{"uniqueID":"{faq_heading_id}"}} -->
-<h2 class="wp-block-kadence-advancedheading">Frequently Asked Questions</h2>
-<!-- /wp:kadence/advancedheading -->
-"""
+            faq_accordion_id = self._generate_kadence_id()
+            
+            accordion_inner_html = ""
             for faq in faqs:
                 faq_item_id = self._generate_kadence_id()
                 q = faq.get("question", "").replace('"', '&quot;')
                 a = faq.get("answer", "")
-                html += f"""<!-- wp:kadence/pane {{"uniqueID":"{faq_item_id}","title":"{q}"}} -->
+                accordion_inner_html += f"""<!-- wp:kadence/pane {{"uniqueID":"{faq_item_id}","title":"{q}"}} -->
 <div class="wp-block-kadence-pane kt-accordion-pane kt-accordion-pane-{faq_item_id}">
 <div class="kt-accordion-header-wrap">
 <button class="kt-accordion-header kt-blocks-accordion-header kt-accordion-header-{faq_item_id}" aria-expanded="false">
@@ -338,7 +349,19 @@ RETURN ONLY VALID JSON:
 <!-- /wp:kadence/pane -->
 
 """
-            html += """</div></div>
+            html += f"""
+<!-- wp:kadence/column {{"uniqueID":"{faq_col_id}"}} -->
+<div class="wp-block-kadence-column kadence-column{faq_col_id}"><div class="kt-inside-inner-col">
+<!-- wp:kadence/advancedheading {{"uniqueID":"{faq_heading_id}"}} -->
+<h2 class="wp-block-kadence-advancedheading">Frequently Asked Questions</h2>
+<!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/accordion {{"uniqueID":"{faq_accordion_id}"}} -->
+<div class="wp-block-kadence-accordion kt-accordion-wrap-{faq_accordion_id}">
+{accordion_inner_html}</div>
+<!-- /wp:kadence/accordion -->
+
+</div></div>
 <!-- /wp:kadence/column -->
 """
         return html

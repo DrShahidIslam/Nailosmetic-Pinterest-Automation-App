@@ -230,7 +230,24 @@ def main():
 
     # 2. Generate Article Plan (niche-aware)
     print(f"🧠 Generating high-quality {chosen_niche} article plan...")
-    plan = gen.generate_article_plan(cat_names, previous_slugs, topic=chosen_topic, niche=chosen_niche)
+    
+    # Filter previous slugs by active niche from published_links.json database to prevent cross-linking
+    niche_slugs = []
+    published_links_path = Path(__file__).parent.parent / "shared" / "published_links.json"
+    if published_links_path.exists():
+        try:
+            with open(published_links_path, "r") as f:
+                published = json.load(f)
+            # Find slugs matching the exact chosen niche
+            niche_slugs = [p["slug"] for p in published if p.get("niche") == chosen_niche and p.get("slug")]
+            print(f"   📂 Found {len(niche_slugs)} previously published articles in niche '{chosen_niche}'")
+        except Exception as e:
+            print(f"   ⚠️ Error reading published_links.json for niche filtering: {e}")
+            
+    # Fall back to general previous slugs if no same-niche slugs found
+    filtered_slugs = niche_slugs if niche_slugs else previous_slugs
+    
+    plan = gen.generate_article_plan(cat_names, filtered_slugs, topic=chosen_topic, niche=chosen_niche)
     print(f"📌 Title: {plan['title']}")
 
     # 3. Handle Images and WordPress Media

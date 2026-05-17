@@ -638,10 +638,10 @@ def clean_text_for_rendering(text: str) -> str:
 
 def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str:
     """
-    Open the raw image, apply a sophisticated overlay, and render the text
-    in a premium font with better typography, plus a CTA and branding.
+    Open the raw image, apply a highly engaging, high-CTR premium clickbait overlay,
+    and render the text using dynamic font pairings, colors, outlines, and badges.
     """
-    print("\n🎨 Phase 3: Designing the Pinterest pin with Pillow (Premium Style)...")
+    print("\n🎨 Phase 3: Designing the Pinterest pin with Pillow (Premium Clickbait Style)...")
 
     # Clean the overlay_text to avoid tofu characters
     overlay_text = clean_text_for_rendering(overlay_text)
@@ -649,74 +649,106 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     img = Image.open(image_path).convert("RGBA")
     width, height = img.size
 
-    # --- Layout Selection ---
-    layouts = ['bottom_fade', 'center_box', 'top_fade', 'solid_block']
-    layout_style = random.choice(layouts)
-    print(f"   📐 Selected layout style: {layout_style}")
-
-    # Font setup
-    draw = ImageDraw.Draw(img)
-    font_size = int(width * 0.075)
+    # --- Setup Niche Details ---
+    niche = getattr(design_pin_image, '_current_niche', 'nails')
     
-    if layout_style == 'center_box':
-        primary_fonts = [os.path.join(os.path.dirname(__file__), "fonts", "Anton-Regular.ttf")]
-        font_size = int(width * 0.085) # slightly larger for impact
-    elif layout_style == 'solid_block':
-        # Montserrat works beautifully for editorial blocks
-        primary_fonts = [os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")]
-    else:
-        primary_fonts = [os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")]
+    # Niche-specific pastel/luxury accent colors (highly optimized for CTR)
+    niche_accents = {
+        "nails": (255, 180, 190),       # Soft Pastel Pink
+        "hair_beauty": (235, 175, 175), # Elegant Rose Gold
+        "home_garden": (168, 205, 175), # Cozy Sage Green
+        "fashion_style": (245, 220, 185) # Luxury Ivory Cream
+    }
+    accent_color = niche_accents.get(niche, (255, 200, 200))
+    
+    # Curiosity-gap badges by niche
+    niche_badges = {
+        "nails": "✨ SALON LOOKBOOK ✨",
+        "hair_beauty": "🔥 BEAUTY SECRET 🔥",
+        "home_garden": "🛋️ DECOR GUIDE 🛋️",
+        "fashion_style": "💡 CHIC STYLING 💡"
+    }
+    badge_text = niche_badges.get(niche, "🔥 TREND ALERT 🔥")
 
-    font = None
-    for p in primary_fonts:
-        try:
-            if os.path.exists(p):
-                font = ImageFont.truetype(p, font_size)
-                print(f"   ✅ Using layout-specific font: {p}")
-                break
-        except: continue
-        
-    if not font:
+    # --- Layout & Styling Selection ---
+    # We use 3 modern high-CTR layouts instead of generic boxed containers
+    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette']
+    layout_style = random.choice(layouts)
+    print(f"   📐 Selected premium layout style: {layout_style}")
+
+    # Set up fonts with dynamic fallbacks
+    draw = ImageDraw.Draw(img)
+    font_size = int(width * 0.08)
+    
+    font_dir = os.path.join(os.path.dirname(__file__), "fonts")
+    anton_font_path = os.path.join(font_dir, "Anton-Regular.ttf")
+    montserrat_bold_path = os.path.join(font_dir, "Montserrat-Bold.ttf")
+    montserrat_reg_path = os.path.join(font_dir, "Montserrat-Regular.ttf")
+    lora_bold_path = os.path.join(font_dir, "Lora-Bold.ttf")
+
+    # Load appropriate main font for the layout
+    main_font = None
+    if layout_style == 'bold_clickbait' and os.path.exists(anton_font_path):
+        main_font = ImageFont.truetype(anton_font_path, int(width * 0.095)) # Tall, punchy sans-serif
+        print("   ✅ Loaded Anton-Regular for bold clickbait")
+    elif layout_style == 'premium_magazine' and os.path.exists(lora_bold_path):
+        main_font = ImageFont.truetype(lora_bold_path, int(width * 0.075)) # Elegant serif
+        print("   ✅ Loaded Lora-Bold for premium magazine style")
+    else:
+        # Fallback to Montserrat-Bold
+        font_path = montserrat_bold_path if os.path.exists(montserrat_bold_path) else lora_bold_path
+        if os.path.exists(font_path):
+            main_font = ImageFont.truetype(font_path, font_size)
+            print(f"   ✅ Loaded primary font: {font_path}")
+            
+    if not main_font:
+        # System font fallbacks
         font_candidates = [
+            "C:/Windows/Fonts/georgiab.ttf",
             "C:/Windows/Fonts/segoeuib.ttf",
-            "C:/Windows/Fonts/corbelb.ttf",
             "C:/Windows/Fonts/arialbd.ttf",
-            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
-            "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-            "/System/Library/Fonts/SFNSDisplay.ttf",
-            "/System/Library/Fonts/Helvetica.ttc",
         ]
         for p in font_candidates:
             try:
-                font = ImageFont.truetype(p, font_size)
+                main_font = ImageFont.truetype(p, font_size)
                 print(f"   ✅ Using system font fallback: {p}")
                 break
             except: continue
             
-    if not font:
-        print(f"   ⚠️ Font error. Using default.")
-        font = ImageFont.load_default()
+    if not main_font:
+        print("   ⚠️ Font error. Using default.")
+        main_font = ImageFont.load_default()
 
     # Dynamic text wrapping using PIL textbbox
     margin = int(width * 0.08)
     max_text_width = width - (2 * margin)
     
-    longest_word = max(overlay_text.split(), key=len) if overlay_text.split() else ""
-    while font_size > 20:
-        bbox = draw.textbbox((0, 0), longest_word, font=font)
-        if (bbox[2] - bbox[0]) < max_text_width: break
-        font_size -= 4
-        try:
-            if hasattr(font, 'path'): font = ImageFont.truetype(font.path, font_size)
-        except: break
-
+    # Ensure wrapping fits within box boundaries
     words = overlay_text.split()
     wrapped_lines = []
     current_line = []
+    
+    # Temporary test font for size wrapping
+    test_font = main_font
+    longest_word = max(words, key=len) if words else ""
+    
+    # Scale down font size if the longest word exceeds margins
+    try:
+        if hasattr(test_font, 'path'):
+            curr_size = test_font.size
+            while curr_size > 20:
+                bbox = draw.textbbox((0, 0), longest_word, font=test_font)
+                if (bbox[2] - bbox[0]) < max_text_width:
+                    break
+                curr_size -= 4
+                test_font = ImageFont.truetype(test_font.path, curr_size)
+            main_font = test_font
+    except: pass
+
     for word in words:
         current_line.append(word)
         line_text = " ".join(current_line)
-        bbox = draw.textbbox((0, 0), line_text, font=font)
+        bbox = draw.textbbox((0, 0), line_text, font=main_font)
         line_width = bbox[2] - bbox[0]
         if line_width > max_text_width:
             if len(current_line) == 1:
@@ -725,109 +757,175 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
                 current_line.pop()
                 wrapped_lines.append(" ".join(current_line))
                 current_line = [word]
-    if current_line: wrapped_lines.append(" ".join(current_line))
+    if current_line: 
+        wrapped_lines.append(" ".join(current_line))
 
-    # (Layout is already selected at the top)
+    # Create overlay drawing context
     overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     draw_overlay = ImageDraw.Draw(overlay)
 
     line_spacing = 1.15
-    line_height = int(font_size * line_spacing)
+    # Fetch font size
+    curr_font_size = getattr(main_font, 'size', font_size)
+    line_height = int(curr_font_size * line_spacing)
     total_text_height = len(wrapped_lines) * line_height
-    
-    # Calculate text start Y based on layout
-    if layout_style == 'bottom_fade':
-        gradient_start_y = int(height * 0.55)
+
+    # Calculate Y-position & render overlays/background blends
+    if layout_style == 'premium_magazine':
+        # Magazine styling: extremely subtle top/bottom shadow or vignette
+        # Very high-end, clean feel
+        gradient_start_y = int(height * 0.50)
         for y in range(gradient_start_y, height):
             progress = (y - gradient_start_y) / (height - gradient_start_y)
-            alpha = int(220 * (progress ** 1.5))
+            alpha = int(140 * (progress ** 1.8))  # extremely soft shadow
             draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
         text_y_start = height - total_text_height - int(height * 0.18)
 
-    elif layout_style == 'top_fade':
-        gradient_end_y = int(height * 0.40)
-        for y in range(0, gradient_end_y):
-            progress = 1.0 - (y / gradient_end_y)
-            alpha = int(220 * (progress ** 1.5))
+    elif layout_style == 'bold_clickbait':
+        # Clickbait style: no solid boxes! We rely on massive high-contrast text dropshadow outlines
+        # Draw a very soft general vignette around borders to increase edge contrast
+        for y in range(0, int(height * 0.20)):
+            progress = 1.0 - (y / (height * 0.20))
+            alpha = int(80 * (progress ** 2))
             draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
-        text_y_start = int(height * 0.10)
+        for y in range(int(height * 0.80), height):
+            progress = (y - int(height * 0.80)) / (height * 0.20)
+            alpha = int(80 * (progress ** 2))
+            draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
+            
+        text_y_start = int(height * 0.22) # floating centered/top-middle text
 
-    elif layout_style == 'center_box':
-        box_padding_y = int(height * 0.05)
-        box_padding_x = int(width * 0.05)
-        box_h = total_text_height + (box_padding_y * 2) + int(height * 0.06) 
-        box_y = (height - box_h) // 2
-        draw_overlay.rectangle([(margin - box_padding_x, box_y), (width - margin + box_padding_x, box_y + box_h)], fill=(0, 0, 0, 170))
-        text_y_start = box_y + box_padding_y
+    else: # modern_vignette
+        # Elegant classic gradient bottom fade
+        gradient_start_y = int(height * 0.50)
+        for y in range(gradient_start_y, height):
+            progress = (y - gradient_start_y) / (height - gradient_start_y)
+            alpha = int(210 * (progress ** 1.3))
+            draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
+        text_y_start = height - total_text_height - int(height * 0.16)
 
-    elif layout_style == 'solid_block':
-        block_h = total_text_height + int(height * 0.20)
-        block_y = height - block_h
-        draw_overlay.rectangle([(0, block_y), (width, height)], fill=(20, 20, 20, 255)) 
-        text_y_start = block_y + int(height * 0.05)
-
+    # Composite overlays
     img = Image.alpha_composite(img, overlay)
     draw = ImageDraw.Draw(img)
 
+    # Helper function to draw elegant text outlines for 100% readability
+    def draw_text_with_outline(d, txt, tx, ty, fnt, fill_c, outline_c, width_val=3):
+        for dx in range(-width_val, width_val + 1):
+            for dy in range(-width_val, width_val + 1):
+                if abs(dx) + abs(dy) > 0: # outline mask
+                    d.text((tx + dx, ty + dy), txt, font=fnt, fill=outline_c)
+        d.text((tx, ty), txt, font=fnt, fill=fill_c)
+
+    # High-impact curiosity-gap clickbait keywords (highlighted in accent colors)
+    clickbait_triggers = [
+        "secret", "secrets", "trick", "tricks", "hack", "hacks", "viral",
+        "stunning", "elevate", "perfect", "flawless", "unleash", "irresistible",
+        "essential", "timeless", "hidden", "mistake", "mistakes", "obsession", "obsess"
+    ]
+
+    # --- Draw the Main Title Text ---
     for i, line in enumerate(wrapped_lines):
-        bbox = draw.textbbox((0, 0), line, font=font)
+        bbox = draw.textbbox((0, 0), line, font=main_font)
         text_width = bbox[2] - bbox[0]
         text_x = (width - text_width) // 2
         text_y = text_y_start + (i * line_height)
         
-        if layout_style in ['bottom_fade', 'top_fade']:
-            draw.text((text_x + 2, text_y + 2), line, font=font, fill=(0, 0, 0, 150))
-        draw.text((text_x, text_y), line, font=font, fill=(255, 255, 255, 255))
+        # Determine outline styling based on layout
+        if layout_style == 'bold_clickbait':
+            # Check if any clickbait trigger keyword is in this line to apply accent color
+            line_lower = line.lower()
+            fill_color = (255, 255, 255, 255)
+            if any(trigger in line_lower for trigger in clickbait_triggers):
+                fill_color = accent_color
+            
+            # Thick black outline to create highly engaging high-contrast text
+            draw_text_with_outline(draw, line, text_x, text_y, main_font, fill_color, (0, 0, 0, 255), width_val=4)
+        else:
+            # Magazine/Vignette style: elegant soft shadow
+            draw.text((text_x + 2, text_y + 2), line, font=main_font, fill=(0, 0, 0, 160))
+            draw.text((text_x, text_y), line, font=main_font, fill=(255, 255, 255, 255))
 
-    # --- Add Call to Action (CTA) ---
-    cta_niche = getattr(design_pin_image, '_current_niche', 'nails')
-    cta_list = CTA_OPTIONS.get(cta_niche, CTA_OPTIONS["nails"])
+    # --- Draw Premium Curiosity-Gap Badge at the Top ---
+    try:
+        badge_font_path = montserrat_bold_path if os.path.exists(montserrat_bold_path) else main_font
+        if badge_font_path:
+            badge_font = ImageFont.truetype(badge_font_path, int(width * 0.038))
+            badge_bbox = draw.textbbox((0, 0), badge_text, font=badge_font)
+            bw = badge_bbox[2] - badge_bbox[0]
+            bh = badge_bbox[3] - badge_bbox[1]
+            
+            bx = (width - bw) // 2
+            # Y position is slightly above text or at the top of the pin
+            by = text_y_start - bh - int(height * 0.04) if layout_style != 'bold_clickbait' else int(height * 0.14)
+            
+            # Draw capsule rounded rectangle backing (pill style)
+            padding_x, padding_y = 18, 8
+            draw_pill = ImageDraw.Draw(img, "RGBA")
+            draw_pill.rounded_rectangle(
+                [(bx - padding_x, by - padding_y), (bx + bw + padding_x, by + bh + padding_y)],
+                radius=12,
+                fill=(*accent_color, 240)
+            )
+            # Text inside pill
+            draw.text((bx, by), badge_text, font=badge_font, fill=(10, 10, 10, 255))
+    except Exception as e:
+        print(f"   ⚠️ Skipping badge drawing: {e}")
+
+    # --- Draw the Upgraded CTA Section ---
+    cta_list = CTA_OPTIONS.get(niche, CTA_OPTIONS["nails"])
     cta_text = random.choice(cta_list)
     try:
         cta_font_size = int(width * 0.045)
-        cta_font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Bold.ttf")
-        cta_font = ImageFont.truetype(cta_font_path, cta_font_size) if os.path.exists(cta_font_path) else font
+        cta_font = ImageFont.truetype(montserrat_bold_path, cta_font_size) if os.path.exists(montserrat_bold_path) else main_font
         
         cta_bbox = draw.textbbox((0, 0), cta_text, font=cta_font)
         cta_w = cta_bbox[2] - cta_bbox[0]
         cta_x = (width - cta_w) // 2
         
-        if layout_style == 'top_fade': cta_y = text_y_start + total_text_height + int(height * 0.02)
-        elif layout_style == 'center_box': cta_y = text_y_start + total_text_height + int(height * 0.02)
-        else: cta_y = text_y_start + total_text_height + int(height * 0.03)
-            
-        if layout_style in ['bottom_fade', 'top_fade']:
+        if layout_style == 'bold_clickbait':
+            cta_y = text_y_start + total_text_height + int(height * 0.04)
+            draw_text_with_outline(draw, cta_text, cta_x, cta_y, cta_font, (255, 255, 255, 255), (0, 0, 0, 255), width_val=2)
+        else:
+            cta_y = text_y_start + total_text_height + int(height * 0.03)
             draw.text((cta_x + 1, cta_y + 1), cta_text, font=cta_font, fill=(0, 0, 0, 150))
-        draw.text((cta_x, cta_y), cta_text, font=cta_font, fill=(255, 200, 200, 255))
+            # Elegant accent color for CTA
+            draw.text((cta_x, cta_y), cta_text, font=cta_font, fill=accent_color)
     except: pass
 
-    # --- Add Branding Badge (Nailosmetic) ---
+    # --- Draw Branding Badge (Nailosmetic) ---
     try:
         brand_font_size = int(width * 0.035)
-        brand_font_path = os.path.join(os.path.dirname(__file__), "fonts", "Montserrat-Regular.ttf")
-        brand_font = ImageFont.truetype(brand_font_path, brand_font_size) if os.path.exists(brand_font_path) else font
+        brand_font = ImageFont.truetype(montserrat_reg_path, brand_font_size) if os.path.exists(montserrat_reg_path) else main_font
         if brand_font:
             brand_text = "Nailosmetic"
-            brand_bbox = draw.textbbox((0, 0), brand_text, font=brand_font)
+            
+            # Add premium letter spacing (N A I L O S M E T I C) for a luxury feel
+            brand_spaced = " ".join(list(brand_text.upper()))
+            brand_bbox = draw.textbbox((0, 0), brand_spaced, font=brand_font)
             bw, bh = brand_bbox[2] - brand_bbox[0], brand_bbox[3] - brand_bbox[1]
 
             bx = (width - bw) // 2
-            by = height - bh - int(height * 0.03)
+            by = height - bh - int(height * 0.035)
             
-            if layout_style == 'top_fade':
-                # Add a subtle dark bar behind branding if the bottom is unshaded
+            if layout_style == 'bold_clickbait' or layout_style == 'premium_magazine':
+                # Draw a very soft blurred backdrop pill for the brand name to ensure visibility on bright images
                 draw_bar = ImageDraw.Draw(img, "RGBA")
-                draw_bar.rectangle([(bx - 15, by - 5), (bx + bw + 15, by + bh + 5)], fill=(0, 0, 0, 120))
+                draw_bar.rounded_rectangle(
+                    [(bx - 20, by - 6), (bx + bw + 20, by + bh + 6)], 
+                    radius=10, 
+                    fill=(0, 0, 0, 100)
+                )
                 
-            draw.text((bx, by), brand_text, font=brand_font, fill=(255, 255, 255, 160))
-    except: pass
+            draw.text((bx, by), brand_spaced, font=brand_font, fill=(255, 255, 255, 200))
+    except Exception as e:
+        print(f"   ⚠️ Skipping brand drawing: {e}")
 
-    # Save
+    # Save final optimized image
     final_img = img.convert("RGB")
     final_path = os.path.join(output_dir, "final_pin.jpg")
     final_img.save(final_path, "JPEG", quality=95)
 
-    print(f"   ✅ Final stylish pin saved: {final_path}")
+    print(f"   ✅ Upgraded premium clickbait pin saved: {final_path}")
     return final_path
 
 
@@ -1162,13 +1260,49 @@ def main():
                     # Filter to same niche first
                     niche_articles = [p for p in published if p.get("niche") == chosen_niche]
                     
-                    if niche_articles and chosen_topic:
+                    # Enforce strict category keyword isolation to prevent routing mismatch (e.g. wallpaper to flower beds)
+                    category_keywords = {
+                        "bedroom_bedding": ['bed', 'bedding', 'bedroom', 'sheet', 'pillow', 'comforter', 'duvet', 'sleep', 'mattress'],
+                        "garden_outdoor": ['garden', 'outdoor', 'yard', 'landscape', 'patio', 'fountain', 'trellis', 'plant', 'flower', 'soil', 'drainage', 'pot', 'curb'],
+                        "home_decor": ['decor', 'home', 'house', 'room', 'bathroom', 'kitchen', 'wall', 'wallpaper', 'paint', 'furniture', 'apartment', 'living'],
+                        "hair_aesthetics": ['hair', 'braid', 'bob', 'cut', 'style', 'color', 'dye', 'scalp', 'wig', 'fringe', 'curl'],
+                        "beauty_skincare": ['beauty', 'skincare', 'makeup', 'skin', 'face', 'glam', 'cosmetics', 'routine', 'care', 'glow'],
+                        "fashion_style": ['outfit', 'clothes', 'fashion', 'style', 'dress', 'wear', 'skirt', 'leggings', 'jacket', 'pant', 'shoe', 'accessory'],
+                        "chrome_glazed": ['chrome', 'glazed', 'donut', 'metallic', 'mirror', 'pearl'],
+                        "minimalist_clean": ['minimalist', 'clean girl', 'nude', 'natural', 'neutral', 'simple', 'short', 'french'],
+                        "spring_trends": ['spring', 'flower', 'pastel', 'bloom', 'easter', 'floral'],
+                        "summer_vacation": ['summer', 'vacation', 'beach', 'holiday', 'neon', 'bright', 'tropical', 'toe']
+                    }
+                    
+                    keywords = category_keywords.get(category, [])
+                    search_pool = []
+                    
+                    # Filter matching search pool using category keywords
+                    if keywords:
+                        for article in niche_articles:
+                            text_to_check = f"{article.get('topic', '')} {article.get('slug', '')}".lower()
+                            matched = False
+                            for kw in keywords:
+                                if kw in text_to_check:
+                                    # Guard against "bed" matching gardening beds in bedding category
+                                    if kw == 'bed' and any(x in text_to_check for x in ["flower bed", "garden bed", "flower-bed", "garden-bed", "raised bed"]):
+                                        continue
+                                    matched = True
+                                    break
+                            if matched:
+                                search_pool.append(article)
+                    
+                    # Fall back to general niche articles if no specific category-keywords article matches
+                    if not search_pool:
+                        search_pool = niche_articles
+                    
+                    if search_pool and chosen_topic:
                         # Score each article by keyword overlap with the pin topic
                         pin_keywords = set(chosen_topic.lower().split())
                         best_score = 0
                         best_article = None
                         
-                        for article in niche_articles:
+                        for article in search_pool:
                             article_keywords = set()
                             # Check topic field
                             if article.get("topic"):
@@ -1185,23 +1319,19 @@ def main():
                         
                         if best_article and best_score > 0:
                             destination_link = best_article["url"]
-                            print(f"   🔗 Relevant match (score {best_score}): {destination_link}")
-                        elif niche_articles:
-                            # No keyword match, but same niche — use latest
-                            destination_link = niche_articles[-1]["url"]
-                            print(f"   🔗 Niche fallback (latest {chosen_niche}): {destination_link}")
-                    elif niche_articles:
-                        # No topic to match against, use latest in niche
-                        destination_link = niche_articles[-1]["url"]
-                        print(f"   🔗 Niche fallback (latest {chosen_niche}): {destination_link}")
-                        
+                            print(f"   🔗 Context-matched article found (score {best_score}): {destination_link}")
+                        elif search_pool:
+                            # No keyword match, but category-matched or niche latest article
+                            destination_link = search_pool[-1]["url"]
+                            print(f"   🔗 Category fallback article: {destination_link}")
+                            
                 except Exception as e:
                     print(f"   ⚠️ Error reading published_links.json: {e}")
             
-            # Final fallback: use board default link
+            # Final fallback: use board default link from BOARD_MAP configuration
             if not destination_link:
                 destination_link = board_info["link"]
-                print(f"   🔗 Using default board link: {destination_link}")
+                print(f"   🔗 Using default category board link: {destination_link}")
 
         target_board_id = board_info["board_id"]
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
