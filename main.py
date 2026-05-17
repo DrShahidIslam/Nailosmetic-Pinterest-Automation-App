@@ -46,6 +46,8 @@ load_dotenv()  # Load .env file if present (local development)
 raw_gemini_keys = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
 GEMINI_API_KEYS = [k.strip() for k in raw_gemini_keys.split(",") if k.strip()]
 SILICONFLOW_API_KEY = os.getenv("SILICONFLOW_API_KEY")
+CLOUDFLARE_ACCOUNT_ID = os.getenv("CLOUDFLARE_ACCOUNT_ID")
+CLOUDFLARE_API_TOKEN = os.getenv("CLOUDFLARE_API_TOKEN")
 raw_hf_keys = os.getenv("HUGGINGFACE_API_KEYS", "") or os.getenv("HUGGINGFACE_API_KEY", "")
 HUGGINGFACE_API_KEYS = [k.strip() for k in raw_hf_keys.split(",") if k.strip()]
 # For backward compatibility in some local functions
@@ -543,6 +545,38 @@ def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: s
         raise Exception(f"SiliconFlow failed: {response.status_code}")
 
 
+def generate_image_with_cloudflare(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
+    """
+    Send the image prompt to Cloudflare Workers AI SDXL model.
+    """
+    print(f"\n🎨 Phase 2: Generating image with Cloudflare Workers AI SDXL (niche: {niche})...")
+    if not CLOUDFLARE_ACCOUNT_ID or not CLOUDFLARE_API_TOKEN:
+        raise Exception("Cloudflare credentials missing")
+
+    url = f"https://api.cloudflare.com/client/v4/accounts/{CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/stabilityai/stable-diffusion-xl-base-1.0"
+    headers = {
+        "Authorization": f"Bearer {CLOUDFLARE_API_TOKEN}",
+        "Content-Type": "application/json",
+    }
+
+    prefix = IMAGE_PROMPT_PREFIXES.get(niche, IMAGE_PROMPT_PREFIXES["nails"])
+    enhanced_prompt = prefix + image_prompt + ", highly detailed, masterpiece, best quality, vertical portrait, 9:16 aspect ratio, high resolution, photorealistic"
+    
+    payload = {
+        "prompt": enhanced_prompt,
+    }
+
+    response = requests.post(url, headers=headers, json=payload, timeout=120)
+    if response.status_code == 200:
+        image_path = os.path.join(output_dir, "raw_ai_image.png")
+        with open(image_path, "wb") as f:
+            f.write(response.content)
+        print(f"   ✅ Image saved successfully via Cloudflare Workers AI SDXL")
+        return image_path
+    else:
+        raise Exception(f"Cloudflare SDXL failed: {response.status_code} - {response.text}")
+
+
 def generate_image_with_pollinations(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
     """
     Zero-key fallback using Pollinations.ai.
@@ -582,14 +616,21 @@ def generate_image_master(image_prompt: str, output_dir: str, niche: str = "nail
     except Exception as e:
         print(f"   ⚠️ Hugging Face fallback triggered: {e}")
 
-    # 2. Try SiliconFlow (if key exists)
+    # 2. Try Cloudflare Workers AI SDXL (if key exists)
+    if CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN:
+        try:
+            return generate_image_with_cloudflare(image_prompt, output_dir, niche)
+        except Exception as e:
+            print(f"   ⚠️ Cloudflare SDXL fallback triggered: {e}")
+
+    # 3. Try SiliconFlow (if key exists)
     if SILICONFLOW_API_KEY:
         try:
             return generate_image_with_siliconflow(image_prompt, output_dir, niche)
         except Exception as e:
             print(f"   ⚠️ SiliconFlow fallback triggered: {e}")
 
-    # 3. Try Pollinations (last resort, no key)
+    # 4. Try Pollinations (last resort, no key)
     try:
         return generate_image_with_pollinations(image_prompt, output_dir, niche)
     except Exception as e:

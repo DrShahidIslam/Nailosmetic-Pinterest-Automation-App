@@ -28,6 +28,8 @@ def run_elite_flow():
     gemini_keys_raw = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
     gemini_keys = [k.strip() for k in gemini_keys_raw.split(",") if k.strip()]
     silicon_key = os.getenv("SILICONFLOW_API_KEY")
+    cf_account_id = os.getenv("CLOUDFLARE_ACCOUNT_ID")
+    cf_api_token = os.getenv("CLOUDFLARE_API_TOKEN")
     # Hugging Face Keys (Support multi-key cycling)
     hf_keys_raw = os.getenv("HUGGINGFACE_API_KEYS", "") or os.getenv("HUGGINGFACE_API_KEY", "")
     hf_keys = [k.strip() for k in hf_keys_raw.split(",") if k.strip()]
@@ -35,7 +37,7 @@ def run_elite_flow():
     wp = WordPressClient(wp_url, wp_user, wp_pass)
     td = TrendDiscovery(gemini_keys)
     gen = EliteGenerator(gemini_keys)
-    img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key)
+    img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key, cloudflare_account_id=cf_account_id, cloudflare_api_token=cf_api_token)
 
     # 0. Load Historical Data for Internal Linking
     history_path = Path(__file__).parent.parent / "shared" / "history.json"

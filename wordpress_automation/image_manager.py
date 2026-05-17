@@ -7,14 +7,17 @@ from huggingface_hub import InferenceClient
 from typing import Dict, Any, List, Optional
 
 class ImageManager:
-    def __init__(self, hf_api_keys: List[str] = None, siliconflow_api_key: str = None):
+    def __init__(self, hf_api_keys: List[str] = None, siliconflow_api_key: str = None, cloudflare_account_id: str = None, cloudflare_api_token: str = None):
         """
-        Initialize the ImageManager with multi-key support for Hugging Face.
+        Initialize the ImageManager with support for Hugging Face, Cloudflare Workers AI, and SiliconFlow.
         """
         self.hf_api_keys = hf_api_keys or []
-        self.silicon_key = siliconflow_api_key
+        self.silicon_key = siliconflow_api_key or os.getenv("SILICONFLOW_API_KEY")
         self.silicon_url = "https://api.siliconflow.cn/v1/images/generations"
         self.silicon_model = "Kwai-Kolors/Kolors"
+
+        self.cf_account_id = cloudflare_account_id or os.getenv("CLOUDFLARE_ACCOUNT_ID")
+        self.cf_api_token = cloudflare_api_token or os.getenv("CLOUDFLARE_API_TOKEN")
 
     def convert_to_webp(self, image_path: str) -> str:
         """
@@ -28,22 +31,18 @@ class ImageManager:
     def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png", prefer_kolors: bool = False) -> str:
         """
         The 'Brilliant' Orchestrator with customizable priority.
-        If prefer_kolors=True (WP Bot): Kolors -> Flux -> Pollinations
-        If prefer_kolors=False (Pinterest Bot): Flux -> Kolors -> Pollinations
+        If prefer_kolors=True (WP Bot): Cloudflare SDXL -> Flux -> Kolors -> Pollinations
+        If prefer_kolors=False (Pinterest Bot): Flux -> Cloudflare SDXL -> Kolors -> Pollinations
         """
-        enhanced_prompt = prompt + ", high quality, ultra realistic, masterpiece, aesthetic 4k"
-        model_id = "black-forest-labs/FLUX.1-schnell"
-
-        # Plan A for WordPress (Elite Bot) - Priority Kolors
-        if prefer_kolors and self.silicon_key:
+        # 1. WordPress Priority: Cloudflare Workers AI SDXL first
+        if prefer_kolors and self.cf_account_id and self.cf_api_token:
             try:
-                print("   🎨 Attempting SiliconFlow (Kolors) - WP Priority...")
-                size_sf = "768x1024" if aspect_ratio == "4:5" else "1024x1024"
-                return self._generate_siliconflow(prompt, size_sf, output_path)
+                print("   🎨 Attempting Cloudflare Workers AI (SDXL) - WP Priority...")
+                return self._generate_cloudflare(prompt, aspect_ratio, output_path)
             except Exception as e:
-                print(f"   ⚠️ SiliconFlow failed, trying Flux: {str(e)[:50]}")
+                print(f"   ⚠️ Cloudflare SDXL failed, trying Flux: {str(e)[:50]}")
 
-        # Plan A for Pinterest (or Fallback for WP) - Flux Cycling
+        # 2. Pinterest Priority or WordPress Fallback: Hugging Face Flux cycling
         if self.hf_api_keys:
             try:
                 print(f"   🎨 Attempting FLUX with {len(self.hf_api_keys)} keys...")
@@ -51,16 +50,24 @@ class ImageManager:
             except Exception as e:
                 print(f"   ⚠️ Flux cycling failed: {str(e)[:50]}")
 
-        # Plan B for Pinterest (Fallback) - Kolors
-        if not prefer_kolors and self.silicon_key:
+        # 3. Pinterest Fallback: Cloudflare Workers AI SDXL second
+        if not prefer_kolors and self.cf_account_id and self.cf_api_token:
+            try:
+                print("   🎨 Attempting Cloudflare Workers AI (SDXL) - Fallback...")
+                return self._generate_cloudflare(prompt, aspect_ratio, output_path)
+            except Exception as e:
+                print(f"   ⚠️ Cloudflare SDXL fallback failed: {str(e)[:50]}")
+
+        # 4. SiliconFlow Kolors fallback (3rd priority)
+        if self.silicon_key:
             try:
                 print("   🎨 Attempting SiliconFlow (Kolors) - Fallback...")
-                size_sf = "768x1024" if aspect_ratio == "4:5" else "1024x1024"
+                size_sf = "1024x1024" if aspect_ratio == "16:9" else "768x1024"
                 return self._generate_siliconflow(prompt, size_sf, output_path)
             except Exception as e:
                 print(f"   ⚠️ SiliconFlow fallback failed: {str(e)[:50]}")
 
-        # 3. Last Resort: Pollinations (Zero-cost, Unlimited)
+        # 5. Last Resort: Pollinations (Zero-cost, Unlimited)
         print("   🎨 Attempting Pollinations (Zero-cost Fallback)...")
         return self._generate_pollinations(prompt, aspect_ratio, output_path)
 
@@ -84,6 +91,31 @@ class ImageManager:
                 errors.append(f"Key {i+1} failed: {str(e)[:50]}")
         
         raise Exception(f"All Flux keys failed: {'; '.join(errors)}")
+
+    def _generate_cloudflare(self, prompt: str, aspect_ratio: str, output_path: str) -> str:
+        url = f"https://api.cloudflare.com/client/v4/accounts/{self.cf_account_id}/ai/run/@cf/stabilityai/stable-diffusion-xl-base-1.0"
+        headers = {
+            "Authorization": f"Bearer {self.cf_api_token}",
+            "Content-Type": "application/json",
+        }
+        
+        # Append dynamic aspect ratio modifiers
+        if aspect_ratio == "16:9":
+            enhanced_prompt = prompt + ", highly detailed, masterpiece, best quality, horizontal landscape, 16:9 aspect ratio, high resolution, photorealistic"
+        else:
+            enhanced_prompt = prompt + ", highly detailed, masterpiece, best quality, vertical portrait, 9:16 aspect ratio, high resolution, photorealistic"
+            
+        payload = {
+            "prompt": enhanced_prompt,
+        }
+        
+        resp = requests.post(url, headers=headers, json=payload, timeout=120)
+        if resp.status_code == 200:
+            with open(output_path, "wb") as f:
+                f.write(resp.content)
+            return output_path
+            
+        raise Exception(f"Cloudflare SDXL Failed: {resp.status_code} - {resp.text}")
 
     def _generate_siliconflow(self, prompt: str, size: str, output_path: str) -> str:
         headers = {
