@@ -1,5 +1,5 @@
 {
-  "next_index": 3,
+  "next_index": 4,
   "published": [
     {
       "index": 0,
@@ -15,6 +15,11 @@
       "index": 2,
       "slug": "spring-outfits-women-guide",
       "url": "https://nailosmetic.com/spring-outfits-women-guide/"
+    },
+    {
+      "index": 3,
+      "slug": "hairstyles-for-women-ultimate-guide",
+      "url": "https://nailosmetic.com/hairstyles-for-women-ultimate-guide/"
     }
   ]
 }
