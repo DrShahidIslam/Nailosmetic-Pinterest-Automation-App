@@ -322,11 +322,80 @@ def build_pillar_html(outline: Dict, section_bodies: List[str], media_map: Dict)
     if faqs:
         faq_col = _kid()
         faq_h = _kid()
+        faq_acc = _kid()
         html += f"""<!-- wp:kadence/column {{"uniqueID":"{faq_col}"}} -->
 <div class="wp-block-kadence-column kadence-column{faq_col}"><div class="kt-inside-inner-col">
 <!-- wp:kadence/advancedheading {{"uniqueID":"{faq_h}","level":2}} -->
 <h2 class="wp-block-kadence-advancedheading">Frequently Asked Questions</h2>
 <!-- /wp:kadence/advancedheading -->
+
+<!-- wp:kadence/accordion {{"uniqueID":"{faq_acc}"}} -->
+<div class="wp-block-kadence-accordion kt-accordion-wrap-{faq_acc}">
+<style>
+/* Scoped overrides to enforce high contrast and clean visual layout */
+.kt-accordion-pane {{
+    width: 100% !important;
+    margin-bottom: 14px !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+}}
+.kt-accordion-header-wrap {{
+    width: 100% !important;
+}}
+.kt-blocks-accordion-header {{
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 16px 20px !important;
+    background: #f8fafc !important;
+    color: #1e293b !important;
+    border: none !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease, color 0.2s ease !important;
+}}
+.kt-blocks-accordion-header:hover {{
+    background: #f1f5f9 !important;
+}}
+/* WCAG AAA High Contrast Expanded Header */
+.kt-blocks-accordion-header.active,
+.kt-blocks-accordion-header[aria-expanded="true"] {{
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}}
+/* Indicator Arrow Icon using CSS */
+.kt-blocks-accordion-header::after {{
+    content: '▼' !important;
+    font-size: 12px !important;
+    color: #64748b !important;
+    transition: transform 0.2s ease !important;
+}}
+.kt-blocks-accordion-header.active::after,
+.kt-blocks-accordion-header[aria-expanded="true"]::after {{
+    transform: rotate(180deg) !important;
+    color: #0f172a !important;
+}}
+/* Content Panel Styling with clean margins */
+.kt-accordion-panel {{
+    display: none !important; /* Hidden by default */
+    padding: 18px 20px !important;
+    background: #ffffff !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: #475569 !important;
+}}
+.kt-accordion-panel.show,
+.kt-blocks-accordion-header.active + .kt-accordion-panel {{
+    display: block !important;
+}}
+</style>
 """
         for faq in faqs:
             pane_id = _kid()
@@ -350,7 +419,38 @@ def build_pillar_html(outline: Dict, section_bodies: List[str], media_map: Dict)
 <!-- /wp:kadence/pane -->
 
 """
-        html += """</div></div>
+        html += """<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Select all our custom accordion buttons
+    const headers = document.querySelectorAll(".kt-blocks-accordion-header");
+    headers.forEach(header => {
+        // Enforce smooth dynamic toggling independent of WP script enqueues
+        header.addEventListener("click", function(e) {
+            e.preventDefault();
+            const pane = this.closest(".kt-accordion-pane");
+            const panel = pane.querySelector(".kt-accordion-panel");
+            
+            const isActive = this.classList.contains("active") || this.getAttribute("aria-expanded") === "true";
+            
+            if (isActive) {
+                this.classList.remove("active");
+                this.setAttribute("aria-expanded", "false");
+                panel.classList.remove("show");
+                panel.style.display = "none";
+            } else {
+                this.classList.add("active");
+                this.setAttribute("aria-expanded", "true");
+                panel.classList.add("show");
+                panel.style.display = "block";
+            }
+        });
+    });
+});
+</script>
+</div>
+<!-- /wp:kadence/accordion -->
+
+</div></div>
 <!-- /wp:kadence/column -->
 """
 

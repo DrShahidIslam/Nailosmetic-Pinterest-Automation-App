@@ -23,23 +23,61 @@ class ContentGenerator:
         """
         categories_str = ", ".join(existing_categories)
         
-        # Niche-specific default link fallbacks
-        niche_fallbacks = {
-            "nails": "spring-nail-designs-inspo",
-            "hair_beauty": "goddess-braids-ideas",
-            "home_garden": "bedscaping-ideas-home-decor",
-            "fashion_style": "casual-brunch-outfits-aesthetic",
-            "gardening": "flower-bed-ideas-front-house"
+        # Niche-specific high-authority pillar fallbacks to guarantee 3 unique links
+        niche_pillars = {
+            "nails": [
+                "nail-art-designs-ultimate-guide",
+                "chrome-nails-complete-guide",
+                "spring-nail-designs-inspo",
+                "pearl-nail-designs-trends"
+            ],
+            "hair_beauty": [
+                "hairstyles-for-women-ultimate-guide",
+                "goddess-braids-ideas",
+                "hair-highlights-trends",
+                "wolf-cut-haircut-styling"
+            ],
+            "home_garden": [
+                "home-decor-ideas-ultimate-guide",
+                "bedscaping-ideas-home-decor",
+                "color-drenching-bedroom-tips",
+                "june-calendar-home-transformation"
+            ],
+            "fashion_style": [
+                "spring-outfits-women-guide",
+                "casual-brunch-outfits-aesthetic",
+                "old-money-aesthetic-outfits",
+                "festival-outfits-ideas-inspo"
+            ]
         }
-        fallback_slug = niche_fallbacks.get(niche, "spring-nail-designs-inspo")
         
-        # Pick 3 unique internal links if possible from the niche-filtered slugs
-        available_links = previous_slugs if previous_slugs else [fallback_slug]
-        internal_links = random.sample(available_links, min(3, len(available_links)))
+        pillars = niche_pillars.get(niche, niche_pillars["nails"])
         
-        # Ensure we have at least 3 strings even if duplicates
-        while len(internal_links) < 3:
-            internal_links.append(random.choice(available_links))
+        # Build available links using previous_slugs, deduplicating them
+        available_links = list(dict.fromkeys(previous_slugs)) if previous_slugs else []
+        
+        # Pick unique links from available links
+        internal_links = []
+        for s in available_links:
+            if s not in internal_links:
+                internal_links.append(s)
+                
+        # Fill remaining slots using niche-specific authority pillars
+        for p in pillars:
+            if len(internal_links) >= 3:
+                break
+            if p not in internal_links:
+                internal_links.append(p)
+                
+        # If still less than 3 (extremely unlikely), fall back to universal nails pillars
+        for p in niche_pillars["nails"]:
+            if len(internal_links) >= 3:
+                break
+            if p not in internal_links:
+                internal_links.append(p)
+                
+        # Slice to exactly 3 unique slugs
+        internal_links = internal_links[:3]
         
         link1, link2, link3 = [f"https://nailosmetic.com/{s}/" for s in internal_links]
         
@@ -358,7 +396,102 @@ RETURN ONLY VALID JSON:
 
 <!-- wp:kadence/accordion {{"uniqueID":"{faq_accordion_id}"}} -->
 <div class="wp-block-kadence-accordion kt-accordion-wrap-{faq_accordion_id}">
-{accordion_inner_html}</div>
+<style>
+/* Scoped overrides to enforce high contrast and clean visual layout */
+.kt-accordion-pane {{
+    width: 100% !important;
+    margin-bottom: 14px !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+}}
+.kt-accordion-header-wrap {{
+    width: 100% !important;
+}}
+.kt-blocks-accordion-header {{
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 16px 20px !important;
+    background: #f8fafc !important;
+    color: #1e293b !important;
+    border: none !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease, color 0.2s ease !important;
+}}
+.kt-blocks-accordion-header:hover {{
+    background: #f1f5f9 !important;
+}}
+/* WCAG AAA High Contrast Expanded Header */
+.kt-blocks-accordion-header.active,
+.kt-blocks-accordion-header[aria-expanded="true"] {{
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}}
+/* Indicator Arrow Icon using CSS */
+.kt-blocks-accordion-header::after {{
+    content: '▼' !important;
+    font-size: 12px !important;
+    color: #64748b !important;
+    transition: transform 0.2s ease !important;
+}}
+.kt-blocks-accordion-header.active::after,
+.kt-blocks-accordion-header[aria-expanded="true"]::after {{
+    transform: rotate(180deg) !important;
+    color: #0f172a !important;
+}}
+/* Content Panel Styling with clean margins */
+.kt-accordion-panel {{
+    display: none !important; /* Hidden by default */
+    padding: 18px 20px !important;
+    background: #ffffff !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: #475569 !important;
+}}
+.kt-accordion-panel.show,
+.kt-blocks-accordion-header.active + .kt-accordion-panel {{
+    display: block !important;
+}}
+</style>
+
+{accordion_inner_html}
+<script>
+document.addEventListener("DOMContentLoaded", function() {{
+    // Select all our custom accordion buttons
+    const headers = document.querySelectorAll(".kt-blocks-accordion-header");
+    headers.forEach(header => {{
+        // Enforce smooth dynamic toggling independent of WP script enqueues
+        header.addEventListener("click", function(e) {{
+            e.preventDefault();
+            const pane = this.closest(".kt-accordion-pane");
+            const panel = pane.querySelector(".kt-accordion-panel");
+            
+            const isActive = this.classList.contains("active") || this.getAttribute("aria-expanded") === "true";
+            
+            if (isActive) {{
+                this.classList.remove("active");
+                this.setAttribute("aria-expanded", "false");
+                panel.classList.remove("show");
+                panel.style.display = "none";
+            }} else {{
+                this.classList.add("active");
+                this.setAttribute("aria-expanded", "true");
+                panel.classList.add("show");
+                panel.style.display = "block";
+            }}
+        }});
+    }});
+}});
+</script>
+</div>
 <!-- /wp:kadence/accordion -->
 
 </div></div>

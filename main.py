@@ -456,7 +456,7 @@ def generate_image_with_huggingface(image_prompt: str, output_dir: str, niche: s
         "black-forest-labs/FLUX.1-schnell",
         "stabilityai/stable-diffusion-xl-base-1.0" # Robust fallback
     ]
-
+ 
     # Try each model, and for each model, try all available keys
     for model_id in models_to_try:
         print(f"   🤖 Trying HF model: {model_id}")
@@ -470,10 +470,10 @@ def generate_image_with_huggingface(image_prompt: str, output_dir: str, niche: s
             
             for attempt in range(max_retries):
                 try:
-                    # Use simple text_to_image
-                    image = client.text_to_image(enhanced_prompt, model=model_id)
+                    # Enforce true 9:16 aspect ratio (768x1344)
+                    image = client.text_to_image(enhanced_prompt, model=model_id, width=768, height=1344)
                     image.save(image_path)
-                    print(f"   ✅ Image saved successfully using {model_id} (Key {i+1})")
+                    print(f"   ✅ Image saved successfully using {model_id} (Key {i+1}) (768x1344)")
                     return image_path
                 except Exception as e:
                     err_str = str(e)
@@ -487,9 +487,6 @@ def generate_image_with_huggingface(image_prompt: str, output_dir: str, niche: s
                         time.sleep(20)
                     elif "404" in err_str:
                         print(f"   ⚠️ Model {model_id} not reachable via public API, skipping model...")
-                        # This breaks the retry loop AND we want to move to next model, 
-                        # so we break the key loop too if it's a model-wide issue.
-                        # For now, let's just break the retry loop and let the key loop finish or break.
                         return _generate_image_with_next_model(model_id, models_to_try, image_prompt, output_dir, niche)
                     else:
                         print(f"   ⚠️ HF Error with {model_id} (Key {i+1}): {err_str[:100]}")
@@ -500,15 +497,10 @@ def generate_image_with_huggingface(image_prompt: str, output_dir: str, niche: s
 
 def _generate_image_with_next_model(failed_model, models, prompt, out_dir, niche):
     """Helper to skip to next model if one is completely down."""
-    # This is a bit complex for a simple refactor, so I'll just let the original loop handle it.
-    # Actually, if a model is 404, it's 404 for all keys usually.
     pass
-
-
-
+ 
+ 
 def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
-    # (Existing function content, but return instead of sys.exit if part of a fallback chain)
-    # ... (I'll keep it as is but wrap it safely)
     """
     Send the image prompt to SiliconFlow's Kolors model.
     """
@@ -564,6 +556,8 @@ def generate_image_with_cloudflare(image_prompt: str, output_dir: str, niche: st
     
     payload = {
         "prompt": enhanced_prompt,
+        "width": 768,
+        "height": 1344
     }
 
     response = requests.post(url, headers=headers, json=payload, timeout=120)
@@ -571,7 +565,7 @@ def generate_image_with_cloudflare(image_prompt: str, output_dir: str, niche: st
         image_path = os.path.join(output_dir, "raw_ai_image.png")
         with open(image_path, "wb") as f:
             f.write(response.content)
-        print(f"   ✅ Image saved successfully via Cloudflare Workers AI SDXL")
+        print(f"   ✅ Image saved successfully via Cloudflare Workers AI SDXL (768x1344)")
         return image_path
     else:
         raise Exception(f"Cloudflare SDXL failed: {response.status_code} - {response.text}")
@@ -587,10 +581,10 @@ def generate_image_with_pollinations(image_prompt: str, output_dir: str, niche: 
     prefix = IMAGE_PROMPT_PREFIXES.get(niche, IMAGE_PROMPT_PREFIXES["nails"])
     # Seed for some randomness
     seed = random.randint(0, 999999)
-    # Pollinations URL format: https://image.pollinations.ai/prompt/{prompt}?width={w}&height={h}&model=flux&seed={seed}
+    # Enforce true 9:16 aspect ratio (768x1344)
     import urllib.parse
     encoded_prompt = urllib.parse.quote(prefix + image_prompt)
-    url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=768&height=1024&model=flux&nologo=true&seed={seed}"
+    url = f"https://image.pollinations.ai/prompt/{encoded_prompt}?width=768&height=1344&model=flux&nologo=true&seed={seed}"
     
     try:
         response = requests.get(url, timeout=60)
@@ -820,21 +814,21 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
             progress = (y - gradient_start_y) / (height - gradient_start_y)
             alpha = int(140 * (progress ** 1.8))  # extremely soft shadow
             draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
-        text_y_start = height - total_text_height - int(height * 0.18)
+        text_y_start = height - total_text_height - int(height * 0.16)
 
     elif layout_style == 'bold_clickbait':
-        # Clickbait style: no solid boxes! We rely on massive high-contrast text dropshadow outlines
+        # Clickbait style: Headline is top-aligned to keep the center completely free for model's face/nails
         # Draw a very soft general vignette around borders to increase edge contrast
-        for y in range(0, int(height * 0.20)):
-            progress = 1.0 - (y / (height * 0.20))
-            alpha = int(80 * (progress ** 2))
+        for y in range(0, int(height * 0.25)):
+            progress = 1.0 - (y / (height * 0.25))
+            alpha = int(120 * (progress ** 2))
             draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
         for y in range(int(height * 0.80), height):
             progress = (y - int(height * 0.80)) / (height * 0.20)
             alpha = int(80 * (progress ** 2))
             draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
             
-        text_y_start = int(height * 0.22) # floating centered/top-middle text
+        text_y_start = int(height * 0.08) # Top-aligned editorial header zone
 
     else: # modern_vignette
         # Elegant classic gradient bottom fade
@@ -886,7 +880,7 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
             draw.text((text_x + 2, text_y + 2), line, font=main_font, fill=(0, 0, 0, 160))
             draw.text((text_x, text_y), line, font=main_font, fill=(255, 255, 255, 255))
 
-    # --- Draw Premium Curiosity-Gap Badge at the Top ---
+    # --- Draw Premium Curiosity-Gap Badge dynamically above the title ---
     try:
         badge_font_path = montserrat_bold_path if os.path.exists(montserrat_bold_path) else main_font
         if badge_font_path:
@@ -896,8 +890,8 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
             bh = badge_bbox[3] - badge_bbox[1]
             
             bx = (width - bw) // 2
-            # Y position is slightly above text or at the top of the pin
-            by = text_y_start - bh - int(height * 0.04) if layout_style != 'bold_clickbait' else int(height * 0.14)
+            # Dynamically position above title for elegant luxury editorial layout
+            by = text_y_start - bh - int(height * 0.022)
             
             # Draw capsule rounded rectangle backing (pill style)
             padding_x, padding_y = 18, 8
@@ -921,16 +915,20 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
         
         cta_bbox = draw.textbbox((0, 0), cta_text, font=cta_font)
         cta_w = cta_bbox[2] - cta_bbox[0]
+        cta_h = cta_bbox[3] - cta_bbox[1]
         cta_x = (width - cta_w) // 2
         
-        if layout_style == 'bold_clickbait':
-            cta_y = text_y_start + total_text_height + int(height * 0.04)
-            draw_text_with_outline(draw, cta_text, cta_x, cta_y, cta_font, (255, 255, 255, 255), (0, 0, 0, 255), width_val=2)
-        else:
-            cta_y = text_y_start + total_text_height + int(height * 0.03)
-            draw.text((cta_x + 1, cta_y + 1), cta_text, font=cta_font, fill=(0, 0, 0, 150))
-            # Elegant accent color for CTA
-            draw.text((cta_x, cta_y), cta_text, font=cta_font, fill=accent_color)
+        cta_y = text_y_start + total_text_height + int(height * 0.028)
+        
+        # Enforce rounded deep slate capsule backing behind the CTA text to ensure 100% readability
+        padding_x, padding_y = 22, 10
+        draw_cta_pill = ImageDraw.Draw(img, "RGBA")
+        draw_cta_pill.rounded_rectangle(
+            [(cta_x - padding_x, cta_y - padding_y), (cta_x + cta_w + padding_x, cta_y + cta_h + padding_y)],
+            radius=12,
+            fill=(15, 23, 42, 220) # deep slate/charcoal with nice visibility
+        )
+        draw.text((cta_x, cta_y), cta_text, font=cta_font, fill=accent_color)
     except: pass
 
     # --- Draw Branding Badge (Nailosmetic) ---
@@ -948,16 +946,15 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
             bx = (width - bw) // 2
             by = height - bh - int(height * 0.035)
             
-            if layout_style == 'bold_clickbait' or layout_style == 'premium_magazine':
-                # Draw a very soft blurred backdrop pill for the brand name to ensure visibility on bright images
-                draw_bar = ImageDraw.Draw(img, "RGBA")
-                draw_bar.rounded_rectangle(
-                    [(bx - 20, by - 6), (bx + bw + 20, by + bh + 6)], 
-                    radius=10, 
-                    fill=(0, 0, 0, 100)
-                )
+            # Always draw a premium soft backdrop pill for the brand name to ensure 100% visibility and branding consistency
+            draw_bar = ImageDraw.Draw(img, "RGBA")
+            draw_bar.rounded_rectangle(
+                [(bx - 20, by - 6), (bx + bw + 20, by + bh + 6)], 
+                radius=10, 
+                fill=(0, 0, 0, 120)
+            )
                 
-            draw.text((bx, by), brand_spaced, font=brand_font, fill=(255, 255, 255, 200))
+            draw.text((bx, by), brand_spaced, font=brand_font, fill=(255, 255, 255, 220))
     except Exception as e:
         print(f"   ⚠️ Skipping brand drawing: {e}")
 

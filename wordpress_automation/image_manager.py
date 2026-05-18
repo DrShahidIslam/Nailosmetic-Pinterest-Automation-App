@@ -40,7 +40,7 @@ class ImageManager:
         if self.hf_api_keys:
             try:
                 print(f"   🎨 Attempting FLUX with {len(self.hf_api_keys)} keys...")
-                return self._generate_priority_flux(prompt, output_path)
+                return self._generate_priority_flux(prompt, aspect_ratio, output_path)
             except Exception as e:
                 print(f"   ⚠️ Flux cycling failed: {str(e)[:50]}")
 
@@ -48,7 +48,12 @@ class ImageManager:
         if self.silicon_key:
             try:
                 print("   🎨 Attempting SiliconFlow (Kolors)...")
-                size_sf = "1024x1024" if aspect_ratio == "16:9" else "768x1024"
+                if aspect_ratio == "16:9":
+                    size_sf = "1024x768"
+                elif aspect_ratio == "9:16":
+                    size_sf = "768x1024"
+                else: # 4:5
+                    size_sf = "768x1024"
                 return self._generate_siliconflow(prompt, size_sf, output_path)
             except Exception as e:
                 print(f"   ⚠️ SiliconFlow failed: {str(e)[:50]}")
@@ -65,21 +70,32 @@ class ImageManager:
         print("   🎨 Attempting Pollinations (Zero-cost Fallback)...")
         return self._generate_pollinations(prompt, aspect_ratio, output_path)
 
-    def _generate_priority_flux(self, prompt: str, output_path: str) -> str:
+    def _generate_priority_flux(self, prompt: str, aspect_ratio: str, output_path: str) -> str:
         """
         Cycles through available HF API keys to generate an image via FLUX.1-schnell.
         """
         from huggingface_hub import InferenceClient
+        
+        # Determine width and height based on aspect ratio
+        if aspect_ratio == "16:9":
+            w, h = 1024, 576
+        elif aspect_ratio == "9:16":
+            w, h = 768, 1344
+        else: # Default 4:5
+            w, h = 800, 1000
+            
         errors = []
         for i, key in enumerate(self.hf_api_keys):
             try:
                 client = InferenceClient(api_key=key)
                 image = client.text_to_image(
                     prompt,
-                    model="black-forest-labs/FLUX.1-schnell"
+                    model="black-forest-labs/FLUX.1-schnell",
+                    width=w,
+                    height=h
                 )
                 image.save(output_path)
-                print(f"    Success with HF Key {i+1}/{len(self.hf_api_keys)}")
+                print(f"    Success with HF Key {i+1}/{len(self.hf_api_keys)} ({w}x{h})")
                 return output_path
             except Exception as e:
                 errors.append(f"Key {i+1} failed: {str(e)[:50]}")
@@ -93,14 +109,21 @@ class ImageManager:
             "Content-Type": "application/json",
         }
         
-        # Append dynamic aspect ratio modifiers
+        # Determine width and height based on aspect ratio
         if aspect_ratio == "16:9":
+            w, h = 1024, 576
             enhanced_prompt = prompt + ", highly detailed, masterpiece, best quality, horizontal landscape, 16:9 aspect ratio, high resolution, photorealistic"
-        else:
+        elif aspect_ratio == "9:16":
+            w, h = 768, 1344
             enhanced_prompt = prompt + ", highly detailed, masterpiece, best quality, vertical portrait, 9:16 aspect ratio, high resolution, photorealistic"
+        else: # Default 4:5
+            w, h = 800, 1000
+            enhanced_prompt = prompt + ", highly detailed, masterpiece, best quality, vertical portrait, 4:5 aspect ratio, high resolution, photorealistic"
             
         payload = {
             "prompt": enhanced_prompt,
+            "width": w,
+            "height": h
         }
         
         resp = requests.post(url, headers=headers, json=payload, timeout=120)
@@ -133,7 +156,13 @@ class ImageManager:
         raise Exception(f"SiliconFlow Failed: {resp.status_code}")
 
     def _generate_pollinations(self, prompt: str, aspect_ratio: str, output_path: str) -> str:
-        w, h = (1024, 768) if aspect_ratio == "16:9" else (768, 1024)
+        if aspect_ratio == "16:9":
+            w, h = 1024, 576
+        elif aspect_ratio == "9:16":
+            w, h = 768, 1344
+        else: # Default 4:5
+            w, h = 800, 1000
+            
         seed = random.randint(0, 999999)
         import urllib.parse
         encoded = urllib.parse.quote(prompt)
