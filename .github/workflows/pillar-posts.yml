@@ -6,7 +6,7 @@
 # exits cleanly once all 5 pillars are published, so this
 # workflow can stay permanently enabled without wasted runs.
 #
-# Image priority: HuggingFace FLUX → SiliconFlow Kolors → Pollinations
+# Image priority: HuggingFace FLUX → SiliconFlow Kolors → Cloudflare SDXL → Pollinations
 # ============================================================
 
 name: 🏛️ Pillar Post Publisher

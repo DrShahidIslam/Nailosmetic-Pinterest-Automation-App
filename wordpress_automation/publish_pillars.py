@@ -7,10 +7,11 @@ Called by the GitHub Action 'pillar-posts.yml' on a daily schedule.
 Tracks progress in shared/pillar_state.json — when all 5 are published the
 script exits cleanly so the action can be left permanently enabled.
 
-Image priority (same as main WordPress bot, prefer_kolors=False):
+Image priority (same as main WordPress bot):
   1. HuggingFace FLUX.1-schnell
-  2. SiliconFlow Kolors (fallback)
-  3. Pollinations (zero-cost last resort)
+  2. SiliconFlow Kolors
+  3. Cloudflare Workers AI SDXL
+  4. Pollinations (zero-cost last resort)
 """
 
 import os
@@ -282,7 +283,7 @@ def main():
         print("❌ WordPress unreachable after 5 attempts. Aborting.")
         sys.exit(1)
 
-    # Image priority: Cloudflare SDXL → FLUX (HF) → Kolors (SiliconFlow) → Pollinations
+    # Image priority: FLUX (HF) → Kolors (SiliconFlow) → Cloudflare SDXL → Pollinations
     img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key, cloudflare_account_id=cf_account_id, cloudflare_api_token=cf_api_token)
 
     # ── Step 1: Generate outline ───────────────────────────────────────────
