@@ -1,5 +1,5 @@
 {
-  "next_index": 4,
+  "next_index": 5,
   "published": [
     {
       "index": 0,
@@ -20,6 +20,11 @@
       "index": 3,
       "slug": "hairstyles-for-women-ultimate-guide",
       "url": "https://nailosmetic.com/hairstyles-for-women-ultimate-guide/"
+    },
+    {
+      "index": 4,
+      "slug": "home-decor-ideas-ultimate-guide",
+      "url": "https://nailosmetic.com/home-decor-ideas-ultimate-guide/"
     }
   ]
 }
