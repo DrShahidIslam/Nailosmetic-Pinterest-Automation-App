@@ -3,6 +3,7 @@ Pinterest Trend Harvester v2
 Fixed: API returns data under "trends" key, not "items".
 Also fetches new board IDs for the expanded niche setup.
 """
+import os
 import requests
 import json
 import sys
