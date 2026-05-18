@@ -616,19 +616,19 @@ def generate_image_master(image_prompt: str, output_dir: str, niche: str = "nail
     except Exception as e:
         print(f"   ⚠️ Hugging Face fallback triggered: {e}")
 
-    # 2. Try Cloudflare Workers AI SDXL (if key exists)
-    if CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN:
-        try:
-            return generate_image_with_cloudflare(image_prompt, output_dir, niche)
-        except Exception as e:
-            print(f"   ⚠️ Cloudflare SDXL fallback triggered: {e}")
-
-    # 3. Try SiliconFlow (if key exists)
+    # 2. Try SiliconFlow (if key exists)
     if SILICONFLOW_API_KEY:
         try:
             return generate_image_with_siliconflow(image_prompt, output_dir, niche)
         except Exception as e:
             print(f"   ⚠️ SiliconFlow fallback triggered: {e}")
+
+    # 3. Try Cloudflare Workers AI SDXL (if key exists)
+    if CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN:
+        try:
+            return generate_image_with_cloudflare(image_prompt, output_dir, niche)
+        except Exception as e:
+            print(f"   ⚠️ Cloudflare SDXL fallback triggered: {e}")
 
     # 4. Try Pollinations (last resort, no key)
     try:

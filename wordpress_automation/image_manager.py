@@ -30,19 +30,13 @@ class ImageManager:
 
     def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png", prefer_kolors: bool = False) -> str:
         """
-        The 'Brilliant' Orchestrator with customizable priority.
-        If prefer_kolors=True (WP Bot): Cloudflare SDXL -> Flux -> Kolors -> Pollinations
-        If prefer_kolors=False (Pinterest Bot): Flux -> Cloudflare SDXL -> Kolors -> Pollinations
+        Universal priority chain:
+        1. Hugging Face FLUX (1st Priority)
+        2. SiliconFlow Kolors (2nd Priority)
+        3. Cloudflare Workers AI SDXL (3rd Priority)
+        4. Pollinations (4th Priority)
         """
-        # 1. WordPress Priority: Cloudflare Workers AI SDXL first
-        if prefer_kolors and self.cf_account_id and self.cf_api_token:
-            try:
-                print("   🎨 Attempting Cloudflare Workers AI (SDXL) - WP Priority...")
-                return self._generate_cloudflare(prompt, aspect_ratio, output_path)
-            except Exception as e:
-                print(f"   ⚠️ Cloudflare SDXL failed, trying Flux: {str(e)[:50]}")
-
-        # 2. Pinterest Priority or WordPress Fallback: Hugging Face Flux cycling
+        # 1st Priority: Hugging Face FLUX cycling
         if self.hf_api_keys:
             try:
                 print(f"   🎨 Attempting FLUX with {len(self.hf_api_keys)} keys...")
@@ -50,24 +44,24 @@ class ImageManager:
             except Exception as e:
                 print(f"   ⚠️ Flux cycling failed: {str(e)[:50]}")
 
-        # 3. Pinterest Fallback: Cloudflare Workers AI SDXL second
-        if not prefer_kolors and self.cf_account_id and self.cf_api_token:
-            try:
-                print("   🎨 Attempting Cloudflare Workers AI (SDXL) - Fallback...")
-                return self._generate_cloudflare(prompt, aspect_ratio, output_path)
-            except Exception as e:
-                print(f"   ⚠️ Cloudflare SDXL fallback failed: {str(e)[:50]}")
-
-        # 4. SiliconFlow Kolors fallback (3rd priority)
+        # 2nd Priority: SiliconFlow Kolors
         if self.silicon_key:
             try:
-                print("   🎨 Attempting SiliconFlow (Kolors) - Fallback...")
+                print("   🎨 Attempting SiliconFlow (Kolors)...")
                 size_sf = "1024x1024" if aspect_ratio == "16:9" else "768x1024"
                 return self._generate_siliconflow(prompt, size_sf, output_path)
             except Exception as e:
-                print(f"   ⚠️ SiliconFlow fallback failed: {str(e)[:50]}")
+                print(f"   ⚠️ SiliconFlow failed: {str(e)[:50]}")
 
-        # 5. Last Resort: Pollinations (Zero-cost, Unlimited)
+        # 3rd Priority: Cloudflare Workers AI SDXL
+        if self.cf_account_id and self.cf_api_token:
+            try:
+                print("   🎨 Attempting Cloudflare Workers AI (SDXL)...")
+                return self._generate_cloudflare(prompt, aspect_ratio, output_path)
+            except Exception as e:
+                print(f"   ⚠️ Cloudflare SDXL failed: {str(e)[:50]}")
+
+        # 4th Priority: Pollinations (Zero-cost fallback)
         print("   🎨 Attempting Pollinations (Zero-cost Fallback)...")
         return self._generate_pollinations(prompt, aspect_ratio, output_path)
 
