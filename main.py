@@ -1360,8 +1360,11 @@ def main():
                             print(f"   🔗 Context-matched article found (score {best_score}): {destination_link}")
                         elif search_pool:
                             # No keyword match, but category-matched or niche latest article
-                            destination_link = search_pool[-1]["url"]
-                            print(f"   🔗 Category fallback article: {destination_link}")
+                            # Enforce URL rotation to prevent spam filters by picking randomly from the last 15 articles
+                            candidates = search_pool[-15:]
+                            best_article = random.choice(candidates)
+                            destination_link = best_article["url"]
+                            print(f"   🔗 Category fallback article (rotated from last 15): {destination_link}")
                             
                 except Exception as e:
                     print(f"   ⚠️ Error reading published_links.json: {e}")
