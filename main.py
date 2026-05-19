@@ -147,36 +147,36 @@ NICHE_WEIGHTS = {
 # Niche-specific CTA options (Universal Action-Oriented to prevent collision)
 CTA_OPTIONS = {
     "nails": [
-        "Click Here For Details ➔",
+        "Click Here For Details ->",
         "Tap To Read More",
         "Get The Full Guide Now",
         "Find Out How Here",
         "Click To See More",
-        "Tap For The Secret ➔",
+        "Tap For The Secret ->",
     ],
     "hair_beauty": [
-        "Click Here For Details ➔",
+        "Click Here For Details ->",
         "Tap To Read More",
         "Get The Full Guide Now",
         "Find Out How Here",
         "Click To See More",
-        "Tap For The Secret ➔",
+        "Tap For The Secret ->",
     ],
     "home_garden": [
-        "Click Here For Details ➔",
+        "Click Here For Details ->",
         "Tap To Read More",
         "Get The Full Guide Now",
         "Find Out How Here",
         "Click To See More",
-        "Tap For The Secret ➔",
+        "Tap For The Secret ->",
     ],
     "fashion_style": [
-        "Click Here For Details ➔",
+        "Click Here For Details ->",
         "Tap To Read More",
         "Get The Full Guide Now",
         "Find Out How Here",
         "Click To See More",
-        "Tap For The Secret ➔",
+        "Tap For The Secret ->",
     ],
 }
 
@@ -636,10 +636,10 @@ def generate_image_master(image_prompt: str, output_dir: str, niche: str = "nail
 
 def clean_text_for_rendering(text: str) -> str:
     """
-    Remove emojis and replace special Unicode characters (smart quotes, em-dashes)
-    with their standard ASCII equivalents to prevent 'tofu' in certain fonts.
+    Remove emojis and non-ASCII characters to prevent 'tofu' (empty boxes)
+    in custom fonts. Only allows standard printable ASCII and spacing.
     """
-    # Replace smart quotes and dashes
+    # Replace smart quotes and dashes with ASCII equivalents first
     replacements = {
         "—": "-",  # em dash
         "–": "-",  # en dash
@@ -652,18 +652,8 @@ def clean_text_for_rendering(text: str) -> str:
     for old, new in replacements.items():
         text = text.replace(old, new)
 
-    # Remove emojis (common source of tofu)
-    # This regex removes most emoji/picto ranges
-    import re
-    emoji_pattern = re.compile("["
-                               "\U0001f600-\U0001f64f"  # emoticons
-                               "\U0001f300-\U0001f5ff"  # symbols & pictographs
-                               "\U0001f680-\U0001f6ff"  # transport & map symbols
-                               "\U0001f1e0-\U0001f1ff"  # flags (iOS)
-                               "\U00002702-\U000027b0"
-                               "\U000024c2-\U0001f251"
-                               "]+", flags=re.UNICODE)
-    cleaned = emoji_pattern.sub("", text)
+    # Filter to only allow printable ASCII and whitespace characters
+    cleaned = "".join(c for c in text if (32 <= ord(c) <= 126) or c in ("\n", "\r", "\t"))
     return cleaned.strip()
 
 
@@ -696,14 +686,14 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     }
     accent_color = niche_accents.get(niche, (255, 200, 200))
     
-    # Curiosity-gap badges by niche
+    # Curiosity-gap badges by niche (Completely emoji-free to prevent empty box rendering errors)
     niche_badges = {
-        "nails": "✨ SALON LOOKBOOK ✨",
-        "hair_beauty": "🔥 BEAUTY SECRET 🔥",
-        "home_garden": "🛋️ DECOR GUIDE 🛋️",
-        "fashion_style": "💡 CHIC STYLING 💡"
+        "nails": "SALON LOOKBOOK",
+        "hair_beauty": "BEAUTY SECRET",
+        "home_garden": "DECOR GUIDE",
+        "fashion_style": "CHIC STYLING"
     }
-    badge_text = niche_badges.get(niche, "🔥 TREND ALERT 🔥")
+    badge_text = niche_badges.get(niche, "TREND ALERT")
 
     # --- Layout & Styling Selection ---
     # We use 3 modern high-CTR layouts instead of generic boxed containers
