@@ -56,6 +56,14 @@ def run_elite_flow():
     weights = list(NICHE_WEIGHTS.values())
     chosen_niche = random.choices(niches, weights=weights, k=1)[0]
     
+    niche_map = {
+        "nail art and beauty": "nails",
+        "hairstyles and beauty": "hair_beauty",
+        "home decor and garden": "home_garden",
+        "fashion and outfit style": "fashion_style"
+    }
+    short_niche = niche_map.get(chosen_niche, "nails")
+    
     # 2. Discover Topics for the chosen niche
     opportunities = td.discover_opportunity_topics(niche=f"{chosen_niche} trends 2026-2027")
     
@@ -73,7 +81,7 @@ def run_elite_flow():
     print(f"🎯 Selected Topic: {topic_data['topic']}")
 
     # 3. Generate Elite Blog Data
-    blog_data = gen.generate_elite_blog(topic_data, previous_slugs)
+    blog_data = gen.generate_elite_blog(topic_data, previous_slugs, short_niche)
     
     # 3. Handle Images and Media
     with tempfile.TemporaryDirectory() as tmp_dir:

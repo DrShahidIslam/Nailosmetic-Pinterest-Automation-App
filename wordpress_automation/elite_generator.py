@@ -15,12 +15,23 @@ class EliteGenerator:
     def _get_client(self, api_key):
         return genai.Client(api_key=api_key)
 
-    def generate_elite_blog(self, topic_data: Dict[str, Any], previous_slugs: List[str]) -> Dict[str, Any]:
+    def generate_elite_blog(self, topic_data: Dict[str, Any], previous_slugs: List[str], niche: str = "nails") -> Dict[str, Any]:
         """
         Main orchestration for elite long-form content with internal linking.
         """
         topic = topic_data["topic"]
-        internal_link_slug = random.choice(previous_slugs) if previous_slugs else "spring-nail-designs-inspo"
+        
+        # Define niche to primary pillar mapping (Hubs)
+        niche_primary_pillars = {
+            "nails": "nail-art-designs-ultimate-guide",
+            "hair_beauty": "hairstyles-for-women-ultimate-guide",
+            "home_garden": "home-decor-ideas-ultimate-guide",
+            "fashion_style": "spring-outfits-women-guide"
+        }
+        
+        # Elite blogs always target their corresponding parent pillar post to pass maximum link equity upward
+        internal_link_slug = niche_primary_pillars.get(niche, "nail-art-designs-ultimate-guide")
+        
         homepage_url = "https://nailosmetic.com/"
         article_url = f"https://nailosmetic.com/{internal_link_slug}/"
         

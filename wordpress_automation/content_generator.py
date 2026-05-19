@@ -23,61 +23,73 @@ class ContentGenerator:
         """
         categories_str = ", ".join(existing_categories)
         
-        # Niche-specific high-authority pillar fallbacks to guarantee 3 unique links
-        niche_pillars = {
-            "nails": [
-                "nail-art-designs-ultimate-guide",
-                "chrome-nails-complete-guide",
-                "spring-nail-designs-inspo",
-                "pearl-nail-designs-trends"
-            ],
-            "hair_beauty": [
-                "hairstyles-for-women-ultimate-guide",
-                "goddess-braids-ideas",
-                "hair-highlights-trends",
-                "wolf-cut-haircut-styling"
-            ],
-            "home_garden": [
-                "home-decor-ideas-ultimate-guide",
-                "bedscaping-ideas-home-decor",
-                "color-drenching-bedroom-tips",
-                "june-calendar-home-transformation"
-            ],
-            "fashion_style": [
-                "spring-outfits-women-guide",
-                "casual-brunch-outfits-aesthetic",
-                "old-money-aesthetic-outfits",
-                "festival-outfits-ideas-inspo"
-            ]
+        # Define niche to primary pillar mapping (Hubs)
+        niche_primary_pillars = {
+            "nails": "nail-art-designs-ultimate-guide",
+            "hair_beauty": "hairstyles-for-women-ultimate-guide",
+            "home_garden": "home-decor-ideas-ultimate-guide",
+            "fashion_style": "spring-outfits-women-guide"
         }
         
-        pillars = niche_pillars.get(niche, niche_pillars["nails"])
+        # Hardcoded high-authority secondary pillars for fallback
+        niche_secondary_pillars = {
+            "nails": ["chrome-nails-complete-guide", "spring-nail-designs-inspo", "pearl-nail-designs-trends"],
+            "hair_beauty": ["wolf-cut-hairstyles-guide", "goddess-braids-styles", "ultimate-box-braids-styles"],
+            "home_garden": ["concrete-block-garden-beds", "small-bathroom-makeover-ideas", "front-yard-landscaping-ideas"],
+            "fashion_style": ["chic-spring-outfits-women", "casual-spring-outfit-ideas", "perfect-leggings-outfits"]
+        }
         
-        # Build available links using previous_slugs, deduplicating them
-        available_links = list(dict.fromkeys(previous_slugs)) if previous_slugs else []
+        # 1. Link 1 is always the primary pillar for the active niche (Hub-and-Spoke model)
+        primary_pillar = niche_primary_pillars.get(niche, "nail-art-designs-ultimate-guide")
         
-        # Pick unique links from available links
-        internal_links = []
-        for s in available_links:
-            if s not in internal_links:
-                internal_links.append(s)
-                
-        # Fill remaining slots using niche-specific authority pillars
-        for p in pillars:
-            if len(internal_links) >= 3:
+        # 2. Link 2 & Link 3 are dynamic same-niche sibling posts from published_links.json
+        sibling_slugs = []
+        try:
+            from pathlib import Path
+            published_links_path = Path(__file__).parent.parent / "shared" / "published_links.json"
+            if published_links_path.exists():
+                with open(published_links_path, "r", encoding="utf-8") as f:
+                    published_data = json.load(f)
+                # Select slugs from published_links belonging to the active niche
+                sibling_slugs = [p["slug"] for p in published_data if p.get("niche") == niche and p.get("slug")]
+        except Exception as e:
+            print(f"   ⚠️ Error reading published_links.json for content generator: {e}")
+            
+        # Filter out the primary pillar to avoid duplicate links in the same post
+        sibling_slugs = [s for s in sibling_slugs if s != primary_pillar]
+        
+        # Prioritize recently published sibling posts (newest first) by reversing
+        sibling_slugs = list(dict.fromkeys(reversed(sibling_slugs)))
+        
+        # Extract up to 2 unique sibling posts
+        additional_links = []
+        for s in sibling_slugs:
+            if len(additional_links) >= 2:
                 break
-            if p not in internal_links:
-                internal_links.append(p)
+            if s not in additional_links:
+                additional_links.append(s)
                 
-        # If still less than 3 (extremely unlikely), fall back to universal nails pillars
-        for p in niche_pillars["nails"]:
-            if len(internal_links) >= 3:
+        # Fallback to secondary pillars of the active niche if we need more links
+        sec_pillars = niche_secondary_pillars.get(niche, niche_secondary_pillars["nails"])
+        for p in sec_pillars:
+            if len(additional_links) >= 2:
                 break
-            if p not in internal_links:
-                internal_links.append(p)
+            if p != primary_pillar and p not in additional_links:
+                additional_links.append(p)
                 
-        # Slice to exactly 3 unique slugs
-        internal_links = internal_links[:3]
+        # Final fallback to general previous slugs if still lacking links
+        if len(additional_links) < 2:
+            for s in previous_slugs:
+                if len(additional_links) >= 2:
+                    break
+                if s != primary_pillar and s not in additional_links:
+                    additional_links.append(s)
+                    
+        # Slice to ensure we have exactly 2 additional slugs
+        additional_links = additional_links[:2]
+        
+        # Construct the final list of 3 unique slugs
+        internal_links = [primary_pillar] + additional_links
         
         link1, link2, link3 = [f"https://nailosmetic.com/{s}/" for s in internal_links]
         
