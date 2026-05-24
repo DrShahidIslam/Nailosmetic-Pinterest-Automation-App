@@ -775,5 +775,12 @@
         "niche": "nails",
         "topic": "black nail designs",
         "slug": "best-black-nail-designs"
+    },
+    {
+        "url": "https://nailosmetic.com/bathroom-vanity-ideas/",
+        "category": "Home & Garden",
+        "niche": "home_garden",
+        "topic": "bathroom vanity ideas",
+        "slug": "bathroom-vanity-ideas"
     }
 ]
