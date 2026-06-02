@@ -1,7 +1,7 @@
 # ============================================================
 # Nailosmetic Pinterest Automation Bot — GitHub Actions Workflow
 # ============================================================
-# This workflow runs the Pinterest bot 10 times every day.
+# This workflow runs the Pinterest bot 3 times every day to avoid spam filters.
 # It can also be triggered manually from the Actions tab.
 
 name: 📌 Daily Pinterest Pin
@@ -11,8 +11,8 @@ env:
 
 on:
   schedule:
-    # Run 10 times a day to meet the daily pin target
-    - cron: "0 0,2,4,7,10,12,14,17,20,22 * * *"
+    # Run 8 times a day (every 3 hours) as requested
+    - cron: "0 0,3,6,9,12,15,18,21 * * *"
 
   # Allow manual triggering from the GitHub Actions UI
   workflow_dispatch:

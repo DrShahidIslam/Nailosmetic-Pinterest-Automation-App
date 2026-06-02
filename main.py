@@ -183,10 +183,10 @@ CTA_OPTIONS = {
 # Niche-specific image prompt prefixes for SiliconFlow
 # These FORCE the correct subject into every generated image, preventing topic-only generation.
 IMAGE_PROMPT_PREFIXES = {
-    "nails": "Extreme close-up macro photograph of a real woman's hand showing beautiful fingernails with nail art design. The nails are the main focal subject of the image. The nail art style is: ",
-    "hair_beauty": "Professional portrait photograph of a real person showing their hairstyle. The hair is the main focal subject of the image. Beautiful, styled hair. The hairstyle is: ",
-    "home_garden": "Professional interior design photograph of a real room or garden space. The space is the main focal subject. Architectural Digest style, natural ambient lighting. The design concept is: ",
-    "fashion_style": "Professional fashion photograph of a real woman wearing a complete outfit. The outfit is the main focal subject. Editorial street style, clean backdrop. The outfit style is: ",
+    "nails": "Extreme close-up macro photograph of a real woman's hand showing beautiful fingernails with nail art design. Incorporate tactile, 'gimme gummy' glossy textures. The nails are the main focal subject of the image. The nail art style is: ",
+    "hair_beauty": "Professional portrait photograph of a real person showing their hairstyle or beauty look. Incorporate 'vamp romantic' or highly textured 2026 aesthetics. The hair/face is the main focal subject of the image. Beautiful, styled look. The style is: ",
+    "home_garden": "Professional interior design photograph of a real room or garden space. Incorporate 'expressive maximalism' or 'afrohemian' warm textures. The space is the main focal subject. Architectural Digest style, natural ambient lighting. The design concept is: ",
+    "fashion_style": "Professional fashion photograph of a real woman wearing a complete outfit. The outfit is the main focal subject. Editorial street style, showcasing distinct 2026 individuality and tactile fabrics. The outfit style is: ",
 }
 
 # Niche-specific negative prompts for SiliconFlow
@@ -282,22 +282,22 @@ def generate_content_with_gemini(topic: str = None, niche: str = "nails") -> dic
     niche_prompts = {
         "nails": {
             "role": "a creative social media strategist specializing in nail art and beauty content for Pinterest",
-            "task": "come up with a UNIQUE, trendy nail art concept and provide content for a Pinterest pin",
+            "task": "come up with an ACTIONABLE (e.g. mini-guide, tutorial, or checklist style) Pinterest pin based on a trendy concept",
             "image_guide": "A highly detailed image generation prompt (200-400 chars). MANDATORY RULE: The image MUST show a real woman's hand/fingers with painted nails as the PRIMARY SUBJECT. The nails must be clearly visible and take up at least 60% of the image. If the topic mentions a theme (e.g., 'dew drop', 'butterfly', 'floral'), the theme must appear AS A NAIL ART DESIGN ON THE NAILS, NOT as a standalone object. Describe: nail shape (almond/coffin/stiletto/square), colors, finish (glossy/matte/chrome), specific design pattern ON the nails. Use terms like 'extreme macro close-up of nail art on real fingers', 'high-resolution jewelry photography of manicured nails'.",
         },
         "hair_beauty": {
             "role": "a creative social media strategist specializing in hair styling, beauty trends, and aesthetic content for Pinterest",
-            "task": "come up with a UNIQUE, trendy hairstyle or beauty concept and provide content for a Pinterest pin",
+            "task": "come up with an ACTIONABLE (e.g. mini-guide, tutorial, or checklist style) Pinterest pin based on a trendy concept",
             "image_guide": "A highly detailed portrait photography prompt (200-400 chars). MANDATORY RULE: The image MUST show a real person with their HAIR/HAIRSTYLE as the PRIMARY SUBJECT. The hair must be clearly visible, styled, and take up the majority of the frame. If the topic names a style (e.g., 'fulani braids', 'prom updo'), the person must be WEARING that exact hairstyle. Describe: hair type/texture, length, color, specific styling details, hair accessories if any. Use terms like 'editorial beauty portrait', 'soft golden hour lighting', '85mm lens', 'salon-quality finish'.",
         },
         "home_garden": {
             "role": "a creative social media strategist specializing in interior design, home decor, and garden aesthetics for Pinterest",
-            "task": "come up with a UNIQUE, trendy home decor or garden design concept and provide content for a Pinterest pin",
+            "task": "come up with an ACTIONABLE (e.g. mini-guide, tutorial, or checklist style) Pinterest pin based on a trendy concept",
             "image_guide": "A highly detailed interior/exterior photography prompt (200-400 chars). MANDATORY RULE: The image MUST show a real, fully decorated ROOM or GARDEN SPACE as the PRIMARY SUBJECT. The space must look realistic, lived-in, and styled. If the topic names a specific element (e.g., 'front porch flower pots', 'drainage ideas'), that element must be shown IN CONTEXT within a full space — never as an isolated object on a white background. Describe: room type, materials, color palette, furniture, plants, lighting mood. Use terms like 'Architectural Digest photography', 'wide-angle interior shot', 'natural ambient lighting'.",
         },
         "fashion_style": {
             "role": "a creative social media strategist specializing in fashion, outfit styling, and trend forecasting for Pinterest",
-            "task": "come up with a UNIQUE, trendy outfit or fashion concept and provide content for a Pinterest pin",
+            "task": "come up with an ACTIONABLE (e.g. mini-guide, tutorial, or checklist style) Pinterest pin based on a trendy concept",
             "image_guide": "A highly detailed fashion photography prompt (200-400 chars). MANDATORY RULE: The image MUST show a real woman WEARING a complete outfit as the PRIMARY SUBJECT. The outfit must be fully visible from head to at least mid-thigh. If the topic names a style (e.g., 'casual brunch outfit', 'spring jeans outfit'), the woman must be wearing that EXACT style of outfit. Describe: specific garments (top, bottom, shoes), colors, accessories, fabrics. Use terms like 'editorial street style photography', 'full-body outfit shot', 'clean minimal backdrop', 'natural lighting'.",
         },
     }
@@ -332,7 +332,7 @@ RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys in th
   "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content.",
   "title": "A high-CTR 'Click-Gap' title (max 100 chars). It MUST strictly start with your primary annotated keyword, but follow it with a hook that creates a 'curiosity gap' or promises a 'secret' (e.g., 'Minimalist Clean Girl Nails: The Exact Polish for the Viral Look'). Force the user to click to find out more. Use emojis sparingly.",
   "overlay_text": "A massive, urgent 3-6 word CLICK-BAIT hook for the image overlay. Focus purely on shocking value or deep curiosity (e.g., 'The Secret To This Look', 'Why Everyone Is Doing This', 'The 1 Product You Need', 'Don\\'t Go To The Salon Without Seeing This'). DO NOT include instructions like 'Click' or 'Tap' here, and DO NOT describe the image.",
-  "description": "An SEO-optimized description (150-300 chars) that naturally weaves in your 3 to 5 annotated keywords in the first two sentences. You MUST include exactly 10 highly relevant and trending hashtags at the very end.",
+  "description": "An SEO-optimized description (150-300 chars) formatted as an actionable tip or mini-guide. You MUST naturally weave in your 3 to 5 annotated keywords in the first two sentences. You MUST include a strong Call-To-Action (e.g., 'Save this for your next salon visit!' or 'Click to see the full guide!') before exactly 10 highly relevant and trending hashtags at the very end.",
   "image_prompt": "{niche_config['image_guide']}",
   "alt_text": "A highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects) for Pinterest accessibility. Focus on visual details, not SEO keywords."
 }}
@@ -1195,8 +1195,28 @@ def main():
                     
                     available_topics = [t for t in niche_topics if t not in used_topics]
                     
-                    # --- TREND PRIORITIZATION ---
-                    trends_path = Path("shared/niche_trends.json")
+                    # --- FRESH PIN VARIATION SYSTEM ---
+                    # 20% chance to generate a fresh variation of an already successful/published topic
+                    if random.random() < 0.20:
+                        published_links_path = Path("shared/published_links.json")
+                        if published_links_path.exists():
+                            try:
+                                with open(published_links_path, "r") as f:
+                                    published = json.load(f)
+                                # Filter by niche
+                                niche_published = [p for p in published if p.get("niche") == chosen_niche and p.get("topic")]
+                                if niche_published:
+                                    # Pick a recent successful one
+                                    variation_target = random.choice(niche_published[-20:])
+                                    chosen_topic = variation_target["topic"]
+                                    destination_link = variation_target.get("url")
+                                    print(f"   🔥 VARIATION MODE: Reusing proven topic \"{chosen_topic}\" to generate a fresh pin!")
+                            except Exception as e:
+                                print(f"   ⚠️ Error reading published links for variation: {e}")
+                    
+                    if not chosen_topic:
+                        # --- TREND PRIORITIZATION ---
+                        trends_path = Path("shared/niche_trends.json")
                     trending_matches = []
                     
                     if trends_path.exists() and available_topics:
@@ -1229,10 +1249,10 @@ def main():
                         top_count = min(3, len(trending_matches))
                         chosen_topic = random.choice([item["topic"] for item in trending_matches[:top_count]])
                         print(f"   🔥 TRENDING TOPIC: \"{chosen_topic}\" (Niche: {chosen_niche})")
-                    elif available_topics:
+                    elif available_topics and not chosen_topic:
                         chosen_topic = random.choice(available_topics)
                         print(f"   🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\"")
-                    else:
+                    elif not chosen_topic:
                         # Niche exhausted, try any available topic
                         all_available = []
                         for niche_key, topics in topic_bank.items():
