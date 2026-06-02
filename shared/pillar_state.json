@@ -1,30 +1,30 @@
 {
-  "next_index": 5,
-  "published": [
-    {
-      "index": 0,
-      "slug": "nail-art-designs-ultimate-guide",
-      "url": "https://nailosmetic.com/nail-art-designs-ultimate-guide/"
-    },
-    {
-      "index": 1,
-      "slug": "chrome-nails-complete-guide",
-      "url": "https://nailosmetic.com/chrome-nails-complete-guide/"
-    },
-    {
-      "index": 2,
-      "slug": "spring-outfits-women-guide",
-      "url": "https://nailosmetic.com/spring-outfits-women-guide/"
-    },
-    {
-      "index": 3,
-      "slug": "hairstyles-for-women-ultimate-guide",
-      "url": "https://nailosmetic.com/hairstyles-for-women-ultimate-guide/"
-    },
-    {
-      "index": 4,
-      "slug": "home-decor-ideas-ultimate-guide",
-      "url": "https://nailosmetic.com/home-decor-ideas-ultimate-guide/"
-    }
-  ]
+    "next_index": 5,
+    "published": [
+        {
+            "index": 0,
+            "slug": "nail-art-designs-ultimate-guide",
+            "url": "https://nailosmetic.com/nail-art-designs-ultimate-guide/"
+        },
+        {
+            "index": 1,
+            "slug": "chrome-nails-complete-guide",
+            "url": "https://nailosmetic.com/chrome-nails-complete-guide/"
+        },
+        {
+            "index": 2,
+            "slug": "spring-outfits-women-guide",
+            "url": "https://nailosmetic.com/spring-outfits-women-guide/"
+        },
+        {
+            "index": 3,
+            "slug": "hairstyles-for-women-ultimate-guide",
+            "url": "https://nailosmetic.com/hairstyles-for-women-ultimate-guide/"
+        },
+        {
+            "index": 4,
+            "slug": "home-decor-ideas-ultimate-guide",
+            "url": "https://nailosmetic.com/home-decor-ideas-ultimate-guide/"
+        }
+    ]
 }
