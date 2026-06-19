@@ -200,18 +200,112 @@ def main():
             
             available_topics = [t for t in niche_topics if t not in used_topics]
             if available_topics:
-                chosen_topic = rng.choice(available_topics)
-                print(f"🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\"")
+                # --- TREND PRIORITIZATION ---
+                trends_path = Path(__file__).parent.parent / "shared" / "niche_trends.json"
+                trending_matches = []
+                
+                if trends_path.exists():
+                    try:
+                        with open(trends_path, "r", encoding="utf-8") as f:
+                            all_trends = json.load(f)
+                        
+                        niche_trend_data = all_trends.get(chosen_niche, [])
+                        if chosen_niche == "home_garden":
+                            niche_trend_data = niche_trend_data + all_trends.get("gardening", [])
+                            
+                        available_set = {t.lower() for t in available_topics}
+                        for trend in niche_trend_data:
+                            kw = trend.get("keyword", "").lower()
+                            if kw in available_set:
+                                trend_type = trend.get("trend_type", "monthly")
+                                growth_mom = trend.get("growth_mom", 0)
+                                growth_yoy = trend.get("growth_yoy", 0)
+                                base_growth = growth_mom if growth_mom > 0 else (growth_yoy if growth_yoy > 0 else 0)
+                                
+                                if trend_type == "seasonal":
+                                    score = base_growth * 1.5 + 50
+                                elif trend_type == "growing":
+                                    score = base_growth * 1.2 + 20
+                                else:
+                                    score = base_growth
+                                    
+                                trending_matches.append({
+                                    "topic": kw,
+                                    "score": score,
+                                    "type": trend_type
+                                })
+                        
+                        trending_matches.sort(key=lambda x: x["score"], reverse=True)
+                    except Exception as e:
+                        print(f"   ⚠️ Error processing trends for prioritization: {e}")
+                
+                if trending_matches:
+                    top_pool = trending_matches[:5]
+                    chosen_item = rng.choice(top_pool)
+                    chosen_topic = chosen_item["topic"]
+                    print(f"🔥 TRENDING TOPIC SELECTED: \"{chosen_topic}\" (Score: {chosen_item['score']:.1f}, Type: {chosen_item['type']}, Niche: {chosen_niche})")
+                else:
+                    chosen_topic = rng.choice(available_topics)
+                    print(f"🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\" (No active trends matched)")
             else:
-                # Try any niche
+                # Try any other niche that has available topics
+                all_available_niches = {}
                 for nk, topics in all_topics.items():
                     avail = [t for t in topics if t not in used_topics]
                     if avail:
-                        chosen_niche = nk
-                        chosen_topic = rng.choice(avail)
-                        print(f"📋 {chosen_niche} fallback topic: \"{chosen_topic}\"")
-                        break
-                if not chosen_topic:
+                        all_available_niches[nk] = avail
+                
+                if all_available_niches:
+                    chosen_niche = rng.choice(list(all_available_niches.keys()))
+                    available_topics = all_available_niches[chosen_niche]
+                    
+                    trends_path = Path(__file__).parent.parent / "shared" / "niche_trends.json"
+                    trending_matches = []
+                    
+                    if trends_path.exists():
+                        try:
+                            with open(trends_path, "r", encoding="utf-8") as f:
+                                all_trends = json.load(f)
+                            
+                            niche_trend_data = all_trends.get(chosen_niche, [])
+                            if chosen_niche == "home_garden":
+                                niche_trend_data = niche_trend_data + all_trends.get("gardening", [])
+                                
+                            available_set = {t.lower() for t in available_topics}
+                            for trend in niche_trend_data:
+                                kw = trend.get("keyword", "").lower()
+                                if kw in available_set:
+                                    trend_type = trend.get("trend_type", "monthly")
+                                    growth_mom = trend.get("growth_mom", 0)
+                                    growth_yoy = trend.get("growth_yoy", 0)
+                                    base_growth = growth_mom if growth_mom > 0 else (growth_yoy if growth_yoy > 0 else 0)
+                                    
+                                    if trend_type == "seasonal":
+                                        score = base_growth * 1.5 + 50
+                                    elif trend_type == "growing":
+                                        score = base_growth * 1.2 + 20
+                                    else:
+                                        score = base_growth
+                                        
+                                    trending_matches.append({
+                                        "topic": kw,
+                                        "score": score,
+                                        "type": trend_type
+                                    })
+                            
+                            trending_matches.sort(key=lambda x: x["score"], reverse=True)
+                        except Exception as e:
+                            print(f"   ⚠️ Error processing fallback trends: {e}")
+                    
+                    if trending_matches:
+                        top_pool = trending_matches[:5]
+                        chosen_item = rng.choice(top_pool)
+                        chosen_topic = chosen_item["topic"]
+                        print(f"🔥 FALLBACK TRENDING TOPIC: \"{chosen_topic}\" (Score: {chosen_item['score']:.1f}, Type: {chosen_item['type']}, Niche: {chosen_niche})")
+                    else:
+                        chosen_topic = rng.choice(available_topics)
+                        print(f"📋 Fallback Niche: {chosen_niche} | Topic: \"{chosen_topic}\"")
+                else:
                     print("📋 All topics used! Picking random.")
                     chosen_topic = rng.choice(niche_topics) if niche_topics else None
         else:
@@ -219,8 +313,54 @@ def main():
             chosen_niche = "nails"
             available_topics = [t for t in all_topics if t not in used_topics]
             if available_topics:
-                chosen_topic = rng.choice(available_topics)
-                print(f"🎯 High-demand topic selected: \"{chosen_topic}\"")
+                # Search trends for flat format
+                trends_path = Path(__file__).parent.parent / "shared" / "niche_trends.json"
+                trending_matches = []
+                
+                if trends_path.exists():
+                    try:
+                        with open(trends_path, "r", encoding="utf-8") as f:
+                            all_trends = json.load(f)
+                        
+                        # Merge all trends for flat format search
+                        flat_trends = []
+                        for n_trends in all_trends.values():
+                            flat_trends.extend(n_trends)
+                            
+                        available_set = {t.lower() for t in available_topics}
+                        for trend in flat_trends:
+                            kw = trend.get("keyword", "").lower()
+                            if kw in available_set:
+                                trend_type = trend.get("trend_type", "monthly")
+                                growth_mom = trend.get("growth_mom", 0)
+                                growth_yoy = trend.get("growth_yoy", 0)
+                                base_growth = growth_mom if growth_mom > 0 else (growth_yoy if growth_yoy > 0 else 0)
+                                
+                                if trend_type == "seasonal":
+                                    score = base_growth * 1.5 + 50
+                                elif trend_type == "growing":
+                                    score = base_growth * 1.2 + 20
+                                else:
+                                    score = base_growth
+                                    
+                                trending_matches.append({
+                                    "topic": kw,
+                                    "score": score,
+                                    "type": trend_type
+                                })
+                        
+                        trending_matches.sort(key=lambda x: x["score"], reverse=True)
+                    except Exception as e:
+                        print(f"   ⚠️ Error processing legacy trends: {e}")
+                        
+                if trending_matches:
+                    top_pool = trending_matches[:5]
+                    chosen_item = rng.choice(top_pool)
+                    chosen_topic = chosen_item["topic"]
+                    print(f"🔥 TRENDING TOPIC (LEGACY): \"{chosen_topic}\" (Score: {chosen_item['score']:.1f}, Type: {chosen_item['type']})")
+                else:
+                    chosen_topic = rng.choice(available_topics)
+                    print(f"🎯 High-demand topic selected: \"{chosen_topic}\"")
             else:
                 print("📋 All topics in bank have been used! Gemini will pick a fresh topic.")
     else:
