@@ -187,6 +187,7 @@ FRAMEWORK REQUIREMENTS:
    - CATEGORY RESTRICTION: The categories "Aesthetic & Art", "Chrome & Glazed", "Minimalist & Clean Girl", and "Seasonal Trends" are STRICTLY for NAIL content only. Do NOT use them for Hair, Fashion, or Home content under any circumstances.
    - If this is a NAIL article, you may use the specialized sub-categories, but "Styles & Fashion" or "Hair & Beauty" are strictly forbidden for nails.
 10. Alt Text: For every "alt_text" field, provide a highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects, lighting). Avoid generic SEO padding; focus on helping a visually impaired user see the image in their mind.
+11. COMPARISON GRID RULE: If the topic/heading involves comparisons, skin tones, nail/hair shapes, or multiple color variations (e.g. containing 'vs', 'comparison', 'shades', 'skin tones', 'colors for'), structure the image prompts to generate a clean side-by-side comparison infographic grid (e.g., a 2x2 grid or vertical columns showing the 4 variations side-by-side with minimal clean text labels, natural soft lighting, minimal layout, beauty infographic style).
 
 WORD COUNT: The total article body (introduction + all 7 block paragraphs + conclusion) MUST be at least 1,200 words. Do not cut paragraphs short to save tokens — length and depth are required for SEO ranking.
 

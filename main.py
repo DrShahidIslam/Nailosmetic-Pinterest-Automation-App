@@ -326,6 +326,8 @@ First, identify 3 to 5 highly specific 'Pinterest Annotated Keywords' (e.g., 'mi
 Then, your task is to {niche_config['task']} based on these annotated keywords.
 {topic_instruction}
 
+IMAGE FORMAT RULE: If the topic involves comparisons, skin tones, nail/hair shapes, or multiple color variations (e.g. containing 'vs', 'comparison', 'shades', 'skin tones', 'colors for'), structure the 'image_prompt' to generate a clean side-by-side comparison infographic grid (e.g., a 2x2 grid or vertical columns showing the 4 variations side-by-side with minimal clean text labels, natural soft lighting, minimal layout, beauty infographic style).
+
 RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys in this order:
 {{
   "annotated_keywords": ["List exactly 3 to 5 highly specific Pinterest Annotated Keywords you identified here."],
@@ -696,8 +698,8 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     badge_text = niche_badges.get(niche, "TREND ALERT")
 
     # --- Layout & Styling Selection ---
-    # We use 3 modern high-CTR layouts instead of generic boxed containers
-    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette']
+    # We use 4 modern high-CTR layouts instead of generic boxed containers
+    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card']
     layout_style = random.choice(layouts)
     print(f"   📐 Selected premium layout style: {layout_style}")
 
@@ -716,9 +718,9 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     if layout_style == 'bold_clickbait' and os.path.exists(anton_font_path):
         main_font = ImageFont.truetype(anton_font_path, int(width * 0.095)) # Tall, punchy sans-serif
         print("   ✅ Loaded Anton-Regular for bold clickbait")
-    elif layout_style == 'premium_magazine' and os.path.exists(lora_bold_path):
+    elif layout_style in ['premium_magazine', 'aesthetic_card'] and os.path.exists(lora_bold_path):
         main_font = ImageFont.truetype(lora_bold_path, int(width * 0.075)) # Elegant serif
-        print("   ✅ Loaded Lora-Bold for premium magazine style")
+        print(f"   ✅ Loaded Lora-Bold for {layout_style}")
     else:
         # Fallback to Montserrat-Bold
         font_path = montserrat_bold_path if os.path.exists(montserrat_bold_path) else lora_bold_path
@@ -820,6 +822,38 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
             
         text_y_start = int(height * 0.08) # Top-aligned editorial header zone
 
+    elif layout_style == 'aesthetic_card':
+        # Draw a semi-transparent cream luxury card at the center/bottom
+        card_width = int(width * 0.86)
+        card_height = total_text_height + int(height * 0.18)
+        card_left = (width - card_width) // 2
+        card_right = card_left + card_width
+        card_bottom = int(height * 0.90)
+        card_top = card_bottom - card_height
+        
+        # Draw soft card shadow first
+        for offset in range(1, 5):
+            draw_overlay.rounded_rectangle(
+                [(card_left - offset, card_top - offset), (card_right + offset, card_bottom + offset)],
+                radius=20 + offset,
+                fill=(0, 0, 0, int(15 / offset))
+            )
+            
+        # Draw main cream card background and border
+        draw_overlay.rounded_rectangle(
+            [(card_left, card_top), (card_right, card_bottom)],
+            radius=20,
+            fill=(255, 255, 255, 220)
+        )
+        draw_overlay.rounded_rectangle(
+            [(card_left, card_top), (card_right, card_bottom)],
+            radius=20,
+            outline=(15, 23, 42, 25),
+            width=2
+        )
+        
+        text_y_start = card_top + int(height * 0.09)
+
     else: # modern_vignette
         # Elegant classic gradient bottom fade
         gradient_start_y = int(height * 0.50)
@@ -865,6 +899,17 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
             
             # Thick black outline to create highly engaging high-contrast text
             draw_text_with_outline(draw, line, text_x, text_y, main_font, fill_color, (0, 0, 0, 255), width_val=4)
+        elif layout_style == 'aesthetic_card':
+            # Dark charcoal text for card layout
+            line_lower = line.lower()
+            fill_color = (15, 23, 42, 255) # Deep slate/charcoal
+            if any(trigger in line_lower for trigger in clickbait_triggers):
+                # Accent highlight on light card background
+                fill_color = (180, 80, 95, 255) if niche == "nails" else (160, 90, 90, 255)
+                
+            # Soft letterpress shadow for elegance
+            draw.text((text_x + 1, text_y + 1), line, font=main_font, fill=(0, 0, 0, 30))
+            draw.text((text_x, text_y), line, font=main_font, fill=fill_color)
         else:
             # Magazine/Vignette style: elegant soft shadow
             draw.text((text_x + 2, text_y + 2), line, font=main_font, fill=(0, 0, 0, 160))
