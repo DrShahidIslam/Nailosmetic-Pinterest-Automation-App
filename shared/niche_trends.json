@@ -1507,7 +1507,7 @@
         {
             "keyword": "dorm desk",
             "growth_mom": 70,
-            "growth_yoy": 20,
+            "growth_yoy": 10,
             "trend_type": "seasonal"
         },
         {
@@ -1669,7 +1669,7 @@
         {
             "keyword": "fairy lights bedroom",
             "growth_mom": 30,
-            "growth_yoy": -4,
+            "growth_yoy": -5,
             "trend_type": "seasonal"
         },
         {
@@ -2343,7 +2343,7 @@
         {
             "keyword": "diesel shirt",
             "growth_mom": 30,
-            "growth_yoy": -10,
+            "growth_yoy": -20,
             "trend_type": "growing"
         },
         {
@@ -2379,7 +2379,7 @@
         {
             "keyword": "long black skirt outfit summer",
             "growth_mom": 50,
-            "growth_yoy": 50,
+            "growth_yoy": 40,
             "trend_type": "seasonal"
         },
         {
