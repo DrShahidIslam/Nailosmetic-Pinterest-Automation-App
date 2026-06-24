@@ -731,7 +731,7 @@
         {
             "keyword": "bridesmaid makeup",
             "growth_mom": 20,
-            "growth_yoy": 3,
+            "growth_yoy": 2,
             "trend_type": "monthly"
         },
         {
@@ -1452,14 +1452,14 @@
         },
         {
             "keyword": "minecraft storage room",
-            "growth_mom": 50,
+            "growth_mom": 40,
             "growth_yoy": 9,
             "trend_type": "growing"
         },
         {
             "keyword": "ocean room",
-            "growth_mom": 50,
-            "growth_yoy": 2,
+            "growth_mom": 40,
+            "growth_yoy": 1,
             "trend_type": "growing"
         },
         {
@@ -1850,7 +1850,7 @@
         },
         {
             "keyword": "tory burch sandals outfit",
-            "growth_mom": 2,
+            "growth_mom": 1,
             "growth_yoy": 20,
             "trend_type": "monthly"
         },
@@ -2270,7 +2270,7 @@
         },
         {
             "keyword": "puma outfits",
-            "growth_mom": 50,
+            "growth_mom": 40,
             "growth_yoy": 1000,
             "trend_type": "growing"
         },
