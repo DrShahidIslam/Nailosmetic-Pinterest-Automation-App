@@ -1237,5 +1237,12 @@
         "niche": "nails",
         "topic": "4th of july pedicure",
         "slug": "4th-of-july-pedicure"
+    },
+    {
+        "url": "https://nailosmetic.com/4th-of-july-hair/",
+        "category": "Hair & Beauty",
+        "niche": "hair_beauty",
+        "topic": "4th of july hair",
+        "slug": "4th-of-july-hair"
     }
 ]
