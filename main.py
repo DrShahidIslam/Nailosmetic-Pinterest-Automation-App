@@ -695,11 +695,18 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
     badge_text = niche_badges.get(niche, "TREND ALERT")
 
     # --- Layout & Styling Selection ---
-    # We use 5 modern high-CTR layouts instead of generic boxed containers
-    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage']
+    # We use 6 modern high-CTR layouts instead of generic boxed containers
+    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid']
     if not layout_style or layout_style not in layouts:
         layout_style = random.choice(layouts)
         
+    if layout_style == 'four_panel_grid' and (not isinstance(image_path, tuple) or len(image_path) < 4):
+        # Fallback to double collage if we have 2+ images, or single layouts
+        if isinstance(image_path, tuple) and len(image_path) >= 2:
+            layout_style = 'double_panel_collage'
+        else:
+            layout_style = random.choice(['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card'])
+            
     if layout_style == 'double_panel_collage' and not isinstance(image_path, tuple):
         # Fallback if only one image is provided
         layouts_single = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card']
@@ -708,7 +715,60 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
     print(f"   📐 Selected premium layout style: {layout_style}")
 
     # Open image(s) depending on layout style
-    if layout_style == 'double_panel_collage':
+    if layout_style == 'four_panel_grid':
+        img1 = Image.open(image_path[0]).convert("RGBA")
+        img2 = Image.open(image_path[1]).convert("RGBA")
+        img3 = Image.open(image_path[2]).convert("RGBA")
+        img4 = Image.open(image_path[3]).convert("RGBA")
+        
+        width, height = 768, 1344
+        img = Image.new("RGBA", (width, height), (255, 255, 255, 255))
+        
+        separator_thickness = 12
+        panel_w = (width - separator_thickness) // 2
+        panel_h = (height - separator_thickness) // 2
+        
+        def crop_and_resize(panel_img, target_w, target_h):
+            p_w, p_h = panel_img.size
+            aspect_target = target_w / target_h
+            aspect_panel = p_w / p_h
+            
+            if aspect_panel > aspect_target:
+                new_h = target_h
+                new_w = int(p_w * (target_h / p_h))
+                resized = panel_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                left = (new_w - target_w) // 2
+                cropped = resized.crop((left, 0, left + target_w, target_h))
+            else:
+                new_w = target_w
+                new_h = int(p_h * (target_w / p_w))
+                resized = panel_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                top = (new_h - target_h) // 2
+                cropped = resized.crop((0, top, target_w, top + target_h))
+            return cropped
+
+        p1 = crop_and_resize(img1, panel_w, panel_h)
+        p2 = crop_and_resize(img2, panel_w, panel_h)
+        p3 = crop_and_resize(img3, panel_w, panel_h)
+        p4 = crop_and_resize(img4, panel_w, panel_h)
+        
+        img.paste(p1, (0, 0))
+        img.paste(p2, (panel_w + separator_thickness, 0))
+        img.paste(p3, (0, panel_h + separator_thickness))
+        img.paste(p4, (panel_w + separator_thickness, panel_h + separator_thickness))
+        
+        draw_sep = ImageDraw.Draw(img)
+        # Vertical divider
+        draw_sep.rectangle(
+            [(panel_w, 0), (panel_w + separator_thickness, height)],
+            fill=(255, 255, 255, 255)
+        )
+        # Horizontal divider
+        draw_sep.rectangle(
+            [(0, panel_h), (width, panel_h + separator_thickness)],
+            fill=(255, 255, 255, 255)
+        )
+    elif layout_style == 'double_panel_collage':
         img1 = Image.open(image_path[0]).convert("RGBA")
         img2 = Image.open(image_path[1]).convert("RGBA")
         
@@ -903,7 +963,7 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
         
         text_y_start = card_top + int(height * 0.09)
 
-    elif layout_style == 'double_panel_collage':
+    elif layout_style in ['double_panel_collage', 'four_panel_grid']:
         # Draw a semi-transparent cream luxury card centered vertically over the middle split
         card_width = int(width * 0.88)
         card_height = total_text_height + int(height * 0.16)
@@ -980,7 +1040,7 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
             
             # Thick black outline to create highly engaging high-contrast text
             draw_text_with_outline(draw, line, text_x, text_y, main_font, fill_color, (0, 0, 0, 255), width_val=4)
-        elif layout_style in ['aesthetic_card', 'double_panel_collage']:
+        elif layout_style in ['aesthetic_card', 'double_panel_collage', 'four_panel_grid']:
             # Dark charcoal text for card layout
             line_lower = line.lower()
             fill_color = (15, 23, 42, 255) # Deep slate/charcoal
@@ -1532,12 +1592,28 @@ def main():
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
 
         # Select layout style
-        layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage']
+        layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid']
         layout_style = random.choice(layouts)
         print(f"   📐 Selected layout style: {layout_style}")
 
         # Phase 2: Generate image with fallbacks
-        if layout_style == 'double_panel_collage':
+        if layout_style == 'four_panel_grid':
+            raw_paths = []
+            for idx in range(4):
+                print(f"   🎨 Generating image {idx+1}/4 for grid...")
+                variation_suffix = f", variation {chr(65+idx)}, distinct angle"
+                p_temp = generate_image_master(
+                    content["image_prompt"] + variation_suffix, tmp_dir, niche=chosen_niche
+                )
+                raw_image_path_idx = os.path.join(tmp_dir, f"raw_ai_image_{idx+1}.png")
+                if os.path.exists(p_temp):
+                    os.rename(p_temp, raw_image_path_idx)
+                raw_paths.append(raw_image_path_idx)
+                if idx < 3:
+                    time.sleep(3) # Small delay to avoid rate limits
+            raw_image_path = tuple(raw_paths)
+            
+        elif layout_style == 'double_panel_collage':
             print("   🎨 Generating first image for collage...")
             raw_path_temp = generate_image_master(
                 content["image_prompt"], tmp_dir, niche=chosen_niche
