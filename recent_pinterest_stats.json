@@ -1,48 +1,56 @@
 {
   "account": {
-    "following_count": 1,
-    "monthly_views": 62303,
     "business_name": "Aesthetic Daily | Beauty, Home & Style",
     "follower_count": 1,
-    "username": "AestheticSenseDaily",
     "board_count": 12,
-    "website_url": "http://nailosmetic.com",
-    "pin_count": 588,
-    "id": "1106689445840970005",
-    "account_type": "BUSINESS",
     "profile_image": "https://i.pinimg.com/600x600_R/e8/03/04/e80304df037773ebca601c930d70f584.jpg",
-    "about": "Your daily source for high-end aesthetic inspiration. ✨ Discover trending nail art, ethereal hairstyles, minimalist home decor, and chic fashion. Curated for the modern lifestyle. Follow for your daily dose of vibes!"
+    "website_url": "http://nailosmetic.com",
+    "account_type": "BUSINESS",
+    "following_count": 1,
+    "id": "1106689445840970005",
+    "pin_count": 641,
+    "about": "Your daily source for high-end aesthetic inspiration. ✨ Discover trending nail art, ethereal hairstyles, minimalist home decor, and chic fashion. Curated for the modern lifestyle. Follow for your daily dose of vibes!",
+    "monthly_views": 84650,
+    "username": "AestheticSenseDaily"
   },
   "boards": {
     "items": [
       {
+        "collaborator_count": 0,
+        "id": "1106689377123228345",
+        "description": "Daily nail inspo and aesthetic manicures. From complex 3D nail art to elegant French tips, save your favorite nail designs and trends for your next salon visit.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-02T11:54:09",
-        "name": "Aesthetic Nail Art & Designs",
+        "board_pins_modified_at": "2026-06-26T22:12:47.403000",
         "media": {
           "pin_thumbnail_urls": [
+            "https://i.pinimg.com/150x150/43/f2/8d/43f28d8544d87200b90add4e9b599d90.jpg",
+            "https://i.pinimg.com/150x150/97/24/66/97246652b57a2191968cb449f807e434.jpg",
+            "https://i.pinimg.com/150x150/63/b9/d4/63b9d4a9fe85cce175053045d9ac93bb.jpg",
             "https://i.pinimg.com/150x150/83/f3/98/83f398e68b4d2b9f8c635a184f442690.jpg",
-            "https://i.pinimg.com/150x150/c8/29/40/c8294067cad9d32972d655fe33af9d56.jpg",
-            "https://i.pinimg.com/150x150/e0/f8/5c/e0f85c3515aee2d6d429d09ce3922d06.jpg",
-            "https://i.pinimg.com/150x150/8d/c8/69/8dc869f3924eccf830e360f5386f8685.jpg",
-            "https://i.pinimg.com/150x150/11/82/95/11829597f3dd9ad56c05de8a122e7da5.jpg"
+            "https://i.pinimg.com/150x150/c8/29/40/c8294067cad9d32972d655fe33af9d56.jpg"
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/2a/0e/02/2a0e021ce0ebfbf1134e20abaaf7acd3.jpg"
         },
-        "id": "1106689377123228345",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-17T20:11:33.235000",
-        "pin_count": 108,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "Daily nail inspo and aesthetic manicures. From complex 3D nail art to elegant French tips, save your favorite nail designs and trends for your next salon visit.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Aesthetic Nail Art & Designs",
+        "pin_count": 111
       },
       {
+        "collaborator_count": 1,
+        "id": "1033083670713083656",
+        "description": "",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "Aestheticmacheen"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-26T05:14:30",
-        "name": "Bedroom Decor Ideas | Cozy & Luxury Bedding",
+        "board_pins_modified_at": "2026-05-07T19:30:55.859000",
         "media": {
           "pin_thumbnail_urls": [
             "https://i.pinimg.com/150x150/9e/ff/b6/9effb68269ce6035647a78b173245e9e.jpg",
@@ -53,21 +61,21 @@
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/54/7b/f8/547bf8081a9808a7735b668b26021489.jpg"
         },
-        "id": "1033083670713083656",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-05-07T19:30:55.859000",
-        "pin_count": 29,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "",
-        "collaborator_count": 1,
-        "owner": {
-          "username": "Aestheticmacheen"
-        }
+        "name": "Bedroom Decor Ideas | Cozy & Luxury Bedding",
+        "pin_count": 29
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123298502",
+        "description": "Explore luxury bedding, aesthetic room designs, and stylish home decor ideas perfect for creating a warm and elegant space. Ideal for bedroom makeovers, wedding gifts, and cozy home styling.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-26T04:53:46",
-        "name": "Bedroom Decor Ideas | Cozy & Luxury Bedding",
+        "board_pins_modified_at": "2026-04-27T22:03:16.177000",
         "media": {
           "pin_thumbnail_urls": [
             "https://i.pinimg.com/150x150/fa/40/6a/fa406acb8639c8604ca419cb00508bfd.jpg",
@@ -78,46 +86,46 @@
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/4a/bf/0f/4abf0f39777d7619ca8fe95a83f0b424.jpg"
         },
-        "id": "1106689377123298502",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-04-27T22:03:16.177000",
-        "pin_count": 6,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "Explore luxury bedding, aesthetic room designs, and stylish home decor ideas perfect for creating a warm and elegant space. Ideal for bedroom makeovers, wedding gifts, and cozy home styling.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Bedroom Decor Ideas | Cozy & Luxury Bedding",
+        "pin_count": 6
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123278057",
+        "description": "For the \"Old Money\" and \"Capsule Wardrobe\" aesthetic.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-18T18:25:10",
-        "name": "Chic & Timeless Fashion Style",
+        "board_pins_modified_at": "2026-06-27T10:59:05.092000",
         "media": {
           "pin_thumbnail_urls": [
-            "https://i.pinimg.com/150x150/17/2e/87/172e87c1de836b2ab9aeca9f3e2d60fd.jpg",
-            "https://i.pinimg.com/150x150/b1/3e/09/b13e0952187f0c3d9ea4b9e58b009bad.jpg",
-            "https://i.pinimg.com/150x150/7a/3b/f0/7a3bf082daa7920afa9f0c6849e4b599.jpg",
-            "https://i.pinimg.com/150x150/1f/1a/d9/1f1ad9b746bd7fb83b9d5a9bc94395e9.jpg",
-            "https://i.pinimg.com/150x150/74/96/d9/7496d9adf4b820656798a138ece98e05.jpg"
+            "https://i.pinimg.com/150x150/02/16/86/021686acb76600e405333049db836245.jpg",
+            "https://i.pinimg.com/150x150/4b/f1/79/4bf179dbb01d9d47b83f84ff3628f1b2.jpg",
+            "https://i.pinimg.com/150x150/e1/c9/ff/e1c9ff1229e37eabe6262c0841ebefee.jpg",
+            "https://i.pinimg.com/150x150/71/10/84/711084dc0c3bf870f1b28915b15a567f.jpg",
+            "https://i.pinimg.com/150x150/1e/23/58/1e23582f8c1cc113e016a2f81dee0a36.jpg"
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/08/c8/79/08c87932624c044c7c3229bc4aeaaffd.jpg"
         },
-        "id": "1106689377123278057",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-19T10:25:17.555000",
-        "pin_count": 119,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "For the \"Old Money\" and \"Capsule Wardrobe\" aesthetic.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Chic & Timeless Fashion Style",
+        "pin_count": 128
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123228350",
+        "description": "Shiny, reflective, and eye-catching! All the best chrome nail powders, glazed donut finishes, metallic tips, and pearlescent manicures. The ultimate trendy nail inspiration.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-02T11:55:00",
-        "name": "Chrome & Glazed Donut Nails",
+        "board_pins_modified_at": "2026-05-29T23:13:30.015000",
         "media": {
           "pin_thumbnail_urls": [
             "https://i.pinimg.com/150x150/ab/d2/a8/abd2a8647ad8e28f4928a42204483dec.jpg",
@@ -128,146 +136,146 @@
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/ab/c2/6a/abc26ac5067fff93ba7f777e90d2601d.jpg"
         },
-        "id": "1106689377123228350",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-05-29T23:13:30.015000",
-        "pin_count": 13,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "Shiny, reflective, and eye-catching! All the best chrome nail powders, glazed donut finishes, metallic tips, and pearlescent manicures. The ultimate trendy nail inspiration.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Chrome & Glazed Donut Nails",
+        "pin_count": 13
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123278053",
+        "description": "Focuses on the \"Clean Girl\" hair trends growing on Pinterest.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-18T18:24:03",
-        "name": "Ethereal & Clean Hair Aesthetics",
+        "board_pins_modified_at": "2026-06-28T03:42:18.026000",
         "media": {
           "pin_thumbnail_urls": [
-            "https://i.pinimg.com/150x150/3d/a7/98/3da798a70eeb346da5ec210b95a0051c.jpg",
-            "https://i.pinimg.com/150x150/e0/91/38/e09138c8e676179c4cb150dc4d8d11d3.jpg",
-            "https://i.pinimg.com/150x150/fd/c3/ba/fdc3baeae1dd3945118732391d01d532.jpg",
-            "https://i.pinimg.com/150x150/4d/ad/33/4dad3371d80a3112646c7a7582fe8989.jpg",
-            "https://i.pinimg.com/150x150/5c/1f/03/5c1f034ad4625d5c6bcc200b56ebb9e3.jpg"
+            "https://i.pinimg.com/150x150/3b/4d/4b/3b4d4ba1854ad8d82b1b3a185ad91dc0.jpg",
+            "https://i.pinimg.com/150x150/88/1c/1e/881c1ef003b19191c6c703d2ea2d4124.jpg",
+            "https://i.pinimg.com/150x150/16/12/e5/1612e5f46fec281f9c863501d6275d54.jpg",
+            "https://i.pinimg.com/150x150/55/b0/a2/55b0a242d044391f6105df5ea0b8fa5b.jpg",
+            "https://i.pinimg.com/150x150/fb/74/52/fb74529e79c8c21be68c08484bfbdb19.jpg"
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/a2/f1/35/a2f135a261874add9530ed86bc617e15.jpg"
         },
-        "id": "1106689377123278053",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-07T19:22:04.678000",
-        "pin_count": 72,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "Focuses on the \"Clean Girl\" hair trends growing on Pinterest.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Ethereal & Clean Hair Aesthetics",
+        "pin_count": 79
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123278059",
+        "description": "Captures broader beauty search volume beyond just nails.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-18T18:25:34",
-        "name": "Luxury Beauty & Skincare Inspo",
+        "board_pins_modified_at": "2026-06-24T22:17:45.134000",
         "media": {
           "pin_thumbnail_urls": [
+            "https://i.pinimg.com/150x150/00/69/18/006918ff0bd8fb8851fbdf1640d6365f.jpg",
+            "https://i.pinimg.com/150x150/c3/19/1b/c3191b7be91b7eed262660050f3f19a7.jpg",
+            "https://i.pinimg.com/150x150/bd/ec/30/bdec304e9a8c9d7a60c663a199df6277.jpg",
             "https://i.pinimg.com/150x150/7b/1d/62/7b1d62d77bc7a0e666360d70c64a23da.jpg",
-            "https://i.pinimg.com/150x150/b9/f5/0b/b9f50b011acf7fb541a9a25ed57ede11.jpg",
-            "https://i.pinimg.com/150x150/c6/cb/73/c6cb7382a630b14d68c4f5981288a169.jpg",
-            "https://i.pinimg.com/150x150/c3/24/12/c3241284087d2388f4fd553718db1205.jpg",
-            "https://i.pinimg.com/150x150/0a/4b/55/0a4b559683c03091078644ce7957b49f.jpg"
+            "https://i.pinimg.com/150x150/b9/f5/0b/b9f50b011acf7fb541a9a25ed57ede11.jpg"
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/93/fc/4b/93fc4b90854357c51f34cd9e9aaad891.jpg"
         },
-        "id": "1106689377123278059",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-14T16:21:06.155000",
-        "pin_count": 14,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "Captures broader beauty search volume beyond just nails.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Luxury Beauty & Skincare Inspo",
+        "pin_count": 17
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123228348",
+        "description": "Simple, elegant, and understated nail designs. Featuring short nails, neutral tones, milky white manicures, micro-french tips, and the clean girl aesthetic. Perfect for school, work, or everyday wear.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-02T11:54:37",
-        "name": "Minimalist & \"Clean Girl\" Nails",
+        "board_pins_modified_at": "2026-06-27T22:03:49.380000",
         "media": {
           "pin_thumbnail_urls": [
-            "https://i.pinimg.com/150x150/cc/7c/38/cc7c38ea77ad6845f0f7d55bebe6f38b.jpg",
-            "https://i.pinimg.com/150x150/1c/1f/83/1c1f83ab91847b46b44f7aaef102250d.jpg",
-            "https://i.pinimg.com/150x150/84/9a/e0/849ae03a9d24190ca3ef8da970c89381.jpg",
-            "https://i.pinimg.com/150x150/05/1d/82/051d829d0a0f76a59c1408144a781c13.jpg",
-            "https://i.pinimg.com/150x150/32/78/cf/3278cf16e8e5bce1ea5bf2f209aad872.jpg"
+            "https://i.pinimg.com/150x150/52/e9/05/52e905d8259632a83e348c90a10a29ec.jpg",
+            "https://i.pinimg.com/150x150/3b/48/fd/3b48fda3e7340d664a4535309f2ed619.jpg",
+            "https://i.pinimg.com/150x150/b3/89/33/b389339399e80b52fd4f270a2cd2859f.jpg",
+            "https://i.pinimg.com/150x150/f3/0f/14/f30f14e3a7b24dc03a10f90f277893c0.jpg",
+            "https://i.pinimg.com/150x150/75/d3/87/75d387ab82f8807d36e98f6d14332850.jpg"
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/a4/ba/c3/a4bac393624120018f06802e4eeee672.jpg"
         },
-        "id": "1106689377123228348",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-19T04:14:13.086000",
-        "pin_count": 40,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "Simple, elegant, and understated nail designs. Featuring short nails, neutral tones, milky white manicures, micro-french tips, and the clean girl aesthetic. Perfect for school, work, or everyday wear.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Minimalist & \"Clean Girl\" Nails",
+        "pin_count": 51
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123278054",
+        "description": "Targets the high-volume home inspiration audience.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-18T18:24:40",
-        "name": "Minimalist & Modern Home Decor",
+        "board_pins_modified_at": "2026-06-27T19:19:24.664000",
         "media": {
           "pin_thumbnail_urls": [
-            "https://i.pinimg.com/150x150/76/4e/13/764e131be61941f8d4fedd64a30511e5.jpg",
-            "https://i.pinimg.com/150x150/e2/ad/d0/e2add07f1401dd8d672639e8dd9f768e.jpg",
-            "https://i.pinimg.com/150x150/76/1d/0a/761d0a6c287e8375439aa8558658559c.jpg",
-            "https://i.pinimg.com/150x150/5b/16/09/5b160995cd3457edece0c177f5c5c69f.jpg",
-            "https://i.pinimg.com/150x150/27/d5/a7/27d5a7c998dbf37f8f0662684ed6d094.jpg"
+            "https://i.pinimg.com/150x150/ab/b6/96/abb696c3a38ce05041a9a4a1ab20457f.jpg",
+            "https://i.pinimg.com/150x150/69/16/40/691640300f4ac0e1c861ae38e8010c0f.jpg",
+            "https://i.pinimg.com/150x150/43/be/fd/43befd981ae0f2a4b402539ac028f269.jpg",
+            "https://i.pinimg.com/150x150/bc/38/c4/bc38c4407c9436930dda8d0072753fad.jpg",
+            "https://i.pinimg.com/150x150/2f/53/d3/2f53d39232515ea41135c7fd4e54c633.jpg"
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/3f/b3/50/3fb350523143fbd845a0de61e62fc064.jpg"
         },
-        "id": "1106689377123278054",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-16T04:01:44.054000",
-        "pin_count": 87,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "Targets the high-volume home inspiration audience.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Minimalist & Modern Home Decor",
+        "pin_count": 105
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123228343",
+        "description": "The best spring nail inspiration! Discover trending spring manicures, pastel nails, bright colors, delicate floral nail art, and fresh designs for the new season. Perfect ideas for acrylics, gel, and natural nails.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-02T11:53:21",
-        "name": "Spring Nail Ideas & Trends",
+        "board_pins_modified_at": "2026-06-22T20:47:20.319000",
         "media": {
           "pin_thumbnail_urls": [
+            "https://i.pinimg.com/150x150/a8/12/67/a81267aaed5ddca8144342e978e4e5db.jpg",
             "https://i.pinimg.com/150x150/05/ec/a5/05eca54bdde7101ab1e564c252f14246.jpg",
             "https://i.pinimg.com/150x150/8e/c4/59/8ec459d04e4b8843e2392aa98d8db163.jpg",
             "https://i.pinimg.com/150x150/f4/46/f7/f446f754f0b3eaa966815419ff0a53e2.jpg",
-            "https://i.pinimg.com/150x150/8f/3b/e6/8f3be67be8678bb77cf2cc3b203887ed.jpg",
-            "https://i.pinimg.com/150x150/65/40/08/6540083c8bdd56f13ed8a81ec690334e.jpg"
+            "https://i.pinimg.com/150x150/8f/3b/e6/8f3be67be8678bb77cf2cc3b203887ed.jpg"
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/78/d9/3a/78d93a20f406b4876352791cfd646b9c.jpg"
         },
-        "id": "1106689377123228343",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-18T03:53:47.568000",
-        "pin_count": 55,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "The best spring nail inspiration! Discover trending spring manicures, pastel nails, bright colors, delicate floral nail art, and fresh designs for the new season. Perfect ideas for acrylics, gel, and natural nails.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Spring Nail Ideas & Trends",
+        "pin_count": 56
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123252630",
+        "description": "The ultimate inspiration for summer vacation nails. Discover aesthetic summer manicures, bright neon nail art, ocean wave designs, and tropical holiday nail trends for your next trip.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-10T11:27:45",
-        "name": "Summer Vacation Nails & Aesthetic Ideas",
+        "board_pins_modified_at": "2026-06-15T23:06:03.700000",
         "media": {
           "pin_thumbnail_urls": [
             "https://i.pinimg.com/150x150/ea/f3/58/eaf3580c86668825bc6640edc5dbf176.jpg",
@@ -278,46 +286,46 @@
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/c3/b0/0b/c3b00b33be80009f7aa79c4cc7d8225e.jpg"
         },
-        "id": "1106689377123252630",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-15T23:06:03.700000",
-        "pin_count": 12,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "The ultimate inspiration for summer vacation nails. Discover aesthetic summer manicures, bright neon nail art, ocean wave designs, and tropical holiday nail trends for your next trip.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Summer Vacation Nails & Aesthetic Ideas",
+        "pin_count": 12
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123278062",
+        "description": "Leverages the growing \"Outdoor flower pots\" trend we found in research.",
+        "privacy": "PUBLIC",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-04-18T18:25:58",
-        "name": "Zen Garden & Outdoor Living",
+        "board_pins_modified_at": "2026-06-23T14:46:44.922000",
         "media": {
           "pin_thumbnail_urls": [
+            "https://i.pinimg.com/150x150/ab/93/19/ab9319991be521a4a3391118238ca4a0.jpg",
             "https://i.pinimg.com/150x150/91/b3/69/91b36933e1f5c097d0de7196688e6633.jpg",
             "https://i.pinimg.com/150x150/18/7c/11/187c111b828c15aff743df3cd80cde2b.jpg",
             "https://i.pinimg.com/150x150/fb/d2/e1/fbd2e17c41b72a76f2aaf20e45524d37.jpg",
-            "https://i.pinimg.com/150x150/82/94/2d/82942ddfb0421f6aa042edc99d9f9ee2.jpg",
-            "https://i.pinimg.com/150x150/b6/97/47/b69747624d0348ff0681a3e9427917f6.jpg"
+            "https://i.pinimg.com/150x150/82/94/2d/82942ddfb0421f6aa042edc99d9f9ee2.jpg"
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/bb/bf/70/bbbf70e66f0fcf4d1a9f5bfc2d0af95a.jpg"
         },
-        "id": "1106689377123278062",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-06-17T18:19:43.217000",
-        "pin_count": 34,
-        "is_ads_only": false,
-        "privacy": "PUBLIC",
-        "description": "Leverages the growing \"Outdoor flower pots\" trend we found in research.",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Zen Garden & Outdoor Living",
+        "pin_count": 35
       },
       {
+        "collaborator_count": 0,
+        "id": "1106689377123322892",
+        "description": "",
+        "privacy": "PROTECTED",
+        "owner": {
+          "username": "AestheticSenseDaily"
+        },
+        "is_ads_only": false,
         "created_at": "2026-05-04T04:55:58",
-        "name": "Products you tagged",
+        "board_pins_modified_at": "2026-05-04T05:10:49.227000",
         "media": {
           "pin_thumbnail_urls": [
             "https://i.pinimg.com/150x150/4b/d1/7b/4bd17b71aa30d461e8356ed7ec811128.jpg",
@@ -326,17 +334,9 @@
           ],
           "image_cover_url": "https://i.pinimg.com/400x300/38/10/78/3810780ea13d5dec87754a6d73f21b6c.jpg"
         },
-        "id": "1106689377123322892",
         "follower_count": 1,
-        "board_pins_modified_at": "2026-05-04T05:10:49.227000",
-        "pin_count": 4,
-        "is_ads_only": false,
-        "privacy": "PROTECTED",
-        "description": "",
-        "collaborator_count": 0,
-        "owner": {
-          "username": "AestheticSenseDaily"
-        }
+        "name": "Products you tagged",
+        "pin_count": 4
       }
     ],
     "bookmark": null
@@ -344,110 +344,20 @@
   "analytics": {
     "all": {
       "summary_metrics": {
-        "SAVE": 498,
-        "PIN_CLICK": 2914,
-        "IMPRESSION": 59690,
-        "OUTBOUND_CLICK": 57
+        "SAVE": 629,
+        "PIN_CLICK": 3895,
+        "OUTBOUND_CLICK": 57,
+        "IMPRESSION": 80895
       },
       "daily_metrics": [
-        {
-          "date": "2026-05-20",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 7,
-            "PIN_CLICK": 64,
-            "IMPRESSION": 1570,
-            "OUTBOUND_CLICK": 1
-          }
-        },
-        {
-          "date": "2026-05-21",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 15,
-            "PIN_CLICK": 68,
-            "IMPRESSION": 1513,
-            "OUTBOUND_CLICK": 0
-          }
-        },
-        {
-          "date": "2026-05-22",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 12,
-            "PIN_CLICK": 68,
-            "IMPRESSION": 1418,
-            "OUTBOUND_CLICK": 1
-          }
-        },
-        {
-          "date": "2026-05-23",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 8,
-            "PIN_CLICK": 45,
-            "IMPRESSION": 960,
-            "OUTBOUND_CLICK": 0
-          }
-        },
-        {
-          "date": "2026-05-24",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 9,
-            "PIN_CLICK": 34,
-            "IMPRESSION": 874,
-            "OUTBOUND_CLICK": 2
-          }
-        },
-        {
-          "date": "2026-05-25",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 7,
-            "PIN_CLICK": 51,
-            "IMPRESSION": 1180,
-            "OUTBOUND_CLICK": 3
-          }
-        },
-        {
-          "date": "2026-05-26",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 12,
-            "PIN_CLICK": 65,
-            "IMPRESSION": 1451,
-            "OUTBOUND_CLICK": 4
-          }
-        },
-        {
-          "date": "2026-05-27",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 21,
-            "PIN_CLICK": 98,
-            "IMPRESSION": 1836,
-            "OUTBOUND_CLICK": 1
-          }
-        },
-        {
-          "date": "2026-05-28",
-          "data_status": "READY",
-          "metrics": {
-            "SAVE": 18,
-            "PIN_CLICK": 107,
-            "IMPRESSION": 1935,
-            "OUTBOUND_CLICK": 5
-          }
-        },
         {
           "date": "2026-05-29",
           "data_status": "READY",
           "metrics": {
             "SAVE": 12,
             "PIN_CLICK": 90,
-            "IMPRESSION": 2032,
-            "OUTBOUND_CLICK": 2
+            "OUTBOUND_CLICK": 2,
+            "IMPRESSION": 2032
           }
         },
         {
@@ -456,8 +366,8 @@
           "metrics": {
             "SAVE": 22,
             "PIN_CLICK": 103,
-            "IMPRESSION": 1808,
-            "OUTBOUND_CLICK": 3
+            "OUTBOUND_CLICK": 3,
+            "IMPRESSION": 1808
           }
         },
         {
@@ -466,8 +376,8 @@
           "metrics": {
             "SAVE": 14,
             "PIN_CLICK": 85,
-            "IMPRESSION": 1659,
-            "OUTBOUND_CLICK": 0
+            "OUTBOUND_CLICK": 0,
+            "IMPRESSION": 1659
           }
         },
         {
@@ -476,8 +386,8 @@
           "metrics": {
             "SAVE": 24,
             "PIN_CLICK": 92,
-            "IMPRESSION": 2168,
-            "OUTBOUND_CLICK": 1
+            "OUTBOUND_CLICK": 1,
+            "IMPRESSION": 2168
           }
         },
         {
@@ -486,8 +396,8 @@
           "metrics": {
             "SAVE": 25,
             "PIN_CLICK": 112,
-            "IMPRESSION": 2367,
-            "OUTBOUND_CLICK": 1
+            "OUTBOUND_CLICK": 1,
+            "IMPRESSION": 2367
           }
         },
         {
@@ -496,8 +406,8 @@
           "metrics": {
             "SAVE": 26,
             "PIN_CLICK": 108,
-            "IMPRESSION": 2102,
-            "OUTBOUND_CLICK": 2
+            "OUTBOUND_CLICK": 2,
+            "IMPRESSION": 2102
           }
         },
         {
@@ -506,8 +416,8 @@
           "metrics": {
             "SAVE": 17,
             "PIN_CLICK": 123,
-            "IMPRESSION": 2365,
-            "OUTBOUND_CLICK": 2
+            "OUTBOUND_CLICK": 2,
+            "IMPRESSION": 2365
           }
         },
         {
@@ -516,8 +426,8 @@
           "metrics": {
             "SAVE": 23,
             "PIN_CLICK": 131,
-            "IMPRESSION": 2474,
-            "OUTBOUND_CLICK": 3
+            "OUTBOUND_CLICK": 3,
+            "IMPRESSION": 2474
           }
         },
         {
@@ -526,8 +436,8 @@
           "metrics": {
             "SAVE": 11,
             "PIN_CLICK": 76,
-            "IMPRESSION": 1952,
-            "OUTBOUND_CLICK": 0
+            "OUTBOUND_CLICK": 0,
+            "IMPRESSION": 1952
           }
         },
         {
@@ -536,8 +446,8 @@
           "metrics": {
             "SAVE": 16,
             "PIN_CLICK": 99,
-            "IMPRESSION": 1969,
-            "OUTBOUND_CLICK": 3
+            "OUTBOUND_CLICK": 3,
+            "IMPRESSION": 1969
           }
         },
         {
@@ -546,8 +456,8 @@
           "metrics": {
             "SAVE": 20,
             "PIN_CLICK": 117,
-            "IMPRESSION": 2633,
-            "OUTBOUND_CLICK": 2
+            "OUTBOUND_CLICK": 2,
+            "IMPRESSION": 2633
           }
         },
         {
@@ -556,8 +466,8 @@
           "metrics": {
             "SAVE": 18,
             "PIN_CLICK": 145,
-            "IMPRESSION": 2638,
-            "OUTBOUND_CLICK": 0
+            "OUTBOUND_CLICK": 0,
+            "IMPRESSION": 2638
           }
         },
         {
@@ -566,8 +476,8 @@
           "metrics": {
             "SAVE": 16,
             "PIN_CLICK": 132,
-            "IMPRESSION": 2975,
-            "OUTBOUND_CLICK": 7
+            "OUTBOUND_CLICK": 7,
+            "IMPRESSION": 2975
           }
         },
         {
@@ -576,8 +486,8 @@
           "metrics": {
             "SAVE": 29,
             "PIN_CLICK": 127,
-            "IMPRESSION": 2418,
-            "OUTBOUND_CLICK": 4
+            "OUTBOUND_CLICK": 4,
+            "IMPRESSION": 2418
           }
         },
         {
@@ -586,8 +496,8 @@
           "metrics": {
             "SAVE": 21,
             "PIN_CLICK": 151,
-            "IMPRESSION": 2604,
-            "OUTBOUND_CLICK": 2
+            "OUTBOUND_CLICK": 2,
+            "IMPRESSION": 2604
           }
         },
         {
@@ -596,8 +506,8 @@
           "metrics": {
             "SAVE": 21,
             "PIN_CLICK": 134,
-            "IMPRESSION": 2958,
-            "OUTBOUND_CLICK": 0
+            "OUTBOUND_CLICK": 0,
+            "IMPRESSION": 2958
           }
         },
         {
@@ -606,8 +516,8 @@
           "metrics": {
             "SAVE": 20,
             "PIN_CLICK": 117,
-            "IMPRESSION": 2394,
-            "OUTBOUND_CLICK": 2
+            "OUTBOUND_CLICK": 2,
+            "IMPRESSION": 2394
           }
         },
         {
@@ -616,8 +526,8 @@
           "metrics": {
             "SAVE": 26,
             "PIN_CLICK": 171,
-            "IMPRESSION": 3268,
-            "OUTBOUND_CLICK": 4
+            "OUTBOUND_CLICK": 4,
+            "IMPRESSION": 3268
           }
         },
         {
@@ -626,22 +536,102 @@
           "metrics": {
             "SAVE": 28,
             "PIN_CLICK": 201,
-            "IMPRESSION": 4169,
-            "OUTBOUND_CLICK": 2
+            "OUTBOUND_CLICK": 2,
+            "IMPRESSION": 4169
           }
         },
         {
           "date": "2026-06-17",
-          "data_status": "PROCESSING",
+          "data_status": "READY",
           "metrics": {
-            "IMPRESSION": 0.0,
-            "PIN_CLICK": 0.0,
-            "OUTBOUND_CLICK": 0.0,
-            "SAVE": 0.0
+            "SAVE": 30,
+            "PIN_CLICK": 190,
+            "OUTBOUND_CLICK": 3,
+            "IMPRESSION": 3865
           }
         },
         {
           "date": "2026-06-18",
+          "data_status": "READY",
+          "metrics": {
+            "SAVE": 26,
+            "PIN_CLICK": 154,
+            "OUTBOUND_CLICK": 3,
+            "IMPRESSION": 3679
+          }
+        },
+        {
+          "date": "2026-06-19",
+          "data_status": "READY",
+          "metrics": {
+            "SAVE": 25,
+            "PIN_CLICK": 178,
+            "OUTBOUND_CLICK": 4,
+            "IMPRESSION": 3839
+          }
+        },
+        {
+          "date": "2026-06-20",
+          "data_status": "READY",
+          "metrics": {
+            "SAVE": 25,
+            "PIN_CLICK": 138,
+            "OUTBOUND_CLICK": 1,
+            "IMPRESSION": 3170
+          }
+        },
+        {
+          "date": "2026-06-21",
+          "data_status": "READY",
+          "metrics": {
+            "SAVE": 18,
+            "PIN_CLICK": 137,
+            "OUTBOUND_CLICK": 1,
+            "IMPRESSION": 3013
+          }
+        },
+        {
+          "date": "2026-06-22",
+          "data_status": "READY",
+          "metrics": {
+            "SAVE": 30,
+            "PIN_CLICK": 203,
+            "OUTBOUND_CLICK": 3,
+            "IMPRESSION": 4074
+          }
+        },
+        {
+          "date": "2026-06-23",
+          "data_status": "READY",
+          "metrics": {
+            "SAVE": 35,
+            "PIN_CLICK": 201,
+            "OUTBOUND_CLICK": 1,
+            "IMPRESSION": 4429
+          }
+        },
+        {
+          "date": "2026-06-24",
+          "data_status": "READY",
+          "metrics": {
+            "SAVE": 31,
+            "PIN_CLICK": 190,
+            "OUTBOUND_CLICK": 0,
+            "IMPRESSION": 4047
+          }
+        },
+        {
+          "date": "2026-06-25",
+          "data_status": "READY",
+          "metrics": {
+            "SAVE": 20,
+            "PIN_CLICK": 190,
+            "OUTBOUND_CLICK": 1,
+            "IMPRESSION": 3826
+          }
+        },
+        {
+          "date": "2026-06-26",
           "data_status": "PROCESSING",
           "metrics": {
             "IMPRESSION": 0.0,
@@ -651,7 +641,17 @@
           }
         },
         {
-          "date": "2026-06-19",
+          "date": "2026-06-27",
+          "data_status": "PROCESSING",
+          "metrics": {
+            "IMPRESSION": 0.0,
+            "PIN_CLICK": 0.0,
+            "OUTBOUND_CLICK": 0.0,
+            "SAVE": 0.0
+          }
+        },
+        {
+          "date": "2026-06-28",
           "data_status": "PROCESSING",
           "metrics": {
             "IMPRESSION": 0.0,
@@ -668,138 +668,138 @@
     "pins": [
       {
         "metrics": {
-          "SAVE": 467,
-          "OUTBOUND_CLICK": 16,
-          "IMPRESSION": 48138
+          "IMPRESSION": 66782,
+          "OUTBOUND_CLICK": 23,
+          "SAVE": 595
         },
         "data_status": {
-          "SAVE": "READY",
+          "IMPRESSION": "READY",
           "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
+          "SAVE": "READY"
         },
         "pin_id": "1106689308453272466"
       },
       {
         "metrics": {
-          "SAVE": 14,
+          "IMPRESSION": 4708,
           "OUTBOUND_CLICK": 1,
-          "IMPRESSION": 4170
+          "SAVE": 16
         },
         "data_status": {
-          "SAVE": "READY",
+          "IMPRESSION": "READY",
           "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
+          "SAVE": "READY"
         },
         "pin_id": "1106689308453385522"
       },
       {
         "metrics": {
-          "SAVE": 4,
-          "OUTBOUND_CLICK": 0,
-          "IMPRESSION": 780
+          "IMPRESSION": 1131,
+          "OUTBOUND_CLICK": 5,
+          "SAVE": 1
         },
         "data_status": {
-          "SAVE": "READY",
+          "IMPRESSION": "READY",
           "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
-        },
-        "pin_id": "1106689308453343361"
-      },
-      {
-        "metrics": {
-          "SAVE": 0,
-          "OUTBOUND_CLICK": 6,
-          "IMPRESSION": 608
-        },
-        "data_status": {
-          "SAVE": "READY",
-          "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
-        },
-        "pin_id": "1106689308455309190"
-      },
-      {
-        "metrics": {
-          "SAVE": 2,
-          "OUTBOUND_CLICK": 1,
-          "IMPRESSION": 420
-        },
-        "data_status": {
-          "SAVE": "READY",
-          "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
-        },
-        "pin_id": "1106689308453364550"
-      },
-      {
-        "metrics": {
-          "SAVE": 1,
-          "OUTBOUND_CLICK": 6,
-          "IMPRESSION": 347
-        },
-        "data_status": {
-          "SAVE": "READY",
-          "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
-        },
-        "pin_id": "1106689308455951527"
-      },
-      {
-        "metrics": {
-          "SAVE": 1,
-          "OUTBOUND_CLICK": 0,
-          "IMPRESSION": 276
-        },
-        "data_status": {
-          "SAVE": "READY",
-          "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
-        },
-        "pin_id": "1106689308453311714"
-      },
-      {
-        "metrics": {
-          "SAVE": 1,
-          "OUTBOUND_CLICK": 4,
-          "IMPRESSION": 272
-        },
-        "data_status": {
-          "SAVE": "READY",
-          "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
+          "SAVE": "READY"
         },
         "pin_id": "1106689308456637737"
       },
       {
         "metrics": {
-          "SAVE": 1,
-          "OUTBOUND_CLICK": 2,
-          "IMPRESSION": 217
+          "IMPRESSION": 822,
+          "OUTBOUND_CLICK": 0,
+          "SAVE": 3
         },
         "data_status": {
-          "SAVE": "READY",
+          "IMPRESSION": "READY",
           "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
+          "SAVE": "READY"
         },
-        "pin_id": "1106689308455983755"
+        "pin_id": "1106689308453343361"
       },
       {
         "metrics": {
-          "SAVE": 0,
-          "OUTBOUND_CLICK": 0,
-          "IMPRESSION": 152
+          "IMPRESSION": 686,
+          "OUTBOUND_CLICK": 3,
+          "SAVE": 0
         },
         "data_status": {
-          "SAVE": "READY",
+          "IMPRESSION": "READY",
           "OUTBOUND_CLICK": "READY",
-          "IMPRESSION": "READY"
+          "SAVE": "READY"
         },
-        "pin_id": "1106689308453326914"
+        "pin_id": "1106689308455309190"
+      },
+      {
+        "metrics": {
+          "IMPRESSION": 462,
+          "OUTBOUND_CLICK": 0,
+          "SAVE": 3
+        },
+        "data_status": {
+          "IMPRESSION": "READY",
+          "OUTBOUND_CLICK": "READY",
+          "SAVE": "READY"
+        },
+        "pin_id": "1106689308453364550"
+      },
+      {
+        "metrics": {
+          "IMPRESSION": 362,
+          "OUTBOUND_CLICK": 0,
+          "SAVE": 0
+        },
+        "data_status": {
+          "IMPRESSION": "READY",
+          "OUTBOUND_CLICK": "READY",
+          "SAVE": "READY"
+        },
+        "pin_id": "1106689308457496452"
+      },
+      {
+        "metrics": {
+          "IMPRESSION": 358,
+          "OUTBOUND_CLICK": 6,
+          "SAVE": 1
+        },
+        "data_status": {
+          "IMPRESSION": "READY",
+          "OUTBOUND_CLICK": "READY",
+          "SAVE": "READY"
+        },
+        "pin_id": "1106689308455951527"
+      },
+      {
+        "metrics": {
+          "IMPRESSION": 290,
+          "OUTBOUND_CLICK": 0,
+          "SAVE": 1
+        },
+        "data_status": {
+          "IMPRESSION": "READY",
+          "OUTBOUND_CLICK": "READY",
+          "SAVE": "READY"
+        },
+        "pin_id": "1106689308453311714"
+      },
+      {
+        "metrics": {
+          "IMPRESSION": 199,
+          "OUTBOUND_CLICK": 0,
+          "SAVE": 1
+        },
+        "data_status": {
+          "IMPRESSION": "READY",
+          "OUTBOUND_CLICK": "READY",
+          "SAVE": "READY"
+        },
+        "pin_id": "1106689308455983755"
       }
     ],
     "date_availability": {
       "is_realtime": false,
-      "latest_available_timestamp": 1781654399000
+      "latest_available_timestamp": 1782431999000
     }
   }
 }

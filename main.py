@@ -138,10 +138,10 @@ DEFAULT_BOARD_CATEGORY = "aesthetic_nail_art"
 # Niche weights for weighted random selection (must sum to 1.0)
 # 40% nails (proven performer), 20% hair, 20% home, 20% fashion
 NICHE_WEIGHTS = {
-    "nails": 0.25,
-    "hair_beauty": 0.25,
-    "home_garden": 0.25,
-    "fashion_style": 0.25,
+    "nails": 0.60,
+    "hair_beauty": 0.30,
+    "home_garden": 0.05,
+    "fashion_style": 0.05,
 }
 
 # Niche-specific CTA options (Universal Action-Oriented to prevent collision)
@@ -333,7 +333,7 @@ RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys in th
   "annotated_keywords": ["List exactly 3 to 5 highly specific Pinterest Annotated Keywords you identified here."],
   "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content.",
   "title": "A high-CTR 'Click-Gap' title (max 100 chars). It MUST strictly start with your primary annotated keyword, but follow it with a hook that creates a 'curiosity gap' or promises a 'secret' (e.g., 'Minimalist Clean Girl Nails: The Exact Polish for the Viral Look'). Force the user to click to find out more. Use emojis sparingly.",
-  "overlay_text": "A massive, urgent 3-6 word CLICK-BAIT hook for the image overlay. Focus purely on shocking value or deep curiosity (e.g., 'The Secret To This Look', 'Why Everyone Is Doing This', 'The 1 Product You Need', 'Don\\'t Go To The Salon Without Seeing This'). DO NOT include instructions like 'Click' or 'Tap' here, and DO NOT describe the image.",
+  "overlay_text": "An ultra-compelling 3-6 word curiosity-gap overlay hook SPECIFIC to the pin topic. Avoid generic clickbait like 'The Secret To This Look' or 'Why Everyone Is Doing This'. Instead, capture the exact visual allure or specific question of this trend (e.g., 'Viral Glass-Donut Shades', '3 Secrets to Perfect Updos', 'Bioluminescent Polish Hack', 'Stop Making This Nail Mistake!'). Focus on specific value or curiosity gaps that relate directly to the topic. DO NOT use generic placeholders.",
   "description": "An SEO-optimized description (150-300 chars) formatted as an actionable tip or mini-guide. You MUST naturally weave in your 3 to 5 annotated keywords in the first two sentences. You MUST include a strong Call-To-Action (e.g., 'Save this for your next salon visit!' or 'Click to see the full guide!') before exactly 10 highly relevant and trending hashtags at the very end.",
   "image_prompt": "{niche_config['image_guide']}",
   "alt_text": "A highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects) for Pinterest accessibility. Focus on visual details, not SEO keywords."
@@ -663,7 +663,7 @@ def clean_text_for_rendering(text: str) -> str:
 # PHASE 3: THE DESIGNER — Pillow (PIL)
 # ============================================================================
 
-def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str:
+def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_style: str = None) -> str:
     """
     Open the raw image, apply a highly engaging, high-CTR premium clickbait overlay,
     and render the text using dynamic font pairings, colors, outlines, and badges.
@@ -672,9 +672,6 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
 
     # Clean the overlay_text to avoid tofu characters
     overlay_text = clean_text_for_rendering(overlay_text)
-
-    img = Image.open(image_path).convert("RGBA")
-    width, height = img.size
 
     # --- Setup Niche Details ---
     niche = getattr(design_pin_image, '_current_niche', 'nails')
@@ -698,10 +695,62 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
     badge_text = niche_badges.get(niche, "TREND ALERT")
 
     # --- Layout & Styling Selection ---
-    # We use 4 modern high-CTR layouts instead of generic boxed containers
-    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card']
-    layout_style = random.choice(layouts)
+    # We use 5 modern high-CTR layouts instead of generic boxed containers
+    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage']
+    if not layout_style or layout_style not in layouts:
+        layout_style = random.choice(layouts)
+        
+    if layout_style == 'double_panel_collage' and not isinstance(image_path, tuple):
+        # Fallback if only one image is provided
+        layouts_single = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card']
+        layout_style = random.choice(layouts_single)
+        
     print(f"   📐 Selected premium layout style: {layout_style}")
+
+    # Open image(s) depending on layout style
+    if layout_style == 'double_panel_collage':
+        img1 = Image.open(image_path[0]).convert("RGBA")
+        img2 = Image.open(image_path[1]).convert("RGBA")
+        
+        width, height = 768, 1344
+        img = Image.new("RGBA", (width, height), (255, 255, 255, 255))
+        
+        separator_thickness = 12
+        panel_height = (height - separator_thickness) // 2
+        
+        def crop_and_resize(panel_img, target_w, target_h):
+            p_w, p_h = panel_img.size
+            aspect_target = target_w / target_h
+            aspect_panel = p_w / p_h
+            
+            if aspect_panel > aspect_target:
+                new_h = target_h
+                new_w = int(p_w * (target_h / p_h))
+                resized = panel_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                left = (new_w - target_w) // 2
+                cropped = resized.crop((left, 0, left + target_w, target_h))
+            else:
+                new_w = target_w
+                new_h = int(p_h * (target_w / p_w))
+                resized = panel_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                top = (new_h - target_h) // 2
+                cropped = resized.crop((0, top, target_w, top + target_h))
+            return cropped
+
+        panel1 = crop_and_resize(img1, width, panel_height)
+        panel2 = crop_and_resize(img2, width, panel_height)
+        
+        img.paste(panel1, (0, 0))
+        img.paste(panel2, (0, panel_height + separator_thickness))
+        
+        draw_sep = ImageDraw.Draw(img)
+        draw_sep.rectangle(
+            [(0, panel_height), (width, panel_height + separator_thickness)],
+            fill=(255, 255, 255, 255)
+        )
+    else:
+        img = Image.open(image_path).convert("RGBA")
+        width, height = img.size
 
     # Set up fonts with dynamic fallbacks
     draw = ImageDraw.Draw(img)
@@ -854,6 +903,38 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
         
         text_y_start = card_top + int(height * 0.09)
 
+    elif layout_style == 'double_panel_collage':
+        # Draw a semi-transparent cream luxury card centered vertically over the middle split
+        card_width = int(width * 0.88)
+        card_height = total_text_height + int(height * 0.16)
+        card_left = (width - card_width) // 2
+        card_right = card_left + card_width
+        card_top = (height - card_height) // 2
+        card_bottom = card_top + card_height
+        
+        # Draw soft card shadow first
+        for offset in range(1, 5):
+            draw_overlay.rounded_rectangle(
+                [(card_left - offset, card_top - offset), (card_right + offset, card_bottom + offset)],
+                radius=16 + offset,
+                fill=(0, 0, 0, int(15 / offset))
+            )
+            
+        # Draw main card background (opaque cream for perfect readability)
+        draw_overlay.rounded_rectangle(
+            [(card_left, card_top), (card_right, card_bottom)],
+            radius=16,
+            fill=(255, 255, 255, 235)
+        )
+        draw_overlay.rounded_rectangle(
+            [(card_left, card_top), (card_right, card_bottom)],
+            radius=16,
+            outline=(*accent_color, 120),
+            width=2
+        )
+        
+        text_y_start = card_top + int(height * 0.08)
+
     else: # modern_vignette
         # Elegant classic gradient bottom fade
         gradient_start_y = int(height * 0.50)
@@ -899,7 +980,7 @@ def design_pin_image(image_path: str, overlay_text: str, output_dir: str) -> str
             
             # Thick black outline to create highly engaging high-contrast text
             draw_text_with_outline(draw, line, text_x, text_y, main_font, fill_color, (0, 0, 0, 255), width_val=4)
-        elif layout_style == 'aesthetic_card':
+        elif layout_style in ['aesthetic_card', 'double_panel_collage']:
             # Dark charcoal text for card layout
             line_lower = line.lower()
             fill_color = (15, 23, 42, 255) # Deep slate/charcoal
@@ -1154,7 +1235,6 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
         print(f"❌ Pinterest API failed permanently after {max_retries} attempts.")
         sys.exit(1)
 
-
 # ============================================================================
 # MAIN PIPELINE
 # ============================================================================
@@ -1172,6 +1252,11 @@ def main():
     print("✨ Nailosmetic — Pinterest Automation Bot v2.0")
     print("=" * 60)
 
+    # Parse arguments
+    dry_run = "--dry-run" in sys.argv
+    if dry_run:
+        print("🚩 DRY-RUN MODE ENABLED. No pins will be published to Pinterest.")
+
     # Validate environment
     validate_env_vars()
 
@@ -1179,24 +1264,27 @@ def main():
     with tempfile.TemporaryDirectory() as tmp_dir:
         print(f"\n📁 Working directory: {tmp_dir}")
 
-        # --- TOPIC & LINK RESOLUTION ---
+        # Setup paths
         queue_path = Path("shared/links_queue.json")
+        published_path = Path("shared/published_links.json")
         topic_bank_path = Path("shared/topic_bank.json")
         used_topics_path = Path("shared/used_topics.json")
         
         chosen_topic = None
         chosen_niche = None
         destination_link = None
-        
+
         # 1. Try to get topic and link from WordPress Queue
         if queue_path.exists():
             try:
                 with open(queue_path, "r") as f:
                     queue = json.load(f)
                 if queue:
-                    queued_item = queue.pop(0)  # FIFO
+                    # Pop the latest link from queue
+                    queued_item = queue[0]
                     destination_link = queued_item.get("url")
                     chosen_topic = queued_item.get("topic")
+                    
                     # Determine niche from the queued category
                     queued_category = queued_item.get("category", "").lower()
                     if "hair" in queued_category or "beauty" in queued_category:
@@ -1210,12 +1298,6 @@ def main():
                     print(f"   🔥 Synchronizing with WordPress Article: {destination_link}")
                     print(f"   🎯 Topic from Queue: \"{chosen_topic}\" (niche: {chosen_niche})")
                     
-                    # Remove the item we just processed
-                    SmartJSON.update_file(queue_path, []) # This is a bit tricky, SmartJSON merges. 
-                    # Actually, we need to REMOVE an item. 
-                    # I'll update SmartJSON to handle removals or just keep this custom logic but use SmartJSON for additions.
-                    
-                    # For removal, we'll still use custom logic for now as it's specific.
                     try:
                         with open(queue_path, "r") as f:
                             fresh_queue = json.load(f)
@@ -1435,39 +1517,86 @@ def main():
                     print(f"   ⚠️ Error reading published_links.json: {e}")
             
             # Final fallback: use board default link from BOARD_MAP configuration
-            if not destination_link:
-                destination_link = board_info["link"]
-                print(f"   🔗 Using default category board link: {destination_link}")
+            if not destination_link or destination_link == "https://nailosmetic.com/":
+                # Let's try to get a random article in the same niche to avoid sending to homepage/None
+                if 'search_pool' in locals() and search_pool:
+                    candidates = search_pool[-15:]
+                    best_article = random.choice(candidates)
+                    destination_link = best_article["url"]
+                    print(f"   🔗 Force niche fallback article (instead of homepage/None): {destination_link}")
+                else:
+                    destination_link = board_info["link"]
+                    print(f"   🔗 Using default category board link: {destination_link}")
 
         target_board_id = board_info["board_id"]
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
 
+        # Select layout style
+        layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage']
+        layout_style = random.choice(layouts)
+        print(f"   📐 Selected layout style: {layout_style}")
+
         # Phase 2: Generate image with fallbacks
-        raw_image_path = generate_image_master(
-            content["image_prompt"], tmp_dir, niche=chosen_niche
-        )
+        if layout_style == 'double_panel_collage':
+            print("   🎨 Generating first image for collage...")
+            raw_path_temp = generate_image_master(
+                content["image_prompt"], tmp_dir, niche=chosen_niche
+            )
+            raw_image_path1 = os.path.join(tmp_dir, "raw_ai_image_1.png")
+            if os.path.exists(raw_path_temp):
+                os.rename(raw_path_temp, raw_image_path1)
+            
+            # Wait a small delay to avoid hitting rate limits too quickly
+            time.sleep(3)
+            
+            print("   🎨 Generating second image for collage...")
+            # Modify the prompt slightly to get a different aesthetic variation
+            variation_prompt = content["image_prompt"] + ", alternative styling, different angle"
+            raw_path_temp2 = generate_image_master(
+                variation_prompt, tmp_dir, niche=chosen_niche
+            )
+            raw_image_path2 = os.path.join(tmp_dir, "raw_ai_image_2.png")
+            if os.path.exists(raw_path_temp2):
+                os.rename(raw_path_temp2, raw_image_path2)
+                
+            raw_image_path = (raw_image_path1, raw_image_path2)
+        else:
+            raw_image_path = generate_image_master(
+                content["image_prompt"], tmp_dir, niche=chosen_niche
+            )
 
         # Phase 3: Design the pin with Pillow
         # Pass niche info to design function via attribute for CTA selection
         design_pin_image._current_niche = chosen_niche
         final_image_path = design_pin_image(
-            raw_image_path, content["overlay_text"], tmp_dir
+            raw_image_path, content["overlay_text"], tmp_dir, layout_style=layout_style
         )
 
         # Phase 4: Publish to Pinterest
-        result = publish_to_pinterest(
-            final_image_path, content["title"], content["description"],
-            board_id=target_board_id, destination_link=destination_link,
-            alt_text=content.get("alt_text", "")
-        )
+        if dry_run:
+            print("\n📌 [DRY-RUN MODE] Skipping Pinterest publishing.")
+            print(f"   Image: {final_image_path}")
+            print(f"   Title: {content['title']}")
+            print(f"   Desc: {content['description']}")
+            print(f"   Link: {destination_link}")
+            print(f"   Board ID: {target_board_id}")
+        else:
+            result = publish_to_pinterest(
+                final_image_path, content["title"], content["description"],
+                board_id=target_board_id, destination_link=destination_link,
+                alt_text=content.get("alt_text", "")
+            )
 
-        # Mark topic as used so we don't repeat it soon
-        if chosen_topic:
+        # Mark topic as used so we don't repeat it soon (only if not dry run, to avoid mutating state in dry run)
+        if chosen_topic and not dry_run:
             SmartJSON.update_file(used_topics_path, [chosen_topic])
             print(f"   📋 Topic \"{chosen_topic}\" marked as used.")
 
     print("\n" + "=" * 60)
-    print(f"✨ Pipeline complete! Your {chosen_niche} pin is live on Pinterest.")
+    if dry_run:
+        print(f"✨ [DRY-RUN] Pipeline complete! Your {chosen_niche} pin was designed.")
+    else:
+        print(f"✨ Pipeline complete! Your {chosen_niche} pin is live on Pinterest.")
     print("=" * 60)
 
 

@@ -165,10 +165,10 @@ def main():
     # ===== Pick a niche and high-demand topic from the topic bank =====
     # Niche weights: 40% nails, 20% hair, 20% home, 20% fashion
     NICHE_WEIGHTS = {
-        "nails": 0.40,
-        "hair_beauty": 0.20,
-        "home_garden": 0.20,
-        "fashion_style": 0.20,
+        "nails": 0.60,
+        "hair_beauty": 0.30,
+        "home_garden": 0.05,
+        "fashion_style": 0.05,
     }
     
     topic_bank_path = Path(__file__).parent.parent / "shared" / "topic_bank.json"
