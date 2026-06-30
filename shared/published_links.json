@@ -1272,5 +1272,12 @@
         "niche": "hair_beauty",
         "topic": "mexico makeup",
         "slug": "mexico-makeup-trends"
+    },
+    {
+        "url": "https://nailosmetic.com/firework-nails-designs/",
+        "category": "Seasonal Trends",
+        "niche": "nails",
+        "topic": "firework nails",
+        "slug": "firework-nails-designs"
     }
 ]

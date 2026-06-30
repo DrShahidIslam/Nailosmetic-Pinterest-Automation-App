@@ -33,7 +33,7 @@
         {
             "keyword": "toe nail colors",
             "growth_mom": 70,
-            "growth_yoy": 60,
+            "growth_yoy": 50,
             "trend_type": "monthly"
         },
         {
@@ -141,7 +141,7 @@
         {
             "keyword": "simple 4th of july nails",
             "growth_mom": 2500,
-            "growth_yoy": 200,
+            "growth_yoy": 100,
             "trend_type": "monthly"
         },
         {
@@ -194,7 +194,7 @@
         },
         {
             "keyword": "simple fourth of july nails",
-            "growth_mom": 3500,
+            "growth_mom": 3000,
             "growth_yoy": -10,
             "trend_type": "growing"
         },
@@ -446,8 +446,8 @@
         },
         {
             "keyword": "simple fourth of july nails",
-            "growth_mom": 3500,
-            "growth_yoy": -6,
+            "growth_mom": 3000,
+            "growth_yoy": -7,
             "trend_type": "seasonal"
         },
         {
@@ -501,7 +501,7 @@
         {
             "keyword": "simple 4th of july nails",
             "growth_mom": 2500,
-            "growth_yoy": 200,
+            "growth_yoy": 100,
             "trend_type": "seasonal"
         },
         {
@@ -643,12 +643,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "4th nails july",
-            "growth_mom": 900,
-            "growth_yoy": -30,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "4 july nails",
             "growth_mom": 800,
             "growth_yoy": 0,
@@ -694,6 +688,12 @@
             "keyword": "bomb pop nails",
             "growth_mom": 500,
             "growth_yoy": 70,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "patriotic nails design",
+            "growth_mom": 500,
+            "growth_yoy": -30,
             "trend_type": "seasonal"
         }
     ],
@@ -871,7 +871,7 @@
         {
             "keyword": "laundry room",
             "growth_mom": 20,
-            "growth_yoy": 1,
+            "growth_yoy": 0,
             "trend_type": "monthly"
         },
         {
@@ -997,7 +997,7 @@
         {
             "keyword": "kitchen counter decor",
             "growth_mom": -5,
-            "growth_yoy": -10,
+            "growth_yoy": -20,
             "trend_type": "monthly"
         },
         {
@@ -1134,7 +1134,7 @@
         },
         {
             "keyword": "nightstand decor",
-            "growth_mom": 3,
+            "growth_mom": 2,
             "growth_yoy": 20,
             "trend_type": "monthly"
         },
@@ -1597,7 +1597,7 @@
         {
             "keyword": "pink dorm",
             "growth_mom": 50,
-            "growth_yoy": 40,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
@@ -1735,7 +1735,7 @@
         {
             "keyword": "cute vanity",
             "growth_mom": 30,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "seasonal"
         },
         {
@@ -1863,7 +1863,7 @@
         {
             "keyword": "buttons",
             "growth_mom": -1,
-            "growth_yoy": 80,
+            "growth_yoy": 70,
             "trend_type": "monthly"
         },
         {
@@ -2019,7 +2019,7 @@
         {
             "keyword": "gold heels",
             "growth_mom": -40,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "monthly"
         },
         {
@@ -2127,7 +2127,7 @@
         {
             "keyword": "diy cut t-shirts",
             "growth_mom": 100,
-            "growth_yoy": 900,
+            "growth_yoy": 800,
             "trend_type": "growing"
         },
         {
@@ -2277,7 +2277,7 @@
         {
             "keyword": "chunky necklace",
             "growth_mom": 30,
-            "growth_yoy": 30,
+            "growth_yoy": 20,
             "trend_type": "growing"
         },
         {
