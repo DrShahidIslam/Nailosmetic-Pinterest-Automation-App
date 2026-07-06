@@ -696,11 +696,11 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
 
     # --- Layout & Styling Selection ---
     # We use 6 modern high-CTR layouts instead of generic boxed containers
-    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid']
+    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid', 'numbered_listicle']
     if not layout_style or layout_style not in layouts:
         layout_style = random.choice(layouts)
         
-    if layout_style == 'four_panel_grid' and (not isinstance(image_path, tuple) or len(image_path) < 4):
+    if layout_style in ['four_panel_grid', 'numbered_listicle'] and (not isinstance(image_path, tuple) or len(image_path) < 4):
         # Fallback to double collage if we have 2+ images, or single layouts
         if isinstance(image_path, tuple) and len(image_path) >= 2:
             layout_style = 'double_panel_collage'
@@ -768,6 +768,92 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
             [(0, panel_h), (width, panel_h + separator_thickness)],
             fill=(255, 255, 255, 255)
         )
+    elif layout_style == 'numbered_listicle':
+        img1 = Image.open(image_path[0]).convert("RGBA")
+        img2 = Image.open(image_path[1]).convert("RGBA")
+        img3 = Image.open(image_path[2]).convert("RGBA")
+        img4 = Image.open(image_path[3]).convert("RGBA")
+        
+        width, height = 768, 1344
+        img = Image.new("RGBA", (width, height), (255, 255, 255, 255))
+        
+        header_height = 360
+        separator_thickness = 8
+        available_height = height - header_height
+        panel_h = (available_height - (separator_thickness * 3)) // 4
+        
+        def crop_and_resize(panel_img, target_w, target_h):
+            p_w, p_h = panel_img.size
+            aspect_target = target_w / target_h
+            aspect_panel = p_w / p_h
+            
+            if aspect_panel > aspect_target:
+                new_h = target_h
+                new_w = int(p_w * (target_h / p_h))
+                resized = panel_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                left = (new_w - target_w) // 2
+                cropped = resized.crop((left, 0, left + target_w, target_h))
+            else:
+                new_w = target_w
+                new_h = int(p_h * (target_w / p_w))
+                resized = panel_img.resize((new_w, new_h), Image.Resampling.LANCZOS)
+                top = (new_h - target_h) // 2
+                cropped = resized.crop((0, top, target_w, top + target_h))
+            return cropped
+
+        p1 = crop_and_resize(img1, width, panel_h)
+        p2 = crop_and_resize(img2, width, panel_h)
+        p3 = crop_and_resize(img3, width, panel_h)
+        p4 = crop_and_resize(img4, width, panel_h)
+        
+        y1 = header_height
+        y2 = y1 + panel_h + separator_thickness
+        y3 = y2 + panel_h + separator_thickness
+        y4 = y3 + panel_h + separator_thickness
+        
+        img.paste(p1, (0, y1))
+        img.paste(p2, (0, y2))
+        img.paste(p3, (0, y3))
+        img.paste(p4, (0, y4))
+        
+        draw_sep = ImageDraw.Draw(img)
+        draw_sep.rectangle([(0, y1 - separator_thickness), (width, y1)], fill=(255, 255, 255, 255))
+        draw_sep.rectangle([(0, y2 - separator_thickness), (width, y2)], fill=(255, 255, 255, 255))
+        draw_sep.rectangle([(0, y3 - separator_thickness), (width, y3)], fill=(255, 255, 255, 255))
+        
+        # Draw header background
+        draw_sep.rectangle([(0, 0), (width, header_height)], fill=(255, 255, 255, 255))
+        
+        # Draw number badges (1, 2, 3, 4)
+        try:
+            badge_font = ImageFont.truetype(primary_font_path, 42)
+        except:
+            badge_font = ImageFont.load_default()
+            
+        badge_radius = 32
+        badge_margin_x = 24
+        badge_margin_y = 24
+        
+        for i, y_pos in enumerate([y1, y2, y3, y4]):
+            bx1 = badge_margin_x
+            by1 = y_pos + badge_margin_y
+            bx2 = bx1 + (badge_radius * 2)
+            by2 = by1 + (badge_radius * 2)
+            
+            # Shadow
+            draw_sep.ellipse([(bx1-2, by1-2), (bx2+4, by2+4)], fill=(0, 0, 0, 40))
+            # White Circle
+            draw_sep.ellipse([(bx1, by1), (bx2, by2)], fill=(255, 255, 255, 255))
+            
+            # Number
+            text = str(i + 1)
+            bbox = draw_sep.textbbox((0, 0), text, font=badge_font)
+            tw = bbox[2] - bbox[0]
+            th = bbox[3] - bbox[1]
+            tx = bx1 + badge_radius - (tw / 2)
+            ty = by1 + badge_radius - (th / 2) - 8
+            draw_sep.text((tx, ty), text, font=badge_font, fill=(15, 23, 42, 255))
+            
     elif layout_style == 'double_panel_collage':
         img1 = Image.open(image_path[0]).convert("RGBA")
         img2 = Image.open(image_path[1]).convert("RGBA")
@@ -962,6 +1048,10 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
         )
         
         text_y_start = card_top + int(height * 0.09)
+
+    elif layout_style == 'numbered_listicle':
+        # Text goes into the top header (360px height)
+        text_y_start = (360 - total_text_height) // 2 + 20
 
     elif layout_style in ['double_panel_collage', 'four_panel_grid']:
         # Draw a semi-transparent cream luxury card centered vertically over the middle split
@@ -1592,15 +1682,27 @@ def main():
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
 
         # Select layout style
-        layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid']
-        layout_style = random.choice(layouts)
-        print(f"   📐 Selected layout style: {layout_style}")
+        layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid', 'numbered_listicle']
+        
+        # Intelligent layout selection
+        title_lower = content.get("title", "").lower()
+        desc_lower = content.get("description", "").lower()
+        list_keywords = ["best", "top", "ways", "types", "ideas", "secrets", "reasons", "hacks", "vs", "comparison"]
+        is_listicle = any(kw in title_lower or kw in desc_lower for kw in list_keywords)
+        
+        if is_listicle:
+            listicle_layouts = ['numbered_listicle', 'numbered_listicle', 'four_panel_grid', 'double_panel_collage']
+            layout_style = random.choice(listicle_layouts)
+        else:
+            layout_style = random.choice(layouts)
+            
+        print(f"   📐 Selected layout style: {layout_style} (is_listicle={is_listicle})")
 
         # Phase 2: Generate image with fallbacks
-        if layout_style == 'four_panel_grid':
+        if layout_style in ['four_panel_grid', 'numbered_listicle']:
             raw_paths = []
             for idx in range(4):
-                print(f"   🎨 Generating image {idx+1}/4 for grid...")
+                print(f"   🎨 Generating image {idx+1}/4 for {layout_style}...")
                 variation_suffix = f", variation {chr(65+idx)}, distinct angle"
                 p_temp = generate_image_master(
                     content["image_prompt"] + variation_suffix, tmp_dir, niche=chosen_niche
