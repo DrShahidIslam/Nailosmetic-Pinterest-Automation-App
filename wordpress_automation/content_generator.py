@@ -161,35 +161,31 @@ INTERNAL LINK 2: {link2}
 INTERNAL LINK 3: {link3}
  
 FRAMEWORK REQUIREMENTS:
-1. Title: Catchy, SEO-optimized, and hook-driven (e.g., '3 Secret Rules for Minimalist Nails', '7 Viral Hacks for...'). It should match the curiosity-gap style of Pinterest pins.
-2. Slug: A short, SEO-friendly URL slug (3-5 words maximum, lowercase-with-dashes). It MUST include the primary focus keyword.
+1. Title: Catchy, SEO-optimized, and hook-driven.
+2. Slug: A short, SEO-friendly URL slug (3-5 words maximum).
 3. SEO Metadata (RankMath):
    - Focus Keyword: The primary keyword for the article.
    - SEO Title: Optimized title for search results (max 60 chars).
    - Meta Description: Compelling summary for search results (120-160 chars).
 4. Featured Image: {config['featured_image_guide']}
-5. Introduction: Return as a JSON array of exactly 2 paragraph strings. The first paragraph sets the scene and must be at least 80 words. The second paragraph MUST include exactly one internal link to '{link1}' using an HTML anchor tag with natural anchor text.
-6. Content Blocks: A list of EXACTLY 7 items (no fewer). Each item must have:
+5. Introduction: Return as a JSON array of exactly 2 paragraph strings. First paragraph 80+ words. Second paragraph MUST include an internal link to '{link1}'.
+6. Key Takeaways: Provide EXACTLY 3 key takeaways (bullet points) that summarize the core value of the article.
+7. Comparison Table: Provide a structured comparison table summarizing the 7 listicle items. Create 3 column headers (e.g., "Style/Item Name", "Difficulty/Cost", "Best For") and EXACTLY 7 rows (one for each block).
+8. Content Blocks: A list of EXACTLY 7 items (no fewer). Each item must have:
    - Image Prompt: {config['block_image_guide']}
-   - Image Alt Text: Descriptive.
-   - Heading (H2): At least 3 of the 7 headings MUST be phrased as a question. The remaining headings can be trendy name-style.
-   - Paragraph: Engaging description of at least 100 words per block. 
-     - INTERNAL LINKS: Include 'INTERNAL LINK 2' ({link2}) and 'INTERNAL LINK 3' ({link3}) naturally across two different blocks (one link per block).
-     - EXTERNAL LINKS: Include at least 3 external links across the full set of 7 blocks — link STRICTLY to authoritative {niche}-specific sources (e.g., {config['external_sources']}) using HTML anchor tags. Do NOT link to off-topic sources (e.g. no hair links in gardening or nails in decor).
-     - Spread all links naturally so they don't look forced.
+   - Image Alt Text: Highly descriptive.
+   - Heading (H2): At least 3 must be questions.
+   - Paragraph: Engaging description of at least 150 words per block. MUST use first-hand editorial phrasing (e.g., "In our testing", "Our editors found", "When we tried this...").
+     - INTERNAL LINKS: Include '{link2}' and '{link3}' naturally across two different blocks.
+     - EXTERNAL LINKS: Include at least 3 external links across the 7 blocks to authoritative {niche} sources (e.g., {config['external_sources']}).
+   - Expert Quote: A compelling 1-2 sentence quote providing professional advice or an editorial verdict on this specific block's item.
    - Details: 3 specific points ({config['block_details']}).
-7. Conclusion: A strong summary of at least 80 words, encouraging interaction and reinforcing the focus keyword.
-8. FAQ Section: Provide EXACTLY 5 Frequently Asked Questions relevant to the focus keyword and article topic. Each FAQ must have:
-   - A question phrased exactly as a real user would type it into Google or ask an AI assistant.
-   - A clear, direct answer of 2-4 sentences that fully answers the question without fluff.
-   This section is critical for Google featured snippets and AI answer engines (ChatGPT, Perplexity, Gemini).
-9. Category: You MUST select "{config['mandatory_category']}" as the category. 
-   - CATEGORY RESTRICTION: The categories "Aesthetic & Art", "Chrome & Glazed", "Minimalist & Clean Girl", and "Seasonal Trends" are STRICTLY for NAIL content only. Do NOT use them for Hair, Fashion, or Home content under any circumstances.
-   - If this is a NAIL article, you may use the specialized sub-categories, but "Styles & Fashion" or "Hair & Beauty" are strictly forbidden for nails.
-10. Alt Text: For every "alt_text" field, provide a highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects, lighting). Avoid generic SEO padding; focus on helping a visually impaired user see the image in their mind.
-11. COMPARISON GRID RULE: If the topic/heading involves comparisons, skin tones, nail/hair shapes, or multiple color variations (e.g. containing 'vs', 'comparison', 'shades', 'skin tones', 'colors for'), structure the image prompts to generate a clean side-by-side comparison infographic grid (e.g., a 2x2 grid or vertical columns showing the 4 variations side-by-side with minimal clean text labels, natural soft lighting, minimal layout, beauty infographic style).
+9. Conclusion: A strong summary of at least 80 words.
+10. FAQ Section: Provide EXACTLY 5 Frequently Asked Questions.
+11. Category: You MUST select "{config['mandatory_category']}" as the category. Do NOT use Nail categories for non-nail articles.
+12. COMPARISON GRID RULE: If the topic involves comparisons, structure image prompts as comparison grids.
 
-WORD COUNT: The total article body (introduction + all 7 block paragraphs + conclusion) MUST be at least 1,200 words. Do not cut paragraphs short to save tokens — length and depth are required for SEO ranking.
+WORD COUNT: The total article body MUST be at least 1,500 words. Do not cut paragraphs short to save tokens.
 
 RETURN ONLY VALID JSON:
 {{
@@ -202,18 +198,32 @@ RETURN ONLY VALID JSON:
   }},
   "category_suggestion": "MANDATORY: string",
   "is_new_category": "MANDATORY: boolean",
-  "category_logic": "Briefly explain why this category matches the niche and is not a nail-specific category (for non-nail articles).",
+  "category_logic": "string",
   "featured_image": {{
     "prompt": "string",
     "alt_text": "string"
   }},
-  "introduction": ["string (first paragraph, 80+ words)", "string (second paragraph with internal link)"],
+  "introduction": ["string", "string"],
+  "key_takeaways": ["string", "string", "string"],
+  "comparison_table": {{
+    "headers": ["string", "string", "string"],
+    "rows": [
+      ["string", "string", "string"],
+      ["string", "string", "string"],
+      ["string", "string", "string"],
+      ["string", "string", "string"],
+      ["string", "string", "string"],
+      ["string", "string", "string"],
+      ["string", "string", "string"]
+    ]
+  }},
   "blocks": [
     {{
-      "heading": "string (at least 3 of 7 must be question-format)",
+      "heading": "string",
       "prompt": "string",
       "alt_text": "string",
-      "paragraph": "string (100+ words, include external authority links in 2 of the 7 blocks)",
+      "paragraph": "string (150+ words, first-hand editorial phrasing)",
+      "expert_quote": "string (1-2 sentence professional advice/verdict)",
       "details": {{
          "vibe": "string",
          "technique": "string",
@@ -223,8 +233,8 @@ RETURN ONLY VALID JSON:
   ],
   "faqs": [
     {{
-      "question": "string (phrased as a real user search query)",
-      "answer": "string (2-4 clear sentences that fully answer the question)"
+      "question": "string",
+      "answer": "string"
     }}
   ],
   "conclusion": "string (80+ words)"
@@ -300,7 +310,37 @@ RETURN ONLY VALID JSON:
         html = f"""<!-- wp:kadence/column {{"uniqueID":"{col_id_intro}"}} -->
 <div class="wp-block-kadence-column kadence-column{col_id_intro}"><div class="kt-inside-inner-col">
 {intro_html}<!-- wp:kadence/tableofcontents {{"uniqueID":"{self._generate_kadence_id()}"}} /-->
-</div></div>
+"""
+        
+        # Add Key Takeaways
+        takeaways = plan.get('key_takeaways', [])
+        if takeaways:
+            html += f"""<!-- wp:kadence/infobox {{"uniqueID":"{self._generate_kadence_id()}","containerBackground":"#f8fafc","containerBorderRadius":8,"containerBorderWidth":[1,1,1,1],"containerBorderColor":"#e2e8f0"}} -->
+<div class="wp-block-kadence-infobox"><div class="kt-blocks-info-box-wrapper"><div class="kt-blocks-info-box-inner-wrap"><div class="kt-blocks-info-box-text-wrap"><h3 class="kt-blocks-info-box-title">Key Takeaways</h3><div class="kt-blocks-info-box-text"><ul>"""
+            for ta in takeaways:
+                html += f"<li>{ta}</li>"
+            html += """</ul></div></div></div></div></div>
+<!-- /wp:kadence/infobox -->
+"""
+        
+        # Add Comparison Table
+        comp_table = plan.get('comparison_table', {})
+        if comp_table and 'headers' in comp_table and 'rows' in comp_table:
+            html += f"""<!-- wp:table {{"className":"is-style-stripes"}} -->
+<figure class="wp-block-table is-style-stripes"><table><thead><tr>"""
+            for h in comp_table['headers']:
+                html += f"<th>{h}</th>"
+            html += "</tr></thead><tbody>"
+            for row in comp_table['rows']:
+                html += "<tr>"
+                for cell in row:
+                    html += f"<td>{cell}</td>"
+                html += "</tr>"
+            html += """</tbody></table></figure>
+<!-- /wp:table -->
+"""
+            
+        html += """</div></div>
 <!-- /wp:kadence/column -->
 """
         
@@ -330,8 +370,16 @@ RETURN ONLY VALID JSON:
 <!-- wp:paragraph -->
 <p>{block.get('paragraph', '')}</p>
 <!-- /wp:paragraph -->
-
-<!-- wp:kadence/iconlist {{"uniqueID":"{list_id}"}} -->
+"""
+            
+            expert_quote = block.get('expert_quote')
+            if expert_quote:
+                html += f"""<!-- wp:quote {{"className":"is-style-large"}} -->
+<blockquote class="wp-block-quote is-style-large"><p>{expert_quote}</p><cite>Editorial Verdict</cite></blockquote>
+<!-- /wp:quote -->
+"""
+            
+            html += f"""<!-- wp:kadence/iconlist {{"uniqueID":"{list_id}"}} -->
 <div class="wp-block-kadence-iconlist kt-svg-icon-list-items kt-svg-icon-list-items{list_id} kt-svg-icon-list-columns-1 alignnone"><ul class="kt-svg-icon-list"><!-- wp:kadence/listitem {{"uniqueID":"{self._generate_kadence_id()}"}} -->
 <li class="wp-block-kadence-listitem kt-svg-icon-list-item-wrap kt-svg-icon-list-item-{list_id}"><span data-name="USE_PARENT_DEFAULT_ICON" data-stroke="USE_PARENT_DEFAULT_WIDTH" data-class="kt-svg-icon-list-single" class="kadence-dynamic-icon"></span><span class="kt-svg-icon-list-text"><strong>The Vibe:</strong> {block.get('details', {}).get('vibe', '')}</span></li>
 <!-- /wp:kadence/listitem -->
