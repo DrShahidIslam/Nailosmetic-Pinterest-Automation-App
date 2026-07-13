@@ -8,13 +8,13 @@
         },
         {
             "keyword": "fun summer nails",
-            "growth_mom": 60,
-            "growth_yoy": 20,
+            "growth_mom": 50,
+            "growth_yoy": 10,
             "trend_type": "monthly"
         },
         {
             "keyword": "july nails",
-            "growth_mom": 900,
+            "growth_mom": 800,
             "growth_yoy": 60,
             "trend_type": "monthly"
         },
@@ -50,7 +50,7 @@
         },
         {
             "keyword": "4th of july nails simple",
-            "growth_mom": 1000,
+            "growth_mom": 900,
             "growth_yoy": 90,
             "trend_type": "monthly"
         },
@@ -63,7 +63,7 @@
         {
             "keyword": "butter yellow nails",
             "growth_mom": -20,
-            "growth_yoy": 8,
+            "growth_yoy": 7,
             "trend_type": "monthly"
         },
         {
@@ -74,13 +74,13 @@
         },
         {
             "keyword": "toe nail colors",
-            "growth_mom": -10,
+            "growth_mom": -20,
             "growth_yoy": 20,
             "trend_type": "monthly"
         },
         {
             "keyword": "cheetah print nails",
-            "growth_mom": -5,
+            "growth_mom": -4,
             "growth_yoy": 100,
             "trend_type": "monthly"
         },
@@ -92,32 +92,26 @@
         },
         {
             "keyword": "simple fourth of july nails",
-            "growth_mom": 2000,
+            "growth_mom": 1500,
             "growth_yoy": -8,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "easy summer nails",
-            "growth_mom": 70,
-            "growth_yoy": 200,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "june nails",
-            "growth_mom": -70,
-            "growth_yoy": 60,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "patriotic nails",
-            "growth_mom": 300,
-            "growth_yoy": 90,
             "trend_type": "monthly"
         },
         {
             "keyword": "back to school nails",
             "growth_mom": 500,
             "growth_yoy": -10,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "easy summer nails",
+            "growth_mom": 60,
+            "growth_yoy": 200,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "patriotic nails",
+            "growth_mom": 200,
+            "growth_yoy": 90,
             "trend_type": "monthly"
         },
         {
@@ -128,19 +122,25 @@
         },
         {
             "keyword": "blooming gel nails",
-            "growth_mom": -4,
+            "growth_mom": -5,
+            "growth_yoy": 60,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "june nails",
+            "growth_mom": -70,
             "growth_yoy": 60,
             "trend_type": "monthly"
         },
         {
             "keyword": "striped nails",
-            "growth_mom": -6,
+            "growth_mom": -8,
             "growth_yoy": 200,
             "trend_type": "monthly"
         },
         {
             "keyword": "summer nail colors",
-            "growth_mom": 8,
+            "growth_mom": 6,
             "growth_yoy": -30,
             "trend_type": "monthly"
         },
@@ -158,20 +158,20 @@
         },
         {
             "keyword": "4th of july nail inspo",
-            "growth_mom": 1500,
+            "growth_mom": 1000,
             "growth_yoy": 100,
             "trend_type": "monthly"
         },
         {
-            "keyword": "simple patriotic nails",
-            "growth_mom": 700,
-            "growth_yoy": 200,
+            "keyword": "blueberry nails",
+            "growth_mom": 7,
+            "growth_yoy": 70,
             "trend_type": "monthly"
         },
         {
-            "keyword": "blueberry nails",
-            "growth_mom": 8,
-            "growth_yoy": 70,
+            "keyword": "simple patriotic nails",
+            "growth_mom": 600,
+            "growth_yoy": 200,
             "trend_type": "monthly"
         },
         {
@@ -187,15 +187,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "july summer nails",
-            "growth_mom": 1500,
-            "growth_yoy": 50,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "august nails",
             "growth_mom": 1500,
             "growth_yoy": 100,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "back to school nail ideas",
+            "growth_mom": 800,
+            "growth_yoy": 200,
             "trend_type": "growing"
         },
         {
@@ -205,27 +205,27 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "back to school nail ideas",
-            "growth_mom": 700,
-            "growth_yoy": 200,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "cute back to school nails",
             "growth_mom": 500,
             "growth_yoy": 60,
             "trend_type": "growing"
         },
         {
-            "keyword": "july summer nails",
-            "growth_mom": 1500,
-            "growth_yoy": 50,
-            "trend_type": "seasonal"
+            "keyword": "nails for back to school",
+            "growth_mom": 500,
+            "growth_yoy": 9,
+            "trend_type": "growing"
         },
         {
             "keyword": "august nails",
             "growth_mom": 1500,
             "growth_yoy": 100,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "nail ideas back to school",
+            "growth_mom": 1000,
+            "growth_yoy": 80,
             "trend_type": "seasonal"
         },
         {
@@ -247,20 +247,20 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "back to school nails",
-            "growth_mom": 500,
-            "growth_yoy": -10,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "leo birthday nails",
             "growth_mom": 500,
             "growth_yoy": -10,
             "trend_type": "seasonal"
         },
         {
+            "keyword": "back to school nails",
+            "growth_mom": 500,
+            "growth_yoy": -10,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "shark week nails",
-            "growth_mom": 400,
+            "growth_mom": 500,
             "growth_yoy": 20,
             "trend_type": "seasonal"
         },
@@ -279,7 +279,7 @@
         {
             "keyword": "senior picture nails",
             "growth_mom": 300,
-            "growth_yoy": 6,
+            "growth_yoy": 4,
             "trend_type": "seasonal"
         },
         {
@@ -311,12 +311,12 @@
         {
             "keyword": "calico hair",
             "growth_mom": -3,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "monthly"
         },
         {
             "keyword": "updo hairstyles",
-            "growth_mom": 30,
+            "growth_mom": 40,
             "growth_yoy": 40,
             "trend_type": "monthly"
         },
@@ -340,7 +340,7 @@
         },
         {
             "keyword": "purple hair",
-            "growth_mom": -4,
+            "growth_mom": -5,
             "growth_yoy": -1,
             "trend_type": "monthly"
         },
@@ -352,26 +352,26 @@
         },
         {
             "keyword": "fourth of july hairstyles",
-            "growth_mom": 5000,
+            "growth_mom": 4500,
             "growth_yoy": 30,
             "trend_type": "monthly"
         },
         {
-            "keyword": "hair dye",
-            "growth_mom": 8,
+            "keyword": "alt makeup",
+            "growth_mom": 60,
             "growth_yoy": 90,
             "trend_type": "monthly"
         },
         {
-            "keyword": "alt makeup",
-            "growth_mom": 50,
-            "growth_yoy": 80,
+            "keyword": "hair dye",
+            "growth_mom": 9,
+            "growth_yoy": 90,
             "trend_type": "monthly"
         },
         {
             "keyword": "bandana hairstyles",
             "growth_mom": 200,
-            "growth_yoy": 5,
+            "growth_yoy": 7,
             "trend_type": "monthly"
         },
         {
@@ -382,8 +382,8 @@
         },
         {
             "keyword": "headband hairstyles",
-            "growth_mom": 40,
-            "growth_yoy": 8,
+            "growth_mom": 50,
+            "growth_yoy": 10,
             "trend_type": "monthly"
         },
         {
@@ -405,15 +405,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "4th of july hairstyles for kids",
+            "keyword": "forth of july hair styles",
             "growth_mom": 7000,
-            "growth_yoy": 20,
+            "growth_yoy": 2000,
             "trend_type": "growing"
         },
         {
-            "keyword": "forth of july hair styles",
+            "keyword": "4th of july hairstyles for kids",
             "growth_mom": 6500,
-            "growth_yoy": 2000,
+            "growth_yoy": 20,
             "trend_type": "growing"
         },
         {
@@ -430,8 +430,8 @@
         },
         {
             "keyword": "hairstyles for 4th of july",
-            "growth_mom": 6500,
-            "growth_yoy": -3,
+            "growth_mom": 6000,
+            "growth_yoy": -2,
             "trend_type": "growing"
         },
         {
@@ -441,33 +441,21 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "4th of july hair styles",
-            "growth_mom": 6000,
-            "growth_yoy": 300,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "4th of july toddler hair",
             "growth_mom": 6000,
             "growth_yoy": -9,
             "trend_type": "growing"
         },
         {
-            "keyword": "fourth of july hair ideas",
+            "keyword": "4th of july hair styles",
             "growth_mom": 5500,
-            "growth_yoy": 100,
+            "growth_yoy": 300,
             "trend_type": "growing"
         },
         {
             "keyword": "forth of july hair ideas",
-            "growth_mom": 5000,
+            "growth_mom": 5500,
             "growth_yoy": 7500,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "4th of july hairstyles for women",
-            "growth_mom": 5000,
-            "growth_yoy": 6,
             "trend_type": "growing"
         },
         {
@@ -477,14 +465,20 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "fourth of july hairstyles",
+            "keyword": "4th of july hairstyles for women",
             "growth_mom": 5000,
-            "growth_yoy": 30,
+            "growth_yoy": 6,
             "trend_type": "growing"
         },
         {
-            "keyword": "4th of july hairstyle",
+            "keyword": "fourth of july hair ideas",
             "growth_mom": 5000,
+            "growth_yoy": 100,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "fourth of july hairstyles",
+            "growth_mom": 4500,
             "growth_yoy": 30,
             "trend_type": "growing"
         },
@@ -495,21 +489,27 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "4th of july hairstyle",
+            "growth_mom": 4500,
+            "growth_yoy": 30,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "4th of july hairstyles",
             "growth_mom": 4500,
             "growth_yoy": 20,
             "trend_type": "growing"
         },
         {
-            "keyword": "fourth of july hairstyles for kids",
-            "growth_mom": 4000,
-            "growth_yoy": 50,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "fourth of july hair",
             "growth_mom": 3500,
             "growth_yoy": -1,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "fourth of july hairstyles for kids",
+            "growth_mom": 3500,
+            "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
@@ -520,8 +520,8 @@
         },
         {
             "keyword": "cute fourth of july hairstyles",
-            "growth_mom": 3500,
-            "growth_yoy": 60,
+            "growth_mom": 3000,
+            "growth_yoy": 70,
             "trend_type": "growing"
         },
         {
@@ -538,14 +538,8 @@
         },
         {
             "keyword": "mexico hairstyles",
-            "growth_mom": 2500,
+            "growth_mom": 2000,
             "growth_yoy": 600,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "mexico makeup look",
-            "growth_mom": 2500,
-            "growth_yoy": 800,
             "trend_type": "growing"
         },
         {
@@ -555,21 +549,27 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "mexico makeup",
+            "keyword": "mexico makeup look",
             "growth_mom": 2000,
-            "growth_yoy": 1500,
+            "growth_yoy": 800,
             "trend_type": "growing"
         },
         {
             "keyword": "neopolotin hair color",
-            "growth_mom": 1500,
-            "growth_yoy": 6500,
+            "growth_mom": 2000,
+            "growth_yoy": 7000,
             "trend_type": "growing"
         },
         {
-            "keyword": "coily pixie cut",
+            "keyword": "mexico makeup",
             "growth_mom": 1500,
             "growth_yoy": 1500,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "bts hairstyle",
+            "growth_mom": 1000,
+            "growth_yoy": 70,
             "trend_type": "growing"
         },
         {
@@ -579,9 +579,9 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "bts hairstyle",
+            "keyword": "coily pixie cut",
             "growth_mom": 1000,
-            "growth_yoy": 70,
+            "growth_yoy": 1500,
             "trend_type": "growing"
         },
         {
@@ -597,15 +597,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "red white and blue makeup",
+            "keyword": "funky makeup",
             "growth_mom": 700,
             "growth_yoy": 40,
             "trend_type": "growing"
         },
         {
-            "keyword": "funky makeup",
+            "keyword": "red white and blue makeup",
             "growth_mom": 700,
-            "growth_yoy": 30,
+            "growth_yoy": 40,
             "trend_type": "growing"
         },
         {
@@ -622,7 +622,7 @@
         },
         {
             "keyword": "4th of july hairstyles for kids",
-            "growth_mom": 7000,
+            "growth_mom": 6500,
             "growth_yoy": 20,
             "trend_type": "seasonal"
         },
@@ -634,7 +634,7 @@
         },
         {
             "keyword": "hairstyles for 4th of july",
-            "growth_mom": 6500,
+            "growth_mom": 6000,
             "growth_yoy": -1,
             "trend_type": "seasonal"
         },
@@ -651,26 +651,20 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "4th of july hairstyles for women",
-            "growth_mom": 5000,
-            "growth_yoy": 9,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "4 of july hairstyles",
             "growth_mom": 5000,
             "growth_yoy": 4,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "fourth of july hairstyles",
+            "keyword": "4th of july hairstyles for women",
             "growth_mom": 5000,
-            "growth_yoy": 30,
+            "growth_yoy": 9,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "4th of july hairstyle",
-            "growth_mom": 5000,
+            "keyword": "fourth of july hairstyles",
+            "growth_mom": 4500,
             "growth_yoy": 30,
             "trend_type": "seasonal"
         },
@@ -681,6 +675,12 @@
             "trend_type": "seasonal"
         },
         {
+            "keyword": "4th of july hairstyle",
+            "growth_mom": 4500,
+            "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "4th of july hairstyles",
             "growth_mom": 4500,
             "growth_yoy": 20,
@@ -688,20 +688,20 @@
         },
         {
             "keyword": "firework makeup",
-            "growth_mom": 4500,
-            "growth_yoy": -6,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "fourth of july hairstyles for kids",
             "growth_mom": 4000,
-            "growth_yoy": 50,
+            "growth_yoy": -6,
             "trend_type": "seasonal"
         },
         {
             "keyword": "fourth of july hair",
             "growth_mom": 3500,
             "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fourth of july hairstyles for kids",
+            "growth_mom": 3500,
+            "growth_yoy": 50,
             "trend_type": "seasonal"
         },
         {
@@ -712,14 +712,8 @@
         },
         {
             "keyword": "cute fourth of july hairstyles",
-            "growth_mom": 3500,
+            "growth_mom": 3000,
             "growth_yoy": 70,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "4th of july eye makeup",
-            "growth_mom": 2000,
-            "growth_yoy": 100,
             "trend_type": "seasonal"
         },
         {
@@ -737,7 +731,7 @@
         {
             "keyword": "hairstyles back to school",
             "growth_mom": 500,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "seasonal"
         },
         {
@@ -749,25 +743,19 @@
         {
             "keyword": "back to school hair",
             "growth_mom": 300,
-            "growth_yoy": 3,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "waterpark hairstyles",
-            "growth_mom": 300,
-            "growth_yoy": -1,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "cute back to school hairstyles",
-            "growth_mom": 300,
-            "growth_yoy": 30,
+            "growth_yoy": 1,
             "trend_type": "seasonal"
         },
         {
             "keyword": "fall hair colors",
             "growth_mom": 300,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cute back to school hairstyles",
+            "growth_mom": 300,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
@@ -785,7 +773,13 @@
         {
             "keyword": "fall hairstyles",
             "growth_mom": 200,
-            "growth_yoy": 20,
+            "growth_yoy": 10,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "bandana hairstyles",
+            "growth_mom": 200,
+            "growth_yoy": 7,
             "trend_type": "seasonal"
         },
         {
@@ -793,13 +787,19 @@
             "growth_mom": 200,
             "growth_yoy": -10,
             "trend_type": "seasonal"
+        },
+        {
+            "keyword": "first day of school hair",
+            "growth_mom": 100,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
         }
     ],
     "home_garden": [
         {
             "keyword": "bathroom",
-            "growth_mom": -4,
-            "growth_yoy": -4,
+            "growth_mom": -6,
+            "growth_yoy": -5,
             "trend_type": "monthly"
         },
         {
@@ -810,7 +810,7 @@
         },
         {
             "keyword": "tuscan house",
-            "growth_mom": 9,
+            "growth_mom": 10,
             "growth_yoy": 60,
             "trend_type": "monthly"
         },
@@ -828,7 +828,7 @@
         },
         {
             "keyword": "shower curtain",
-            "growth_mom": -1,
+            "growth_mom": 0,
             "growth_yoy": 30,
             "trend_type": "monthly"
         },
@@ -847,7 +847,7 @@
         {
             "keyword": "moody bedroom",
             "growth_mom": -10,
-            "growth_yoy": 3,
+            "growth_yoy": 2,
             "trend_type": "monthly"
         },
         {
@@ -858,32 +858,14 @@
         },
         {
             "keyword": "closet ideas",
-            "growth_mom": 90,
+            "growth_mom": 100,
             "growth_yoy": 30,
             "trend_type": "monthly"
         },
         {
             "keyword": "coffee station ideas",
-            "growth_mom": 30,
-            "growth_yoy": 70,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "stock tank pool",
-            "growth_mom": 10,
-            "growth_yoy": -30,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "cozy living room",
-            "growth_mom": 20,
-            "growth_yoy": 90,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "bloxburg kitchen",
-            "growth_mom": 10,
-            "growth_yoy": -30,
+            "growth_mom": 40,
+            "growth_yoy": 80,
             "trend_type": "monthly"
         },
         {
@@ -893,15 +875,33 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "laundry room design",
-            "growth_mom": -30,
+            "keyword": "cozy living room",
+            "growth_mom": 20,
+            "growth_yoy": 90,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "stock tank pool",
+            "growth_mom": 10,
             "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
             "keyword": "bookshelf ideas",
             "growth_mom": 100,
-            "growth_yoy": 6,
+            "growth_yoy": 10,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "bloxburg kitchen",
+            "growth_mom": 9,
+            "growth_yoy": -30,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "laundry room design",
+            "growth_mom": -30,
+            "growth_yoy": -40,
             "trend_type": "monthly"
         },
         {
@@ -949,31 +949,31 @@
         {
             "keyword": "warm bedroom aesthetic",
             "growth_mom": 20,
-            "growth_yoy": 1,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "pantry",
-            "growth_mom": -6,
-            "growth_yoy": -20,
+            "growth_yoy": 0,
             "trend_type": "monthly"
         },
         {
             "keyword": "entry way ideas",
-            "growth_mom": 90,
+            "growth_mom": 100,
             "growth_yoy": -20,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "pantry",
+            "growth_mom": -7,
+            "growth_yoy": -20,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "kitchen island ideas",
+            "growth_mom": -10,
+            "growth_yoy": -40,
             "trend_type": "monthly"
         },
         {
             "keyword": "kitchen counter decor",
-            "growth_mom": -20,
+            "growth_mom": -10,
             "growth_yoy": -20,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "nancy meyers home aesthetic",
-            "growth_mom": 50,
-            "growth_yoy": 200,
             "trend_type": "monthly"
         },
         {
@@ -983,14 +983,20 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "kitchen island ideas",
-            "growth_mom": -20,
-            "growth_yoy": -40,
+            "keyword": "nancy meyers home aesthetic",
+            "growth_mom": 50,
+            "growth_yoy": 200,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "plate wall",
+            "growth_mom": 4,
+            "growth_yoy": 300,
             "trend_type": "monthly"
         },
         {
             "keyword": "whimsical bedroom",
-            "growth_mom": -1,
+            "growth_mom": 0,
             "growth_yoy": 100,
             "trend_type": "monthly"
         },
@@ -998,18 +1004,6 @@
             "keyword": "walk in closet ideas",
             "growth_mom": -9,
             "growth_yoy": -30,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "plate wall",
-            "growth_mom": 3,
-            "growth_yoy": 300,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "apartment inspo",
-            "growth_mom": -20,
-            "growth_yoy": -40,
             "trend_type": "monthly"
         },
         {
@@ -1025,15 +1019,15 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "clean room",
-            "growth_mom": -3,
-            "growth_yoy": 20,
+            "keyword": "apartment inspo",
+            "growth_mom": -20,
+            "growth_yoy": -40,
             "trend_type": "monthly"
         },
         {
-            "keyword": "boho living room",
+            "keyword": "clean room",
             "growth_mom": -3,
-            "growth_yoy": -60,
+            "growth_yoy": 20,
             "trend_type": "monthly"
         },
         {
@@ -1043,27 +1037,27 @@
             "trend_type": "monthly"
         },
         {
+            "keyword": "boho living room",
+            "growth_mom": -2,
+            "growth_yoy": -60,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "screened in porch",
             "growth_mom": -20,
             "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
-            "keyword": "bloxburg room ideas",
-            "growth_mom": 7,
-            "growth_yoy": -60,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "bloxburg kitchen ideas",
-            "growth_mom": 7,
+            "growth_mom": 6,
             "growth_yoy": -70,
             "trend_type": "monthly"
         },
         {
-            "keyword": "walk in closet",
-            "growth_mom": -1,
-            "growth_yoy": 20,
+            "keyword": "bloxburg room ideas",
+            "growth_mom": 5,
+            "growth_yoy": -60,
             "trend_type": "monthly"
         },
         {
@@ -1073,27 +1067,33 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "studio apartment layout",
-            "growth_mom": -9,
-            "growth_yoy": -30,
+            "keyword": "walk in closet",
+            "growth_mom": -1,
+            "growth_yoy": 20,
             "trend_type": "monthly"
         },
         {
             "keyword": "nightstand decor",
-            "growth_mom": 0,
+            "growth_mom": 1,
             "growth_yoy": 10,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "studio apartment layout",
+            "growth_mom": -10,
+            "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
             "keyword": "balcony ideas apartment",
             "growth_mom": -20,
-            "growth_yoy": -1,
+            "growth_yoy": -2,
             "trend_type": "monthly"
         },
         {
-            "keyword": "deck ideas off back of house",
-            "growth_mom": -30,
-            "growth_yoy": -8,
+            "keyword": "basement ideas",
+            "growth_mom": 30,
+            "growth_yoy": -40,
             "trend_type": "monthly"
         },
         {
@@ -1115,15 +1115,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "dorm checklist",
-            "growth_mom": 200,
-            "growth_yoy": 50,
+            "keyword": "dorm room themes",
+            "growth_mom": 300,
+            "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
-            "keyword": "2000s teen bedroom",
+            "keyword": "dorm checklist",
             "growth_mom": 200,
-            "growth_yoy": 90,
+            "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
@@ -1139,15 +1139,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "light switch bedazzled",
-            "growth_mom": 100,
-            "growth_yoy": 8500,
+            "keyword": "farmhouse ideas",
+            "growth_mom": 200,
+            "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
-            "keyword": "farmhouse ideas",
+            "keyword": "light switch bedazzled",
             "growth_mom": 100,
-            "growth_yoy": 50,
+            "growth_yoy": 9000,
             "trend_type": "growing"
         },
         {
@@ -1163,21 +1163,21 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "unfinished basement ideas on a budget",
+            "keyword": "future home ideas",
             "growth_mom": 90,
-            "growth_yoy": 7,
+            "growth_yoy": 700,
             "trend_type": "growing"
         },
         {
             "keyword": "dorm decor ideas",
-            "growth_mom": 80,
+            "growth_mom": 90,
             "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
-            "keyword": "future home ideas",
-            "growth_mom": 80,
-            "growth_yoy": 700,
+            "keyword": "unfinished basement ideas on a budget",
+            "growth_mom": 90,
+            "growth_yoy": 7,
             "trend_type": "growing"
         },
         {
@@ -1187,39 +1187,21 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "chic dorm room",
-            "growth_mom": 80,
-            "growth_yoy": 200,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "college apartment ideas",
             "growth_mom": 80,
             "growth_yoy": 300,
             "trend_type": "growing"
         },
         {
-            "keyword": "white divider",
-            "growth_mom": 70,
-            "growth_yoy": 1000,
+            "keyword": "chic dorm room",
+            "growth_mom": 80,
+            "growth_yoy": 200,
             "trend_type": "growing"
         },
         {
             "keyword": "apartment living room ideas",
             "growth_mom": 70,
             "growth_yoy": 60,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "door ideas",
-            "growth_mom": 70,
-            "growth_yoy": 50,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "dorm storage",
-            "growth_mom": 60,
-            "growth_yoy": -20,
             "trend_type": "growing"
         },
         {
@@ -1235,27 +1217,21 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "forest room",
-            "growth_mom": 60,
-            "growth_yoy": 0,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "playroom inspiration",
             "growth_mom": 60,
             "growth_yoy": 200,
             "trend_type": "growing"
         },
         {
-            "keyword": "bar cart aesthetic",
-            "growth_mom": 50,
-            "growth_yoy": 50,
+            "keyword": "forest room",
+            "growth_mom": 60,
+            "growth_yoy": 0,
             "trend_type": "growing"
         },
         {
-            "keyword": "whimsigoth bathroom",
+            "keyword": "cozy neutral bedroom",
             "growth_mom": 50,
-            "growth_yoy": 10,
+            "growth_yoy": 70,
             "trend_type": "growing"
         },
         {
@@ -1265,21 +1241,9 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "whimsy kitchen",
+            "keyword": "small half bath",
             "growth_mom": 50,
-            "growth_yoy": 600,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "stockholm room",
-            "growth_mom": 50,
-            "growth_yoy": 10,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "whimsy bedroom ideas",
-            "growth_mom": 50,
-            "growth_yoy": 1000,
+            "growth_yoy": -40,
             "trend_type": "growing"
         },
         {
@@ -1289,45 +1253,33 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "blue living room ideas",
-            "growth_mom": 50,
-            "growth_yoy": 100,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "y2k living room",
-            "growth_mom": 40,
+            "growth_mom": 50,
             "growth_yoy": 20,
             "trend_type": "growing"
         },
         {
+            "keyword": "whimsy bedroom ideas",
+            "growth_mom": 50,
+            "growth_yoy": 1000,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "gaming setup ideas",
+            "growth_mom": 50,
+            "growth_yoy": 70,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "cozy apartment aesthetic",
-            "growth_mom": 40,
+            "growth_mom": 50,
             "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
-            "keyword": "modern colonial interior design",
-            "growth_mom": 40,
-            "growth_yoy": -4,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "cutecore bedroom",
-            "growth_mom": 40,
-            "growth_yoy": 50,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "top load washer laundry room ideas",
-            "growth_mom": 40,
-            "growth_yoy": 3,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "ralph lauren home",
-            "growth_mom": 40,
-            "growth_yoy": -10,
+            "keyword": "blue living room ideas",
+            "growth_mom": 50,
+            "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
@@ -1343,9 +1295,39 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "coffee bar home",
+            "keyword": "shelf inspo",
             "growth_mom": 40,
-            "growth_yoy": -60,
+            "growth_yoy": 50,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cutecore bedroom",
+            "growth_mom": 40,
+            "growth_yoy": 50,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "ralph lauren home",
+            "growth_mom": 40,
+            "growth_yoy": -10,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "nightstand inspo",
+            "growth_mom": 40,
+            "growth_yoy": 70,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "modern colonial interior design",
+            "growth_mom": 40,
+            "growth_yoy": -4,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "top load washer laundry room ideas",
+            "growth_mom": 40,
+            "growth_yoy": 4,
             "trend_type": "growing"
         },
         {
@@ -1355,27 +1337,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "cottage decor",
-            "growth_mom": 30,
-            "growth_yoy": -40,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "whimsy bathroom",
-            "growth_mom": 30,
-            "growth_yoy": 600,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "boy rooms",
             "growth_mom": 30,
             "growth_yoy": -5,
             "trend_type": "growing"
         },
         {
-            "keyword": "whimsigoth living room",
+            "keyword": "whimsy bathroom",
             "growth_mom": 30,
-            "growth_yoy": 30,
+            "growth_yoy": 600,
             "trend_type": "growing"
         },
         {
@@ -1397,8 +1367,38 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "english cottage bedroom",
+            "growth_mom": 30,
+            "growth_yoy": 10,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "tuscan bedroom",
+            "growth_mom": 30,
+            "growth_yoy": 200,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "organized fridge",
+            "growth_mom": 20,
+            "growth_yoy": 0,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "lakehouse",
+            "growth_mom": 20,
+            "growth_yoy": -20,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "picture frame wall",
+            "growth_mom": 20,
+            "growth_yoy": 30,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "fall room ideas",
-            "growth_mom": 500,
+            "growth_mom": 600,
             "growth_yoy": 40,
             "trend_type": "seasonal"
         },
@@ -1409,27 +1409,27 @@
             "trend_type": "seasonal"
         },
         {
+            "keyword": "dorm gallery wall",
+            "growth_mom": 300,
+            "growth_yoy": 100,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "fall apartment decor",
             "growth_mom": 300,
             "growth_yoy": 40,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "fall bedroom decor",
-            "growth_mom": 300,
-            "growth_yoy": -30,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "dorm gallery wall",
-            "growth_mom": 300,
-            "growth_yoy": 200,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "fall living room decor",
             "growth_mom": 300,
             "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fall bedroom decor",
+            "growth_mom": 300,
+            "growth_yoy": -30,
             "trend_type": "seasonal"
         },
         {
@@ -1440,7 +1440,7 @@
         },
         {
             "keyword": "halloween room decor",
-            "growth_mom": 200,
+            "growth_mom": 300,
             "growth_yoy": -20,
             "trend_type": "seasonal"
         },
@@ -1451,21 +1451,21 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "dorm room wall decor",
+            "keyword": "mantle ideas",
             "growth_mom": 200,
-            "growth_yoy": -7,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "mantle ideas",
-            "growth_mom": 100,
-            "growth_yoy": 20,
+            "keyword": "dorm room wall decor",
+            "growth_mom": 200,
+            "growth_yoy": -8,
             "trend_type": "seasonal"
         },
         {
             "keyword": "college desk",
             "growth_mom": 100,
-            "growth_yoy": 0,
+            "growth_yoy": -2,
             "trend_type": "seasonal"
         },
         {
@@ -1481,39 +1481,45 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "dorm bathroom decor",
-            "growth_mom": 80,
-            "growth_yoy": 10,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "americana bedroom",
-            "growth_mom": 70,
+            "growth_mom": 80,
             "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
+            "keyword": "dorm bathroom decor",
+            "growth_mom": 80,
+            "growth_yoy": 8,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "apartment room inspo",
-            "growth_mom": 70,
+            "growth_mom": 80,
             "growth_yoy": 90,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "cozy kitchen ideas",
-            "growth_mom": 60,
+            "keyword": "single dorm room ideas",
+            "growth_mom": 40,
             "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
             "keyword": "college bathroom decor",
             "growth_mom": 40,
-            "growth_yoy": -30,
+            "growth_yoy": -40,
             "trend_type": "seasonal"
         },
         {
             "keyword": "wood vanity",
             "growth_mom": 30,
             "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "clean bedroom",
+            "growth_mom": 30,
+            "growth_yoy": -10,
             "trend_type": "seasonal"
         },
         {
@@ -1529,33 +1535,45 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "cute lamps",
-            "growth_mom": 20,
-            "growth_yoy": -5,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "blue room aesthetic",
             "growth_mom": 20,
             "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
+            "keyword": "apartment wall decor",
+            "growth_mom": 20,
+            "growth_yoy": 7,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cute lamps",
+            "growth_mom": 20,
+            "growth_yoy": -4,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "salt lamp",
             "growth_mom": 20,
-            "growth_yoy": 10,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
             "keyword": "mantel decor",
             "growth_mom": 20,
-            "growth_yoy": -3,
+            "growth_yoy": -2,
             "trend_type": "seasonal"
         },
         {
             "keyword": "perfume tray",
-            "growth_mom": 10,
+            "growth_mom": 20,
             "growth_yoy": 40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "living room gallery wall",
+            "growth_mom": 10,
+            "growth_yoy": 2,
             "trend_type": "seasonal"
         },
         {
@@ -1565,9 +1583,9 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "diy pin board",
+            "keyword": "command center",
             "growth_mom": 10,
-            "growth_yoy": 80,
+            "growth_yoy": -50,
             "trend_type": "seasonal"
         }
     ],
@@ -1580,14 +1598,8 @@
         },
         {
             "keyword": "alo set",
-            "growth_mom": 0,
+            "growth_mom": 1,
             "growth_yoy": 50,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "mexico jersey outfit woman",
-            "growth_mom": 500,
-            "growth_yoy": 900,
             "trend_type": "monthly"
         },
         {
@@ -1597,9 +1609,15 @@
             "trend_type": "monthly"
         },
         {
+            "keyword": "mexico jersey outfit woman",
+            "growth_mom": 400,
+            "growth_yoy": 900,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "white maxi skirt outfit",
             "growth_mom": -10,
-            "growth_yoy": -9,
+            "growth_yoy": -10,
             "trend_type": "monthly"
         },
         {
@@ -1611,13 +1629,7 @@
         {
             "keyword": "disney outfits women",
             "growth_mom": -50,
-            "growth_yoy": 20,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "kitten heels outfit",
-            "growth_mom": -20,
-            "growth_yoy": 50,
+            "growth_yoy": 10,
             "trend_type": "monthly"
         },
         {
@@ -1627,8 +1639,20 @@
             "trend_type": "monthly"
         },
         {
+            "keyword": "kitten heels outfit",
+            "growth_mom": -20,
+            "growth_yoy": 50,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "von dutch shoes",
+            "growth_mom": 200,
+            "growth_yoy": 10001,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "patchwork hoodie",
-            "growth_mom": 20,
+            "growth_mom": 10,
             "growth_yoy": -30,
             "trend_type": "monthly"
         },
@@ -1636,12 +1660,6 @@
             "keyword": "bandana outfit",
             "growth_mom": -20,
             "growth_yoy": 30,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "von dutch shoes",
-            "growth_mom": 200,
-            "growth_yoy": 10001,
             "trend_type": "monthly"
         },
         {
@@ -1657,15 +1675,15 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "shirt cutting ideas",
-            "growth_mom": 8,
-            "growth_yoy": 400,
+            "keyword": "buttons",
+            "growth_mom": 6,
+            "growth_yoy": 80,
             "trend_type": "monthly"
         },
         {
-            "keyword": "buttons",
-            "growth_mom": 4,
-            "growth_yoy": 80,
+            "keyword": "shirt cutting ideas",
+            "growth_mom": 6,
+            "growth_yoy": 300,
             "trend_type": "monthly"
         },
         {
@@ -1677,12 +1695,12 @@
         {
             "keyword": "sandals outfit",
             "growth_mom": -40,
-            "growth_yoy": 20,
+            "growth_yoy": 30,
             "trend_type": "monthly"
         },
         {
             "keyword": "alo outfit",
-            "growth_mom": 0,
+            "growth_mom": -1,
             "growth_yoy": 200,
             "trend_type": "monthly"
         },
@@ -1693,15 +1711,21 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "tabi shoes outfit",
-            "growth_mom": -4,
-            "growth_yoy": 300,
+            "keyword": "von dutch shoes outfit",
+            "growth_mom": 200,
+            "growth_yoy": 10001,
             "trend_type": "monthly"
         },
         {
             "keyword": "travis scott shoes outfit",
             "growth_mom": 50,
             "growth_yoy": 500,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "tabi shoes outfit",
+            "growth_mom": -3,
+            "growth_yoy": 300,
             "trend_type": "monthly"
         },
         {
@@ -1723,7 +1747,7 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "von dutch shoes outfit",
+            "keyword": "senior jeans 2027 ideas",
             "growth_mom": 200,
             "growth_yoy": 10001,
             "trend_type": "monthly"
@@ -1735,15 +1759,9 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "miami outfits black women",
-            "growth_mom": -30,
-            "growth_yoy": 300,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "whimsigoth outfits",
-            "growth_mom": -7,
-            "growth_yoy": 10,
+            "growth_mom": -6,
+            "growth_yoy": 20,
             "trend_type": "monthly"
         },
         {
@@ -1753,9 +1771,9 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "senior jeans 2027 ideas",
-            "growth_mom": 200,
-            "growth_yoy": 10001,
+            "keyword": "miami outfits black women",
+            "growth_mom": -30,
+            "growth_yoy": 300,
             "trend_type": "monthly"
         },
         {
@@ -1765,33 +1783,33 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "belts",
-            "growth_mom": 20,
-            "growth_yoy": 2,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "rush outfits",
             "growth_mom": 70,
             "growth_yoy": 200,
             "trend_type": "monthly"
         },
         {
+            "keyword": "belts",
+            "growth_mom": 20,
+            "growth_yoy": 2,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "diesel outfit",
             "growth_mom": 20,
-            "growth_yoy": 20,
+            "growth_yoy": 30,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "whimsy outfits",
+            "growth_mom": 30,
+            "growth_yoy": 400,
             "trend_type": "monthly"
         },
         {
             "keyword": "cut shirt designs",
             "growth_mom": 40,
             "growth_yoy": -3,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "whimsy outfits",
-            "growth_mom": 20,
-            "growth_yoy": 400,
             "trend_type": "monthly"
         },
         {
@@ -1813,20 +1831,32 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "essentials hoodie",
-            "growth_mom": -20,
-            "growth_yoy": -6,
+            "keyword": "flats outfit",
+            "growth_mom": 30,
+            "growth_yoy": 100,
             "trend_type": "monthly"
         },
         {
-            "keyword": "mexico game outfit women",
-            "growth_mom": 600,
-            "growth_yoy": 600,
+            "keyword": "golf outfit",
+            "growth_mom": 40,
+            "growth_yoy": -2,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "essentials hoodie",
+            "growth_mom": -20,
+            "growth_yoy": -8,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "bandage dress outfit",
+            "growth_mom": 40,
+            "growth_yoy": 2000,
             "trend_type": "monthly"
         },
         {
             "keyword": "samba jane outfit",
-            "growth_mom": -5,
+            "growth_mom": -6,
             "growth_yoy": 600,
             "trend_type": "monthly"
         },
@@ -1837,39 +1867,27 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "golf outfit",
-            "growth_mom": 30,
-            "growth_yoy": -3,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "flats outfit",
-            "growth_mom": 20,
-            "growth_yoy": 100,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "mexican jersey outfit",
-            "growth_mom": 400,
-            "growth_yoy": 500,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "scarf top",
-            "growth_mom": -7,
+            "growth_mom": -6,
             "growth_yoy": 0,
             "trend_type": "monthly"
         },
         {
             "keyword": "2000s boho chic",
-            "growth_mom": 80,
+            "growth_mom": 70,
             "growth_yoy": 10001,
             "trend_type": "monthly"
         },
         {
-            "keyword": "bandage dress outfit",
-            "growth_mom": 30,
-            "growth_yoy": 1500,
+            "keyword": "mexico game outfit women",
+            "growth_mom": 400,
+            "growth_yoy": 600,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "trail ride outfit black women",
+            "growth_mom": -10,
+            "growth_yoy": -20,
             "trend_type": "monthly"
         },
         {
@@ -1879,25 +1897,31 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "pirates outfit",
-            "growth_mom": 600,
-            "growth_yoy": 700,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "fall 2026 fashion trends",
             "growth_mom": 300,
             "growth_yoy": 1500,
             "trend_type": "growing"
         },
         {
-            "keyword": "tee shirt cutting diy",
+            "keyword": "von dutch shoes outfit",
             "growth_mom": 200,
-            "growth_yoy": -20,
+            "growth_yoy": 10001,
             "trend_type": "growing"
         },
         {
-            "keyword": "von dutch shoes outfit",
+            "keyword": "tee shirt cutting diy",
+            "growth_mom": 200,
+            "growth_yoy": -10,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "black asics outfit",
+            "growth_mom": 200,
+            "growth_yoy": 40,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "von dutch shoes",
             "growth_mom": 200,
             "growth_yoy": 10001,
             "trend_type": "growing"
@@ -1909,18 +1933,6 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "von dutch shoes",
-            "growth_mom": 200,
-            "growth_yoy": 10001,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "black asics outfit",
-            "growth_mom": 200,
-            "growth_yoy": 40,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "senior jeans 2027 ideas",
             "growth_mom": 200,
             "growth_yoy": 10001,
@@ -1928,14 +1940,8 @@
         },
         {
             "keyword": "2000s fall outfits",
-            "growth_mom": 100,
+            "growth_mom": 200,
             "growth_yoy": 200,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "rush skirts",
-            "growth_mom": 100,
-            "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
@@ -1947,7 +1953,13 @@
         {
             "keyword": "rush dresses",
             "growth_mom": 100,
-            "growth_yoy": 90,
+            "growth_yoy": 80,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "douyin dress to impress",
+            "growth_mom": 100,
+            "growth_yoy": -80,
             "trend_type": "growing"
         },
         {
@@ -1959,37 +1971,13 @@
         {
             "keyword": "ed hardy shoes",
             "growth_mom": 90,
-            "growth_yoy": -2,
+            "growth_yoy": -1,
             "trend_type": "growing"
         },
         {
             "keyword": "metallic 5s outfit",
             "growth_mom": 80,
             "growth_yoy": -40,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "cut t shirt ideas",
-            "growth_mom": 70,
-            "growth_yoy": 500,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "retro style dress to impress",
-            "growth_mom": 70,
-            "growth_yoy": -70,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "rush outfits",
-            "growth_mom": 70,
-            "growth_yoy": 100,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "navy blue shoes",
-            "growth_mom": 70,
-            "growth_yoy": -9,
             "trend_type": "growing"
         },
         {
@@ -2011,21 +1999,45 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "retro style dress to impress",
+            "growth_mom": 70,
+            "growth_yoy": -70,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cut t shirt ideas",
+            "growth_mom": 70,
+            "growth_yoy": 600,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "rush outfits",
+            "growth_mom": 70,
+            "growth_yoy": 100,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "navy blue shoes",
+            "growth_mom": 70,
+            "growth_yoy": -9,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "coach flats",
+            "growth_mom": 70,
+            "growth_yoy": 500,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "khaki skirt",
             "growth_mom": 60,
             "growth_yoy": -10,
             "trend_type": "growing"
         },
         {
-            "keyword": "coach flats",
+            "keyword": "heavy metal outfit",
             "growth_mom": 60,
-            "growth_yoy": 500,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "ed hardy shoes outfit",
-            "growth_mom": 60,
-            "growth_yoy": -30,
+            "growth_yoy": -6,
             "trend_type": "growing"
         },
         {
@@ -2041,6 +2053,12 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "pink asics outfit",
+            "growth_mom": 50,
+            "growth_yoy": -40,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "hipster dress to impress",
             "growth_mom": 50,
             "growth_yoy": -60,
@@ -2053,27 +2071,45 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "dark harvest dress to impress",
+            "growth_mom": 50,
+            "growth_yoy": 10001,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "bottega shoes",
+            "growth_mom": 50,
+            "growth_yoy": 30,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "red bandana outfit",
+            "growth_mom": 50,
+            "growth_yoy": 40,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "folklore dress to impress",
             "growth_mom": 50,
             "growth_yoy": -70,
             "trend_type": "growing"
         },
         {
-            "keyword": "pink asics outfit",
+            "keyword": "uggs shoes",
             "growth_mom": 40,
-            "growth_yoy": -40,
+            "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
-            "keyword": "dark harvest dress to impress",
+            "keyword": "diesel shirt",
             "growth_mom": 40,
-            "growth_yoy": 10001,
+            "growth_yoy": -8,
             "trend_type": "growing"
         },
         {
-            "keyword": "red bandana outfit",
+            "keyword": "diy patchwork hoodie",
             "growth_mom": 40,
-            "growth_yoy": 40,
+            "growth_yoy": -5,
             "trend_type": "growing"
         },
         {
@@ -2083,15 +2119,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "chrome heart shirt",
-            "growth_mom": 30,
-            "growth_yoy": 200,
+            "keyword": "bape outfit",
+            "growth_mom": 40,
+            "growth_yoy": 40,
             "trend_type": "growing"
         },
         {
-            "keyword": "bape outfit",
-            "growth_mom": 30,
-            "growth_yoy": 40,
+            "keyword": "bandage dress outfit",
+            "growth_mom": 40,
+            "growth_yoy": 1500,
             "trend_type": "growing"
         },
         {
@@ -2107,9 +2143,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "bandage dress outfit",
+            "keyword": "chrome heart shirt",
             "growth_mom": 30,
-            "growth_yoy": 1500,
+            "growth_yoy": 200,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "funky chic outfits",
+            "growth_mom": 30,
+            "growth_yoy": 4000,
             "trend_type": "growing"
         },
         {
@@ -2119,33 +2161,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "cut shirts ideas",
-            "growth_mom": 30,
-            "growth_yoy": 100,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "funky chic outfits",
-            "growth_mom": 30,
-            "growth_yoy": 3500,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "asics outfit",
             "growth_mom": 30,
             "growth_yoy": -60,
             "trend_type": "growing"
         },
         {
-            "keyword": "harajuku dress to impress",
-            "growth_mom": 20,
-            "growth_yoy": -70,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "fur boots",
-            "growth_mom": 20,
-            "growth_yoy": 7,
+            "keyword": "red purse",
+            "growth_mom": 30,
+            "growth_yoy": 4,
             "trend_type": "growing"
         },
         {
@@ -2155,27 +2179,21 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "palm angels outfit",
+            "keyword": "fur boots",
             "growth_mom": 20,
-            "growth_yoy": -40,
+            "growth_yoy": 7,
             "trend_type": "growing"
         },
         {
-            "keyword": "bottega veneta shoes outfit",
+            "keyword": "harajuku dress to impress",
             "growth_mom": 20,
-            "growth_yoy": 40,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "red jacket",
-            "growth_mom": 20,
-            "growth_yoy": 40,
+            "growth_yoy": -70,
             "trend_type": "growing"
         },
         {
             "keyword": "rush dresses",
             "growth_mom": 100,
-            "growth_yoy": 80,
+            "growth_yoy": 70,
             "trend_type": "seasonal"
         },
         {
@@ -2185,15 +2203,27 @@
             "trend_type": "seasonal"
         },
         {
+            "keyword": "rush dress",
+            "growth_mom": 90,
+            "growth_yoy": 80,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "zip ups",
+            "growth_mom": 80,
+            "growth_yoy": 70,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "khaki skirt",
             "growth_mom": 60,
             "growth_yoy": -9,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "red bandana outfit",
+            "keyword": "uggs shoes",
             "growth_mom": 40,
-            "growth_yoy": 30,
+            "growth_yoy": 100,
             "trend_type": "seasonal"
         },
         {
@@ -2206,12 +2236,6 @@
             "keyword": "asics outfit",
             "growth_mom": 30,
             "growth_yoy": -60,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "charmed outfits 90s",
-            "growth_mom": 30,
-            "growth_yoy": -4,
             "trend_type": "seasonal"
         },
         {
@@ -2228,14 +2252,8 @@
         },
         {
             "keyword": "schiaparelli",
-            "growth_mom": 10,
+            "growth_mom": 20,
             "growth_yoy": 50,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "pink sweater",
-            "growth_mom": 10,
-            "growth_yoy": 7,
             "trend_type": "seasonal"
         },
         {
@@ -2245,15 +2263,21 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "green jacket",
+            "keyword": "aeropostale set",
             "growth_mom": 10,
-            "growth_yoy": 30,
+            "growth_yoy": 100,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "how to cut a shirt",
+            "keyword": "pink sweater",
             "growth_mom": 10,
-            "growth_yoy": 20,
+            "growth_yoy": 7,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "green jacket",
+            "growth_mom": 10,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         }
     ],
