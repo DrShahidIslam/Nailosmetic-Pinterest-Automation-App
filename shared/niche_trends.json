@@ -243,7 +243,7 @@
         {
             "keyword": "nails for back to school",
             "growth_mom": 500,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "seasonal"
         },
         {
@@ -323,7 +323,7 @@
         {
             "keyword": "4th of july makeup",
             "growth_mom": 6500,
-            "growth_yoy": 30,
+            "growth_yoy": 20,
             "trend_type": "monthly"
         },
         {
@@ -364,7 +364,7 @@
         },
         {
             "keyword": "hair dye",
-            "growth_mom": 9,
+            "growth_mom": 8,
             "growth_yoy": 90,
             "trend_type": "monthly"
         },
@@ -461,7 +461,7 @@
         {
             "keyword": "4 of july hairstyles",
             "growth_mom": 5000,
-            "growth_yoy": 1,
+            "growth_yoy": 0,
             "trend_type": "growing"
         },
         {
@@ -629,7 +629,7 @@
         {
             "keyword": "4th of july makeup",
             "growth_mom": 6500,
-            "growth_yoy": 30,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
@@ -743,7 +743,7 @@
         {
             "keyword": "back to school hair",
             "growth_mom": 300,
-            "growth_yoy": 1,
+            "growth_yoy": 0,
             "trend_type": "seasonal"
         },
         {
@@ -1440,7 +1440,7 @@
         },
         {
             "keyword": "halloween room decor",
-            "growth_mom": 300,
+            "growth_mom": 200,
             "growth_yoy": -20,
             "trend_type": "seasonal"
         },
@@ -1465,7 +1465,7 @@
         {
             "keyword": "college desk",
             "growth_mom": 100,
-            "growth_yoy": -2,
+            "growth_yoy": -3,
             "trend_type": "seasonal"
         },
         {
@@ -1543,7 +1543,7 @@
         {
             "keyword": "apartment wall decor",
             "growth_mom": 20,
-            "growth_yoy": 7,
+            "growth_yoy": 6,
             "trend_type": "seasonal"
         },
         {
@@ -1761,7 +1761,7 @@
         {
             "keyword": "whimsigoth outfits",
             "growth_mom": -6,
-            "growth_yoy": 20,
+            "growth_yoy": 10,
             "trend_type": "monthly"
         },
         {
