@@ -1538,5 +1538,12 @@
         "niche": "nails",
         "topic": "ruby nails",
         "slug": "ruby-nails-luxury-trend"
+    },
+    {
+        "url": "https://nailosmetic.com/zendaya-makeup-beauty-guide/",
+        "category": "Hair & Beauty",
+        "niche": "hair_beauty",
+        "topic": "zendaya makeup",
+        "slug": "zendaya-makeup-beauty-guide"
     }
 ]
