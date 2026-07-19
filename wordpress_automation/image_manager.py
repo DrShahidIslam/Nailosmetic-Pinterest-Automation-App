@@ -13,8 +13,8 @@ class ImageManager:
         """
         self.hf_api_keys = hf_api_keys or []
         self.silicon_key = siliconflow_api_key or os.getenv("SILICONFLOW_API_KEY")
-        self.silicon_url = "https://api.siliconflow.cn/v1/images/generations"
-        self.silicon_model = "Kwai-Kolors/Kolors"
+        self.silicon_url = "https://api.siliconflow.com/v1/images/generations"
+        self.silicon_model = "black-forest-labs/FLUX.1-schnell"
 
         self.cf_account_id = cloudflare_account_id or os.getenv("CLOUDFLARE_ACCOUNT_ID")
         self.cf_api_token = cloudflare_api_token or os.getenv("CLOUDFLARE_API_TOKEN")
@@ -47,11 +47,11 @@ class ImageManager:
         # 2nd Priority: SiliconFlow Kolors
         if self.silicon_key:
             try:
-                print("   🎨 Attempting SiliconFlow (Kolors)...")
+                print("   🎨 Attempting SiliconFlow (FLUX.1-schnell)...")
                 if aspect_ratio == "16:9":
-                    size_sf = "1024x768"
+                    size_sf = "1024x576"
                 elif aspect_ratio == "9:16":
-                    size_sf = "768x1024"
+                    size_sf = "768x1344"
                 else: # 4:5
                     size_sf = "768x1024"
                 return self._generate_siliconflow(prompt, size_sf, output_path)

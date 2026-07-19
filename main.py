@@ -199,8 +199,8 @@ IMAGE_NEGATIVE_PROMPTS = {
 }
 
 # SiliconFlow API config
-SILICONFLOW_API_URL = "https://api.siliconflow.cn/v1/images/generations"
-SILICONFLOW_MODEL = "Kwai-Kolors/Kolors"
+SILICONFLOW_API_URL = "https://api.siliconflow.com/v1/images/generations"
+SILICONFLOW_MODEL = "black-forest-labs/FLUX.1-schnell"
 
 # Hugging Face API config
 HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell"
@@ -502,6 +502,53 @@ def _generate_image_with_next_model(failed_model, models, prompt, out_dir, niche
     pass
  
  
+def analyze_image_for_text_placement(image_path: str) -> str:
+    """
+    Multimodal analysis using Gemini to determine the best place for the text overlay.
+    Returns 'top' or 'bottom'.
+    """
+    print(f"\n🧠 Multimodal: Analyzing image layout for text placement...")
+    if not GEMINI_API_KEYS:
+        print("   ⚠️ No Gemini API keys found, defaulting to 'top'")
+        return "top"
+        
+    try:
+        from PIL import Image
+        img = Image.open(image_path)
+        
+        # Load Client
+        client = genai.Client(api_key=GEMINI_API_KEYS[0])
+        
+        prompt = (
+            "We want to overlay a short title text on this vertical 9:16 Pinterest image. "
+            "To avoid covering important features like a person's face, details of hair, or key manicure details, "
+            "where is the best place to draw the text overlay? Choose between 'top' or 'bottom'. "
+            "Return ONLY a JSON object with this key: 'placement' which can be 'top' or 'bottom'."
+        )
+        
+        models = ["gemini-3.1-flash-lite-preview", "gemini-2.0-flash", "gemini-1.5-flash"]
+        for m in models:
+            try:
+                response = client.models.generate_content(
+                    model=m,
+                    contents=[img, prompt]
+                )
+                res_text = response.text.strip().lower()
+                if "bottom" in res_text:
+                    print("   🎯 Gemini vision decided placement: BOTTOM")
+                    return "bottom"
+                else:
+                    print("   🎯 Gemini vision decided placement: TOP")
+                    return "top"
+            except Exception as ex:
+                continue
+        print("   ⚠️ All vision models failed, defaulting to 'top'")
+        return "top"
+    except Exception as e:
+        print(f"   ⚠️ Multimodal analysis failed ({e}), falling back to 'top'")
+        return "top"
+
+
 def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
     """
     Send the image prompt to SiliconFlow's Kolors model.
@@ -523,7 +570,7 @@ def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: s
         "model": SILICONFLOW_MODEL,
         "prompt": enhanced_prompt,
         "negative_prompt": negative,
-        "image_size": "768x1024",
+        "image_size": "768x1344",
         "batch_size": 1,
     }
 
@@ -663,7 +710,7 @@ def clean_text_for_rendering(text: str) -> str:
 # PHASE 3: THE DESIGNER — Pillow (PIL)
 # ============================================================================
 
-def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_style: str = None) -> str:
+def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_style: str = None, placement: str = "top") -> str:
     """
     Open the raw image, apply a highly engaging, high-CTR premium clickbait overlay,
     and render the text using dynamic font pairings, colors, outlines, and badges.
@@ -696,7 +743,7 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
 
     # --- Layout & Styling Selection ---
     # We use 6 modern high-CTR layouts instead of generic boxed containers
-    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid', 'numbered_listicle']
+    layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid', 'numbered_listicle', 'organic_editorial']
     if not layout_style or layout_style not in layouts:
         layout_style = random.choice(layouts)
         
@@ -705,11 +752,11 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
         if isinstance(image_path, tuple) and len(image_path) >= 2:
             layout_style = 'double_panel_collage'
         else:
-            layout_style = random.choice(['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card'])
+            layout_style = random.choice(['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'organic_editorial'])
             
     if layout_style == 'double_panel_collage' and not isinstance(image_path, tuple):
         # Fallback if only one image is provided
-        layouts_single = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card']
+        layouts_single = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'organic_editorial']
         layout_style = random.choice(layouts_single)
         
     print(f"   📐 Selected premium layout style: {layout_style}")
@@ -907,12 +954,16 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
     montserrat_bold_path = os.path.join(font_dir, "Montserrat-Bold.ttf")
     montserrat_reg_path = os.path.join(font_dir, "Montserrat-Regular.ttf")
     lora_bold_path = os.path.join(font_dir, "Lora-Bold.ttf")
+    playfair_bold_path = os.path.join(font_dir, "PlayfairDisplay-Bold.ttf")
 
     # Load appropriate main font for the layout
     main_font = None
     if layout_style == 'bold_clickbait' and os.path.exists(anton_font_path):
         main_font = ImageFont.truetype(anton_font_path, int(width * 0.095)) # Tall, punchy sans-serif
         print("   ✅ Loaded Anton-Regular for bold clickbait")
+    elif layout_style == 'organic_editorial' and os.path.exists(playfair_bold_path):
+        main_font = ImageFont.truetype(playfair_bold_path, int(width * 0.078)) # Premium Playfair Display Serif
+        print("   ✅ Loaded PlayfairDisplay-Bold for organic_editorial")
     elif layout_style in ['premium_magazine', 'aesthetic_card'] and os.path.exists(lora_bold_path):
         main_font = ImageFont.truetype(lora_bold_path, int(width * 0.075)) # Elegant serif
         print(f"   ✅ Loaded Lora-Bold for {layout_style}")
@@ -1016,6 +1067,24 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
             draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
             
         text_y_start = int(height * 0.08) # Top-aligned editorial header zone
+
+    elif layout_style == 'organic_editorial':
+        if placement == 'bottom':
+            # Organic editorial style: Headline is bottom-aligned to keep the top center free
+            # Draw a very soft bottom vignette to make the serif font readable
+            for y in range(int(height * 0.76), height):
+                progress = (y - int(height * 0.76)) / (height * 0.24)
+                alpha = int(120 * (progress ** 2)) # extremely soft bottom vignette
+                draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
+            text_y_start = height - total_text_height - int(height * 0.08)
+        else:
+            # Organic editorial style: Headline is top-aligned to keep the bottom free
+            # Draw a very soft top vignette to make the serif font readable
+            for y in range(0, int(height * 0.22)):
+                progress = 1.0 - (y / (height * 0.22))
+                alpha = int(100 * (progress ** 2)) # extremely soft top vignette
+                draw_overlay.rectangle([(0, y), (width, y + 1)], fill=(0, 0, 0, alpha))
+            text_y_start = int(height * 0.08)
 
     elif layout_style == 'aesthetic_card':
         # Draw a semi-transparent cream luxury card at the center/bottom
@@ -1148,6 +1217,8 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
 
     # --- Draw Premium Curiosity-Gap Badge dynamically above the title ---
     try:
+        if layout_style == 'organic_editorial':
+            raise ValueError("Skip badge for organic editorial layout")
         badge_font_path = montserrat_bold_path if os.path.exists(montserrat_bold_path) else main_font
         if badge_font_path:
             badge_font = ImageFont.truetype(badge_font_path, int(width * 0.038))
@@ -1176,6 +1247,8 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
     cta_list = CTA_OPTIONS.get(niche, CTA_OPTIONS["nails"])
     cta_text = random.choice(cta_list)
     try:
+        if layout_style == 'organic_editorial':
+            raise ValueError("Skip CTA for organic editorial layout")
         cta_font_size = int(width * 0.045)
         cta_font = ImageFont.truetype(montserrat_bold_path, cta_font_size) if os.path.exists(montserrat_bold_path) else main_font
         
@@ -1199,6 +1272,8 @@ def design_pin_image(image_path, overlay_text: str, output_dir: str, layout_styl
 
     # --- Draw Branding Badge (Nailosmetic) ---
     try:
+        if layout_style == 'organic_editorial':
+            raise ValueError("Skip branding for organic editorial layout")
         brand_font_size = int(width * 0.035)
         brand_font = ImageFont.truetype(montserrat_reg_path, brand_font_size) if os.path.exists(montserrat_reg_path) else main_font
         if brand_font:
@@ -1682,7 +1757,7 @@ def main():
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
 
         # Select layout style
-        layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid', 'numbered_listicle']
+        layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid', 'numbered_listicle', 'organic_editorial']
         
         # Intelligent layout selection
         title_lower = content.get("title", "").lower()
@@ -1695,6 +1770,10 @@ def main():
             layout_style = random.choice(listicle_layouts)
         else:
             layout_style = random.choice(layouts)
+            
+        if dry_run:
+            # Force organic_editorial in dry_run mode to test the new design preview
+            layout_style = 'organic_editorial'
             
         print(f"   📐 Selected layout style: {layout_style} (is_listicle={is_listicle})")
 
@@ -1746,8 +1825,14 @@ def main():
         # Phase 3: Design the pin with Pillow
         # Pass niche info to design function via attribute for CTA selection
         design_pin_image._current_niche = chosen_niche
+        
+        # Determine dynamic text placement using multimodal analysis
+        placement = 'top'
+        if layout_style == 'organic_editorial' and isinstance(raw_image_path, str):
+            placement = analyze_image_for_text_placement(raw_image_path)
+            
         final_image_path = design_pin_image(
-            raw_image_path, content["overlay_text"], tmp_dir, layout_style=layout_style
+            raw_image_path, content["overlay_text"], tmp_dir, layout_style=layout_style, placement=placement
         )
 
         # Phase 4: Publish to Pinterest
@@ -1758,6 +1843,12 @@ def main():
             print(f"   Desc: {content['description']}")
             print(f"   Link: {destination_link}")
             print(f"   Board ID: {target_board_id}")
+            try:
+                import shutil
+                shutil.copy(final_image_path, "shared/dry_run_pin.jpg")
+                print("   💾 Dry-run pin image successfully saved to shared/dry_run_pin.jpg")
+            except Exception as e:
+                print(f"   ⚠️ Failed to save copy to shared/dry_run_pin.jpg: {e}")
         else:
             result = publish_to_pinterest(
                 final_image_path, content["title"], content["description"],
