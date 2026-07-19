@@ -1766,10 +1766,13 @@ def main():
         is_listicle = any(kw in title_lower or kw in desc_lower for kw in list_keywords)
         
         if is_listicle:
-            listicle_layouts = ['numbered_listicle', 'numbered_listicle', 'four_panel_grid', 'double_panel_collage']
+            # Listicle-optimized layouts + organic_editorial weighted 2x (proven viral format)
+            listicle_layouts = ['numbered_listicle', 'numbered_listicle', 'four_panel_grid', 'double_panel_collage', 'organic_editorial', 'organic_editorial']
             layout_style = random.choice(listicle_layouts)
         else:
-            layout_style = random.choice(layouts)
+            # Non-listicle layouts with organic_editorial boosted 3x (highest organic save rate)
+            non_listicle_layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'organic_editorial', 'organic_editorial', 'organic_editorial']
+            layout_style = random.choice(non_listicle_layouts)
             
         if dry_run:
             # Force organic_editorial in dry_run mode to test the new design preview
