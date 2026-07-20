@@ -21,7 +21,7 @@
         {
             "keyword": "pedicure ideas",
             "growth_mom": -20,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "monthly"
         },
         {
@@ -575,7 +575,7 @@
         {
             "keyword": "headband hairstyles",
             "growth_mom": 60,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "monthly"
         },
         {
@@ -882,7 +882,7 @@
         },
         {
             "keyword": "breakfast nook",
-            "growth_mom": 0,
+            "growth_mom": -1,
             "growth_yoy": 20,
             "trend_type": "monthly"
         },
@@ -1519,7 +1519,7 @@
         {
             "keyword": "college desk",
             "growth_mom": 100,
-            "growth_yoy": 0,
+            "growth_yoy": -1,
             "trend_type": "seasonal"
         },
         {
@@ -1674,7 +1674,7 @@
         },
         {
             "keyword": "cute curtains",
-            "growth_mom": 30,
+            "growth_mom": 20,
             "growth_yoy": 10,
             "trend_type": "seasonal"
         },
@@ -1754,7 +1754,7 @@
         },
         {
             "keyword": "alo set",
-            "growth_mom": 2,
+            "growth_mom": 1,
             "growth_yoy": 40,
             "trend_type": "monthly"
         },
