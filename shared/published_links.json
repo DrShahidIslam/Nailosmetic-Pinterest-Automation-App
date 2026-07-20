@@ -1566,5 +1566,12 @@
         "niche": "nails",
         "topic": "late summer nails",
         "slug": "late-summer-nails-trends"
+    },
+    {
+        "url": "https://nailosmetic.com/back-to-school-hair-trends/",
+        "category": "Hair & Beauty",
+        "niche": "hair_beauty",
+        "topic": "back to school hair",
+        "slug": "back-to-school-hair-trends"
     }
 ]
