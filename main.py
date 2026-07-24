@@ -321,8 +321,24 @@ MANDATORY CONTEXT: The pin must focus on the trend/topic: "{topic}".
 - {niche_topic_context.get(niche, '')}
 """
 
+    # Fetch live Pinterest search autocompletions & competitor blueprints
+    from pinterest_intelligence import fetch_pinterest_annotations, fetch_competitor_pins
+    search_q = topic if topic else niche.replace("_", " ")
+    live_annos = fetch_pinterest_annotations(search_q)
+    competitor_pins = fetch_competitor_pins(search_q, limit=3)
+    
+    live_anno_text = ", ".join([f"'{a}'" for a in live_annos]) if live_annos else ""
+    live_anno_prompt = f"\nVERIFIED LIVE PINTEREST ANNOTATIONS (Use these high-volume search tags): {live_anno_text}\n" if live_anno_text else ""
+    
+    comp_prompt = ""
+    if competitor_pins:
+        comp_titles = [f"'{p['title']}'" for p in competitor_pins if p.get('title')]
+        if comp_titles:
+            comp_prompt = f"\nTOP COMPETITOR WINNING PIN TITLES TO BEAT: {', '.join(comp_titles)}\n"
+
     system_prompt = f"""You are {niche_config['role']}.
 First, identify 3 to 5 highly specific 'Pinterest Annotated Keywords' (e.g., 'milky clean girl nails', 'minimalist aesthetic bedroom', etc.) that have high search volume for {f'the topic "{topic}"' if topic else f'the {niche.replace("_", " ")} niche'}.
+{live_anno_prompt}{comp_prompt}
 Then, your task is to {niche_config['task']} based on these annotated keywords.
 {topic_instruction}
 
@@ -1752,6 +1768,11 @@ def main():
                 else:
                     destination_link = board_info["link"]
                     print(f"   🔗 Using default category board link: {destination_link}")
+
+        # Append UTM tracking parameters for conversion & traffic analytics
+        if destination_link:
+            sep = "&" if "?" in destination_link else "?"
+            destination_link += f"{sep}utm_source=pinterest&utm_medium=auto_pin&utm_campaign={chosen_niche}"
 
         target_board_id = board_info["board_id"]
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
