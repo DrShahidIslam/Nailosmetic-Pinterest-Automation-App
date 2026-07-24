@@ -25,6 +25,10 @@ env/
 .DS_Store
 Thumbs.db
 
-# Temporary files
+# Temporary files & Scratch assets
 *.tmp
 temp/
+scratch/
+debug_env.py
+shared/*.jpg
+shared/*.png
