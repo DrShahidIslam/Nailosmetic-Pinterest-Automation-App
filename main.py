@@ -45,7 +45,6 @@ load_dotenv()  # Load .env file if present (local development)
 # Supports multiple GEMINI keys (comma-separated). Fallback to solitary key.
 raw_gemini_keys = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
 GEMINI_API_KEYS = [k.strip() for k in raw_gemini_keys.split(",") if k.strip()]
-SILICONFLOW_API_KEY = os.getenv("SILICONFLOW_API_KEY")
 CLOUDFLARE_ACCOUNT_ID = os.getenv("CLOUDFLARE_ACCOUNT_ID")
 CLOUDFLARE_API_TOKEN = os.getenv("CLOUDFLARE_API_TOKEN")
 raw_hf_keys = os.getenv("HUGGINGFACE_API_KEYS", "") or os.getenv("HUGGINGFACE_API_KEY", "")
@@ -197,10 +196,6 @@ IMAGE_NEGATIVE_PROMPTS = {
     "home_garden": "no room, empty void, people, humans, faces, bad architecture, impossible geometry, blurry, worst quality, low quality, watermark, text, cartoon, anime",
     "fashion_style": "no person, no clothes, naked, nude, faceless mannequin, bad anatomy, disfigured, deformed, extra limbs, blurry, worst quality, low quality, watermark, text, cartoon, anime",
 }
-
-# SiliconFlow API config
-SILICONFLOW_API_URL = "https://api.siliconflow.com/v1/images/generations"
-SILICONFLOW_MODEL = "black-forest-labs/FLUX.1-schnell"
 
 # Hugging Face API config
 HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell"
@@ -563,43 +558,6 @@ def analyze_image_for_text_placement(image_path: str) -> str:
     except Exception as e:
         print(f"   ⚠️ Multimodal analysis failed ({e}), falling back to 'top'")
         return "top"
-
-
-def generate_image_with_siliconflow(image_prompt: str, output_dir: str, niche: str = "nails") -> str:
-    """
-    Send the image prompt to SiliconFlow's Kolors model.
-    """
-    print(f"\n🎨 Phase 2: Generating image with SiliconFlow (niche: {niche})...")
-    if not SILICONFLOW_API_KEY:
-        raise Exception("SiliconFlow API key missing")
-
-    headers = {
-        "Authorization": f"Bearer {SILICONFLOW_API_KEY}",
-        "Content-Type": "application/json",
-    }
-
-    prefix = IMAGE_PROMPT_PREFIXES.get(niche, IMAGE_PROMPT_PREFIXES["nails"])
-    negative = IMAGE_NEGATIVE_PROMPTS.get(niche, IMAGE_NEGATIVE_PROMPTS["nails"])
-    enhanced_prompt = prefix + image_prompt + ", highly detailed, masterpiece, best quality"
-    
-    payload = {
-        "model": SILICONFLOW_MODEL,
-        "prompt": enhanced_prompt,
-        "negative_prompt": negative,
-        "image_size": "768x1344",
-        "batch_size": 1,
-    }
-
-    response = requests.post(SILICONFLOW_API_URL, headers=headers, json=payload, timeout=120)
-    if response.status_code == 200:
-        image_url = response.json()["images"][0]["url"]
-        img_response = requests.get(image_url, timeout=60)
-        image_path = os.path.join(output_dir, "raw_ai_image.png")
-        with open(image_path, "wb") as f:
-            f.write(img_response.content)
-        return image_path
-    else:
-        raise Exception(f"SiliconFlow failed: {response.status_code}")
 
 
 def generate_image_with_cloudflare(image_prompt: str, output_dir: str, niche: str = "nails") -> str:

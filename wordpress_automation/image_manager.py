@@ -7,15 +7,11 @@ from huggingface_hub import InferenceClient
 from typing import Dict, Any, List, Optional
 
 class ImageManager:
-    def __init__(self, hf_api_keys: List[str] = None, siliconflow_api_key: str = None, cloudflare_account_id: str = None, cloudflare_api_token: str = None):
+    def __init__(self, hf_api_keys: List[str] = None, cloudflare_account_id: str = None, cloudflare_api_token: str = None):
         """
-        Initialize the ImageManager with support for Hugging Face, Cloudflare Workers AI, and SiliconFlow.
+        Initialize the ImageManager with support for Hugging Face, Cloudflare Workers AI, and Pollinations.ai.
         """
         self.hf_api_keys = hf_api_keys or []
-        self.silicon_key = siliconflow_api_key or os.getenv("SILICONFLOW_API_KEY")
-        self.silicon_url = "https://api.siliconflow.com/v1/images/generations"
-        self.silicon_model = "black-forest-labs/FLUX.1-schnell"
-
         self.cf_account_id = cloudflare_account_id or os.getenv("CLOUDFLARE_ACCOUNT_ID")
         self.cf_api_token = cloudflare_api_token or os.getenv("CLOUDFLARE_API_TOKEN")
 
@@ -28,13 +24,12 @@ class ImageManager:
             img.save(output_path, "WEBP", quality=85)
         return output_path
 
-    def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png", prefer_kolors: bool = False) -> str:
+    def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png") -> str:
         """
         Universal priority chain:
         1. Hugging Face FLUX (1st Priority)
-        2. SiliconFlow Kolors (2nd Priority)
-        3. Cloudflare Workers AI SDXL (3rd Priority)
-        4. Pollinations (4th Priority)
+        2. Cloudflare Workers AI SDXL (2nd Priority - 10,000 free requests/day)
+        3. Pollinations.ai (3rd Priority - Zero-cost fallback)
         """
         # 1st Priority: Hugging Face FLUX cycling
         if self.hf_api_keys:
@@ -44,21 +39,7 @@ class ImageManager:
             except Exception as e:
                 print(f"   ⚠️ Flux cycling failed: {str(e)[:50]}")
 
-        # 2nd Priority: SiliconFlow Kolors
-        if self.silicon_key:
-            try:
-                print("   🎨 Attempting SiliconFlow (FLUX.1-schnell)...")
-                if aspect_ratio == "16:9":
-                    size_sf = "1024x576"
-                elif aspect_ratio == "9:16":
-                    size_sf = "768x1344"
-                else: # 4:5
-                    size_sf = "768x1024"
-                return self._generate_siliconflow(prompt, size_sf, output_path)
-            except Exception as e:
-                print(f"   ⚠️ SiliconFlow failed: {str(e)[:50]}")
-
-        # 3rd Priority: Cloudflare Workers AI SDXL
+        # 2nd Priority: Cloudflare Workers AI SDXL
         if self.cf_account_id and self.cf_api_token:
             try:
                 print("   🎨 Attempting Cloudflare Workers AI (SDXL)...")
@@ -66,7 +47,7 @@ class ImageManager:
             except Exception as e:
                 print(f"   ⚠️ Cloudflare SDXL failed: {str(e)[:50]}")
 
-        # 4th Priority: Pollinations (Zero-cost fallback)
+        # 3rd Priority: Pollinations (Zero-cost fallback)
         print("   🎨 Attempting Pollinations (Zero-cost Fallback)...")
         return self._generate_pollinations(prompt, aspect_ratio, output_path)
 
@@ -133,27 +114,6 @@ class ImageManager:
             return output_path
             
         raise Exception(f"Cloudflare SDXL Failed: {resp.status_code} - {resp.text}")
-
-    def _generate_siliconflow(self, prompt: str, size: str, output_path: str) -> str:
-        headers = {
-            "Authorization": f"Bearer {self.silicon_key}",
-            "Content-Type": "application/json",
-        }
-        payload = {
-            "model": self.silicon_model,
-            "prompt": prompt + ", professional photography, studio lighting",
-            "negative_prompt": "blurry, low quality, watermark, text",
-            "image_size": size,
-            "batch_size": 1,
-        }
-        resp = requests.post(self.silicon_url, headers=headers, json=payload, timeout=120)
-        if resp.status_code == 200:
-            url = resp.json()["images"][0]["url"]
-            img_data = requests.get(url, timeout=60).content
-            with open(output_path, "wb") as f:
-                f.write(img_data)
-            return output_path
-        raise Exception(f"SiliconFlow Failed: {resp.status_code}")
 
     def _generate_pollinations(self, prompt: str, aspect_ratio: str, output_path: str) -> str:
         if aspect_ratio == "16:9":
