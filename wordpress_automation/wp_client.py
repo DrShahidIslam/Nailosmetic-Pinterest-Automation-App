@@ -93,9 +93,9 @@ class WordPressClient:
         data = {"alt_text": alt_text}
         self.session.post(url, headers=self.headers, json=data, timeout=self.default_timeout)
 
-    def create_post(self, title: str, content: str, featured_media_id: Optional[int] = None, categories: Optional[list] = None, meta: Optional[dict] = None, slug: Optional[str] = None, status: str = "publish") -> Dict[str, Any]:
+    def create_post(self, title: str, content: str, featured_media_id: Optional[int] = None, categories: Optional[list] = None, meta: Optional[dict] = None, slug: Optional[str] = None, status: str = "publish", seo_title: Optional[str] = None, meta_description: Optional[str] = None, focus_keyword: Optional[str] = None) -> Dict[str, Any]:
         """
-        Create a new post in WordPress.
+        Create a new post in WordPress with RankMath & Yoast SEO metadata support.
         """
         url = f"{self.api_url}/posts"
         payload = {
@@ -107,8 +107,21 @@ class WordPressClient:
             payload["featured_media"] = featured_media_id
         if categories:
             payload["categories"] = categories
-        if meta:
-            payload["meta"] = meta
+
+        # Populate RankMath & Yoast SEO meta fields
+        post_meta = meta or {}
+        if seo_title:
+            post_meta["_yoast_wpseo_title"] = seo_title
+            post_meta["rank_math_title"] = seo_title
+        if meta_description:
+            post_meta["_yoast_wpseo_metadesc"] = meta_description
+            post_meta["rank_math_description"] = meta_description
+        if focus_keyword:
+            post_meta["_yoast_wpseo_focuskw"] = focus_keyword
+            post_meta["rank_math_focus_keyword"] = focus_keyword
+
+        if post_meta:
+            payload["meta"] = post_meta
         if slug:
             payload["slug"] = slug
 

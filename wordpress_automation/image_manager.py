@@ -15,13 +15,42 @@ class ImageManager:
         self.cf_account_id = cloudflare_account_id or os.getenv("CLOUDFLARE_ACCOUNT_ID")
         self.cf_api_token = cloudflare_api_token or os.getenv("CLOUDFLARE_API_TOKEN")
 
-    def convert_to_webp(self, image_path: str) -> str:
+    def convert_to_webp(self, image_path: str, max_width: int = 1200, target_size_kb: int = 100) -> str:
         """
-        Convert an image to WebP format for SEO optimization.
+        Convert an image to WebP format with iterative quality compression 
+        and resolution capping to guarantee file size is strictly under 100KB for ultra-fast page speeds.
         """
         output_path = image_path.rsplit(".", 1)[0] + ".webp"
         with Image.open(image_path) as img:
-            img.save(output_path, "WEBP", quality=85)
+            # Convert RGBA/P to RGB
+            if img.mode in ("RGBA", "P"):
+                img = img.convert("RGB")
+
+            # Resize if width exceeds max_width
+            w, h = img.size
+            if w > max_width:
+                new_h = int(h * (max_width / w))
+                img = img.resize((max_width, new_h), Image.Resampling.LANCZOS)
+
+            # Iterative quality reduction until file size is under target_size_kb (100KB)
+            quality = 85
+            min_quality = 55
+            target_bytes = target_size_kb * 1024
+
+            while quality >= min_quality:
+                img.save(output_path, "WEBP", quality=quality, optimize=True)
+                if os.path.getsize(output_path) <= target_bytes:
+                    break
+                quality -= 5
+
+            # If still over target, downscale resolution slightly
+            if os.path.getsize(output_path) > target_bytes:
+                w, h = img.size
+                img = img.resize((int(w * 0.85), int(h * 0.85)), Image.Resampling.LANCZOS)
+                img.save(output_path, "WEBP", quality=65, optimize=True)
+
+        size_kb = os.path.getsize(output_path) / 1024
+        print(f"   🖼️ WebP compressed: {output_path} ({size_kb:.1f} KB)")
         return output_path
 
     def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png") -> str:

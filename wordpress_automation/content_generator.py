@@ -153,31 +153,31 @@ Do NOT deviate from this topic. This is a high-demand search term that real user
         config = niche_configs.get(niche, niche_configs["nails"])
         
         system_prompt = f"""You are {config['role']}. 
-Your task is to create {config['article_type']} for a WordPress site using Kadence Blocks and RankMath SEO.
+Your task is to create {config['article_type']} for a WordPress site using Kadence Blocks, RankMath SEO, and Generative Engine Optimization (GEO/AEO).
 {topic_instruction}
 Available WordPress Categories: {categories_str}
-INTERNAL LINK 1: {link1}
-INTERNAL LINK 2: {link2}
-INTERNAL LINK 3: {link3}
+INTERNAL LINK 1 (Primary Pillar Hub): {link1}
+INTERNAL LINK 2 (Silo Sibling Post): {link2}
+INTERNAL LINK 3 (Silo Sibling Post): {link3}
  
-FRAMEWORK REQUIREMENTS:
-1. Title: Catchy, SEO-optimized, and hook-driven.
+FRAMEWORK & GEO/AEO OPTIMIZATION REQUIREMENTS:
+1. Title: Catchy, SEO-optimized, entity-rich hook.
 2. Slug: A short, SEO-friendly URL slug (3-5 words maximum).
-3. SEO Metadata (RankMath):
-   - Focus Keyword: The primary keyword for the article.
+3. SEO Metadata (RankMath / Yoast):
+   - Focus Keyword: Primary entity keyphrase.
    - SEO Title: Optimized title for search results (max 60 chars).
-   - Meta Description: Compelling summary for search results (120-160 chars).
+   - Meta Description: Compelling summary for search results with primary keyword (120-160 chars).
 4. Featured Image: {config['featured_image_guide']}
-5. Introduction: Return as a JSON array of exactly 2 paragraph strings. First paragraph 80+ words. Second paragraph MUST include an internal link to '{link1}'.
-6. Key Takeaways: Provide EXACTLY 3 key takeaways (bullet points) that summarize the core value of the article.
-7. Comparison Table: Provide a structured comparison table summarizing the 7 listicle items. Create 3 column headers (e.g., "Style/Item Name", "Difficulty/Cost", "Best For") and EXACTLY 7 rows (one for each block).
-8. Content Blocks: A list of EXACTLY 7 items (no fewer). Each item must have:
+5. Introduction & GEO Answer Capsule (First 100 Words): Return as a JSON array of exactly 2 paragraph strings. First paragraph MUST be an authoritative direct-answer capsule (GEO/AEO compliant) answering the core intent. Second paragraph MUST include an internal link to '{link1}' using entity-rich contextual anchor text.
+6. Key Takeaways: Provide EXACTLY 3 key takeaways (bullet points) summarizing core value.
+7. Comparison Table: Provide a structured comparison table summarizing the 7 listicle items (3 column headers, 7 rows).
+8. Content Blocks (Semantic NLP & Entity Density): A list of EXACTLY 7 items. Each item must have:
    - Image Prompt: {config['block_image_guide']}
-   - Image Alt Text: Highly descriptive.
-   - Heading (H2): At least 3 must be questions.
-   - Paragraph: Engaging description of at least 150 words per block. MUST use first-hand editorial phrasing (e.g., "In our testing", "Our editors found", "When we tried this...").
-     - INTERNAL LINKS: Include '{link2}' and '{link3}' naturally across two different blocks.
-     - EXTERNAL LINKS: Include at least 3 external links across the 7 blocks to authoritative {niche} sources (e.g., {config['external_sources']}).
+   - Image Alt Text: Highly descriptive entity-rich alt tag.
+   - Heading (H2): At least 3 must be question-based (AEO search queries).
+   - Paragraph: 150+ words of editorial content. Integrate high density of NLP semantic entities and co-occurring terms naturally. Include Pinterest audience callouts ("Save this design to your Pinterest board!").
+     - INTERNAL LINKS: Weave '{link2}' and '{link3}' naturally across two different blocks using descriptive contextual entity anchor phrases.
+     - EXTERNAL LINKS: Include at least 3 external links across the 7 blocks to authoritative {niche} sources ({config['external_sources']}).
    - Expert Quote: A compelling 1-2 sentence quote providing professional advice or an editorial verdict on this specific block's item.
    - Details: 3 specific points ({config['block_details']}).
 9. Conclusion: A strong summary of at least 80 words.
