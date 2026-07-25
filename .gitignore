@@ -1,5 +1,7 @@
-# Environment variables (contains secrets!)
+# Environment variables & secrets (contains credentials!)
 .env
+nailosmetic-*.json
+gsc_key.json
 
 # Python
 __pycache__/

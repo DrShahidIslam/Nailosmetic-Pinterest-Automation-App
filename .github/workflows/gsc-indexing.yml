@@ -1,0 +1,68 @@
+# ============================================================
+# Google Search Console Indexing Auto-Submitter Workflow
+# ============================================================
+# Automatically submits a daily batch of published URLs to the Google Indexing API.
+# Keeps search console indexing active and up-to-date.
+
+name: 🚀 GSC Auto Indexing
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+on:
+  schedule:
+    # Run once daily at 04:00 UTC
+    - cron: "0 4 * * *"
+
+  # Allow manual triggering from the GitHub Actions UI
+  workflow_dispatch:
+
+concurrency:
+  group: gsc-indexing-sync
+  cancel-in-progress: false
+
+jobs:
+  submit-urls:
+    name: Submit URLs to Google Indexing API
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to update shared/gsc_submitted_links.json
+
+    steps:
+      # 1. Check out the repository
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      # 3. Install dependencies
+      - name: 📦 Install dependencies
+        run: |
+          pip install google-auth requests
+
+      # 4. Run the Indexing Submitter
+      - name: 🚀 Run Submitter Script
+        env:
+          GSC_CREDENTIALS_JSON: ${{ secrets.GSC_CREDENTIALS_JSON }}
+        run: python submit_gsc_urls.py
+
+      # 5. Commit updated submission state file
+      - name: 💾 Commit updated GSC submission state
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add shared/gsc_submitted_links.json
+          git commit -m "📝 Update GSC submission state [skip ci]" || exit 0
+          
+          # Pull remote changes and push updated state
+          git pull --rebase origin main || (
+            git rebase --abort
+            git fetch origin main
+            git pull origin main --no-rebase -s recursive -X ours
+          )
+          git push
