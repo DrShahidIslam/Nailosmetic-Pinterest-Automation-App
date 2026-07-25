@@ -208,7 +208,6 @@ def validate_env_vars():
     """Ensure all required environment variables are set."""
     required = {
         "GEMINI_API_KEYS": True if GEMINI_API_KEYS else False,
-        "HUGGINGFACE_API_KEYS": True if HUGGINGFACE_API_KEYS else False,
         "PINTEREST_ACCESS_TOKEN": PINTEREST_ACCESS_TOKEN,
     }
     missing = [k for k, v in required.items() if not v]
@@ -1550,12 +1549,10 @@ def main():
                             except Exception as e:
                                 print(f"   ⚠️ Error reading published links for variation: {e}")
                     
-                    if not chosen_topic:
-                        # --- TREND PRIORITIZATION ---
-                        trends_path = Path("shared/niche_trends.json")
+                    trends_path = Path("shared/niche_trends.json")
                     trending_matches = []
                     
-                    if trends_path.exists() and available_topics:
+                    if not chosen_topic and trends_path.exists() and available_topics:
                         try:
                             with open(trends_path, "r") as f:
                                 all_trends = json.load(f)
