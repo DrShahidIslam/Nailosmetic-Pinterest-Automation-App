@@ -53,7 +53,7 @@ class ImageManager:
         print(f"   🖼️ WebP compressed: {output_path} ({size_kb:.1f} KB)")
         return output_path
 
-    def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png") -> str:
+    def generate_image(self, prompt: str, aspect_ratio: str = "4:5", output_path: str = "image.png", prefer_kolors: bool = False) -> str:
         """
         Universal priority chain:
         1. Hugging Face FLUX (1st Priority)
