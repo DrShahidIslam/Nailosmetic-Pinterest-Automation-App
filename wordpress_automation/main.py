@@ -109,7 +109,6 @@ def main():
     wp_pass = os.getenv("WORDPRESS_APP_PASSWORD", "")
     gemini_keys_raw = os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")
     gemini_keys = [k.strip() for k in gemini_keys_raw.split(",") if k.strip()]
-    silicon_key = os.getenv("SILICONFLOW_API_KEY")
     cf_account_id = os.getenv("CLOUDFLARE_ACCOUNT_ID")
     cf_api_token = os.getenv("CLOUDFLARE_API_TOKEN")
     hf_keys_raw = os.getenv("HUGGINGFACE_API_KEYS", "") or os.getenv("HUGGINGFACE_API_KEY", "")
@@ -368,7 +367,7 @@ def main():
 
     # ===== Now safe to initialize paid API clients =====
     gen = ContentGenerator(gemini_keys)
-    img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key, cloudflare_account_id=cf_account_id, cloudflare_api_token=cf_api_token)
+    img_mgr = ImageManager(hf_api_keys=hf_keys, cloudflare_account_id=cf_account_id, cloudflare_api_token=cf_api_token)
 
     # 2. Generate Article Plan (niche-aware)
     print(f"🧠 Generating high-quality {chosen_niche} article plan...")

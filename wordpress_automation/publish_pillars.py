@@ -260,7 +260,6 @@ def main():
     wp_pass = os.getenv("WORDPRESS_APP_PASSWORD", "")
     gemini_keys = [k.strip() for k in (os.getenv("GEMINI_API_KEYS", "") or os.getenv("GEMINI_API_KEY", "")).split(",") if k.strip()]
     hf_keys = [k.strip() for k in (os.getenv("HUGGINGFACE_API_KEYS", "") or os.getenv("HUGGINGFACE_API_KEY", "")).split(",") if k.strip()]
-    silicon_key = os.getenv("SILICONFLOW_API_KEY")  # Second-priority image source (Kolors)
     cf_account_id = os.getenv("CLOUDFLARE_ACCOUNT_ID")
     cf_api_token = os.getenv("CLOUDFLARE_API_TOKEN")
 
@@ -283,8 +282,8 @@ def main():
         print("❌ WordPress unreachable after 5 attempts. Aborting.")
         sys.exit(1)
 
-    # Image priority: FLUX (HF) → Kolors (SiliconFlow) → Cloudflare SDXL → Pollinations
-    img_mgr = ImageManager(hf_api_keys=hf_keys, siliconflow_api_key=silicon_key, cloudflare_account_id=cf_account_id, cloudflare_api_token=cf_api_token)
+    # Image priority: FLUX (HF) → Cloudflare SDXL → Pollinations
+    img_mgr = ImageManager(hf_api_keys=hf_keys, cloudflare_account_id=cf_account_id, cloudflare_api_token=cf_api_token)
 
     # ── Step 1: Generate outline ───────────────────────────────────────────
     print("🧠 Generating pillar outline...")
