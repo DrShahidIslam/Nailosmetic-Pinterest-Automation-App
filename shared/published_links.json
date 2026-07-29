@@ -1671,5 +1671,12 @@
         "niche": "hair_beauty",
         "topic": "fall makeup",
         "slug": "best-fall-makeup-trends"
+    },
+    {
+        "url": "https://nailosmetic.com/middle-school-nails-trends/",
+        "category": "Aesthetic & Art",
+        "niche": "nails",
+        "topic": "middle school nails",
+        "slug": "middle-school-nails-trends"
     }
 ]
