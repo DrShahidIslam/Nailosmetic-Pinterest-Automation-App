@@ -27,13 +27,13 @@
         {
             "keyword": "cat eye nails",
             "growth_mom": -20,
-            "growth_yoy": 9,
+            "growth_yoy": 8,
             "trend_type": "monthly"
         },
         {
             "keyword": "pedicure ideas",
             "growth_mom": -10,
-            "growth_yoy": 9,
+            "growth_yoy": 8,
             "trend_type": "monthly"
         },
         {
@@ -297,7 +297,7 @@
         {
             "keyword": "tropicoqueta nails",
             "growth_mom": 300,
-            "growth_yoy": 700,
+            "growth_yoy": 600,
             "trend_type": "growing"
         },
         {
@@ -441,7 +441,7 @@
         {
             "keyword": "nails back to school",
             "growth_mom": 500,
-            "growth_yoy": 40,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
@@ -815,7 +815,7 @@
         {
             "keyword": "halloween hair",
             "growth_mom": 200,
-            "growth_yoy": -6,
+            "growth_yoy": -7,
             "trend_type": "seasonal"
         },
         {
@@ -1297,7 +1297,7 @@
         {
             "keyword": "nancy meyers bathroom",
             "growth_mom": 60,
-            "growth_yoy": 1,
+            "growth_yoy": 0,
             "trend_type": "growing"
         },
         {
@@ -1531,7 +1531,7 @@
         {
             "keyword": "fall room inspo",
             "growth_mom": 300,
-            "growth_yoy": 40,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
@@ -1935,7 +1935,7 @@
         {
             "keyword": "bandage dress outfit",
             "growth_mom": 60,
-            "growth_yoy": 3000,
+            "growth_yoy": 2500,
             "trend_type": "monthly"
         },
         {
@@ -2013,13 +2013,13 @@
         {
             "keyword": "mexico jersey outfit woman",
             "growth_mom": -40,
-            "growth_yoy": 500,
+            "growth_yoy": 400,
             "trend_type": "monthly"
         },
         {
             "keyword": "gold heels",
             "growth_mom": -1,
-            "growth_yoy": 3,
+            "growth_yoy": 2,
             "trend_type": "monthly"
         },
         {
@@ -2229,7 +2229,7 @@
         {
             "keyword": "decorated converse",
             "growth_mom": 80,
-            "growth_yoy": 90,
+            "growth_yoy": 80,
             "trend_type": "growing"
         },
         {
