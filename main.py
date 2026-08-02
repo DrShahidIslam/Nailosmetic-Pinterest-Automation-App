@@ -342,9 +342,9 @@ RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys in th
 {{
   "annotated_keywords": ["List exactly 3 to 5 highly specific Pinterest Annotated Keywords you identified here."],
   "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content.",
-  "title": "A high-CTR 'Click-Gap' title (max 100 chars). It MUST strictly start with your primary annotated keyword, but follow it with a hook that creates a 'curiosity gap' or promises a 'secret' (e.g., 'Minimalist Clean Girl Nails: The Exact Polish for the Viral Look'). Force the user to click to find out more. Use emojis sparingly.",
-  "overlay_text": "An ultra-compelling 3-6 word curiosity-gap overlay hook SPECIFIC to the pin topic. Avoid generic clickbait like 'The Secret To This Look' or 'Why Everyone Is Doing This'. Instead, capture the exact visual allure or specific question of this trend (e.g., 'Viral Glass-Donut Shades', '3 Secrets to Perfect Updos', 'Bioluminescent Polish Hack', 'Stop Making This Nail Mistake!'). Focus on specific value or curiosity gaps that relate directly to the topic. DO NOT use generic placeholders.",
-  "description": "An SEO-optimized description (150-300 chars) formatted as an actionable tip or mini-guide. You MUST naturally weave in your 3 to 5 annotated keywords in the first two sentences. You MUST include a strong Call-To-Action (e.g., 'Save this for your next salon visit!' or 'Click to see the full guide!') before exactly 10 highly relevant and trending hashtags at the very end.",
+  "title": "A scroll-stopping Pinterest title (max 100 chars). MANDATORY: The title MUST name or speak directly to the specific AUDIENCE IDENTITY (e.g. 'for beginners', 'women over 40', 'for dark skin tones', 'natural nail lovers', 'budget-friendly'). Structure it using Splinter Method — target ONE specific person, situation, or occasion angle. Starts with primary annotated keyword. Creates a curiosity gap or specific promise. NO generic phrases like 'amazing' or 'beautiful'.",
+  "overlay_text": "An ultra-compelling 3-6 word text overlay readable at thumbnail size. Use exact identity or result language (e.g., 'For Short Almond Nails', 'Finally: Gel-Free Chrome', 'The 5-Minute School Hairstyle'). Must be specific — NOT generic. Split into 2-3 short lines for maximum readability.",
+  "description": "WRITE EXACTLY 50-75 WORDS. Tone: warm, conversational, like a knowledgeable friend recommending something. Naturally weave in the primary keyword plus 4-6 related search phrases inside complete, natural sentences — no keyword stuffing, NO hashtags whatsoever. End with a soft CTA like 'Save this for your next salon appointment!' or 'Click through for the full step-by-step guide!'. The description must read naturally to a human reader while signaling all keywords to Pinterest's algorithm.",
   "image_prompt": "{niche_config['image_guide']}",
   "alt_text": "A highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects) for Pinterest accessibility. Focus on visual details, not SEO keywords."
 }}
@@ -432,16 +432,8 @@ Ensure the 'board_category' value in your JSON response is EXACTLY one of the ke
     print(f"   📋 Board: {board_info['name']} ({content['board_category']})")
     print(f"   📌 Title: {content['title']}")
     
-    # Enforce basic SEO tags based on niche
-    niche_hashtags = {
-        "nails": ["#nailart", "#nails"],
-        "hair_beauty": ["#hairstyle", "#hairinspo"],
-        "home_garden": ["#homedecor", "#interiordesign"],
-        "fashion_style": ["#fashion", "#outfitinspo"],
-    }
-    for tag in niche_hashtags.get(niche, ["#aesthetic"]):
-        if tag not in content["description"].lower():
-            content["description"] += f" {tag}"
+    # NO hashtags appended — per proven strategy, hashtags are algorithm-negative
+    # on modern Pinterest. Descriptions use keyword-dense natural sentences instead.
 
     print(f"   📝 Description: {content['description'][:80]}...")
     print(f"   🎨 Image Prompt: {content['image_prompt'][:80]}...")
@@ -1433,11 +1425,135 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
 # MAIN PIPELINE
 # ============================================================================
 
+
+# ============================================================================
+# PINNING SAFETY PROTOCOL (Friend's Proven Strategy)
+# ============================================================================
+
+PIN_LOG_PATH = Path("shared/pin_log.json")
+ACCOUNT_STATS_PATH = Path("shared/account_stats.json")
+URL_COOLDOWN_DAYS = 7  # Same URL cannot be re-pinned within this window
+
+
+def load_pin_log() -> dict:
+    """Load the per-URL pin history log."""
+    if PIN_LOG_PATH.exists():
+        try:
+            with open(PIN_LOG_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+
+def save_pin_log(log: dict):
+    """Persist the pin log back to disk."""
+    try:
+        PIN_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(PIN_LOG_PATH, "w", encoding="utf-8") as f:
+            json.dump(log, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"   ⚠️ Could not save pin_log.json: {e}")
+
+
+def load_account_stats() -> dict:
+    """Load account stats (total pins published, created date)."""
+    if ACCOUNT_STATS_PATH.exists():
+        try:
+            with open(ACCOUNT_STATS_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {"total_pins": 0, "account_created": None}
+
+
+def save_account_stats(stats: dict):
+    """Persist account stats back to disk."""
+    try:
+        ACCOUNT_STATS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(ACCOUNT_STATS_PATH, "w", encoding="utf-8") as f:
+            json.dump(stats, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"   ⚠️ Could not save account_stats.json: {e}")
+
+
+def is_url_safe_to_pin(url: str, published_article_count: int) -> tuple:
+    """
+    Check whether a URL passes the pinning safety protocol.
+
+    Rules (from proven strategy):
+    - Phase A (< 50 articles): URL must NEVER have been pinned before.
+    - Phase B (50+ articles / Month 3+): URL must not have been pinned
+      within the last URL_COOLDOWN_DAYS days.
+
+    Returns (is_safe: bool, reason: str)
+    """
+    if not url:
+        return False, "No URL provided"
+
+    # Strip UTM params for clean comparison
+    clean_url = url.split("?")[0].rstrip("/")
+
+    log = load_pin_log()
+    pin_history = log.get(clean_url, [])
+
+    if published_article_count < 50:
+        # Phase A: strict one-time pin per URL
+        if pin_history:
+            return False, f"Phase A (<50 articles): URL already pinned {len(pin_history)} time(s). Skipping."
+        return True, "Phase A: URL is fresh — safe to pin."
+    else:
+        # Phase B: 7-day cooldown
+        if pin_history:
+            from datetime import datetime, timezone
+            last_pin_ts = max(pin_history)
+            last_pin_dt = datetime.fromisoformat(last_pin_ts)
+            now = datetime.now(timezone.utc)
+            if last_pin_dt.tzinfo is None:
+                last_pin_dt = last_pin_dt.replace(tzinfo=timezone.utc)
+            days_since = (now - last_pin_dt).days
+            if days_since < URL_COOLDOWN_DAYS:
+                return False, f"Phase B: URL pinned {days_since}d ago (cooldown={URL_COOLDOWN_DAYS}d). Skipping."
+        return True, "Phase B: URL cooldown passed — safe to pin."
+
+
+def record_pin_published(url: str):
+    """Record that a URL was just pinned (called after successful publish)."""
+    from datetime import datetime, timezone
+    clean_url = url.split("?")[0].rstrip("/")
+    log = load_pin_log()
+    if clean_url not in log:
+        log[clean_url] = []
+    log[clean_url].append(datetime.now(timezone.utc).isoformat())
+    save_pin_log(log)
+
+    # Increment total pin counter
+    stats = load_account_stats()
+    stats["total_pins"] = stats.get("total_pins", 0) + 1
+    save_account_stats(stats)
+    print(f"   📋 Pin log updated. Total pins ever published: {stats['total_pins']}")
+
+
+def get_published_article_count() -> int:
+    """Get total number of published articles from published_links.json."""
+    published_path = Path("shared/published_links.json")
+    if published_path.exists():
+        try:
+            with open(published_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            return len(data)
+        except Exception:
+            pass
+    return 0
+
+
 def select_niche_weighted() -> str:
     """Select a niche using weighted random distribution."""
     niches = list(NICHE_WEIGHTS.keys())
     weights = list(NICHE_WEIGHTS.values())
     return random.choices(niches, weights=weights, k=1)[0]
+
+
 
 
 def main():
@@ -1720,6 +1836,41 @@ def main():
                     destination_link = board_info["link"]
                     print(f"   🔗 Using default category board link: {destination_link}")
 
+
+        # ── PINNING SAFETY PROTOCOL ──────────────────────────────────────────
+        # Enforce the 7-day URL cooldown (Phase B: 50+ articles) before we
+        # invest API credits into generating the full image pipeline.
+        published_article_count = get_published_article_count()
+        clean_destination = destination_link.split("?")[0].rstrip("/") if destination_link else ""
+        url_safe, url_reason = is_url_safe_to_pin(clean_destination, published_article_count)
+        if not url_safe:
+            print(f"\n   🛡️ SAFETY GATE: {url_reason}")
+            print(f"   🔄 Selecting an alternative article URL...")
+            # Try to find an alternative URL from the same niche that passes safety
+            alt_link = None
+            published_links_path = Path("shared/published_links.json")
+            if published_links_path.exists():
+                try:
+                    with open(published_links_path, "r") as f:
+                        all_published = json.load(f)
+                    niche_candidates = [p for p in all_published if p.get("niche") == chosen_niche and p.get("url")]
+                    random.shuffle(niche_candidates)
+                    for candidate in niche_candidates:
+                        c_url = candidate["url"].split("?")[0].rstrip("/")
+                        safe, _ = is_url_safe_to_pin(c_url, published_article_count)
+                        if safe:
+                            alt_link = candidate["url"]
+                            print(f"   ✅ Alternative article found: {alt_link}")
+                            break
+                except Exception as e:
+                    print(f"   ⚠️ Error finding alternative URL: {e}")
+            if alt_link:
+                destination_link = alt_link
+            else:
+                print("   ⚠️ No alternative URL passed cooldown. Pinning to the best available article anyway.")
+        else:
+            print(f"   🛡️ Safety Gate: {url_reason}")
+
         # Append UTM tracking parameters for conversion & traffic analytics
         if destination_link:
             sep = "&" if "?" in destination_link else "?"
@@ -1727,6 +1878,7 @@ def main():
 
         target_board_id = board_info["board_id"]
         print(f"\n   🎯 Routing pin to: {board_info['name']} (niche: {chosen_niche})")
+
 
         # Select layout style
         layouts = ['bold_clickbait', 'premium_magazine', 'modern_vignette', 'aesthetic_card', 'double_panel_collage', 'four_panel_grid', 'numbered_listicle', 'organic_editorial']
@@ -1835,6 +1987,9 @@ def main():
         if chosen_topic and not dry_run:
             SmartJSON.update_file(used_topics_path, [chosen_topic])
             print(f"   📋 Topic \"{chosen_topic}\" marked as used.")
+            # Record pin in safety protocol log for URL cooldown enforcement
+            if destination_link:
+                record_pin_published(destination_link)
 
     print("\n" + "=" * 60)
     if dry_run:

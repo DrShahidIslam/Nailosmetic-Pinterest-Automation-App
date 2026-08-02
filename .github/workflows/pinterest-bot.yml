@@ -1,8 +1,9 @@
 # ============================================================
 # Nailosmetic Pinterest Automation Bot — GitHub Actions Workflow
 # ============================================================
-# This workflow runs the Pinterest bot 3 times every day to avoid spam filters.
-# It can also be triggered manually from the Actions tab.
+# Strategy: Month 3+ (Account 2+ months old)
+# Volume: Up to 15 pins/day (every ~96 minutes / 15 runs per day)
+# URL Safety: 7-day cooldown enforced per URL via shared/pin_log.json
 
 name: 📌 Daily Pinterest Pin
 
@@ -11,8 +12,8 @@ env:
 
 on:
   schedule:
-    # Run 8 times a day (every 3 hours) as requested
-    - cron: "0 0,3,6,9,12,15,18,21 * * *"
+    # 15 runs/day spread evenly — Month 3+ strategy (account is 2+ months old)
+    - cron: "0 0,2,4,6,7,8,10,12,13,14,16,18,20,21,22 * * *"
 
   # Allow manual triggering from the GitHub Actions UI
   workflow_dispatch:
@@ -77,13 +78,13 @@ jobs:
         run: |
           gh secret set PINTEREST_REFRESH_TOKEN --body "${{ env.NEW_PINTEREST_REFRESH_TOKEN }}"
 
-      # 5. Commit shared data changes
-      - name: 💾 Commit updated history and queue
+      # 5. Commit shared data changes (including pin safety log)
+      - name: 💾 Commit updated history, pin log, and queue
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add shared/*.json
-          git commit -m "📝 Update history and link queue [skip ci]" || exit 0
+          git commit -m "📝 Update history, pin log, and link queue [skip ci]" || exit 0
           
           # Use a robust pull strategy: pull remote changes, then re-merge our data
           git pull --rebase origin main || (
