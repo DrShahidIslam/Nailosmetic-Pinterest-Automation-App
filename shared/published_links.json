@@ -1734,5 +1734,12 @@
         "niche": "nails",
         "topic": "nails for august",
         "slug": "nails-for-august"
+    },
+    {
+        "url": "https://nailosmetic.com/bts-hairstyles-trends/",
+        "category": "Hair & Beauty",
+        "niche": "hair_beauty",
+        "topic": "bts hairstyles",
+        "slug": "bts-hairstyles-trends"
     }
 ]
