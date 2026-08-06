@@ -75,7 +75,7 @@
         {
             "keyword": "fun summer nails",
             "growth_mom": -20,
-            "growth_yoy": 3,
+            "growth_yoy": 2,
             "trend_type": "monthly"
         },
         {
@@ -111,7 +111,7 @@
         {
             "keyword": "pedicure ideas",
             "growth_mom": -20,
-            "growth_yoy": 6,
+            "growth_yoy": 5,
             "trend_type": "monthly"
         },
         {
@@ -627,7 +627,7 @@
         {
             "keyword": "fall nails ideas",
             "growth_mom": 400,
-            "growth_yoy": 20,
+            "growth_yoy": 10,
             "trend_type": "seasonal"
         }
     ],
@@ -936,7 +936,7 @@
         },
         {
             "keyword": "closet organization ideas",
-            "growth_mom": 4,
+            "growth_mom": 3,
             "growth_yoy": -20,
             "trend_type": "monthly"
         },
@@ -1027,7 +1027,7 @@
         {
             "keyword": "laundry room",
             "growth_mom": 10,
-            "growth_yoy": 8,
+            "growth_yoy": 7,
             "trend_type": "monthly"
         },
         {
@@ -1087,7 +1087,7 @@
         {
             "keyword": "closet",
             "growth_mom": 0,
-            "growth_yoy": -2,
+            "growth_yoy": -3,
             "trend_type": "monthly"
         },
         {
@@ -1651,7 +1651,7 @@
         {
             "keyword": "fall living room",
             "growth_mom": 300,
-            "growth_yoy": 30,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
@@ -1947,7 +1947,7 @@
         {
             "keyword": "bag charms",
             "growth_mom": -2,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "monthly"
         },
         {
@@ -2241,7 +2241,7 @@
         {
             "keyword": "band camp outfits",
             "growth_mom": 200,
-            "growth_yoy": 6,
+            "growth_yoy": 5,
             "trend_type": "growing"
         },
         {
@@ -2403,7 +2403,7 @@
         {
             "keyword": "october disney outfits",
             "growth_mom": 300,
-            "growth_yoy": 0,
+            "growth_yoy": -1,
             "trend_type": "seasonal"
         },
         {
