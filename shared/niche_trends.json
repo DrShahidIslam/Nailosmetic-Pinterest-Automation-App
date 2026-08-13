@@ -1,6 +1,120 @@
 {
     "nails": [
         {
+            "keyword": "summer nails 2026",
+            "growth_mom": -40,
+            "growth_yoy": 10001,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "back to school nails",
+            "growth_mom": 600,
+            "growth_yoy": 7,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "august nails",
+            "growth_mom": 1000,
+            "growth_yoy": 100,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "polka dot nails",
+            "growth_mom": 0,
+            "growth_yoy": 10,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "simple summer nails",
+            "growth_mom": -20,
+            "growth_yoy": 60,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "vacation nails",
+            "growth_mom": -6,
+            "growth_yoy": 40,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "teal nails",
+            "growth_mom": 10,
+            "growth_yoy": 200,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "fall nails",
+            "growth_mom": 400,
+            "growth_yoy": 9,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nails summer",
+            "growth_mom": -9,
+            "growth_yoy": 100,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "chrome nails",
+            "growth_mom": 10,
+            "growth_yoy": -20,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "cat eye nails",
+            "growth_mom": 3,
+            "growth_yoy": 10,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "yellow nails",
+            "growth_mom": -4,
+            "growth_yoy": -20,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "toe nail designs",
+            "growth_mom": 20,
+            "growth_yoy": 30,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "cute summer nails",
+            "growth_mom": -40,
+            "growth_yoy": 60,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "summer nail inspo",
+            "growth_mom": -50,
+            "growth_yoy": 90,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "fun summer nails",
+            "growth_mom": -40,
+            "growth_yoy": 3,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "purple nails",
+            "growth_mom": 30,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "pedicure ideas",
+            "growth_mom": -20,
+            "growth_yoy": 5,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "spiderman nails",
+            "growth_mom": 200,
+            "growth_yoy": 800,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "august nails ideas 2026",
             "growth_mom": 10001,
             "growth_yoy": 10001,
@@ -506,6 +620,174 @@
         }
     ],
     "hair_beauty": [
+        {
+            "keyword": "hairstyles",
+            "growth_mom": 10,
+            "growth_yoy": 20,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "hair",
+            "growth_mom": 3,
+            "growth_yoy": 10,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "braids hairstyles",
+            "growth_mom": 6,
+            "growth_yoy": 100,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "makeup",
+            "growth_mom": 5,
+            "growth_yoy": 30,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "hair styles",
+            "growth_mom": -1,
+            "growth_yoy": -20,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "cute hairstyles",
+            "growth_mom": 9,
+            "growth_yoy": 1,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "curly hairstyles",
+            "growth_mom": 1,
+            "growth_yoy": -30,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "half up half down hair",
+            "growth_mom": -6,
+            "growth_yoy": 80,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "natural hair styles",
+            "growth_mom": 10,
+            "growth_yoy": 7,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "blonde hair",
+            "growth_mom": 1,
+            "growth_yoy": -30,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "hair color ideas",
+            "growth_mom": -10,
+            "growth_yoy": 20,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "natural hairstyles for black women",
+            "growth_mom": -20,
+            "growth_yoy": -10,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "ponytail hairstyles",
+            "growth_mom": 9,
+            "growth_yoy": 40,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "brown hair",
+            "growth_mom": 20,
+            "growth_yoy": 20,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "boho braids",
+            "growth_mom": 1,
+            "growth_yoy": 1,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "butterfly haircut",
+            "growth_mom": 20,
+            "growth_yoy": -9,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "hair dye ideas",
+            "growth_mom": -2,
+            "growth_yoy": 90,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "pixie cut",
+            "growth_mom": 10,
+            "growth_yoy": 50,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "calico hair",
+            "growth_mom": 6,
+            "growth_yoy": 0,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "balayage hair",
+            "growth_mom": 6,
+            "growth_yoy": -10,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "curly hair hairstyles",
+            "growth_mom": -20,
+            "growth_yoy": 100,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "curly hair",
+            "growth_mom": -7,
+            "growth_yoy": 1,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "hair ideas",
+            "growth_mom": -3,
+            "growth_yoy": 60,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "knotless braids",
+            "growth_mom": -10,
+            "growth_yoy": 60,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "updo hairstyles",
+            "growth_mom": 10,
+            "growth_yoy": 50,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "short hair",
+            "growth_mom": -10,
+            "growth_yoy": -1,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "short hair hairstyles",
+            "growth_mom": 20,
+            "growth_yoy": 700,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "bridesmaid hairstyles",
+            "growth_mom": 30,
+            "growth_yoy": 30,
+            "trend_type": "monthly"
+        },
         {
             "keyword": "fall hair 2026",
             "growth_mom": 6000,
