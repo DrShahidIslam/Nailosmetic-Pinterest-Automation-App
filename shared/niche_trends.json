@@ -315,7 +315,7 @@
         {
             "keyword": "college nails",
             "growth_mom": 800,
-            "growth_yoy": 5,
+            "growth_yoy": 4,
             "trend_type": "growing"
         },
         {
@@ -604,7 +604,7 @@
     "hair_beauty": [
         {
             "keyword": "hairstyles",
-            "growth_mom": 7,
+            "growth_mom": 6,
             "growth_yoy": 20,
             "trend_type": "monthly"
         },
@@ -1039,7 +1039,7 @@
         {
             "keyword": "cozy bedroom ideas",
             "growth_mom": 10,
-            "growth_yoy": 0,
+            "growth_yoy": -1,
             "trend_type": "monthly"
         },
         {
@@ -1663,7 +1663,7 @@
         {
             "keyword": "fall house decor",
             "growth_mom": 200,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "seasonal"
         },
         {
@@ -2067,7 +2067,7 @@
         {
             "keyword": "gaucho pants outfit",
             "growth_mom": -4,
-            "growth_yoy": 5000,
+            "growth_yoy": 4500,
             "trend_type": "monthly"
         },
         {
@@ -2655,7 +2655,7 @@
         {
             "keyword": "tall uggs outfit",
             "growth_mom": 100,
-            "growth_yoy": 300,
+            "growth_yoy": 200,
             "trend_type": "seasonal"
         },
         {
