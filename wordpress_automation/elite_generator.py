@@ -1,6 +1,7 @@
 import json
 import random
 import re
+import time
 from typing import List, Dict, Any, Optional
 from google import genai
 from dotenv import load_dotenv
@@ -12,14 +13,44 @@ class EliteGenerator:
         self.api_keys = api_keys
         self.models_to_try = ["gemini-3.1-flash-lite-preview", "gemini-2.0-flash", "gemini-1.5-flash"]
 
-    def _get_client(self, api_key):
+    def _get_client(self, api_key: str):
         return genai.Client(api_key=api_key)
+
+    def _call_gemini_json(self, prompt: str, label: str = "") -> Dict[str, Any]:
+        """Robust Gemini caller with key cycling, model fallback, 429 rate limit backoff, and JSON parsing."""
+        errors = []
+        for key in self.api_keys:
+            client = self._get_client(key)
+            key_hint = f"...{key[-4:]}" if len(key) >= 4 else "key"
+            for model_name in self.models_to_try:
+                for attempt in range(4):
+                    try:
+                        response = client.models.generate_content(model=model_name, contents=prompt)
+                        cleaned = re.sub(r"```json\s*|\s*```", "", response.text).strip()
+                        json_match = re.search(r'\{.*\}', cleaned, re.DOTALL)
+                        if json_match:
+                            data = json.loads(json_match.group(0))
+                            print(f"   ✅ [{label}] {model_name} ({key_hint})")
+                            return data
+                    except Exception as e:
+                        err = str(e)
+                        errors.append(f"{model_name} ({key_hint}) attempt {attempt+1}: {err[:100]}")
+                        if "404" in err or "limit: 0" in err:
+                            break  # Skip model if not supported/zero limit
+                        
+                        # Calculate backoff delay for 429 / rate limits
+                        wait = 5 * (attempt + 1)
+                        m = re.search(r"retry in ([\d\.]+)s", err)
+                        if m:
+                            wait = max(wait, float(m.group(1)) + 2.0)
+                        print(f"   ⚠️ [{label}] {model_name} ({key_hint}) attempt {attempt+1} failed — waiting {wait:.1f}s...")
+                        time.sleep(wait)
+        raise Exception(f"Gemini API permanently failed for [{label}]. Recent errors: {errors[-3:]}")
 
     def generate_elite_blog(self, topic: str, previous_slugs: List[str], existing_categories: List[str] = None, niche: str = "nails") -> Dict[str, Any]:
         """
         Main orchestration for elite long-form content with internal linking.
         """
-        
         # Define niche to primary pillar mapping (Hubs)
         niche_primary_pillars = {
             "nails": "nail-art-designs-ultimate-guide",
@@ -28,13 +59,11 @@ class EliteGenerator:
             "fashion_style": "spring-outfits-women-guide"
         }
         
-        # Elite blogs always target their corresponding parent pillar post to pass maximum link equity upward
         internal_link_slug = niche_primary_pillars.get(niche, "nail-art-designs-ultimate-guide")
-        
         homepage_url = "https://nailosmetic.com/"
         primary_pillar_url = f"https://nailosmetic.com/{internal_link_slug}/"
         
-        # 1. Silo Linking Setup: Select 2 sibling posts from previous slugs in same niche (fallback to recent ones)
+        # 1. Silo Linking Setup: Select 2 sibling posts from previous slugs in same niche
         siblings = []
         for s in reversed(previous_slugs):
             if isinstance(s, dict) and s.get("niche") == niche and s.get("slug") != internal_link_slug:
@@ -53,10 +82,11 @@ class EliteGenerator:
         
         # Step 2: Generate Content for each section
         full_article = []
-        for i, section in enumerate(outline["sections"]):
-            print(f"   ✍️  Drafting Section {i+1}/{len(outline['sections'])}: {section['heading']}")
+        sections = outline.get("sections", [])
+        for i, section in enumerate(sections):
+            print(f"   ✍️  Drafting Section {i+1}/{len(sections)}: {section['heading']}")
             
-            # Pass the internal article link to the 3rd, 6th, and 9th section for natural placement
+            # Pass internal links strategically
             target_link = None
             if i == 2: target_link = primary_pillar_url
             elif i == 5: target_link = sibling_1
@@ -65,21 +95,25 @@ class EliteGenerator:
             draft = self._generate_section(topic, section, full_article, target_link)
             full_article.append({
                 "heading": section["heading"],
-                "content": draft["text"],
+                "content": draft.get("text", ""),
                 "image_prompt": draft.get("image_metadata", {}).get("prompt", ""),
                 "alt_text": draft.get("image_metadata", {}).get("alt_text", "")
             })
             
+            # Small pacing delay to avoid hitting burst rate limits
+            if i < len(sections) - 1:
+                time.sleep(2)
+            
         # Step 3: Meta and Final Wrap
         blog_data = {
             "title": topic,
-            "introduction": outline["introduction"],
+            "introduction": outline.get("introduction", ""),
             "featured_image": outline.get("featured_image"),
             "sections": full_article,
-            "conclusion": outline["conclusion"],
+            "conclusion": outline.get("conclusion", ""),
             "seo": {
-                "title": outline.get("meta_title", f"{topic} | Nailosmetic"),
-                "description": outline["seo_description"],
+                "title": outline.get("meta_title", f"{topic.title()} | Nailosmetic"),
+                "description": outline.get("seo_description", f"Discover the best guide on {topic}."),
                 "focus_keyword": topic,
                 "slug": outline.get("slug")
             }
@@ -100,9 +134,9 @@ class EliteGenerator:
         - DISCOVER: The title and introduction must be highly engaging, clickbait-style curiosity gaps (e.g. "The exact polish to...", "Why everyone is switching to...").
         
         STRUCTURE:
-        - Exactly 10 to 15 distinct H2/H3 sections (e.g. a listicle of 10-15 items, or 10-15 deep-dive subtopics).
+        - Exactly 10 to 12 distinct H2/H3 sections.
         - Total word count target is 3000+ words.
-        - EXACTLY 3 sections must be designated for in-content images.
+        - EXACTLY 3 sections must be designated for in-content images (has_image: true).
         
         RETURN ONLY VALID JSON:
         {{
@@ -125,24 +159,10 @@ class EliteGenerator:
           "conclusion": "Summary and final takeaway"
         }}
         """
-        errors = []
-        for key in self.api_keys:
-            client = self._get_client(key)
-            for model_name in self.models_to_try:
-                try:
-                    response = client.models.generate_content(model=model_name, contents=prompt)
-                    import re
-                    json_match = re.search(r'\{.*\}', response.text, re.DOTALL)
-                    if json_match:
-                        return json.loads(json_match.group(0))
-                except Exception as e:
-                    errors.append(f"{model_name}: {str(e)}")
-                    continue
-        raise Exception(f"Could not parse outline JSON. Errors: {errors[:2]}")
+        return self._call_gemini_json(prompt, label="Outline")
 
     def _generate_section(self, topic: str, section: Dict[str, Any], previous_sections: List[Dict], target_link: Optional[str] = None) -> Dict[str, Any]:
-        # Context from previous sections to avoid repetition
-        context = "\n".join([f"Previous section: {s['heading']}" for s in previous_sections])
+        context = "\n".join([f"Previous section: {s['heading']}" for s in previous_sections[-3:]])
         
         link_instruction = ""
         if target_link:
@@ -176,20 +196,7 @@ class EliteGenerator:
           }}
         }}
         """
-        errors = []
-        for key in self.api_keys:
-            client = self._get_client(key)
-            for model_name in self.models_to_try:
-                try:
-                    response = client.models.generate_content(model=model_name, contents=prompt)
-                    import re
-                    json_match = re.search(r'\{.*\}', response.text, re.DOTALL)
-                    if json_match:
-                        return json.loads(json_match.group(0))
-                except Exception as e:
-                    errors.append(f"{model_name}: {str(e)}")
-                    continue
-        raise Exception(f"Could not parse section JSON. Errors: {errors[:2]}")
+        return self._call_gemini_json(prompt, label=f"Section: {section['heading'][:30]}")
 
     def build_elite_html(self, data: Dict[str, Any]) -> str:
         """Converts elite data to WordPress blocks with rich formatting support."""
