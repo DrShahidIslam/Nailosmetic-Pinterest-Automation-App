@@ -15,15 +15,15 @@ class EliteGenerator:
         self.models_to_try = [
             "gemini-3.1-flash-lite",
             "gemini-3.1-flash-lite-preview",
-            "gemini-2.0-flash",
-            "gemini-1.5-flash",
+            "gemini-2.5-flash",
+            "gemini-2.5-flash-lite",
         ]
 
     def _get_client(self, api_key: str):
         return genai.Client(api_key=api_key)
 
     def _call_gemini_json(self, prompt: str, label: str = "") -> Dict[str, Any]:
-        """Robust Gemini caller with active round-robin key cycling, instant failover on 429, and model fallback."""
+        """Robust Gemini caller with active round-robin key cycling, smart rate-limit backoff, and model fallback."""
         errors = []
         num_keys = len(self.api_keys)
         
@@ -50,12 +50,17 @@ class EliteGenerator:
                         err = str(e)
                         errors.append(f"{model_name} ({key_hint}): {err[:100]}")
                         
-                        if "404" in err or "limit: 0" in err:
-                            break  # Skip model if not supported/zero limit
+                        if "404" in err or "limit: 0" in err or "no longer" in err or "not found" in err:
+                            break  # Skip model if sunset/not found
                         
-                        # If 429 quota exhausted on this key, immediately break and try next API KEY
+                        # If 429 quota exhausted on this key, pause briefly and rotate to next key
                         if "429" in err or "RESOURCE_EXHAUSTED" in err:
-                            print(f"   🔄 [{label}] Quota reached on {key_hint}. Rotating to next API key...")
+                            wait = 3.0
+                            m = re.search(r"retry in ([\d\.]+)s", err)
+                            if m:
+                                wait = max(wait, float(m.group(1)) + 1.0)
+                            print(f"   🔄 [{label}] Rate limit on {key_hint}. Waiting {wait:.1f}s and rotating to next API key...")
+                            time.sleep(wait)
                             break
                         
                         time.sleep(2 * (attempt + 1))
