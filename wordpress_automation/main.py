@@ -19,7 +19,7 @@ if sys.stdout.encoding.lower() != 'utf-8':
 sys.path.append(str(Path(__file__).parent.parent))
 
 from wp_client import WordPressClient
-from content_generator import ContentGenerator
+from elite_generator import EliteGenerator
 from image_manager import ImageManager
 from shared_data_manager import SmartJSON
 
@@ -366,7 +366,7 @@ def main():
         print("📋 No topic bank found. Gemini will pick a topic on its own.")
 
     # ===== Now safe to initialize paid API clients =====
-    gen = ContentGenerator(gemini_keys)
+    gen = EliteGenerator(gemini_keys)
     img_mgr = ImageManager(hf_api_keys=hf_keys, cloudflare_account_id=cf_account_id, cloudflare_api_token=cf_api_token)
 
     # 2. Generate Article Plan (niche-aware)
@@ -388,7 +388,7 @@ def main():
     # Fall back to general previous slugs if no same-niche slugs found
     filtered_slugs = niche_slugs if niche_slugs else previous_slugs
     
-    plan = gen.generate_article_plan(cat_names, filtered_slugs, topic=chosen_topic, niche=chosen_niche)
+    plan = gen.generate_elite_blog(topic=chosen_topic, previous_slugs=filtered_slugs, existing_categories=cat_names, niche=chosen_niche)
     print(f"📌 Title: {plan['title']}")
 
     # 3. Handle Images and WordPress Media
@@ -414,12 +414,15 @@ def main():
         time.sleep(5)  # ⏳ Added delay to prevent 429 Too Many Requests
 
         # Block Images
-        html_content = gen.build_html_content(plan)
+        html_content = gen.build_elite_html(plan)
         
-        for i, block in enumerate(plan["blocks"]):
+        for i, block in enumerate(plan.get("sections", [])):
+            if not block.get("image_prompt") or block["image_prompt"] == "NONE":
+                continue
+                
             print(f"🎨 Generating image for '{block['heading']}' (4:5)...")
             block_img_path = str(Path(tmp_dir) / f"block_{i}.png")
-            block_prompt = block.get("prompt") or block.get("image_prompt") or f"A high-end aesthetic nail design for {block['heading']}"
+            block_prompt = block.get("image_prompt")
             
             img_mgr.generate_image(block_prompt, "4:5", block_img_path, prefer_kolors=True)
             
@@ -441,12 +444,15 @@ def main():
 
     # 5. Determine Target Categories
     target_category_ids = []
-    initial_suggestion = plan.get("category_suggestion", "Nails and Manicure")
+    initial_suggestion = "Nails and Manicure"
+    if chosen_niche == "hair_beauty": initial_suggestion = "Hair & Beauty"
+    elif chosen_niche == "home_garden" or chosen_niche == "gardening": initial_suggestion = "Home & Garden"
+    elif chosen_niche == "fashion_style": initial_suggestion = "Styles & Fashion"
     
     # Apply Programmatic Guardrail
     category_suggestion = validate_and_fix_category(plan["title"], initial_suggestion, chosen_niche)
     
-    is_new = plan.get("is_new_category", False)
+    is_new = False
 
     if is_new:
         print(f"🆕 Creating new category: {category_suggestion}")
@@ -497,7 +503,7 @@ def main():
     queue_path = Path(__file__).parent.parent / "shared" / "links_queue.json"
     SmartJSON.update_file(queue_path, [{
         "url": post_url, 
-        "category": plan.get("category_suggestion", "Nails and Manicure"),
+        "category": category_suggestion,
         "topic": chosen_topic,
         "niche": chosen_niche
     }])

@@ -34,7 +34,7 @@ class ImageManager:
 
             # Iterative quality reduction until file size is under target_size_kb (100KB)
             quality = 85
-            min_quality = 55
+            min_quality = 40
             target_bytes = target_size_kb * 1024
 
             while quality >= min_quality:
@@ -43,11 +43,12 @@ class ImageManager:
                     break
                 quality -= 5
 
-            # If still over target, downscale resolution slightly
-            if os.path.getsize(output_path) > target_bytes:
+            # If still over target, aggressively downscale resolution in a loop
+            while os.path.getsize(output_path) > target_bytes:
                 w, h = img.size
-                img = img.resize((int(w * 0.85), int(h * 0.85)), Image.Resampling.LANCZOS)
-                img.save(output_path, "WEBP", quality=65, optimize=True)
+                if w < 300: break # don't downscale to oblivion
+                img = img.resize((int(w * 0.8), int(h * 0.8)), Image.Resampling.LANCZOS)
+                img.save(output_path, "WEBP", quality=50, optimize=True)
 
         size_kb = os.path.getsize(output_path) / 1024
         print(f"   🖼️ WebP compressed: {output_path} ({size_kb:.1f} KB)")

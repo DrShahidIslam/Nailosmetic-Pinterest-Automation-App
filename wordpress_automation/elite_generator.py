@@ -15,11 +15,10 @@ class EliteGenerator:
     def _get_client(self, api_key):
         return genai.Client(api_key=api_key)
 
-    def generate_elite_blog(self, topic_data: Dict[str, Any], previous_slugs: List[str], niche: str = "nails") -> Dict[str, Any]:
+    def generate_elite_blog(self, topic: str, previous_slugs: List[str], existing_categories: List[str] = None, niche: str = "nails") -> Dict[str, Any]:
         """
         Main orchestration for elite long-form content with internal linking.
         """
-        topic = topic_data["topic"]
         
         # Define niche to primary pillar mapping (Hubs)
         niche_primary_pillars = {
@@ -33,20 +32,35 @@ class EliteGenerator:
         internal_link_slug = niche_primary_pillars.get(niche, "nail-art-designs-ultimate-guide")
         
         homepage_url = "https://nailosmetic.com/"
-        article_url = f"https://nailosmetic.com/{internal_link_slug}/"
+        primary_pillar_url = f"https://nailosmetic.com/{internal_link_slug}/"
+        
+        # 1. Silo Linking Setup: Select 2 sibling posts from previous slugs in same niche (fallback to recent ones)
+        siblings = []
+        for s in reversed(previous_slugs):
+            if isinstance(s, dict) and s.get("niche") == niche and s.get("slug") != internal_link_slug:
+                siblings.append(f"https://nailosmetic.com/{s['slug']}/")
+            elif isinstance(s, str) and s != internal_link_slug:
+                siblings.append(f"https://nailosmetic.com/{s}/")
+            if len(siblings) >= 2: break
+            
+        sibling_1 = siblings[0] if len(siblings) > 0 else homepage_url
+        sibling_2 = siblings[1] if len(siblings) > 1 else homepage_url
         
         print(f"🚀 Generating Elite Blog Article for: {topic}...")
         
         # Step 1: Generate Detailed Outline
-        outline = self._generate_outline(topic, topic_data.get("entities", []), homepage_url)
+        outline = self._generate_outline(topic, homepage_url)
         
         # Step 2: Generate Content for each section
         full_article = []
         for i, section in enumerate(outline["sections"]):
             print(f"   ✍️  Drafting Section {i+1}/{len(outline['sections'])}: {section['heading']}")
             
-            # Pass the internal article link to the 3rd or 4th section for natural placement
-            target_link = article_url if i == 3 else None
+            # Pass the internal article link to the 3rd, 6th, and 9th section for natural placement
+            target_link = None
+            if i == 2: target_link = primary_pillar_url
+            elif i == 5: target_link = sibling_1
+            elif i == 8: target_link = sibling_2
             
             draft = self._generate_section(topic, section, full_article, target_link)
             full_article.append({
@@ -66,48 +80,44 @@ class EliteGenerator:
             "seo": {
                 "title": outline.get("meta_title", f"{topic} | Nailosmetic"),
                 "description": outline["seo_description"],
-                "focus_keyword": topic_data["target_keywords"][0] if topic_data.get("target_keywords") else topic,
+                "focus_keyword": topic,
                 "slug": outline.get("slug")
             }
         }
         
         return blog_data
 
-    def _generate_outline(self, topic: str, entities: List[str], homepage_url: str) -> Dict[str, Any]:
+    def _generate_outline(self, topic: str, homepage_url: str) -> Dict[str, Any]:
         prompt = f"""
         You are an Elite Content Architect for 'Nailosmetic'. 
-        Structure a 1500-word comprehensive, authoritative blog guide about: "{topic}".
+        Structure a 3000-word comprehensive, authoritative blog guide about: "{topic}".
         
-        INTERNAL LINKING:
+        INTERNAL LINKING & GOALS:
         - The introduction MUST naturally link to the homepage: {homepage_url}
-        
-        GOALS:
-        - SEO: High keyword density (natural), optimized H2/H3.
-        - AEO (Answer Engine Optimization): Direct answers to likely user questions.
-        - GEO (Generative Engine Optimization): Clear entities, semantic richness, and data-backed claims.
-        - QUALITY: Provide unique value, pro-tips, and a luxurious brand voice.
-        
-        ENTITIES TO INCLUDE: {entities}
+        - SEO & NLP: Include a high density of semantic entities and LSI keywords naturally.
+        - AEO (Answer Engine Optimization): Headings must be formatted as user questions where applicable.
+        - GEO (Generative Engine Optimization): Clear factual capsules and data-backed claims.
+        - DISCOVER: The title and introduction must be highly engaging, clickbait-style curiosity gaps (e.g. "The exact polish to...", "Why everyone is switching to...").
         
         STRUCTURE:
-        - 7-9 distinct H2/H3 sections.
-        - Total word count MUST exceed 1500 words.
-        - EXACTLY 2 sections must be designated for in-content images.
+        - Exactly 10 to 15 distinct H2/H3 sections (e.g. a listicle of 10-15 items, or 10-15 deep-dive subtopics).
+        - Total word count target is 3000+ words.
+        - EXACTLY 3 sections must be designated for in-content images.
         
         RETURN ONLY VALID JSON:
         {{
-          "introduction": "A compelling 150-word hook that sets the stage (Current year is 2026)",
+          "introduction": "A compelling 150-word hook that sets the stage and creates a curiosity gap for Google Discover. The first paragraph MUST be a 'Direct Answer Capsule' for AI Overviews.",
           "seo_description": "Meta description (max 155 chars)",
           "meta_title": "SEO Title (max 60 chars)",
           "slug": "url-slug-using-3-5-keywords-only",
           "featured_image": {{
-            "prompt": "A detailed 16:9 image prompt for the featured image",
+            "prompt": "A detailed 16:9 image prompt for the featured image. Must be vibrant, high-contrast, edge-to-edge photography (Discover optimized).",
             "alt_text": "Descriptive alt text for visually impaired"
           }},
           "sections": [
             {{
-              "heading": "Clear heading title",
-              "goal": "What this section should cover (Aim for 200-250 words depth)",
+              "heading": "Clear heading title (use Question formats for AEO)",
+              "goal": "What this section should cover (Aim for 300+ words depth)",
               "has_image": boolean,
               "preferred_format": "paragraph | list | table | faq"
             }}
@@ -140,7 +150,7 @@ class EliteGenerator:
 
         prompt = f"""
         You are a top-tier human author for 'Nailosmetic'. 
-        Write a deep-dive, 200-300 word section for the article "{topic}".
+        Write a deep-dive, 300+ word section for the article "{topic}".
         SECTION HEADING: "{section['heading']}"
         SECTION GOAL: "{section['goal']}"
         PREFERRED FORMAT: "{section['preferred_format']}"
@@ -149,10 +159,10 @@ class EliteGenerator:
         STRICT WRITING RULES:
         1. READABILITY: Conversational but premium.
         2. NO DASHES: NEVER use em-dashes (—) or en-dashes (–).
-        3. NO AI-ISMS: Avoid 'In the tapestry of', 'delve into', 'unlocking the secrets'.
-        4. AEO/GEO: Use clear, factual statements. If the format is 'faq', use Q&A structure.
+        3. AEO/GEO: Use clear, factual statements. If the format is 'faq', use Q&A structure.
+        4. NLP & SEMANTIC ENTITIES: Naturally weave in highly relevant LSI keywords and semantic entities for this topic to maximize SEO.
         5. RICH FORMATTING: If format is 'list', use HTML <ul> or <ol>. If 'table', use HTML <table> with headers.
-        6. LENGTH: Be verbose and detailed. Provide specific examples and pro-tips.
+        6. LENGTH: Be highly verbose and detailed. Provide specific examples and pro-tips. MINIMUM 300 words.
         
         CONTEXT (Already written):
         {context}
@@ -161,8 +171,8 @@ class EliteGenerator:
         {{
           "text": "The full section content (DO NOT repeat the heading here. Use HTML for lists/tables if requested)",
           "image_metadata": {{
-            "prompt": "{'A detailed 4:5 image prompt' if section.get('has_image') else 'NONE'}",
-            "alt_text": "{'Highly descriptive alt text' if section.get('has_image') else 'NONE'}"
+            "prompt": "{'A detailed 4:5 image prompt. Vibrant, high-contrast, edge-to-edge photography.' if section.get('has_image') else 'NONE'}",
+            "alt_text": "{'Highly descriptive entity-rich alt text' if section.get('has_image') else 'NONE'}"
           }}
         }}
         """
