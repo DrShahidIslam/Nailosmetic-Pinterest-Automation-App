@@ -63,7 +63,7 @@
         {
             "keyword": "pink nails",
             "growth_mom": 5,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
             "trend_type": "monthly"
         },
         {
@@ -105,7 +105,7 @@
         {
             "keyword": "nails design",
             "growth_mom": 20,
-            "growth_yoy": -30,
+            "growth_yoy": -40,
             "trend_type": "monthly"
         },
         {
@@ -362,7 +362,7 @@
         },
         {
             "keyword": "fall nails designs",
-            "growth_mom": 800,
+            "growth_mom": 700,
             "growth_yoy": 400,
             "trend_type": "growing"
         },
@@ -1989,7 +1989,7 @@
         {
             "keyword": "vacation outfits",
             "growth_mom": -40,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "monthly"
         },
         {
