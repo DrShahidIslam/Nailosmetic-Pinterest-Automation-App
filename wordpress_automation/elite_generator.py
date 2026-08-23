@@ -11,6 +11,7 @@ load_dotenv()
 class EliteGenerator:
     def __init__(self, api_keys: List[str]):
         self.api_keys = api_keys
+        self.key_idx = 0
         self.models_to_try = [
             "gemini-3.1-flash-lite",
             "gemini-3.1-flash-lite-preview",
@@ -22,13 +23,19 @@ class EliteGenerator:
         return genai.Client(api_key=api_key)
 
     def _call_gemini_json(self, prompt: str, label: str = "") -> Dict[str, Any]:
-        """Robust Gemini caller with key cycling, model fallback, 429 rate limit backoff, and JSON parsing."""
+        """Robust Gemini caller with active round-robin key cycling, instant failover on 429, and model fallback."""
         errors = []
-        for key in self.api_keys:
+        num_keys = len(self.api_keys)
+        
+        # Try every key starting from the current rotating index
+        for k_offset in range(num_keys):
+            active_idx = (self.key_idx + k_offset) % num_keys
+            key = self.api_keys[active_idx]
+            key_hint = f"...{key[-4:]}" if len(key) >= 4 else f"key-{active_idx+1}"
             client = self._get_client(key)
-            key_hint = f"...{key[-4:]}" if len(key) >= 4 else "key"
+
             for model_name in self.models_to_try:
-                for attempt in range(4):
+                for attempt in range(2):
                     try:
                         response = client.models.generate_content(model=model_name, contents=prompt)
                         cleaned = re.sub(r"```json\s*|\s*```", "", response.text).strip()
@@ -36,21 +43,24 @@ class EliteGenerator:
                         if json_match:
                             data = json.loads(json_match.group(0))
                             print(f"   ✅ [{label}] {model_name} ({key_hint})")
+                            # Advance rotation index for the next call to distribute quota evenly
+                            self.key_idx = (active_idx + 1) % num_keys
                             return data
                     except Exception as e:
                         err = str(e)
-                        errors.append(f"{model_name} ({key_hint}) attempt {attempt+1}: {err[:100]}")
+                        errors.append(f"{model_name} ({key_hint}): {err[:100]}")
+                        
                         if "404" in err or "limit: 0" in err:
                             break  # Skip model if not supported/zero limit
                         
-                        # Calculate backoff delay for 429 / rate limits
-                        wait = 5 * (attempt + 1)
-                        m = re.search(r"retry in ([\d\.]+)s", err)
-                        if m:
-                            wait = max(wait, float(m.group(1)) + 2.0)
-                        print(f"   ⚠️ [{label}] {model_name} ({key_hint}) attempt {attempt+1} failed — waiting {wait:.1f}s...")
-                        time.sleep(wait)
-        raise Exception(f"Gemini API permanently failed for [{label}]. Recent errors: {errors[-3:]}")
+                        # If 429 quota exhausted on this key, immediately break and try next API KEY
+                        if "429" in err or "RESOURCE_EXHAUSTED" in err:
+                            print(f"   🔄 [{label}] Quota reached on {key_hint}. Rotating to next API key...")
+                            break
+                        
+                        time.sleep(2 * (attempt + 1))
+
+        raise Exception(f"Gemini API permanently failed for [{label}] across all {num_keys} keys. Recent errors: {errors[-3:]}")
 
     def generate_elite_blog(self, topic: str, previous_slugs: List[str], existing_categories: List[str] = None, niche: str = "nails") -> Dict[str, Any]:
         """
