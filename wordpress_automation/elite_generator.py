@@ -11,7 +11,12 @@ load_dotenv()
 class EliteGenerator:
     def __init__(self, api_keys: List[str]):
         self.api_keys = api_keys
-        self.models_to_try = ["gemini-3.1-flash-lite-preview", "gemini-2.0-flash", "gemini-1.5-flash"]
+        self.models_to_try = [
+            "gemini-3.1-flash-lite",
+            "gemini-3.1-flash-lite-preview",
+            "gemini-2.0-flash",
+            "gemini-1.5-flash",
+        ]
 
     def _get_client(self, api_key: str):
         return genai.Client(api_key=api_key)
