@@ -579,7 +579,7 @@
         {
             "keyword": "fall nails almond",
             "growth_mom": 800,
-            "growth_yoy": 6,
+            "growth_yoy": 5,
             "trend_type": "seasonal"
         },
         {
@@ -724,7 +724,7 @@
         },
         {
             "keyword": "hair color ideas",
-            "growth_mom": 0,
+            "growth_mom": -1,
             "growth_yoy": 20,
             "trend_type": "monthly"
         },
@@ -967,7 +967,7 @@
         {
             "keyword": "bathroom ideas",
             "growth_mom": -20,
-            "growth_yoy": -40,
+            "growth_yoy": -50,
             "trend_type": "monthly"
         },
         {
@@ -1039,7 +1039,7 @@
         {
             "keyword": "gallery wall",
             "growth_mom": 7,
-            "growth_yoy": 3,
+            "growth_yoy": 2,
             "trend_type": "monthly"
         },
         {
@@ -1585,7 +1585,7 @@
         {
             "keyword": "fall bathroom decor",
             "growth_mom": 300,
-            "growth_yoy": -2,
+            "growth_yoy": -3,
             "trend_type": "seasonal"
         },
         {
@@ -1627,7 +1627,7 @@
         {
             "keyword": "front porch halloween ideas",
             "growth_mom": 300,
-            "growth_yoy": -30,
+            "growth_yoy": -40,
             "trend_type": "seasonal"
         },
         {
@@ -1651,7 +1651,7 @@
         {
             "keyword": "blue and orange fall decor",
             "growth_mom": 300,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "seasonal"
         },
         {
