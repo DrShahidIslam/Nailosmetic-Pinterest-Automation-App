@@ -731,7 +731,7 @@
         {
             "keyword": "natural hair styles",
             "growth_mom": -10,
-            "growth_yoy": 9,
+            "growth_yoy": 8,
             "trend_type": "monthly"
         },
         {
@@ -1165,13 +1165,13 @@
         {
             "keyword": "fall kitchen decor ideas",
             "growth_mom": 400,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "growing"
         },
         {
             "keyword": "fall front porch decor ideas",
             "growth_mom": 400,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "growing"
         },
         {
@@ -1519,7 +1519,7 @@
         {
             "keyword": "fall home screen",
             "growth_mom": 400,
-            "growth_yoy": 1,
+            "growth_yoy": 0,
             "trend_type": "seasonal"
         },
         {
@@ -1773,7 +1773,7 @@
         {
             "keyword": "hoco dresses",
             "growth_mom": 100,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
             "trend_type": "monthly"
         },
         {
