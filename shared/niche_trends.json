@@ -3,7 +3,7 @@
         {
             "keyword": "nails",
             "growth_mom": 3,
-            "growth_yoy": 3,
+            "growth_yoy": 2,
             "trend_type": "monthly"
         },
         {
@@ -69,7 +69,7 @@
         {
             "keyword": "pink nails",
             "growth_mom": -4,
-            "growth_yoy": -6,
+            "growth_yoy": -7,
             "trend_type": "monthly"
         },
         {
@@ -561,7 +561,7 @@
         {
             "keyword": "brown fall nails",
             "growth_mom": 1500,
-            "growth_yoy": 6,
+            "growth_yoy": 5,
             "trend_type": "seasonal"
         },
         {
@@ -755,7 +755,7 @@
         {
             "keyword": "natural hairstyles for black women",
             "growth_mom": -2,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "monthly"
         },
         {
@@ -967,7 +967,7 @@
         {
             "keyword": "master bedrooms decor",
             "growth_mom": 10,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "monthly"
         },
         {
@@ -1561,7 +1561,7 @@
         {
             "keyword": "fall basket",
             "growth_mom": 300,
-            "growth_yoy": 3,
+            "growth_yoy": 2,
             "trend_type": "seasonal"
         },
         {
@@ -1579,7 +1579,7 @@
         {
             "keyword": "fall porch",
             "growth_mom": 300,
-            "growth_yoy": 7,
+            "growth_yoy": 6,
             "trend_type": "seasonal"
         },
         {
@@ -2353,12 +2353,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "labor day outfits women",
-            "growth_mom": 900,
-            "growth_yoy": -40,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "2nd day of school outfit",
             "growth_mom": 800,
             "growth_yoy": 30,
@@ -2392,12 +2386,6 @@
             "keyword": "homecoming court dresses",
             "growth_mom": 700,
             "growth_yoy": -20,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "late summer outfit",
-            "growth_mom": 700,
-            "growth_yoy": -1,
             "trend_type": "seasonal"
         },
         {
@@ -2584,6 +2572,18 @@
             "keyword": "hot fall outfits",
             "growth_mom": 400,
             "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "what to wear to school",
+            "growth_mom": 400,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "september outfits",
+            "growth_mom": 400,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         }
     ],
