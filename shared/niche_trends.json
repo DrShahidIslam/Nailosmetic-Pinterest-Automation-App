@@ -99,7 +99,7 @@
         {
             "keyword": "polka dot nails",
             "growth_mom": -4,
-            "growth_yoy": -20,
+            "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
@@ -585,7 +585,7 @@
         {
             "keyword": "labor day nails",
             "growth_mom": 1500,
-            "growth_yoy": 9,
+            "growth_yoy": 8,
             "trend_type": "seasonal"
         },
         {
@@ -719,7 +719,7 @@
         {
             "keyword": "cute hairstyles",
             "growth_mom": 30,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "monthly"
         },
         {
@@ -925,7 +925,7 @@
         {
             "keyword": "wall decor",
             "growth_mom": 20,
-            "growth_yoy": 8,
+            "growth_yoy": 7,
             "trend_type": "monthly"
         },
         {
@@ -1044,7 +1044,7 @@
         },
         {
             "keyword": "bedding ideas",
-            "growth_mom": -8,
+            "growth_mom": -9,
             "growth_yoy": 40,
             "trend_type": "monthly"
         },
@@ -1231,7 +1231,7 @@
         {
             "keyword": "fall porch",
             "growth_mom": 300,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "growing"
         },
         {
@@ -2108,7 +2108,7 @@
         },
         {
             "keyword": "second day of school outfit",
-            "growth_mom": 800,
+            "growth_mom": 700,
             "growth_yoy": -30,
             "trend_type": "growing"
         },
