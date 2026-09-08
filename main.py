@@ -61,19 +61,19 @@ PINTEREST_APP_SECRET = os.getenv("PINTEREST_APP_SECRET")
 BOARD_MAP = {
     # --- Seasonal & Holiday Boards ---
     "fall_autumn_trends": {
-        "board_id": os.getenv("PINTEREST_BOARD_FALL", "1106689377123778680"),
+        "board_id": os.getenv("PINTEREST_BOARD_FALL") or "1106689377123778680",
         "name": "Fall Nails & Autumn Aesthetic Inspo",
         "niche": "nails",
         "link": "https://nailosmetic.com/",
     },
     "halloween_spooky": {
-        "board_id": os.getenv("PINTEREST_BOARD_HALLOWEEN", "1106689377123778682"),
+        "board_id": os.getenv("PINTEREST_BOARD_HALLOWEEN") or "1106689377123778682",
         "name": "Halloween Nails, Spooky Glam & Decor",
         "niche": "nails",
         "link": "https://nailosmetic.com/",
     },
     "holiday_winter": {
-        "board_id": os.getenv("PINTEREST_BOARD_HOLIDAY", "1106689377123778685"),
+        "board_id": os.getenv("PINTEREST_BOARD_HOLIDAY") or "1106689377123778685",
         "name": "Holiday & Winter Nails, Glam & Home",
         "niche": "nails",
         "link": "https://nailosmetic.com/",
