@@ -12,8 +12,8 @@ env:
 
 on:
   schedule:
-    # 15 runs/day spread evenly — Month 3+ strategy (account is 2+ months old)
-    - cron: "0 0,2,4,6,7,8,10,12,13,14,16,18,20,21,22 * * *"
+    # 8 runs/day spread evenly every 3 hours (optimal authority, safety & high-engagement pacing)
+    - cron: "0 0,3,6,9,12,15,18,21 * * *"
 
   # Allow manual triggering from the GitHub Actions UI
   workflow_dispatch:
@@ -55,6 +55,9 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+          PINTEREST_BOARD_FALL: ${{ secrets.PINTEREST_BOARD_FALL }}
+          PINTEREST_BOARD_HALLOWEEN: ${{ secrets.PINTEREST_BOARD_HALLOWEEN }}
+          PINTEREST_BOARD_HOLIDAY: ${{ secrets.PINTEREST_BOARD_HOLIDAY }}
           PINTEREST_BOARD_AESTHETIC: ${{ secrets.PINTEREST_BOARD_AESTHETIC }}
           PINTEREST_BOARD_CHROME: ${{ secrets.PINTEREST_BOARD_CHROME }}
           PINTEREST_BOARD_MINIMALIST: ${{ secrets.PINTEREST_BOARD_MINIMALIST }}

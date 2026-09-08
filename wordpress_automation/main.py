@@ -199,9 +199,10 @@ def main():
             
             available_topics = [t for t in niche_topics if t not in used_topics]
             if available_topics:
-                # --- TREND PRIORITIZATION ---
+                from shared.seasonal_calendar import score_topic_seasonality
+                # --- TREND & SEASONAL PRIORITIZATION ---
                 trends_path = Path(__file__).parent.parent / "shared" / "niche_trends.json"
-                trending_matches = []
+                niche_trend_lookup = {}
                 
                 if trends_path.exists():
                     try:
@@ -212,40 +213,39 @@ def main():
                         if chosen_niche == "home_garden":
                             niche_trend_data = niche_trend_data + all_trends.get("gardening", [])
                             
-                        available_set = {t.lower() for t in available_topics}
                         for trend in niche_trend_data:
                             kw = trend.get("keyword", "").lower()
-                            if kw in available_set:
-                                trend_type = trend.get("trend_type", "monthly")
-                                growth_mom = trend.get("growth_mom", 0)
-                                growth_yoy = trend.get("growth_yoy", 0)
-                                base_growth = growth_mom if growth_mom > 0 else (growth_yoy if growth_yoy > 0 else 0)
-                                
-                                if trend_type == "seasonal":
-                                    score = base_growth * 1.5 + 50
-                                elif trend_type == "growing":
-                                    score = base_growth * 1.2 + 20
-                                else:
-                                    score = base_growth
-                                    
-                                trending_matches.append({
-                                    "topic": kw,
-                                    "score": score,
-                                    "type": trend_type
-                                })
-                        
-                        trending_matches.sort(key=lambda x: x["score"], reverse=True)
+                            growth_mom = trend.get("growth_mom", 0)
+                            growth_yoy = trend.get("growth_yoy", 0)
+                            base_growth = growth_mom if growth_mom > 0 else (growth_yoy if growth_yoy > 0 else 0)
+                            niche_trend_lookup[kw] = (base_growth, trend.get("trend_type", "monthly"))
                     except Exception as e:
                         print(f"   ⚠️ Error processing trends for prioritization: {e}")
-                
-                if trending_matches:
-                    top_pool = trending_matches[:5]
+
+                scored_candidates = []
+                for topic_str in available_topics:
+                    t_lower = topic_str.lower()
+                    seasonal_mult, theme = score_topic_seasonality(topic_str)
+                    if seasonal_mult < 0.5:
+                        continue
+                    
+                    base_growth, trend_type = niche_trend_lookup.get(t_lower, (0, "seasonal" if any(k in t_lower for k in ["fall", "autumn", "halloween", "thanksgiving", "winter"]) else "standard"))
+                    score = (100.0 + base_growth) * seasonal_mult
+                    scored_candidates.append({
+                        "topic": topic_str,
+                        "score": score,
+                        "type": f"{trend_type}/{theme}"
+                    })
+
+                if scored_candidates:
+                    scored_candidates.sort(key=lambda x: x["score"], reverse=True)
+                    top_pool = scored_candidates[:min(5, len(scored_candidates))]
                     chosen_item = rng.choice(top_pool)
                     chosen_topic = chosen_item["topic"]
-                    print(f"🔥 TRENDING TOPIC SELECTED: \"{chosen_topic}\" (Score: {chosen_item['score']:.1f}, Type: {chosen_item['type']}, Niche: {chosen_niche})")
+                    print(f"🔥 IN-SEASON TOPIC SELECTED: \"{chosen_topic}\" (Score: {chosen_item['score']:.1f}, Type: {chosen_item['type']}, Niche: {chosen_niche})")
                 else:
                     chosen_topic = rng.choice(available_topics)
-                    print(f"🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\" (No active trends matched)")
+                    print(f"🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\" (No seasonal filter matched)")
             else:
                 # Try any other niche that has available topics
                 all_available_niches = {}

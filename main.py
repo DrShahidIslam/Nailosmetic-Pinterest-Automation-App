@@ -59,6 +59,25 @@ PINTEREST_APP_SECRET = os.getenv("PINTEREST_APP_SECRET")
 # Board routing: maps each content category to its Pinterest board ID and blog link.
 # The Gemini prompt will classify each generated pin into one of these categories.
 BOARD_MAP = {
+    # --- Seasonal & Holiday Boards ---
+    "fall_autumn_trends": {
+        "board_id": os.getenv("PINTEREST_BOARD_FALL", "1106689377123778680"),
+        "name": "Fall Nails & Autumn Aesthetic Inspo",
+        "niche": "nails",
+        "link": "https://nailosmetic.com/",
+    },
+    "halloween_spooky": {
+        "board_id": os.getenv("PINTEREST_BOARD_HALLOWEEN", "1106689377123778682"),
+        "name": "Halloween Nails, Spooky Glam & Decor",
+        "niche": "nails",
+        "link": "https://nailosmetic.com/",
+    },
+    "holiday_winter": {
+        "board_id": os.getenv("PINTEREST_BOARD_HOLIDAY", "1106689377123778685"),
+        "name": "Holiday & Winter Nails, Glam & Home",
+        "niche": "nails",
+        "link": "https://nailosmetic.com/",
+    },
     # --- Nail Boards ---
     "aesthetic_nail_art": {
         "board_id": os.getenv("PINTEREST_BOARD_AESTHETIC", ""),
@@ -143,39 +162,39 @@ NICHE_WEIGHTS = {
     "fashion_style": 0.05,
 }
 
-# Niche-specific CTA options (Universal Action-Oriented to prevent collision)
+# Niche-specific CTA options (Universal Action-Oriented to drive maximum Outbound Clicks)
 CTA_OPTIONS = {
     "nails": [
-        "Click Here For Details ->",
-        "Tap To Read More",
-        "Get The Full Guide Now",
-        "Find Out How Here",
-        "Click To See More",
-        "Tap For The Secret ->",
+        "Tap For Step-By-Step ->",
+        "See All 12 Designs Inside",
+        "Save For Your Salon Visit",
+        "Tap For The Color Formula ->",
+        "Get The Full Nail Guide",
+        "Click To See The Tutorial",
     ],
     "hair_beauty": [
-        "Click Here For Details ->",
-        "Tap To Read More",
-        "Get The Full Guide Now",
-        "Find Out How Here",
+        "Tap For The Tutorial ->",
+        "See The Full Breakdown",
+        "Save For Your Next Look",
+        "Tap For Product Details ->",
+        "Get The Step-By-Step Guide",
         "Click To See More",
-        "Tap For The Secret ->",
     ],
     "home_garden": [
-        "Click Here For Details ->",
+        "Tap For The Full Room Tour ->",
+        "See All Decor Sources",
+        "Get The Budget Breakdown",
+        "Save This Cozy Inspo",
+        "Click For Styling Tips ->",
         "Tap To Read More",
-        "Get The Full Guide Now",
-        "Find Out How Here",
-        "Click To See More",
-        "Tap For The Secret ->",
     ],
     "fashion_style": [
-        "Click Here For Details ->",
+        "Get The Full Outfit Guide ->",
+        "Tap For Styling Formulas",
+        "See All Outfit Ideas",
+        "Save This Look For Fall",
+        "Click For Direct Links ->",
         "Tap To Read More",
-        "Get The Full Guide Now",
-        "Find Out How Here",
-        "Click To See More",
-        "Tap For The Secret ->",
     ],
 }
 
@@ -204,8 +223,34 @@ HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/black-forest-
 PINTEREST_API_BASE = "https://api.pinterest.com/v5"
 
 
+def auto_discover_boards():
+    """Dynamically query Pinterest boards to match and auto-populate any missing board IDs."""
+    if not PINTEREST_ACCESS_TOKEN:
+        return
+    try:
+        url = f"{PINTEREST_API_BASE}/boards"
+        headers = {"Authorization": f"Bearer {PINTEREST_ACCESS_TOKEN}"}
+        resp = requests.get(url, headers=headers, params={"page_size": 50}, timeout=15)
+        if resp.status_code == 200:
+            boards = resp.json().get("items", [])
+            for b in boards:
+                name = b.get("name", "").lower()
+                b_id = b.get("id")
+                if not b_id:
+                    continue
+                if ("fall" in name or "autumn" in name) and not BOARD_MAP.get("fall_autumn_trends", {}).get("board_id"):
+                    BOARD_MAP["fall_autumn_trends"]["board_id"] = b_id
+                elif ("halloween" in name or "spooky" in name) and not BOARD_MAP.get("halloween_spooky", {}).get("board_id"):
+                    BOARD_MAP["halloween_spooky"]["board_id"] = b_id
+                elif ("holiday" in name or "winter" in name) and not BOARD_MAP.get("holiday_winter", {}).get("board_id"):
+                    BOARD_MAP["holiday_winter"]["board_id"] = b_id
+    except Exception as e:
+        print(f"   ⚠️ Notice: Board auto-discovery skipped: {e}")
+
+
 def validate_env_vars():
     """Ensure all required environment variables are set."""
+    auto_discover_boards()
     required = {
         "GEMINI_API_KEYS": True if GEMINI_API_KEYS else False,
         "PINTEREST_ACCESS_TOKEN": PINTEREST_ACCESS_TOKEN,
@@ -250,6 +295,10 @@ def generate_content_with_gemini(topic: str = None, niche: str = "nails") -> dic
         available_categories = [cat for cat, info in BOARD_MAP.items() if info["board_id"]]
 
     category_descriptions = {
+        # Seasonal & Festive
+        "fall_autumn_trends": "Cozy fall aesthetic, autumn nail art, warm brown and burgundy chrome, Thanksgiving styles, sweater weather looks",
+        "halloween_spooky": "Halloween nail designs, spooky cute ghost nails, vampire glam, dark romance makeup, creative halloween decor and outfits",
+        "holiday_winter": "Winter glam, Christmas holiday nails, velvet chrome, festive party makeup, holiday dresses, cozy winter bedroom decor",
         # Nails
         "aesthetic_nail_art": "Creative, artistic, 3D, maximalist, abstract, geometric, or editorial nail art designs",
         "chrome_glazed": "Chrome nails, glazed donut finish, metallic, pearlescent, reflective, or shiny nail designs",
@@ -343,7 +392,7 @@ RETURN ONLY VALID JSON (no markdown, no code fences) with these exact keys in th
   "annotated_keywords": ["List exactly 3 to 5 highly specific Pinterest Annotated Keywords you identified here."],
   "board_category": "MANDATORY: Pick the key from the list below that BEST matches the content.",
   "title": "A scroll-stopping Pinterest title (max 100 chars). MANDATORY: The title MUST name or speak directly to the specific AUDIENCE IDENTITY (e.g. 'for beginners', 'women over 40', 'for dark skin tones', 'natural nail lovers', 'budget-friendly'). Structure it using Splinter Method — target ONE specific person, situation, or occasion angle. Starts with primary annotated keyword. Creates a curiosity gap or specific promise. NO generic phrases like 'amazing' or 'beautiful'.",
-  "overlay_text": "An ultra-compelling 3-6 word text overlay readable at thumbnail size. Use exact identity or result language (e.g., 'For Short Almond Nails', 'Finally: Gel-Free Chrome', 'The 5-Minute School Hairstyle'). Must be specific — NOT generic. Split into 2-3 short lines for maximum readability.",
+  "overlay_text": "An ultra-compelling 3-6 word text overlay readable at thumbnail size. HIGH CTR RULE: Must create an irresistible curiosity gap or promise a specific high-value result/solution (e.g. 'The 2026 Trend Everyone Wants', '10 Classy Ghost Nails', 'Under $30 Thanksgiving Decor', 'Finally: Gel-Free Chrome', 'The 5-Minute School Hairstyle'). Never be generic. Split into 2-3 short lines for maximum thumb-stopping power.",
   "description": "WRITE EXACTLY 50-75 WORDS. Tone: warm, conversational, like a knowledgeable friend recommending something. Naturally weave in the primary keyword plus 4-6 related search phrases inside complete, natural sentences — no keyword stuffing, NO hashtags whatsoever. End with a soft CTA like 'Save this for your next salon appointment!' or 'Click through for the full step-by-step guide!'. The description must read naturally to a human reader while signaling all keywords to Pinterest's algorithm.",
   "image_prompt": "{niche_config['image_guide']}",
   "alt_text": "A highly descriptive 1-2 sentence description of the visual elements (colors, textures, subjects) for Pinterest accessibility. Focus on visual details, not SEO keywords."
@@ -1587,7 +1636,7 @@ def main():
         # 1. Try to get topic and link from WordPress Queue
         if queue_path.exists():
             try:
-                with open(queue_path, "r") as f:
+                with open(queue_path, "r", encoding="utf-8") as f:
                     queue = json.load(f)
                 if queue:
                     # Pop the latest link from queue
@@ -1609,10 +1658,10 @@ def main():
                     print(f"   🎯 Topic from Queue: \"{chosen_topic}\" (niche: {chosen_niche})")
                     
                     try:
-                        with open(queue_path, "r") as f:
+                        with open(queue_path, "r", encoding="utf-8") as f:
                             fresh_queue = json.load(f)
                         fresh_queue = [item for item in fresh_queue if item.get("url") != destination_link]
-                        with open(queue_path, "w") as f:
+                        with open(queue_path, "w", encoding="utf-8") as f:
                             json.dump(fresh_queue, f, indent=4)
                     except Exception as e:
                         print(f"   ⚠️ Error updating links_queue.json: {e}")
@@ -1622,12 +1671,12 @@ def main():
         # 2. If no queued item, pick a niche and fresh topic from the bank
         if not chosen_topic and topic_bank_path.exists():
             try:
-                with open(topic_bank_path, "r") as f:
+                with open(topic_bank_path, "r", encoding="utf-8") as f:
                     topic_bank = json.load(f)
                 
                 used_topics = []
                 if used_topics_path.exists():
-                    with open(used_topics_path, "r") as f:
+                    with open(used_topics_path, "r", encoding="utf-8") as f:
                         used_topics = json.load(f)
                 
                 # New niche-aware topic bank format (dict of niche -> list)
@@ -1648,7 +1697,7 @@ def main():
                         published_links_path = Path("shared/published_links.json")
                         if published_links_path.exists():
                             try:
-                                with open(published_links_path, "r") as f:
+                                with open(published_links_path, "r", encoding="utf-8") as f:
                                     published = json.load(f)
                                 # Filter by niche
                                 niche_published = [p for p in published if p.get("niche") == chosen_niche and p.get("topic")]
@@ -1661,42 +1710,48 @@ def main():
                             except Exception as e:
                                 print(f"   ⚠️ Error reading published links for variation: {e}")
                     
+                    from shared.seasonal_calendar import score_topic_seasonality
                     trends_path = Path("shared/niche_trends.json")
-                    trending_matches = []
                     
-                    if not chosen_topic and trends_path.exists() and available_topics:
-                        try:
-                            with open(trends_path, "r") as f:
-                                all_trends = json.load(f)
-                            
-                            # Get trends for this niche
-                            niche_trend_data = all_trends.get(chosen_niche, [])
-                            
-                            # Find overlap and score
-                            available_set = {t.lower() for t in available_topics}
-                            for trend in niche_trend_data:
-                                kw = trend.get("keyword", "").lower()
-                                if kw in available_set:
-                                    # Score based on MoM growth
-                                    trending_matches.append({
-                                        "topic": kw,
-                                        "growth": trend.get("growth_mom", 0)
-                                    })
-                            
-                            # Sort by growth (highest first)
-                            trending_matches.sort(key=lambda x: x["growth"], reverse=True)
-                        except Exception as e:
-                            print(f"   ⚠️ Error processing trends: {e}")
+                    if not chosen_topic and available_topics:
+                        niche_trend_lookup = {}
+                        if trends_path.exists():
+                            try:
+                                with open(trends_path, "r", encoding="utf-8") as f:
+                                    all_trends = json.load(f)
+                                for trend in all_trends.get(chosen_niche, []):
+                                    kw = trend.get("keyword", "").lower()
+                                    niche_trend_lookup[kw] = trend.get("growth_mom", 0)
+                            except Exception as e:
+                                print(f"   ⚠️ Error processing trends: {e}")
 
-                    if trending_matches:
-                        # Pick from the top 5 trending items for variety, or just the best one
-                        # Let's take the top 3 and pick one randomly
-                        top_count = min(3, len(trending_matches))
-                        chosen_topic = random.choice([item["topic"] for item in trending_matches[:top_count]])
-                        print(f"   🔥 TRENDING TOPIC: \"{chosen_topic}\" (Niche: {chosen_niche})")
-                    elif available_topics and not chosen_topic:
-                        chosen_topic = random.choice(available_topics)
-                        print(f"   🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\"")
+                        # Score all available topics using Seasonal Multiplier + API Trend Growth
+                        scored_candidates = []
+                        for topic_str in available_topics:
+                            t_lower = topic_str.lower()
+                            seasonal_mult, theme = score_topic_seasonality(topic_str)
+                            # Suppress completely off-season topics (e.g. spring in fall/winter)
+                            if seasonal_mult < 0.5:
+                                continue
+                            trend_growth = niche_trend_lookup.get(t_lower, 0)
+                            # Final score combines seasonal momentum and API trend growth
+                            score = (100.0 + max(0, trend_growth)) * seasonal_mult
+                            scored_candidates.append({
+                                "topic": topic_str,
+                                "score": score,
+                                "theme": theme,
+                                "growth": trend_growth
+                            })
+
+                        if scored_candidates:
+                            scored_candidates.sort(key=lambda x: x["score"], reverse=True)
+                            top_pool = scored_candidates[:min(5, len(scored_candidates))]
+                            chosen_item = random.choice(top_pool)
+                            chosen_topic = chosen_item["topic"]
+                            print(f"   🔥 SEASONAL TREND TOPIC: \"{chosen_topic}\" (Theme: {chosen_item['theme']}, Score: {chosen_item['score']:.1f}, Niche: {chosen_niche})")
+                        elif available_topics:
+                            chosen_topic = random.choice(available_topics)
+                            print(f"   🎯 Niche: {chosen_niche} | Topic: \"{chosen_topic}\" (Fallback)")
                     elif not chosen_topic:
                         # Niche exhausted, try any available topic
                         all_available = []
@@ -1747,7 +1802,7 @@ def main():
             published_links_path = Path("shared/published_links.json")
             if published_links_path.exists():
                 try:
-                    with open(published_links_path, "r") as f:
+                    with open(published_links_path, "r", encoding="utf-8") as f:
                         published = json.load(f)
                     
                     # Filter to same niche first
@@ -1755,6 +1810,9 @@ def main():
                     
                     # Enforce strict category keyword isolation to prevent routing mismatch (e.g. wallpaper to flower beds)
                     category_keywords = {
+                        "fall_autumn_trends": ['fall', 'autumn', 'october', 'september', 'sweater', 'pumpkin', 'harvest', 'thanksgiving', 'mocha', 'tortoiseshell', 'burgundy'],
+                        "halloween_spooky": ['halloween', 'spooky', 'ghost', 'witch', 'vampire', 'venom', 'goth', 'costume', 'skull', 'creepy'],
+                        "holiday_winter": ['winter', 'christmas', 'holiday', 'xmas', 'festive', 'velvet', 'glitter', 'december', 'snowflake', 'party', 'new year', 'nye'],
                         "bedroom_bedding": ['bed', 'bedding', 'bedroom', 'sheet', 'pillow', 'comforter', 'duvet', 'sleep', 'mattress'],
                         "garden_outdoor": ['garden', 'outdoor', 'yard', 'landscape', 'patio', 'fountain', 'trellis', 'plant', 'flower', 'soil', 'drainage', 'pot', 'curb'],
                         "home_decor": ['decor', 'home', 'house', 'room', 'bathroom', 'kitchen', 'wall', 'wallpaper', 'paint', 'furniture', 'apartment', 'living'],
@@ -1851,7 +1909,7 @@ def main():
             published_links_path = Path("shared/published_links.json")
             if published_links_path.exists():
                 try:
-                    with open(published_links_path, "r") as f:
+                    with open(published_links_path, "r", encoding="utf-8") as f:
                         all_published = json.load(f)
                     niche_candidates = [p for p in all_published if p.get("niche") == chosen_niche and p.get("url")]
                     random.shuffle(niche_candidates)
