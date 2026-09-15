@@ -98,7 +98,7 @@
         },
         {
             "keyword": "short nails",
-            "growth_mom": 1,
+            "growth_mom": 0,
             "growth_yoy": -10,
             "trend_type": "monthly"
         },
@@ -164,7 +164,7 @@
         },
         {
             "keyword": "classy nails",
-            "growth_mom": 10,
+            "growth_mom": 9,
             "growth_yoy": 60,
             "trend_type": "monthly"
         },
@@ -351,7 +351,7 @@
         {
             "keyword": "september nail",
             "growth_mom": 2000,
-            "growth_yoy": -9,
+            "growth_yoy": -10,
             "trend_type": "growing"
         },
         {
@@ -375,7 +375,7 @@
         {
             "keyword": "fall chrome nails",
             "growth_mom": 1500,
-            "growth_yoy": 5,
+            "growth_yoy": 4,
             "trend_type": "growing"
         },
         {
@@ -429,7 +429,7 @@
         {
             "keyword": "september pedicure colors",
             "growth_mom": 10001,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "seasonal"
         },
         {
@@ -453,7 +453,7 @@
         {
             "keyword": "september nail color",
             "growth_mom": 4000,
-            "growth_yoy": 30,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
@@ -507,7 +507,7 @@
         {
             "keyword": "september nail",
             "growth_mom": 2000,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
             "trend_type": "seasonal"
         },
         {
@@ -743,7 +743,7 @@
         {
             "keyword": "half up half down hair",
             "growth_mom": 8,
-            "growth_yoy": 60,
+            "growth_yoy": 50,
             "trend_type": "monthly"
         },
         {
@@ -1021,7 +1021,7 @@
         {
             "keyword": "gallery wall",
             "growth_mom": 7,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "monthly"
         },
         {
@@ -1087,7 +1087,7 @@
         {
             "keyword": "interior design",
             "growth_mom": 7,
-            "growth_yoy": -8,
+            "growth_yoy": -9,
             "trend_type": "monthly"
         },
         {
@@ -1381,7 +1381,7 @@
         {
             "keyword": "moody fall decor",
             "growth_mom": 300,
-            "growth_yoy": 0,
+            "growth_yoy": -1,
             "trend_type": "growing"
         },
         {
@@ -1621,7 +1621,7 @@
         {
             "keyword": "fall basket",
             "growth_mom": 300,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "seasonal"
         },
         {
@@ -1693,7 +1693,7 @@
         {
             "keyword": "fall garland",
             "growth_mom": 300,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "seasonal"
         },
         {
@@ -1749,7 +1749,7 @@
         {
             "keyword": "senior jeans",
             "growth_mom": -6,
-            "growth_yoy": 40,
+            "growth_yoy": 30,
             "trend_type": "monthly"
         },
         {
@@ -1785,7 +1785,7 @@
         {
             "keyword": "y2k outfits",
             "growth_mom": 10,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "monthly"
         },
         {
@@ -1845,7 +1845,7 @@
         {
             "keyword": "college outfits",
             "growth_mom": 40,
-            "growth_yoy": -2,
+            "growth_yoy": -3,
             "trend_type": "monthly"
         },
         {
@@ -2541,13 +2541,7 @@
         {
             "keyword": "hot fall outfits",
             "growth_mom": 500,
-            "growth_yoy": -10,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "picture day fit",
-            "growth_mom": 500,
-            "growth_yoy": 20,
+            "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
@@ -2614,6 +2608,12 @@
             "keyword": "homecoming pants ideas",
             "growth_mom": 500,
             "growth_yoy": -2,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "summer fall transition outfit",
+            "growth_mom": 400,
+            "growth_yoy": -70,
             "trend_type": "seasonal"
         }
     ],
