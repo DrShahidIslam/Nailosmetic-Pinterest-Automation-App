@@ -1481,7 +1481,7 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
 
 PIN_LOG_PATH = Path("shared/pin_log.json")
 ACCOUNT_STATS_PATH = Path("shared/account_stats.json")
-URL_COOLDOWN_DAYS = 7  # Same URL cannot be re-pinned within this window
+URL_COOLDOWN_DAYS = 20  # Same URL cannot be re-pinned within this 20-day window (elite domain safety)
 
 
 def load_pin_log() -> dict:
