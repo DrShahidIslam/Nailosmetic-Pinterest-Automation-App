@@ -477,7 +477,7 @@
         {
             "keyword": "cute hoco nails",
             "growth_mom": 2000,
-            "growth_yoy": -4,
+            "growth_yoy": -5,
             "trend_type": "seasonal"
         },
         {
@@ -645,7 +645,7 @@
         {
             "keyword": "fall jelly nails",
             "growth_mom": 1000,
-            "growth_yoy": -10,
+            "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
@@ -889,7 +889,7 @@
         {
             "keyword": "room decor ideas",
             "growth_mom": -20,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "monthly"
         },
         {
@@ -1585,7 +1585,7 @@
         {
             "keyword": "fall garland",
             "growth_mom": 300,
-            "growth_yoy": 1,
+            "growth_yoy": 0,
             "trend_type": "seasonal"
         },
         {
@@ -1683,7 +1683,7 @@
         {
             "keyword": "outfit ideas",
             "growth_mom": 30,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
             "trend_type": "monthly"
         },
         {
@@ -1935,7 +1935,7 @@
         {
             "keyword": "chic outfits",
             "growth_mom": -8,
-            "growth_yoy": 70,
+            "growth_yoy": 60,
             "trend_type": "monthly"
         },
         {
@@ -2491,12 +2491,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "under the sea hoco dress",
-            "growth_mom": 500,
-            "growth_yoy": -60,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "pumpkin patch fits",
             "growth_mom": 500,
             "growth_yoy": -2,
@@ -2576,6 +2570,12 @@
         },
         {
             "keyword": "picture day outfit ideas",
+            "growth_mom": 500,
+            "growth_yoy": 50,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "hoco outfit ideas",
             "growth_mom": 500,
             "growth_yoy": 50,
             "trend_type": "seasonal"
