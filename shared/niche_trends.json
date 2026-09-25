@@ -51,7 +51,7 @@
         {
             "keyword": "simple nails",
             "growth_mom": -30,
-            "growth_yoy": 40,
+            "growth_yoy": 30,
             "trend_type": "monthly"
         },
         {
@@ -165,7 +165,7 @@
         {
             "keyword": "blue nails",
             "growth_mom": -20,
-            "growth_yoy": -9,
+            "growth_yoy": -10,
             "trend_type": "monthly"
         },
         {
@@ -647,7 +647,7 @@
         {
             "keyword": "braids",
             "growth_mom": -10,
-            "growth_yoy": 5,
+            "growth_yoy": 4,
             "trend_type": "monthly"
         },
         {
@@ -811,7 +811,7 @@
         {
             "keyword": "room ideas",
             "growth_mom": -10,
-            "growth_yoy": -1,
+            "growth_yoy": -2,
             "trend_type": "monthly"
         },
         {
@@ -913,7 +913,7 @@
         {
             "keyword": "room decor ideas",
             "growth_mom": -20,
-            "growth_yoy": 7,
+            "growth_yoy": 6,
             "trend_type": "monthly"
         },
         {
@@ -1441,7 +1441,7 @@
         {
             "keyword": "halloween window art",
             "growth_mom": 500,
-            "growth_yoy": 9,
+            "growth_yoy": 8,
             "trend_type": "seasonal"
         },
         {
@@ -2097,7 +2097,7 @@
         {
             "keyword": "apple picking outfit",
             "growth_mom": 900,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "growing"
         },
         {
@@ -2503,12 +2503,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "homecoming jewelry",
-            "growth_mom": 600,
-            "growth_yoy": -40,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "career fair outfit",
             "growth_mom": 600,
             "growth_yoy": -30,
@@ -2602,6 +2596,12 @@
             "keyword": "fall church outfit",
             "growth_mom": 500,
             "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "octoberfest outfits",
+            "growth_mom": 500,
+            "growth_yoy": -5,
             "trend_type": "seasonal"
         }
     ],
