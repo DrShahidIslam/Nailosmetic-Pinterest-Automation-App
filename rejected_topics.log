@@ -286,3 +286,51 @@
    Match Overlap  : 100.0%
    Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 1364] 'The Rise of Bio-Synthetic Hybrid Hair Extensions: A 2027 Styling Guide'.
 --------------------------------------------------------------------------------
+[2026-09-28 23:20:30] REJECTED TOPIC: "15 Chic September Nail Ideas"
+   Cleaned Topic  : "september nail"
+   Matched Post   : [ID: 2699] "15 Chic September Nail Ideas to Transition Into Autumn"
+   Post URL       : https://nailosmetic.com/september-nail-ideas/
+   Post Date      : 2026-08-16
+   Match Overlap  : 100.0%
+   Reason         : Recency rule: '15 Chic September Nail Ideas to Transition Into Autumn' published 43 days ago (<= 45 days) with 100.0% topic match.
+--------------------------------------------------------------------------------
+[2026-09-28 23:20:30] REJECTED TOPIC: "Back to School Nail Art for Campus"
+   Cleaned Topic  : "back school nail art campu"
+   Matched Post   : [ID: 501] "15+ Chic Back to School Nail Art Ideas for a Stylish Return"
+   Post URL       : https://nailosmetic.com/back-to-school-nail-art/
+   Post Date      : 2026-04-21
+   Match Overlap  : 80.0%
+   Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 501] '15+ Chic Back to School Nail Art Ideas for a Stylish Return'.
+--------------------------------------------------------------------------------
+[2026-09-28 23:20:30] REJECTED TOPIC: "Cute Fall Nails Burgundy Style"
+   Cleaned Topic  : "fall nail burgundy"
+   Matched Post   : [ID: 3481] "Fall Nails Red Burgundy"
+   Post URL       : https://nailosmetic.com/fall-nails-red-burgundy/
+   Post Date      : 2026-09-27
+   Match Overlap  : 100.0%
+   Reason         : Recency rule: 'Fall Nails Red Burgundy' published 1 days ago (<= 45 days) with 100.0% topic match.
+--------------------------------------------------------------------------------
+[2026-09-28 23:20:30] REJECTED TOPIC: "Fall Nails Brown Chrome 2026"
+   Cleaned Topic  : "fall nail brown chrome"
+   Matched Post   : [ID: 3322] "Fall Nails Brown Chrome"
+   Post URL       : https://nailosmetic.com/fall-nails-brown-chrome/
+   Post Date      : 2026-09-18
+   Match Overlap  : 100.0%
+   Reason         : Recency rule: 'Fall Nails Brown Chrome' published 10 days ago (<= 45 days) with 100.0% topic match.
+--------------------------------------------------------------------------------
+[2026-09-28 23:20:30] REJECTED TOPIC: "Spooky Halloween Skull Makeup"
+   Cleaned Topic  : "spooky halloween skull makeup"
+   Matched Post   : [ID: 3144] "Spooky Cute Skull Makeup Easy"
+   Post URL       : https://nailosmetic.com/spooky-cute-skull-makeup-easy/
+   Post Date      : 2026-09-09
+   Match Overlap  : 85.7%
+   Reason         : Recency rule: 'Spooky Cute Skull Makeup Easy' published 19 days ago (<= 45 days) with 85.7% topic match.
+--------------------------------------------------------------------------------
+[2026-09-28 23:20:30] REJECTED TOPIC: "Bio-Synthetic Hybrid Hair Extensions 2027"
+   Cleaned Topic  : "bio synthetic hybrid hair extension"
+   Matched Post   : [ID: 1364] "The Rise of Bio-Synthetic Hybrid Hair Extensions: A 2027 Styling Guide"
+   Post URL       : https://nailosmetic.com/bio-synthetic-hybrid-hair-extensions-guide-2/
+   Post Date      : 2026-05-31
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 1364] 'The Rise of Bio-Synthetic Hybrid Hair Extensions: A 2027 Styling Guide'.
+--------------------------------------------------------------------------------
