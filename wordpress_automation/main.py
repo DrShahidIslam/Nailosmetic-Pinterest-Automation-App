@@ -367,9 +367,8 @@ def main():
     else:
         print("📋 No topic bank found. Gemini will pick a topic on its own.")
 
-    # 1b. Topic Gatekeeper — check for duplicates/cannibalization BEFORE paid APIs or article generation
-    # Kept in TEST MODE (TOPIC_GATE_ENFORCE = False) until user review.
-    TOPIC_GATE_ENFORCE = False  # Set to True once reviewed to actively block duplicate topics
+    # Actively blocks duplicate/cannibalized topics and searches for approved alternatives.
+    TOPIC_GATE_ENFORCE = True  # Active enforcement enabled
 
     if chosen_topic:
         mode_str = "ACTIVE ENFORCEMENT" if TOPIC_GATE_ENFORCE else "MONITORING ONLY (TEST MODE)"
