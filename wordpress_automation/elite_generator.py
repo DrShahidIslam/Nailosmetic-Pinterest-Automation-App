@@ -2,6 +2,7 @@ import json
 import random
 import re
 import time
+from html import unescape
 from typing import List, Dict, Any, Optional
 from google import genai
 from dotenv import load_dotenv
@@ -117,7 +118,8 @@ class EliteGenerator:
                 "heading": section["heading"],
                 "content": draft.get("text", ""),
                 "image_prompt": draft.get("image_metadata", {}).get("prompt", ""),
-                "alt_text": draft.get("image_metadata", {}).get("alt_text", "")
+                "alt_text": draft.get("image_metadata", {}).get("alt_text", ""),
+                "preferred_format": section.get("preferred_format", "")
             })
             
             # Small pacing delay to avoid hitting burst rate limits
@@ -243,4 +245,29 @@ class EliteGenerator:
                         html += f"<!-- wp:paragraph -->\n<p>{p.strip()}</p>\n<!-- /wp:paragraph -->\n\n"
 
         html += f"<!-- wp:paragraph -->\n<p>{data['conclusion']}</p>\n<!-- /wp:paragraph -->"
+
+        # FAQPage schema: the outline prompt already designates FAQ-format sections,
+        # but no structured data was ever emitted. Build one Question per FAQ section.
+        faq_entities = []
+        for section in data.get("sections", []):
+            if section.get("preferred_format") == "faq":
+                answer = unescape(re.sub(r"<[^>]+>", " ", section.get("content", "")))
+                answer = re.sub(r"\s+", " ", answer).strip()
+                if len(answer) >= 40:
+                    faq_entities.append({
+                        "@type": "Question",
+                        "name": section.get("heading", ""),
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": answer[:2000]
+                        }
+                    })
+        if faq_entities:
+            faq_schema = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": faq_entities
+            }
+            html += "\n<script type=\"application/ld+json\">" + json.dumps(faq_schema, ensure_ascii=False) + "</script>\n"
+
         return html
