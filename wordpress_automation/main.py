@@ -21,6 +21,8 @@ sys.path.append(str(Path(__file__).parent.parent))
 from wp_client import WordPressClient
 from elite_generator import EliteGenerator
 from image_manager import ImageManager
+from quality_gate import run_quality_gate
+from topic_gate import check_topic
 from shared_data_manager import SmartJSON
 
 def validate_and_fix_category(title: str, current_category: str, chosen_niche: str) -> str:
@@ -365,6 +367,41 @@ def main():
     else:
         print("📋 No topic bank found. Gemini will pick a topic on its own.")
 
+    # 1b. Topic Gatekeeper — check for duplicates/cannibalization BEFORE paid APIs or article generation
+    # Kept in TEST MODE (TOPIC_GATE_ENFORCE = False) until user review.
+    TOPIC_GATE_ENFORCE = False  # Set to True once reviewed to actively block duplicate topics
+
+    if chosen_topic:
+        mode_str = "ACTIVE ENFORCEMENT" if TOPIC_GATE_ENFORCE else "MONITORING ONLY (TEST MODE)"
+        print(f"🛡️ Running topic gate for: \"{chosen_topic}\" [{mode_str}]...")
+        topic_verdict = check_topic(chosen_topic)
+        if topic_verdict != "ok":
+            print(f"   🛑 TOPIC GATE FLAGGED \"{chosen_topic}\": verdict = {topic_verdict}")
+            print("   👉 Logged to rejected_topics.log.")
+            if TOPIC_GATE_ENFORCE:
+                print("   🔍 Searching for an approved alternate topic...")
+                alt_candidates = [t for t in available_topics if t != chosen_topic] if 'available_topics' in locals() else []
+                rng.shuffle(alt_candidates)
+                approved_topic = None
+                for alt in alt_candidates:
+                    alt_verdict = check_topic(alt)
+                    if alt_verdict == "ok":
+                        print(f"   ✅ Approved alternate topic found: \"{alt}\"")
+                        approved_topic = alt
+                        break
+                    else:
+                        print(f"   ⚠️ Alternate \"{alt}\" also rejected ({alt_verdict})")
+
+                if approved_topic:
+                    chosen_topic = approved_topic
+                else:
+                    print("   ⚠️ No approved topics in pool. Halting generation to avoid duplicate content penalty.")
+                    return
+            else:
+                print("   ℹ️ [TEST MODE] Topic gate is currently in test mode — generation allowed without blocking.")
+        else:
+            print("   ✅ Topic approved by topic gate.")
+
     # ===== Now safe to initialize paid API clients =====
     gen = EliteGenerator(gemini_keys)
     img_mgr = ImageManager(hf_api_keys=hf_keys, cloudflare_account_id=cf_account_id, cloudflare_api_token=cf_api_token)
@@ -391,56 +428,75 @@ def main():
     plan = gen.generate_elite_blog(topic=chosen_topic, previous_slugs=filtered_slugs, existing_categories=cat_names, niche=chosen_niche)
     print(f"📌 Title: {plan['title']}")
 
-    # 3. Handle Images and WordPress Media
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        print(f"📁 Temp directory: {tmp_dir}")
-        
-        # Featured Image
-        print("🎨 Generating featured image (16:9)...")
-        feat_img_path = str(Path(tmp_dir) / "featured.png")
-        feat_prompt = "A high-end aesthetic nail design"
-        feat_alt = "Featured image"
-        if "featured_image" in plan:
-            feat_prompt = plan["featured_image"].get("prompt") or plan["featured_image"].get("image_prompt") or feat_prompt
-            feat_alt = plan["featured_image"].get("alt_text") or plan["featured_image"].get("alt") or plan.get("title") or feat_alt
-            
-        img_mgr.generate_image(feat_prompt, "16:9", feat_img_path, prefer_kolors=True)
-        
-        # Convert to WebP
-        print("⚡ Converting featured image to WebP...")
-        feat_webp_path = img_mgr.convert_to_webp(feat_img_path)
-        feat_media_id = wp.upload_media(feat_webp_path, feat_alt)
-        print(f"✅ Featured image (WebP) uploaded. ID: {feat_media_id}")
-        time.sleep(5)  # ⏳ Added delay to prevent 429 Too Many Requests
+    # 3. Pre-build HTML & Run Publish QA Gate BEFORE image generation
+    # Fail-closed: thin/skeleton articles become drafts and cost ZERO image credits.
+    html_content = gen.build_elite_html(plan)
+    feat_media_id = None
 
-        # Block Images
-        html_content = gen.build_elite_html(plan)
-        
-        for i, block in enumerate(plan.get("sections", [])):
-            if not block.get("image_prompt") or block["image_prompt"] == "NONE":
-                continue
-                
-            print(f"🎨 Generating image for '{block['heading']}' (4:5)...")
-            block_img_path = str(Path(tmp_dir) / f"block_{i}.png")
-            block_prompt = block.get("image_prompt")
+    print("🛡️ Running publish QA gate...")
+    gate_passed, gate_failures, gate_warnings = run_quality_gate(plan, html_content)
+    for w in gate_warnings:
+        print(f"   ⚠️ QA warning: {w}")
+    if gate_passed:
+        print("   ✅ Quality gate passed.")
+        post_status = "publish"
+    else:
+        print("   🛑 QUALITY GATE FAILED — saving as DRAFT for manual review:")
+        for f in gate_failures:
+            print(f"      • {f}")
+        post_status = "draft"
+
+    # 4. Handle Images and WordPress Media (ONLY if quality gate passed)
+    if post_status == "publish":
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            print(f"📁 Temp directory: {tmp_dir}")
             
-            img_mgr.generate_image(block_prompt, "4:5", block_img_path, prefer_kolors=True)
+            # Featured Image
+            print("🎨 Generating featured image (16:9)...")
+            feat_img_path = str(Path(tmp_dir) / "featured.png")
+            feat_prompt = "A high-end aesthetic nail design"
+            feat_alt = "Featured image"
+            if "featured_image" in plan:
+                feat_prompt = plan["featured_image"].get("prompt") or plan["featured_image"].get("image_prompt") or feat_prompt
+                feat_alt = plan["featured_image"].get("alt_text") or plan["featured_image"].get("alt") or plan.get("title") or feat_alt
+                
+            img_mgr.generate_image(feat_prompt, "16:9", feat_img_path, prefer_kolors=True)
             
             # Convert to WebP
-            print(f"⚡ Converting block '{block['heading']}' to WebP...")
-            block_webp_path = img_mgr.convert_to_webp(block_img_path)
-            
-            block_alt = block.get("alt_text") or block.get("alt") or block.get("heading") or "Nailosmetic blog image"
-            block_media_id = wp.upload_media(block_webp_path, block_alt)
+            print("⚡ Converting featured image to WebP...")
+            feat_webp_path = img_mgr.convert_to_webp(feat_img_path)
+            feat_media_id = wp.upload_media(feat_webp_path, feat_alt)
+            print(f"✅ Featured image (WebP) uploaded. ID: {feat_media_id}")
             time.sleep(5)  # ⏳ Added delay to prevent 429 Too Many Requests
-            
-            # Fetch URL for Kadence image block
-            media_info = wp.session.get(f"{wp.api_url}/media/{block_media_id}", headers=wp.headers).json()
-            img_url = media_info["source_url"]
-            
-            # Replace placeholder in Kadence block
-            img_tag = f'<img src="{img_url}" alt="{block_alt}" class="kb-img wp-image-{block_media_id}"/>'
-            html_content = html_content.replace(f"<!-- IMAGE_PLACEHOLDER_{block['heading']} -->", img_tag)
+
+            # Block Images
+            for i, block in enumerate(plan.get("sections", [])):
+                if not block.get("image_prompt") or block["image_prompt"] == "NONE":
+                    continue
+                    
+                print(f"🎨 Generating image for '{block['heading']}' (4:5)...")
+                block_img_path = str(Path(tmp_dir) / f"block_{i}.png")
+                block_prompt = block.get("image_prompt")
+                
+                img_mgr.generate_image(block_prompt, "4:5", block_img_path, prefer_kolors=True)
+                
+                # Convert to WebP
+                print(f"⚡ Converting block '{block['heading']}' to WebP...")
+                block_webp_path = img_mgr.convert_to_webp(block_img_path)
+                
+                block_alt = block.get("alt_text") or block.get("alt") or block.get("heading") or "Nailosmetic blog image"
+                block_media_id = wp.upload_media(block_webp_path, block_alt)
+                time.sleep(5)  # ⏳ Added delay to prevent 429 Too Many Requests
+                
+                # Fetch URL for Kadence image block
+                media_info = wp.session.get(f"{wp.api_url}/media/{block_media_id}", headers=wp.headers).json()
+                img_url = media_info["source_url"]
+                
+                # Replace placeholder in Kadence block
+                img_tag = f'<img src="{img_url}" alt="{block_alt}" class="kb-img wp-image-{block_media_id}"/>'
+                html_content = html_content.replace(f"<!-- IMAGE_PLACEHOLDER_{block['heading']} -->", img_tag)
+    else:
+        print("   🛑 Skipping image generation to preserve API credits.")
 
     # 5. Determine Target Categories
     target_category_ids = []
@@ -475,7 +531,7 @@ def main():
             target_category_ids.append(wp_cats[0]["id"] if wp_cats else 1)
 
     # 6. Create Post with RankMath Meta
-    print("🚀 Publishing post to WordPress with RankMath SEO...")
+    print(f"🚀 {'Publishing' if post_status == 'publish' else 'Saving DRAFT of'} post to WordPress with RankMath SEO...")
     rankmath_meta = {
         "rank_math_title": plan["seo"]["title"],
         "rank_math_description": plan["seo"]["description"],
@@ -488,35 +544,43 @@ def main():
         featured_media_id=feat_media_id,
         categories=target_category_ids,
         meta=rankmath_meta,
-        slug=plan.get("slug")
+        slug=plan.get("slug"),
+        status=post_status
     )
     
     post_url = post_result["link"]
     post_slug = post_result["slug"]
-    print(f"✨ Post Live! URL: {post_url}")
+    if post_status == "publish":
+        print(f"✨ Post Live! URL: {post_url}")
+    else:
+        print(f"📄 Draft Saved! Link: {post_url}")
 
-    # 6. Update History and Queue
+    # 7. Update History and Queue
     print("📝 Updating history and Pinterest queue...")
     history_path = Path(__file__).parent.parent / "shared" / "history.json"
     SmartJSON.update_file(history_path, [post_slug])
         
-    queue_path = Path(__file__).parent.parent / "shared" / "links_queue.json"
-    SmartJSON.update_file(queue_path, [{
-        "url": post_url, 
-        "category": category_suggestion,
-        "topic": chosen_topic,
-        "niche": chosen_niche
-    }])
+    if post_status == "publish":
+        queue_path = Path(__file__).parent.parent / "shared" / "links_queue.json"
+        SmartJSON.update_file(queue_path, [{
+            "url": post_url, 
+            "category": category_suggestion,
+            "topic": chosen_topic,
+            "niche": chosen_niche
+        }])
 
-    # Also save to persistent published links history (used by Pinterest bot for smart link fallback)
-    published_path = Path(__file__).parent.parent / "shared" / "published_links.json"
-    SmartJSON.update_file(published_path, [{
-        "url": post_url,
-        "category": plan.get("category_suggestion", "Nails and Manicure"),
-        "niche": chosen_niche,
-        "topic": chosen_topic,
-        "slug": post_slug
-    }])
+        # Also save to persistent published links history (used by Pinterest bot for smart link fallback)
+        published_path = Path(__file__).parent.parent / "shared" / "published_links.json"
+        SmartJSON.update_file(published_path, [{
+            "url": post_url,
+            "category": plan.get("category_suggestion", "Nails and Manicure"),
+            "niche": chosen_niche,
+            "topic": chosen_topic,
+            "slug": post_slug
+        }])
+    else:
+        print("   ⏸️ Draft saved — NOT added to Pinterest queue or published-links.")
+        print("   👉 Review it in WP admin; after you hit Publish manually, add the URL to shared/links_queue.json so the Pinterest bot picks it up.")
 
     # Mark topic as used so we don't repeat it
     if chosen_topic:
@@ -524,7 +588,7 @@ def main():
         SmartJSON.update_file(used_topics_path, [chosen_topic])
         print(f"📋 Topic \"{chosen_topic}\" marked as used.")
 
-    print(f"✅ All done! ({chosen_niche} article published)")
+    print(f"✅ All done! ({chosen_niche} article {'published' if post_status == 'publish' else 'saved as draft'})")
 
 
 if __name__ == "__main__":
