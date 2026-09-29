@@ -148,8 +148,17 @@ class EliteGenerator:
         You are an Elite Content Architect for 'Nailosmetic'. 
         Structure a 3000-word comprehensive, authoritative blog guide about: "{topic}".
         
-        INTERNAL LINKING & GOALS:
+        PRIMARY KEYWORD PLACEMENT:
+        - PRIMARY KEYWORD is the article topic ("{topic}").
+        - Place it: in the H1/title, within the first 50 words of the introduction, in at least one H2 (preferably the first H2), in the conclusion, and in the URL slug (3-5 keywords, no year unless the topic is genuinely year-bound).
+        
+        E-E-A-T & AUTHORITY:
+        - Write with first-hand experience signals: "I tested", "in my experience", "what worked for me". Never generic filler, never throat-clearing.
+        - Include 1-2 outbound links to authoritative sources (e.g. aad.org, official brand sites). Use only real, well-known domains — NEVER invent or guess URLs.
+        
+        INTERNAL LINKING & NAVIGATION:
         - The introduction MUST naturally link to the homepage: {homepage_url}
+        - After the introduction, include a Table of Contents with jump links to every H2.
         - SEO & NLP: Include a high density of semantic entities and LSI keywords naturally.
         - AEO (Answer Engine Optimization): Headings must be formatted as user questions where applicable.
         - GEO (Generative Engine Optimization): Clear factual capsules and data-backed claims.
@@ -159,10 +168,11 @@ class EliteGenerator:
         - Exactly 10 to 12 distinct H2/H3 sections.
         - Total word count target is 3000+ words.
         - EXACTLY 3 sections must be designated for in-content images (has_image: true).
+        - FAQ REQUIREMENT: EXACTLY one section must use preferred_format 'faq' and contain 3-5 genuine user questions with concise 40-80 word answers. This powers the FAQPage schema. Never skip the FAQ section.
         
         RETURN ONLY VALID JSON:
         {{
-          "introduction": "A compelling 150-word hook that sets the stage and creates a curiosity gap for Google Discover. The first paragraph MUST be a 'Direct Answer Capsule' for AI Overviews.",
+          "introduction": "A compelling 150-word hook that sets the stage and creates a curiosity gap for Google Discover. The primary keyword must appear in the first 50 words. The first paragraph MUST be a 'Direct Answer Capsule' for AI Overviews. Follow with a Table of Contents containing jump links (e.g., <a href='#heading-anchor'>) to every H2.",
           "seo_description": "Meta description (max 155 chars)",
           "meta_title": "SEO Title (max 60 chars)",
           "slug": "url-slug-using-3-5-keywords-only",
@@ -172,13 +182,13 @@ class EliteGenerator:
           }},
           "sections": [
             {{
-              "heading": "Clear heading title (use Question formats for AEO)",
+              "heading": "Clear heading title (use Question formats for AEO, include primary keyword in at least one H2)",
               "goal": "What this section should cover (Aim for 300+ words depth)",
               "has_image": boolean,
               "preferred_format": "paragraph | list | table | faq"
             }}
           ],
-          "conclusion": "Summary and final takeaway"
+          "conclusion": "Summary and final takeaway (must include primary keyword naturally)"
         }}
         """
         return self._call_gemini_json(prompt, label="Outline")
@@ -189,6 +199,13 @@ class EliteGenerator:
         link_instruction = ""
         if target_link:
             link_instruction = f"INTERNAL LINKING: You MUST naturally include exactly one internal link to '{target_link}' using an HTML anchor tag with relevant anchor text."
+
+        has_img = section.get("has_image", False)
+        alt_text_instruction = (
+            "ALT TEXT must be descriptive and entity-rich (colors, technique, style actually depicted). "
+            "Never start with 'image of'. Never keyword-stuff the alt text."
+            if has_img else "NONE"
+        )
 
         prompt = f"""
         You are a top-tier human author for 'Nailosmetic'. 
@@ -201,10 +218,13 @@ class EliteGenerator:
         STRICT WRITING RULES:
         1. READABILITY: Conversational but premium.
         2. NO DASHES: NEVER use em-dashes (—) or en-dashes (–).
-        3. AEO/GEO: Use clear, factual statements. If the format is 'faq', use Q&A structure.
+        3. AEO/GEO: Use clear, factual statements. If the format is 'faq', use Q&A structure with 3-5 user questions and concise 40-80 word answers.
         4. NLP & SEMANTIC ENTITIES: Naturally weave in highly relevant LSI keywords and semantic entities for this topic to maximize SEO.
         5. RICH FORMATTING: If format is 'list', use HTML <ul> or <ol>. If 'table', use HTML <table> with headers.
         6. LENGTH: Be highly verbose and detailed. Provide specific examples and pro-tips. MINIMUM 300 words.
+        7. KEYWORD DENSITY: Use the primary keyword naturally, maximum 6-7 times per 1000 words across the whole article. Prefer LSI synonyms and semantic variants over repeating the exact phrase.
+        8. ANTI-FLUFF: Every paragraph must add new information. Do not restate the heading in different words. Do not pad.
+        9. OUTBOUND AUTHORITY: If relevant to techniques or health (e.g. nail care, skin/hair safety), include a natural link to an authoritative real domain (e.g. aad.org).
         
         CONTEXT (Already written):
         {context}
@@ -213,8 +233,8 @@ class EliteGenerator:
         {{
           "text": "The full section content (DO NOT repeat the heading here. Use HTML for lists/tables if requested)",
           "image_metadata": {{
-            "prompt": "{'A detailed 4:5 image prompt. Vibrant, high-contrast, edge-to-edge photography.' if section.get('has_image') else 'NONE'}",
-            "alt_text": "{'Highly descriptive entity-rich alt text' if section.get('has_image') else 'NONE'}"
+            "prompt": "{'A detailed 4:5 image prompt. Vibrant, high-contrast, edge-to-edge photography.' if has_img else 'NONE'}",
+            "alt_text": "{alt_text_instruction}"
           }}
         }}
         """
