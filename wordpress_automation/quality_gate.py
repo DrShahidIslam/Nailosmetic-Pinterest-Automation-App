@@ -14,9 +14,16 @@ Checks (failures — block publishing):
   5. Image placeholder count matches sections flagged for images
      (catches prompt/HTML drift)
   6. No lorem ipsum / TODO / [insert ...] / "coming soon" filler
+  7. FAQ section present (preferred_format == 'faq' required for AEO/GEO)
+  8. Focus keyword appears in the first 100 words of the introduction
+  9. Focus keyword appears in at least one section heading (H2)
+  10. Keyword stuffing check (maximum 7 occurrences per 1000 words)
 
 Checks (warnings — logged, do not block):
-  - SEO title length, meta description length
+  - SEO title length, meta description length, focus keyword presence
+  - Outbound external links to authoritative domains (1-2 links)
+  - Focus keyword present in conclusion
+  - Table of Contents with jump links to H2 sections
 
 Usage in main.py:
     from quality_gate import run_quality_gate
@@ -31,6 +38,7 @@ MIN_SECTION_WORDS = 80
 MIN_TOTAL_WORDS = 1200
 MIN_INTRO_WORDS = 40
 MIN_CONCLUSION_WORDS = 30
+MAX_KEYWORD_DENSITY_PER_1000 = 7.0
 
 # Filler / placeholder signals (case-insensitive). NOTE: the
 # "<!-- IMAGE_PLACEHOLDER_" pattern is checked separately by count,
@@ -63,6 +71,7 @@ def _words(text: str) -> int:
 
 def run_quality_gate(plan: dict, html_content: str):
     """
+    Evaluates generated content against SEO quality and structure requirements.
     Returns (passed: bool, failures: list[str], warnings: list[str]).
     """
     failures, warnings = [], []
@@ -74,7 +83,7 @@ def run_quality_gate(plan: dict, html_content: str):
             f"Only {len(sections)} sections generated (minimum {MIN_SECTIONS})."
         )
 
-    # 2. Intro / conclusion
+    # 2. Intro / conclusion presence and length
     intro_words = _words(plan.get("introduction", ""))
     if intro_words < MIN_INTRO_WORDS:
         failures.append(
@@ -127,8 +136,41 @@ def run_quality_gate(plan: dict, html_content: str):
         if re.search(pat, html_lower, re.I):
             failures.append(f"Filler/placeholder text detected matching pattern: {pat}")
 
-    # Warnings: SEO meta lengths (logged, never block)
+    # 7. FAQ section check (required for AEO/GEO schema)
+    has_faq = any(sec.get("preferred_format") == "faq" for sec in sections)
+    if not has_faq:
+        failures.append("Article has no FAQ section (required for AEO/GEO).")
+
+    # Primary / Focus keyword checks
     seo = plan.get("seo", {}) or {}
+    focus_kw = seo.get("focus_keyword", "").strip()
+
+    if focus_kw:
+        kw_lower = focus_kw.lower()
+
+        # 8. Keyword in first 100 words of introduction
+        intro_stripped = _strip_html(plan.get("introduction", ""))
+        first_100_intro = " ".join(intro_stripped.split()[:100]).lower()
+        if kw_lower not in first_100_intro:
+            failures.append(f"Focus keyword '{focus_kw}' not found in the first 100 words of the introduction.")
+
+        # 9. Keyword in at least one section heading (H2)
+        kw_in_heading = any(kw_lower in sec.get("heading", "").lower() for sec in sections)
+        if not kw_in_heading:
+            failures.append(f"Focus keyword '{focus_kw}' does not appear in any section heading.")
+
+        # 10. Keyword stuffing check (max 7 per 1000 words across full stripped article text)
+        full_text = _strip_html(html_content).lower()
+        kw_occurrences = len(re.findall(rf"\b{re.escape(kw_lower)}\b", full_text))
+        if total_words > 0:
+            per_1000 = (kw_occurrences / total_words) * 1000.0
+            if per_1000 > MAX_KEYWORD_DENSITY_PER_1000:
+                count_disp = f"{per_1000:.1f}" if per_1000 % 1 != 0 else f"{int(per_1000)}"
+                failures.append(f"Focus keyword appears {count_disp} times per 1000 words (maximum 7).")
+
+    # WARNINGS: Logged, do not block publishing
+
+    # Warning: SEO meta lengths and focus keyword
     seo_title = seo.get("title", "")
     if not seo_title:
         warnings.append("SEO title is empty — RankMath will fall back to post title.")
@@ -141,7 +183,24 @@ def run_quality_gate(plan: dict, html_content: str):
         warnings.append(
             f"Meta description is {len(seo_desc)} chars (ideal 120-160)."
         )
-    if not seo.get("focus_keyword"):
+    if not focus_kw:
         warnings.append("Focus keyword is empty.")
 
+    # Warning: Outbound external links
+    has_outbound = bool(re.search(r'href=["\']https?://(?!(?:www\.)?nailosmetic\.com)[^"\']+', html_content, re.I))
+    if not has_outbound:
+        warnings.append("No outbound external links found (recommended: 1-2 authoritative links).")
+
+    # Warning: Focus keyword in conclusion
+    if focus_kw:
+        conclusion_stripped = _strip_html(plan.get("conclusion", "")).lower()
+        if kw_lower not in conclusion_stripped:
+            warnings.append("Focus keyword is absent from conclusion.")
+
+    # Warning: Table of Contents (jump links to H2s)
+    has_toc = bool(re.search(r'href=["\']#[^"\']+["\']', html_content, re.I))
+    if not has_toc:
+        warnings.append("No Table of Contents (jump links) detected.")
+
     return (len(failures) == 0, failures, warnings)
+
