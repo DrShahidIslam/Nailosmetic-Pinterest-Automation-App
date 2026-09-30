@@ -57,17 +57,21 @@ def refresh_pinterest_token() -> str:
                 PINTEREST_ACCESS_TOKEN = new_access_token
                 print("   ✅ Access token refreshed successfully!")
                 
-                # Expose new refresh token to GitHub Actions if present
+                # Expose new refresh token to GitHub Actions ONLY if genuinely rotated
                 if new_refresh_token:
+                    is_rotated = (new_refresh_token.strip() != PINTEREST_REFRESH_TOKEN.strip())
                     PINTEREST_REFRESH_TOKEN = new_refresh_token
-                    github_env = os.getenv("GITHUB_ENV")
-                    if github_env:
-                        try:
-                            with open(github_env, "a", encoding="utf-8") as f:
-                                f.write(f"NEW_PINTEREST_REFRESH_TOKEN={new_refresh_token}\n")
-                            print("   ✅ Exported new refresh token to GITHUB_ENV.")
-                        except Exception as e:
-                            print(f"   ⚠️ Failed to write to GITHUB_ENV: {e}")
+                    if is_rotated:
+                        github_env = os.getenv("GITHUB_ENV")
+                        if github_env:
+                            try:
+                                with open(github_env, "a", encoding="utf-8") as f:
+                                    f.write(f"NEW_PINTEREST_REFRESH_TOKEN={new_refresh_token}\n")
+                                print("   ✅ Exported rotated refresh token to GITHUB_ENV.")
+                            except Exception as e:
+                                print(f"   ⚠️ Failed to write to GITHUB_ENV: {e}")
+                    else:
+                        print("   ℹ️ Refresh token is unchanged (not rotated).")
                 
                 # Update local .env file
                 if os.path.exists(".env"):

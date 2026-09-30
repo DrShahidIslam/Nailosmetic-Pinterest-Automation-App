@@ -56,10 +56,11 @@ jobs:
       # 3.6. Update Refresh Token Secret if rotated
       - name: 🔐 Update Refresh Token Secret
         if: env.NEW_PINTEREST_REFRESH_TOKEN != ''
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          gh secret set PINTEREST_REFRESH_TOKEN --body "${{ env.NEW_PINTEREST_REFRESH_TOKEN }}"
+          gh secret set PINTEREST_REFRESH_TOKEN --body "${{ env.NEW_PINTEREST_REFRESH_TOKEN }}" || echo "⚠️ Warning: Failed to update PINTEREST_REFRESH_TOKEN secret (GitHub API rate limit or permission issue). Token remains active for this session."
 
       # 4. Run the WordPress bot
       - name: 🚀 Run WordPress Bot

@@ -1375,20 +1375,24 @@ def refresh_pinterest_token() -> str:
             # Update global state for this run
             PINTEREST_ACCESS_TOKEN = new_access_token
             if new_refresh_token:
+                is_rotated = (new_refresh_token.strip() != r_token.strip())
                 PINTEREST_REFRESH_TOKEN = new_refresh_token
-                print("   ✅ Token refreshed successfully!")
-                print(f"   ⚠️  NEW REFRESH TOKEN received. Update your secrets/env!")
-                print(f"   New refresh token: {new_refresh_token[:10]}...")
-                
-                # Expose the new refresh token to the GitHub Actions environment
-                github_env = os.getenv("GITHUB_ENV")
-                if github_env:
-                    try:
-                        with open(github_env, "a", encoding="utf-8") as f:
-                            f.write(f"NEW_PINTEREST_REFRESH_TOKEN={new_refresh_token}\n")
-                        print("   ✅ Exported new refresh token to GITHUB_ENV.")
-                    except Exception as e:
-                        print(f"   ⚠️  Failed to write to GITHUB_ENV: {e}")
+                if is_rotated:
+                    print("   ✅ Token refreshed successfully!")
+                    print(f"   ⚠️  NEW REFRESH TOKEN received. Update your secrets/env!")
+                    print(f"   New refresh token: {new_refresh_token[:10]}...")
+                    
+                    # Expose the new refresh token to the GitHub Actions environment
+                    github_env = os.getenv("GITHUB_ENV")
+                    if github_env:
+                        try:
+                            with open(github_env, "a", encoding="utf-8") as f:
+                                f.write(f"NEW_PINTEREST_REFRESH_TOKEN={new_refresh_token}\n")
+                            print("   ✅ Exported rotated refresh token to GITHUB_ENV.")
+                        except Exception as e:
+                            print(f"   ⚠️  Failed to write to GITHUB_ENV: {e}")
+                else:
+                    print("   ✅ Access token refreshed successfully! (Refresh token unchanged)")
             else:
                 print("   ✅ Access token refreshed successfully!")
 
