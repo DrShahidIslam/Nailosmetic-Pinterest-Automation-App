@@ -9,6 +9,7 @@ name: 📌 Daily Pinterest Pin
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  PYTHONUNBUFFERED: "1"
 
 on:
   schedule:
@@ -71,7 +72,7 @@ jobs:
           PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
           PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
-        run: python main.py
+        run: python -u main.py
 
       # 4.5. Update Secret if token rotated
       - name: 🔐 Update Refresh Token Secret
@@ -88,17 +89,27 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add shared/*.json
+          if [ -f rejected_topics.log ]; then
+            git add rejected_topics.log
+          fi
           git commit -m "📝 Update history, pin log, and link queue [skip ci]" || exit 0
           
+          # Clean any unstaged/ephemeral files so rebase is never blocked
+          git checkout -- . 2>/dev/null || true
+          git clean -fd 2>/dev/null || true
+
           # Use a robust pull strategy: pull remote changes, then re-merge our data
           git pull --rebase origin main || (
             echo "⚠️ Conflict detected! Running Smart Merge..."
-            git rebase --abort
+            git rebase --abort 2>/dev/null || true
             git fetch origin main
             python shared_data_manager.py --resolve-conflicts
             git add shared/*.json
-            git commit -m "📝 Resolve data conflicts [skip ci]"
+            if [ -f rejected_topics.log ]; then
+              git add rejected_topics.log
+            fi
+            git commit -m "📝 Resolve data conflicts [skip ci]" || true
             # Fetch again just in case, then merge taking our resolved files
-            git pull origin main --no-rebase -s recursive -X ours
+            git pull origin main --no-rebase -s recursive -X ours || true
           )
           git push
