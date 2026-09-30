@@ -334,3 +334,8 @@
    Match Overlap  : 100.0%
    Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 1364] 'The Rise of Bio-Synthetic Hybrid Hair Extensions: A 2027 Styling Guide'.
 --------------------------------------------------------------------------------
+[2026-09-30 17:18:00] REJECTED TOPIC: "black hair halloween costumes for women"
+   Cleaned Topic  : "black hair halloween costumes for women"
+   Matched Post   : [ID: 2384] "Trendy Halloween Nails"
+   Reason         : Topic gate flagged cannibalization or overlap with existing post
+--------------------------------------------------------------------------------
