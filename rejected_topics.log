@@ -339,3 +339,11 @@
    Matched Post   : [ID: 2384] "Trendy Halloween Nails"
    Reason         : Topic gate flagged cannibalization or overlap with existing post
 --------------------------------------------------------------------------------
+[2026-10-01 00:19:30] REJECTED TOPIC: "fall nails with designs"
+   Cleaned Topic  : "fall nail"
+   Matched Post   : [ID: 2528] "15 Chic Nail Ideas Fall 2026: The Ultimate Seasonal Trend Report"
+   Post URL       : https://nailosmetic.com/fall-themed-nails-simple/
+   Post Date      : 2026-08-05
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2528] '15 Chic Nail Ideas Fall 2026: The Ultimate Seasonal Trend Report'.
+--------------------------------------------------------------------------------
