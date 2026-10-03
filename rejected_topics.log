@@ -379,3 +379,11 @@
    Match Overlap  : 100.0%
    Reason         : Recency rule: 'Easy Homecoming Hairstyles' published 7 days ago (<= 45 days) with 100.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-03 23:29:59] REJECTED TOPIC: "fall nails autumn"
+   Cleaned Topic  : "fall nail autumn"
+   Matched Post   : [ID: 2645] "10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic"
+   Post URL       : https://nailosmetic.com/fall-nails-square/
+   Post Date      : 2026-08-13
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2645] '10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic'.
+--------------------------------------------------------------------------------

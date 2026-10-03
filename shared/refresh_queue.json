@@ -58,5 +58,15 @@
     "candidate_attempted": "trendy halloween costumes",
     "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 2384] '7 Show-Stopping Black Hair Halloween Costumes: Expert Styling Guide'.",
     "queued_at": "2026-10-03 00:07:13"
+  },
+  {
+    "id": "2645",
+    "title": "10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic",
+    "slug": "fall-nails-square",
+    "link": "https://nailosmetic.com/fall-nails-square/",
+    "date": "2026-08-13",
+    "candidate_attempted": "fall nails autumn",
+    "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 2645] '10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic'.",
+    "queued_at": "2026-10-03 23:29:59"
   }
 ]
