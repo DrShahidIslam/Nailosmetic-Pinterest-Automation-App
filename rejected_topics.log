@@ -355,3 +355,19 @@
    Match Overlap  : 100.0%
    Reason         : Recency rule: 'Hoco Half Up Half Down Hair' published 8 days ago (<= 45 days) with 100.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-03 00:07:13] REJECTED TOPIC: "trendy halloween costumes"
+   Cleaned Topic  : "halloween costume"
+   Matched Post   : [ID: 2384] "7 Show-Stopping Black Hair Halloween Costumes: Expert Styling Guide"
+   Post URL       : https://nailosmetic.com/black-hair-halloween-costumes/
+   Post Date      : 2026-07-27
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2384] '7 Show-Stopping Black Hair Halloween Costumes: Expert Styling Guide'.
+--------------------------------------------------------------------------------
+[2026-10-03 00:07:13] REJECTED TOPIC: "y2k school outfits"
+   Cleaned Topic  : "school outfit"
+   Matched Post   : [ID: 2789] "Noah Kahan Concert Outfit Guide: 7 Chic Looks for the ‘Stick Season’ Vibe"
+   Post URL       : https://nailosmetic.com/noah-kahan-concert-outfit/
+   Post Date      : 2026-08-22
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Noah Kahan Concert Outfit Guide: 7 Chic Looks for the ‘Stick Season’ Vibe' published 42 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
