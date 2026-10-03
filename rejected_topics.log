@@ -371,3 +371,11 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Noah Kahan Concert Outfit Guide: 7 Chic Looks for the ‘Stick Season’ Vibe' published 42 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-03 14:07:30] REJECTED TOPIC: "easy homecoming hair"
+   Cleaned Topic  : "homecoming hair"
+   Matched Post   : [ID: 3471] "Easy Homecoming Hairstyles"
+   Post URL       : https://nailosmetic.com/simple-hoco-hairstyles/
+   Post Date      : 2026-09-26
+   Match Overlap  : 100.0%
+   Reason         : Recency rule: 'Easy Homecoming Hairstyles' published 7 days ago (<= 45 days) with 100.0% topic match.
+--------------------------------------------------------------------------------

@@ -701,7 +701,7 @@
         {
             "keyword": "simple hoco hair",
             "growth_mom": 1500,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
             "trend_type": "growing"
         },
         {
@@ -1015,7 +1015,7 @@
         {
             "keyword": "fall porch decorating ideas",
             "growth_mom": 100,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "monthly"
         },
         {
@@ -1669,7 +1669,7 @@
         {
             "keyword": "thanksgiving tablescapes ideas",
             "growth_mom": 200,
-            "growth_yoy": 700,
+            "growth_yoy": 600,
             "trend_type": "seasonal"
         }
     ],
@@ -1875,7 +1875,7 @@
         {
             "keyword": "football game outfit",
             "growth_mom": 70,
-            "growth_yoy": 90,
+            "growth_yoy": 80,
             "trend_type": "monthly"
         },
         {
