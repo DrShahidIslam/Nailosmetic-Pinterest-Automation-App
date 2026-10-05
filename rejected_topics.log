@@ -387,3 +387,19 @@
    Match Overlap  : 100.0%
    Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2645] '10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic'.
 --------------------------------------------------------------------------------
+[2026-10-05 17:48:31] REJECTED TOPIC: "french tip nails with design for fall"
+   Cleaned Topic  : "french nail fall"
+   Matched Post   : [ID: 3228] "Fall French Tip"
+   Post URL       : https://nailosmetic.com/fall-french-tip/
+   Post Date      : 2026-09-13
+   Match Overlap  : 80.0%
+   Reason         : Recency rule: 'Fall French Tip' published 22 days ago (<= 45 days) with 80.0% topic match.
+--------------------------------------------------------------------------------
+[2026-10-05 17:48:31] REJECTED TOPIC: "cute spring nails square for petite hands"
+   Cleaned Topic  : "spring nail square petite hand"
+   Matched Post   : [ID: 3052] "September Nails Square"
+   Post URL       : https://nailosmetic.com/september-nails-square/
+   Post Date      : 2026-09-05
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'September Nails Square' published 30 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
