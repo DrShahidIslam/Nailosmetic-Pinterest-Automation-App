@@ -731,7 +731,7 @@
         {
             "keyword": "simple hoco hair",
             "growth_mom": 1500,
-            "growth_yoy": -8,
+            "growth_yoy": -9,
             "trend_type": "growing"
         },
         {
@@ -1249,7 +1249,7 @@
         {
             "keyword": "cauldron decoration ideas",
             "growth_mom": 200,
-            "growth_yoy": -4,
+            "growth_yoy": -5,
             "trend_type": "growing"
         },
         {
@@ -1553,12 +1553,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "halloween front door ideas",
-            "growth_mom": 200,
-            "growth_yoy": -10,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "christmas door decorating contest",
             "growth_mom": 200,
             "growth_yoy": 9,
@@ -1680,6 +1674,12 @@
         },
         {
             "keyword": "front porch christmas decor",
+            "growth_mom": 200,
+            "growth_yoy": -50,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "halloween front door decorations",
             "growth_mom": 200,
             "growth_yoy": -50,
             "trend_type": "seasonal"

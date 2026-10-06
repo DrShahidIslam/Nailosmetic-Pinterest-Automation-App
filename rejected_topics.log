@@ -403,3 +403,11 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'September Nails Square' published 30 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-06 01:38:48] REJECTED TOPIC: "yolanda makeup"
+   Cleaned Topic  : "yolanda makeup"
+   Matched Post   : [ID: 3250] "Pumpkin Spice Latte Makeup Look"
+   Post URL       : https://nailosmetic.com/pumpkin-spice-latte-makeup-look/
+   Post Date      : 2026-09-15
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Pumpkin Spice Latte Makeup Look' published 21 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
