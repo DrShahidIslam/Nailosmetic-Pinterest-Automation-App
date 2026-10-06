@@ -411,3 +411,19 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Pumpkin Spice Latte Makeup Look' published 21 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-06 15:39:50] REJECTED TOPIC: "fall nails with designs"
+   Cleaned Topic  : "fall nail"
+   Matched Post   : [ID: 2528] "15 Chic Nail Ideas Fall 2026: The Ultimate Seasonal Trend Report"
+   Post URL       : https://nailosmetic.com/fall-themed-nails-simple/
+   Post Date      : 2026-08-05
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2528] '15 Chic Nail Ideas Fall 2026: The Ultimate Seasonal Trend Report'.
+--------------------------------------------------------------------------------
+[2026-10-06 15:39:50] REJECTED TOPIC: "prom nails almond for short fingers"
+   Cleaned Topic  : "prom nail almond short finger"
+   Matched Post   : [ID: 3218] "Cute Fall Almond Nails"
+   Post URL       : https://nailosmetic.com/cute-fall-almond-nails/
+   Post Date      : 2026-09-13
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Cute Fall Almond Nails' published 23 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
