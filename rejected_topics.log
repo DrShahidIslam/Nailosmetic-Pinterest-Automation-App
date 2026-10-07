@@ -427,3 +427,19 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Cute Fall Almond Nails' published 23 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-07 16:03:37] REJECTED TOPIC: "simple hoco hair"
+   Cleaned Topic  : "hoco hair"
+   Matched Post   : [ID: 3398] "Hoco Half Up Half Down Hair"
+   Post URL       : https://nailosmetic.com/hoco-half-up-half-down-hair/
+   Post Date      : 2026-09-23
+   Match Overlap  : 100.0%
+   Reason         : Recency rule: 'Hoco Half Up Half Down Hair' published 14 days ago (<= 45 days) with 100.0% topic match.
+--------------------------------------------------------------------------------
+[2026-10-07 16:03:37] REJECTED TOPIC: "volleyball hairstyles"
+   Cleaned Topic  : "volleyball hair"
+   Matched Post   : [ID: 3398] "Hoco Half Up Half Down Hair"
+   Post URL       : https://nailosmetic.com/hoco-half-up-half-down-hair/
+   Post Date      : 2026-09-23
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Hoco Half Up Half Down Hair' published 14 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
