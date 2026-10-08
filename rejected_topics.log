@@ -459,3 +459,27 @@
    Match Overlap  : 80.0%
    Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 2279] '7 Effortless Back to School Hair Trends for a Perfect First Day'.
 --------------------------------------------------------------------------------
+[2026-10-08 16:05:46] REJECTED TOPIC: "fall nails autumn"
+   Cleaned Topic  : "fall nail autumn"
+   Matched Post   : [ID: 2645] "10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic"
+   Post URL       : https://nailosmetic.com/fall-nails-square/
+   Post Date      : 2026-08-13
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2645] '10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic'.
+--------------------------------------------------------------------------------
+[2026-10-08 16:05:46] REJECTED TOPIC: "june nails for tropical summer vacations"
+   Cleaned Topic  : "june nail tropical summer vacation"
+   Matched Post   : [ID: 2982] "Summer Into Fall Nails"
+   Post URL       : https://nailosmetic.com/summer-into-fall-nails/
+   Post Date      : 2026-09-01
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Summer Into Fall Nails' published 37 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
+[2026-10-08 16:05:46] REJECTED TOPIC: "blooming gel nails for DIY enthusiasts"
+   Cleaned Topic  : "blooming gel nail enthusiast"
+   Matched Post   : [ID: 3156] "Fall Gel Nails"
+   Post URL       : https://nailosmetic.com/fall-gel-nails/
+   Post Date      : 2026-09-10
+   Match Overlap  : 57.1%
+   Reason         : Recency rule: 'Fall Gel Nails' published 28 days ago (<= 45 days) with 57.1% topic match.
+--------------------------------------------------------------------------------

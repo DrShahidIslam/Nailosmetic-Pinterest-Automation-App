@@ -393,7 +393,7 @@
         {
             "keyword": "october nail colors",
             "growth_mom": 1500,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "seasonal"
         },
         {
@@ -517,12 +517,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "hoco nails for black dress",
-            "growth_mom": 900,
-            "growth_yoy": -60,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "black french tip halloween nails",
             "growth_mom": 900,
             "growth_yoy": -30,
@@ -574,6 +568,12 @@
             "keyword": "chic halloween nails",
             "growth_mom": 800,
             "growth_yoy": 40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "halloween pedicure ideas",
+            "growth_mom": 800,
+            "growth_yoy": -40,
             "trend_type": "seasonal"
         }
     ],
@@ -781,7 +781,7 @@
         {
             "keyword": "bedroom ideas",
             "growth_mom": -10,
-            "growth_yoy": -20,
+            "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
@@ -1671,7 +1671,7 @@
         {
             "keyword": "fall outfits",
             "growth_mom": 100,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "monthly"
         },
         {
@@ -1767,7 +1767,7 @@
         {
             "keyword": "winter outfits",
             "growth_mom": 60,
-            "growth_yoy": -10,
+            "growth_yoy": -20,
             "trend_type": "monthly"
         },
         {
@@ -1851,7 +1851,7 @@
         {
             "keyword": "birthday outfit",
             "growth_mom": 9,
-            "growth_yoy": -6,
+            "growth_yoy": -7,
             "trend_type": "monthly"
         },
         {
@@ -2217,7 +2217,7 @@
         {
             "keyword": "fall club outfits",
             "growth_mom": 600,
-            "growth_yoy": 6,
+            "growth_yoy": 5,
             "trend_type": "growing"
         },
         {
@@ -2308,12 +2308,6 @@
             "keyword": "fall dinner date outfit",
             "growth_mom": 1000,
             "growth_yoy": 10,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "fall weekend outfits",
-            "growth_mom": 1000,
-            "growth_yoy": 50,
             "trend_type": "seasonal"
         },
         {
@@ -2566,6 +2560,12 @@
             "keyword": "lazy fall outfits",
             "growth_mom": 600,
             "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "black jeans fall outfit",
+            "growth_mom": 600,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         }
     ],
