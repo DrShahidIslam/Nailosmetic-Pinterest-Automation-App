@@ -194,7 +194,7 @@
         },
         {
             "keyword": "fall nails autumn",
-            "growth_mom": 6000,
+            "growth_mom": 5500,
             "growth_yoy": 100,
             "trend_type": "growing"
         },
@@ -569,6 +569,12 @@
             "growth_mom": 800,
             "growth_yoy": 10,
             "trend_type": "seasonal"
+        },
+        {
+            "keyword": "chic halloween nails",
+            "growth_mom": 800,
+            "growth_yoy": 40,
+            "trend_type": "seasonal"
         }
     ],
     "hair_beauty": [
@@ -605,12 +611,12 @@
         {
             "keyword": "hair",
             "growth_mom": -4,
-            "growth_yoy": 8,
+            "growth_yoy": 7,
             "trend_type": "monthly"
         },
         {
             "keyword": "hair styles",
-            "growth_mom": 3,
+            "growth_mom": 2,
             "growth_yoy": -60,
             "trend_type": "monthly"
         },
@@ -720,12 +726,6 @@
             "keyword": "easy hoco hairstyles",
             "growth_mom": 1500,
             "growth_yoy": -40,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "hair ideas for homecoming",
-            "growth_mom": 1000,
-            "growth_yoy": -30,
             "trend_type": "seasonal"
         },
         {
@@ -847,7 +847,7 @@
         {
             "keyword": "bathroom",
             "growth_mom": -10,
-            "growth_yoy": 3,
+            "growth_yoy": 2,
             "trend_type": "monthly"
         },
         {
@@ -978,7 +978,7 @@
         },
         {
             "keyword": "small bathroom ideas",
-            "growth_mom": -7,
+            "growth_mom": -8,
             "growth_yoy": -50,
             "trend_type": "monthly"
         },
@@ -1050,7 +1050,7 @@
         },
         {
             "keyword": "bloxburg house",
-            "growth_mom": -3,
+            "growth_mom": -4,
             "growth_yoy": 200,
             "trend_type": "monthly"
         },
@@ -1839,7 +1839,7 @@
         {
             "keyword": "outfits for school",
             "growth_mom": -20,
-            "growth_yoy": 30,
+            "growth_yoy": 20,
             "trend_type": "monthly"
         },
         {
@@ -1868,7 +1868,7 @@
         },
         {
             "keyword": "casual outfits",
-            "growth_mom": 5,
+            "growth_mom": 4,
             "growth_yoy": -30,
             "trend_type": "monthly"
         },
@@ -2505,7 +2505,7 @@
         {
             "keyword": "warm fall outfit",
             "growth_mom": 600,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
             "trend_type": "seasonal"
         },
         {

@@ -443,3 +443,19 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Hoco Half Up Half Down Hair' published 14 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-08 00:41:09] REJECTED TOPIC: "hoco makeup ideas"
+   Cleaned Topic  : "hoco makeup"
+   Matched Post   : [ID: 3363] "Hoco Makeup Inspo"
+   Post URL       : https://nailosmetic.com/hoco-makeup-inspo/
+   Post Date      : 2026-09-20
+   Match Overlap  : 100.0%
+   Reason         : Recency rule: 'Hoco Makeup Inspo' published 18 days ago (<= 45 days) with 100.0% topic match.
+--------------------------------------------------------------------------------
+[2026-10-08 00:41:09] REJECTED TOPIC: "hairstyles for the first day of school for teachers"
+   Cleaned Topic  : "hair first day school teacher"
+   Matched Post   : [ID: 2279] "7 Effortless Back to School Hair Trends for a Perfect First Day"
+   Post URL       : https://nailosmetic.com/back-to-school-hair-trends/
+   Post Date      : 2026-07-20
+   Match Overlap  : 80.0%
+   Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 2279] '7 Effortless Back to School Hair Trends for a Perfect First Day'.
+--------------------------------------------------------------------------------

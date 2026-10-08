@@ -68,5 +68,15 @@
     "candidate_attempted": "fall nails autumn",
     "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 2645] '10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic'.",
     "queued_at": "2026-10-03 23:29:59"
+  },
+  {
+    "id": "2279",
+    "title": "7 Effortless Back to School Hair Trends for a Perfect First Day",
+    "slug": "back-to-school-hair-trends",
+    "link": "https://nailosmetic.com/back-to-school-hair-trends/",
+    "date": "2026-07-20",
+    "candidate_attempted": "hairstyles for the first day of school for teachers",
+    "reason": "High topic overlap (80.0% >= 80%) with existing post [ID: 2279] '7 Effortless Back to School Hair Trends for a Perfect First Day'.",
+    "queued_at": "2026-10-08 00:41:09"
   }
 ]
