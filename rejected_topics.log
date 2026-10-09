@@ -483,3 +483,11 @@
    Match Overlap  : 57.1%
    Reason         : Recency rule: 'Fall Gel Nails' published 28 days ago (<= 45 days) with 57.1% topic match.
 --------------------------------------------------------------------------------
+[2026-10-09 00:56:44] REJECTED TOPIC: "fall nails autumn"
+   Cleaned Topic  : "fall nail autumn"
+   Matched Post   : [ID: 2645] "10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic"
+   Post URL       : https://nailosmetic.com/fall-nails-square/
+   Post Date      : 2026-08-13
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2645] '10 Chicest Fall Nails Square Designs to Elevate Your Autumn Aesthetic'.
+--------------------------------------------------------------------------------
