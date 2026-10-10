@@ -15,7 +15,7 @@
         {
             "keyword": "halloween nails",
             "growth_mom": 400,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "monthly"
         },
         {
@@ -69,7 +69,7 @@
         {
             "keyword": "brown nails",
             "growth_mom": 80,
-            "growth_yoy": 9,
+            "growth_yoy": 8,
             "trend_type": "monthly"
         },
         {
@@ -1451,12 +1451,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "porch pumpkins",
-            "growth_mom": 300,
-            "growth_yoy": -50,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "simple fall tablescapes",
             "growth_mom": 300,
             "growth_yoy": 30,
@@ -1665,6 +1659,12 @@
             "growth_mom": 200,
             "growth_yoy": -3,
             "trend_type": "seasonal"
+        },
+        {
+            "keyword": "plastic pumpkins makeover",
+            "growth_mom": 200,
+            "growth_yoy": 80,
+            "trend_type": "seasonal"
         }
     ],
     "fashion_style": [
@@ -1791,7 +1791,7 @@
         {
             "keyword": "wedding dress",
             "growth_mom": 10,
-            "growth_yoy": 70,
+            "growth_yoy": 60,
             "trend_type": "monthly"
         },
         {
@@ -1923,7 +1923,7 @@
         {
             "keyword": "comfy outfits",
             "growth_mom": 30,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "monthly"
         },
         {
@@ -2379,7 +2379,7 @@
         {
             "keyword": "fall festival outfits",
             "growth_mom": 800,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "seasonal"
         },
         {
