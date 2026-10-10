@@ -499,3 +499,19 @@
    Match Overlap  : 100.0%
    Reason         : Recency rule: 'Hoco Half Up Half Down Hair' published 17 days ago (<= 45 days) with 100.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-10 15:00:11] REJECTED TOPIC: "fall nails october"
+   Cleaned Topic  : "fall nail october"
+   Matched Post   : [ID: 3186] "Cute Nails for Fall"
+   Post URL       : https://nailosmetic.com/cute-nails-for-fall/
+   Post Date      : 2026-09-11
+   Match Overlap  : 80.0%
+   Reason         : Recency rule: 'Cute Nails for Fall' published 29 days ago (<= 45 days) with 80.0% topic match.
+--------------------------------------------------------------------------------
+[2026-10-10 15:00:11] REJECTED TOPIC: "red hoco nails"
+   Cleaned Topic  : "red hoco nail"
+   Matched Post   : [ID: 3481] "Fall Nails Red Burgundy"
+   Post URL       : https://nailosmetic.com/fall-nails-red-burgundy/
+   Post Date      : 2026-09-27
+   Match Overlap  : 66.7%
+   Reason         : Recency rule: 'Fall Nails Red Burgundy' published 13 days ago (<= 45 days) with 66.7% topic match.
+--------------------------------------------------------------------------------
