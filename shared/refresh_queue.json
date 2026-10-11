@@ -78,5 +78,15 @@
     "candidate_attempted": "hairstyles for the first day of school for teachers",
     "reason": "High topic overlap (80.0% >= 80%) with existing post [ID: 2279] '7 Effortless Back to School Hair Trends for a Perfect First Day'.",
     "queued_at": "2026-10-08 00:41:09"
+  },
+  {
+    "id": "2690",
+    "title": "10 Chic Fall Short Nails: The Ultimate Seasonal Manicure Guide",
+    "slug": "fall-short-nails-trends",
+    "link": "https://nailosmetic.com/fall-short-nails-trends/",
+    "date": "2026-08-16",
+    "candidate_attempted": "fall manicure ideas",
+    "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 2690] '10 Chic Fall Short Nails: The Ultimate Seasonal Manicure Guide'.",
+    "queued_at": "2026-10-11 00:04:32"
   }
 ]
