@@ -61,7 +61,27 @@ def main():
                 else:
                     f.write(line)
                     
-        print("[SAVED] Updated .env with new access and refresh tokens. You can now run refresh_and_analyze.py without errors!")
+        print("[SAVED] Updated local .env with new access and refresh tokens.")
+
+        # Attempt to update GitHub Secrets automatically
+        gh_pat = os.getenv("GH_PAT", "").strip()
+        if gh_pat:
+            import subprocess
+            try:
+                env = os.environ.copy()
+                env["GH_TOKEN"] = gh_pat
+                subprocess.run(["gh", "secret", "set", "PINTEREST_ACCESS_TOKEN", "--body", access_token], env=env, check=True)
+                subprocess.run(["gh", "secret", "set", "PINTEREST_REFRESH_TOKEN", "--body", refresh_token], env=env, check=True)
+                print("🔒 [SAVED] Successfully updated GitHub Secrets: PINTEREST_ACCESS_TOKEN and PINTEREST_REFRESH_TOKEN!")
+            except Exception as e:
+                print(f"\n⚠️ Could not automatically update GitHub Secrets via gh CLI ({e}).")
+                print("👉 Please manually update GitHub Repository Secrets:")
+                print(f"   • PINTEREST_ACCESS_TOKEN = {access_token[:20]}...")
+                print(f"   • PINTEREST_REFRESH_TOKEN = {refresh_token[:20]}...")
+        else:
+            print("\n👉 Please remember to update GitHub Secrets (Settings > Secrets and variables > Actions):")
+            print(f"   • PINTEREST_ACCESS_TOKEN")
+            print(f"   • PINTEREST_REFRESH_TOKEN")
     else:
         print(f"[ERROR] Failed to exchange code: {response.status_code}")
         print(response.text)
