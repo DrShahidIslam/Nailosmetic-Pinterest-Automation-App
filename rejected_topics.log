@@ -555,3 +555,11 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'September Nails Square' published 36 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-12 18:32:05] REJECTED TOPIC: "simple hoco hair"
+   Cleaned Topic  : "hoco hair"
+   Matched Post   : [ID: 3398] "Hoco Half Up Half Down Hair"
+   Post URL       : https://nailosmetic.com/hoco-half-up-half-down-hair/
+   Post Date      : 2026-09-23
+   Match Overlap  : 100.0%
+   Reason         : Recency rule: 'Hoco Half Up Half Down Hair' published 19 days ago (<= 45 days) with 100.0% topic match.
+--------------------------------------------------------------------------------
