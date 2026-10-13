@@ -88,5 +88,15 @@
     "candidate_attempted": "fall manicure ideas",
     "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 2690] '10 Chic Fall Short Nails: The Ultimate Seasonal Manicure Guide'.",
     "queued_at": "2026-10-11 00:04:32"
+  },
+  {
+    "id": "2311",
+    "title": "15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style",
+    "slug": "trendy-halloween-nails",
+    "link": "https://nailosmetic.com/trendy-halloween-nails/",
+    "date": "2026-07-22",
+    "candidate_attempted": "cute halloween nail ideas",
+    "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 2311] '15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style'.",
+    "queued_at": "2026-10-13 02:23:47"
   }
 ]
