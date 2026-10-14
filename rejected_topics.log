@@ -595,3 +595,11 @@
    Match Overlap  : 80.0%
    Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 537] '15+ Chic Beach Nail Art Ideas for Your Luxurious Summer Getaway'.
 --------------------------------------------------------------------------------
+[2026-10-14 14:18:10] REJECTED TOPIC: "almond halloween nails"
+   Cleaned Topic  : "almond halloween nail"
+   Matched Post   : [ID: 3218] "Cute Fall Almond Nails"
+   Post URL       : https://nailosmetic.com/cute-fall-almond-nails/
+   Post Date      : 2026-09-13
+   Match Overlap  : 66.7%
+   Reason         : Recency rule: 'Cute Fall Almond Nails' published 31 days ago (<= 45 days) with 66.7% topic match.
+--------------------------------------------------------------------------------
