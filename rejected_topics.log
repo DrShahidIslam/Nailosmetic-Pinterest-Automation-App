@@ -603,3 +603,11 @@
    Match Overlap  : 66.7%
    Reason         : Recency rule: 'Cute Fall Almond Nails' published 31 days ago (<= 45 days) with 66.7% topic match.
 --------------------------------------------------------------------------------
+[2026-10-14 23:37:50] REJECTED TOPIC: "halloween doors"
+   Cleaned Topic  : "halloween door"
+   Matched Post   : [ID: 3290] "Creative Halloween Makeup 2026"
+   Post URL       : https://nailosmetic.com/creative-halloween-makeup-2026/
+   Post Date      : 2026-09-17
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Creative Halloween Makeup 2026' published 27 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
