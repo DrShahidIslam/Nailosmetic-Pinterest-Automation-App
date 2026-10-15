@@ -611,3 +611,35 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Creative Halloween Makeup 2026' published 27 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-15 23:31:30] REJECTED TOPIC: "fall manicure ideas"
+   Cleaned Topic  : "fall manicure"
+   Matched Post   : [ID: 2690] "10 Chic Fall Short Nails: The Ultimate Seasonal Manicure Guide"
+   Post URL       : https://nailosmetic.com/fall-short-nails-trends/
+   Post Date      : 2026-08-16
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2690] '10 Chic Fall Short Nails: The Ultimate Seasonal Manicure Guide'.
+--------------------------------------------------------------------------------
+[2026-10-15 23:31:30] REJECTED TOPIC: "fall french manicure"
+   Cleaned Topic  : "fall french manicure"
+   Matched Post   : [ID: 3228] "Fall French Tip"
+   Post URL       : https://nailosmetic.com/fall-french-tip/
+   Post Date      : 2026-09-13
+   Match Overlap  : 80.0%
+   Reason         : Recency rule: 'Fall French Tip' published 32 days ago (<= 45 days) with 80.0% topic match.
+--------------------------------------------------------------------------------
+[2026-10-15 23:31:30] REJECTED TOPIC: "western fall nails"
+   Cleaned Topic  : "western fall nail"
+   Matched Post   : [ID: 3186] "Cute Nails for Fall"
+   Post URL       : https://nailosmetic.com/cute-nails-for-fall/
+   Post Date      : 2026-09-11
+   Match Overlap  : 80.0%
+   Reason         : Recency rule: 'Cute Nails for Fall' published 34 days ago (<= 45 days) with 80.0% topic match.
+--------------------------------------------------------------------------------
+[2026-10-15 23:31:30] REJECTED TOPIC: "basic halloween nails"
+   Cleaned Topic  : "basic halloween nail"
+   Matched Post   : [ID: 3423] "Trendy Halloween Nails"
+   Post URL       : https://nailosmetic.com/trendy-halloween-nails/
+   Post Date      : 2026-09-24
+   Match Overlap  : 80.0%
+   Reason         : Recency rule: 'Trendy Halloween Nails' published 21 days ago (<= 45 days) with 80.0% topic match.
+--------------------------------------------------------------------------------
