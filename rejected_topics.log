@@ -659,3 +659,19 @@
    Match Overlap  : 66.7%
    Reason         : Recency rule: 'September Nails Square' published 41 days ago (<= 45 days) with 66.7% topic match.
 --------------------------------------------------------------------------------
+[2026-10-16 23:13:35] REJECTED TOPIC: "cute halloween nail ideas"
+   Cleaned Topic  : "halloween nail"
+   Matched Post   : [ID: 2311] "15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style"
+   Post URL       : https://nailosmetic.com/trendy-halloween-nails/
+   Post Date      : 2026-07-22
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2311] '15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style'.
+--------------------------------------------------------------------------------
+[2026-10-16 23:13:35] REJECTED TOPIC: "negative space nail art for minimalist style"
+   Cleaned Topic  : "negative space nail art minimalist"
+   Matched Post   : [ID: 1687] "7 Viral Negative Space Nail Art Hacks You Need to Try"
+   Post URL       : https://nailosmetic.com/negative-space-nail-art/
+   Post Date      : 2026-06-18
+   Match Overlap  : 80.0%
+   Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 1687] '7 Viral Negative Space Nail Art Hacks You Need to Try'.
+--------------------------------------------------------------------------------
