@@ -683,3 +683,11 @@
    Match Overlap  : 100.0%
    Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2311] '15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style'.
 --------------------------------------------------------------------------------
+[2026-10-17 22:51:12] REJECTED TOPIC: "edgy halloween nails"
+   Cleaned Topic  : "edgy halloween nail"
+   Matched Post   : [ID: 3423] "Trendy Halloween Nails"
+   Post URL       : https://nailosmetic.com/trendy-halloween-nails/
+   Post Date      : 2026-09-24
+   Match Overlap  : 80.0%
+   Reason         : Recency rule: 'Trendy Halloween Nails' published 23 days ago (<= 45 days) with 80.0% topic match.
+--------------------------------------------------------------------------------

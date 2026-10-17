@@ -9,7 +9,7 @@
         {
             "keyword": "nails",
             "growth_mom": -30,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "monthly"
         },
         {
@@ -93,7 +93,7 @@
         {
             "keyword": "pink nails",
             "growth_mom": -30,
-            "growth_yoy": -6,
+            "growth_yoy": -7,
             "trend_type": "monthly"
         },
         {
@@ -481,12 +481,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "halloween nails black and white",
-            "growth_mom": 1000,
-            "growth_yoy": 4,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "elegant halloween nails",
             "growth_mom": 1000,
             "growth_yoy": -20,
@@ -561,7 +555,7 @@
         {
             "keyword": "black and white halloween nails",
             "growth_mom": 800,
-            "growth_yoy": -4,
+            "growth_yoy": -5,
             "trend_type": "seasonal"
         },
         {
@@ -585,7 +579,7 @@
         {
             "keyword": "halloween nails spider web",
             "growth_mom": 800,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "seasonal"
         },
         {
@@ -603,13 +597,13 @@
         {
             "keyword": "halloween nails french tip",
             "growth_mom": 800,
-            "growth_yoy": 6,
+            "growth_yoy": 5,
             "trend_type": "seasonal"
         },
         {
             "keyword": "basic halloween nails",
             "growth_mom": 800,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "seasonal"
         },
         {
@@ -621,13 +615,19 @@
         {
             "keyword": "halloween nails black",
             "growth_mom": 800,
-            "growth_yoy": 1,
+            "growth_yoy": 0,
             "trend_type": "seasonal"
         },
         {
             "keyword": "kids halloween nails",
             "growth_mom": 800,
             "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "neutral halloween nails",
+            "growth_mom": 800,
+            "growth_yoy": -20,
             "trend_type": "seasonal"
         }
     ],
@@ -659,7 +659,7 @@
         {
             "keyword": "hair",
             "growth_mom": -4,
-            "growth_yoy": 8,
+            "growth_yoy": 7,
             "trend_type": "monthly"
         },
         {
@@ -877,7 +877,7 @@
         {
             "keyword": "room decor ideas",
             "growth_mom": -20,
-            "growth_yoy": 20,
+            "growth_yoy": 10,
             "trend_type": "monthly"
         },
         {
@@ -991,7 +991,7 @@
         {
             "keyword": "gallery wall",
             "growth_mom": -20,
-            "growth_yoy": -8,
+            "growth_yoy": -9,
             "trend_type": "monthly"
         },
         {
@@ -1129,7 +1129,7 @@
         {
             "keyword": "backyard halloween party ideas",
             "growth_mom": 400,
-            "growth_yoy": -8,
+            "growth_yoy": -9,
             "trend_type": "growing"
         },
         {
@@ -1435,7 +1435,7 @@
         {
             "keyword": "pumpkin porch",
             "growth_mom": 400,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "seasonal"
         },
         {
@@ -1495,7 +1495,7 @@
         {
             "keyword": "thanksgiving table decor",
             "growth_mom": 200,
-            "growth_yoy": 40,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
@@ -1761,7 +1761,7 @@
         {
             "keyword": "winter outfits",
             "growth_mom": 60,
-            "growth_yoy": -10,
+            "growth_yoy": -20,
             "trend_type": "monthly"
         },
         {
@@ -1845,7 +1845,7 @@
         {
             "keyword": "hoco dress",
             "growth_mom": -1,
-            "growth_yoy": 50,
+            "growth_yoy": 40,
             "trend_type": "monthly"
         },
         {
@@ -1965,7 +1965,7 @@
         {
             "keyword": "emo",
             "growth_mom": -7,
-            "growth_yoy": 0,
+            "growth_yoy": -1,
             "trend_type": "monthly"
         },
         {
@@ -2097,7 +2097,7 @@
         {
             "keyword": "fall date night outfit",
             "growth_mom": 700,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "growing"
         },
         {
@@ -2187,7 +2187,7 @@
         {
             "keyword": "oktoberfest outfit",
             "growth_mom": 600,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "growing"
         },
         {
@@ -2469,7 +2469,7 @@
         {
             "keyword": "octoberfest outfits",
             "growth_mom": 600,
-            "growth_yoy": 0,
+            "growth_yoy": -1,
             "trend_type": "seasonal"
         },
         {
@@ -2541,7 +2541,7 @@
         {
             "keyword": "warm fall outfit",
             "growth_mom": 500,
-            "growth_yoy": -9,
+            "growth_yoy": -10,
             "trend_type": "seasonal"
         },
         {
