@@ -675,3 +675,11 @@
    Match Overlap  : 80.0%
    Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 1687] '7 Viral Negative Space Nail Art Hacks You Need to Try'.
 --------------------------------------------------------------------------------
+[2026-10-17 12:39:48] REJECTED TOPIC: "cute halloween nail ideas"
+   Cleaned Topic  : "halloween nail"
+   Matched Post   : [ID: 2311] "15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style"
+   Post URL       : https://nailosmetic.com/trendy-halloween-nails/
+   Post Date      : 2026-07-22
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2311] '15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style'.
+--------------------------------------------------------------------------------
