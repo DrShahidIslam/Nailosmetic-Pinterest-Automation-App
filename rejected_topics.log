@@ -691,3 +691,11 @@
    Match Overlap  : 80.0%
    Reason         : Recency rule: 'Trendy Halloween Nails' published 23 days ago (<= 45 days) with 80.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-18 12:57:13] REJECTED TOPIC: "minion themed makeup for halloween"
+   Cleaned Topic  : "minion themed makeup halloween"
+   Matched Post   : [ID: 3290] "Creative Halloween Makeup 2026"
+   Post URL       : https://nailosmetic.com/creative-halloween-makeup-2026/
+   Post Date      : 2026-09-17
+   Match Overlap  : 57.1%
+   Reason         : Recency rule: 'Creative Halloween Makeup 2026' published 31 days ago (<= 45 days) with 57.1% topic match.
+--------------------------------------------------------------------------------
