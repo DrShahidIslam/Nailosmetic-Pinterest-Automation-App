@@ -707,3 +707,11 @@
    Match Overlap  : 100.0%
    Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2384] '7 Show-Stopping Black Hair Halloween Costumes: Expert Styling Guide'.
 --------------------------------------------------------------------------------
+[2026-10-20 14:03:48] REJECTED TOPIC: "brown and orange nails fall"
+   Cleaned Topic  : "brown orange nail fall"
+   Matched Post   : [ID: 3343] "Fall Nail Inspo Brown"
+   Post URL       : https://nailosmetic.com/fall-nail-inspo-brown/
+   Post Date      : 2026-09-19
+   Match Overlap  : 85.7%
+   Reason         : Recency rule: 'Fall Nail Inspo Brown' published 31 days ago (<= 45 days) with 85.7% topic match.
+--------------------------------------------------------------------------------
