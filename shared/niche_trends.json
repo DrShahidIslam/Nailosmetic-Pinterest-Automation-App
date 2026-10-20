@@ -577,12 +577,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "halloween nails spider web",
-            "growth_mom": 800,
-            "growth_yoy": -4,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "halloween nails ghost",
             "growth_mom": 800,
             "growth_yoy": -10,
@@ -628,6 +622,18 @@
             "keyword": "neutral halloween nails",
             "growth_mom": 800,
             "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "black and red halloween nails",
+            "growth_mom": 800,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "red and black halloween nails",
+            "growth_mom": 800,
+            "growth_yoy": -6,
             "trend_type": "seasonal"
         }
     ],
@@ -1243,7 +1249,7 @@
         {
             "keyword": "front porch christmas decor ideas",
             "growth_mom": 200,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
             "trend_type": "growing"
         },
         {
@@ -1417,7 +1423,7 @@
         {
             "keyword": "halloween door decorating contest office",
             "growth_mom": 500,
-            "growth_yoy": -20,
+            "growth_yoy": -30,
             "trend_type": "seasonal"
         },
         {
