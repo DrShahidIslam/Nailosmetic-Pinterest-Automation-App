@@ -215,6 +215,66 @@
             "growth_mom": 800,
             "growth_yoy": -4,
             "trend_type": "growing"
+        },
+        {
+            "keyword": "fall thanksgiving nails",
+            "growth_mom": 5500,
+            "growth_yoy": 300,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fall november nails",
+            "growth_mom": 3000,
+            "growth_yoy": 200,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fall holiday nails",
+            "growth_mom": 3000,
+            "growth_yoy": 600,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "november nails ideas",
+            "growth_mom": 1000,
+            "growth_yoy": -50,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "november nails",
+            "growth_mom": 1000,
+            "growth_yoy": 60,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "white halloween nails",
+            "growth_mom": 900,
+            "growth_yoy": -5,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "purple and black halloween nails",
+            "growth_mom": 800,
+            "growth_yoy": 50,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "nails for november",
+            "growth_mom": 800,
+            "growth_yoy": 90,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "black and white halloween nails",
+            "growth_mom": 800,
+            "growth_yoy": 4,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "kids halloween nails",
+            "growth_mom": 800,
+            "growth_yoy": 40,
+            "trend_type": "seasonal"
         }
     ],
     "hair_beauty": [
@@ -317,7 +377,7 @@
         {
             "keyword": "fulani braids",
             "growth_mom": -20,
-            "growth_yoy": -6,
+            "growth_yoy": -7,
             "trend_type": "monthly"
         },
         {
@@ -373,13 +433,67 @@
             "growth_mom": 900,
             "growth_yoy": 70,
             "trend_type": "growing"
+        },
+        {
+            "keyword": "pumpkin patch hairstyles",
+            "growth_mom": 3000,
+            "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "easy scarecrow makeup",
+            "growth_mom": 1000,
+            "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cat makeup halloween",
+            "growth_mom": 1000,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "simple halloween makeup looks",
+            "growth_mom": 1000,
+            "growth_yoy": 10,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "simple halloween makeup",
+            "growth_mom": 900,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "easy halloween makeup",
+            "growth_mom": 900,
+            "growth_yoy": 100,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "glam skeleton makeup",
+            "growth_mom": 800,
+            "growth_yoy": 2,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "catrina makeup",
+            "growth_mom": 800,
+            "growth_yoy": 200,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mummy brownies",
+            "growth_mom": 800,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
         }
     ],
     "home_garden": [
         {
             "keyword": "room ideas",
             "growth_mom": -9,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "monthly"
         },
         {
@@ -1407,7 +1521,7 @@
         {
             "keyword": "wedding dress",
             "growth_mom": 0,
-            "growth_yoy": 70,
+            "growth_yoy": 60,
             "trend_type": "monthly"
         },
         {
@@ -1569,7 +1683,7 @@
         {
             "keyword": "comfy outfits",
             "growth_mom": -1,
-            "growth_yoy": -4,
+            "growth_yoy": -5,
             "trend_type": "monthly"
         },
         {
@@ -2037,7 +2151,7 @@
         {
             "keyword": "cheetah costume women",
             "growth_mom": 700,
-            "growth_yoy": 30,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
