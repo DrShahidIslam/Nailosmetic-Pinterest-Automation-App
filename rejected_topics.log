@@ -747,3 +747,11 @@
    Match Overlap  : 80.0%
    Reason         : Recency rule: 'Cute Nails for Fall' published 42 days ago (<= 45 days) with 80.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-24 22:51:09] REJECTED TOPIC: "october nails fall"
+   Cleaned Topic  : "october nail fall"
+   Matched Post   : [ID: 3186] "Cute Nails for Fall"
+   Post URL       : https://nailosmetic.com/cute-nails-for-fall/
+   Post Date      : 2026-09-11
+   Match Overlap  : 80.0%
+   Reason         : Recency rule: 'Cute Nails for Fall' published 43 days ago (<= 45 days) with 80.0% topic match.
+--------------------------------------------------------------------------------
