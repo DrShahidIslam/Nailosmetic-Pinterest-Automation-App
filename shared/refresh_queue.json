@@ -128,5 +128,15 @@
     "candidate_attempted": "fall nails solid color",
     "reason": "High topic overlap (85.7% >= 80%) with existing post [ID: 3065] 'Fall Nails 2026 Color Trends'.",
     "queued_at": "2026-10-22 23:51:39"
+  },
+  {
+    "id": "1260",
+    "title": "7 Edgy Black Nail Designs That Are Defining The Season",
+    "slug": "best-black-nail-designs",
+    "link": "https://nailosmetic.com/best-black-nail-designs/",
+    "date": "2026-05-23",
+    "candidate_attempted": "black nails for edgy aesthetic",
+    "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 1260] '7 Edgy Black Nail Designs That Are Defining The Season'.",
+    "queued_at": "2026-10-25 22:59:55"
   }
 ]

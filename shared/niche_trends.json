@@ -577,7 +577,7 @@
         {
             "keyword": "closet organization ideas",
             "growth_mom": -20,
-            "growth_yoy": -20,
+            "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
@@ -961,7 +961,7 @@
         {
             "keyword": "front porch christmas decor ideas",
             "growth_mom": 100,
-            "growth_yoy": -8,
+            "growth_yoy": -9,
             "trend_type": "growing"
         },
         {
@@ -1147,7 +1147,7 @@
         {
             "keyword": "christmas tree topper ideas",
             "growth_mom": 200,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "seasonal"
         },
         {
@@ -1327,13 +1327,13 @@
         {
             "keyword": "pumpkin house",
             "growth_mom": 200,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "seasonal"
         },
         {
             "keyword": "christmas mantel",
             "growth_mom": 200,
-            "growth_yoy": 0,
+            "growth_yoy": -1,
             "trend_type": "seasonal"
         },
         {
@@ -1965,7 +1965,7 @@
         {
             "keyword": "pumpkin patch outfit women",
             "growth_mom": 1000,
-            "growth_yoy": 90,
+            "growth_yoy": 80,
             "trend_type": "seasonal"
         },
         {
@@ -2025,7 +2025,7 @@
         {
             "keyword": "closet costumes",
             "growth_mom": 800,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "seasonal"
         },
         {
@@ -2223,7 +2223,7 @@
         {
             "keyword": "simple witch costume",
             "growth_mom": 500,
-            "growth_yoy": -4,
+            "growth_yoy": -5,
             "trend_type": "seasonal"
         },
         {
