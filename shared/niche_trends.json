@@ -32,7 +32,7 @@
         },
         {
             "keyword": "october nails",
-            "growth_mom": 400,
+            "growth_mom": 300,
             "growth_yoy": 100,
             "trend_type": "monthly"
         },
@@ -44,7 +44,7 @@
         },
         {
             "keyword": "fall nail designs",
-            "growth_mom": 30,
+            "growth_mom": 20,
             "growth_yoy": -50,
             "trend_type": "monthly"
         },
@@ -56,7 +56,7 @@
         },
         {
             "keyword": "black nails",
-            "growth_mom": 40,
+            "growth_mom": 30,
             "growth_yoy": 10,
             "trend_type": "monthly"
         },
@@ -68,7 +68,7 @@
         },
         {
             "keyword": "brown nails",
-            "growth_mom": 20,
+            "growth_mom": 10,
             "growth_yoy": 10,
             "trend_type": "monthly"
         },
@@ -85,15 +85,15 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "nail designs",
-            "growth_mom": -20,
-            "growth_yoy": -9,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "burgundy nails",
             "growth_mom": 40,
             "growth_yoy": 80,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "nail designs",
+            "growth_mom": -20,
+            "growth_yoy": -9,
             "trend_type": "monthly"
         },
         {
@@ -127,6 +127,12 @@
             "trend_type": "monthly"
         },
         {
+            "keyword": "christmas nails",
+            "growth_mom": 200,
+            "growth_yoy": 10,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "short nails",
             "growth_mom": -20,
             "growth_yoy": -7,
@@ -139,21 +145,9 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "christmas nails",
-            "growth_mom": 200,
-            "growth_yoy": 20,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "short nail designs",
             "growth_mom": -30,
             "growth_yoy": 40,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "fall nail ideas",
-            "growth_mom": 10,
-            "growth_yoy": 50,
             "trend_type": "monthly"
         },
         {
@@ -163,15 +157,21 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "october november nails",
-            "growth_mom": 5500,
-            "growth_yoy": 90,
-            "trend_type": "growing"
+            "keyword": "fall nail ideas",
+            "growth_mom": 8,
+            "growth_yoy": 50,
+            "trend_type": "monthly"
         },
         {
             "keyword": "fall thanksgiving nails",
-            "growth_mom": 5500,
+            "growth_mom": 5000,
             "growth_yoy": 200,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "october november nails",
+            "growth_mom": 4500,
+            "growth_yoy": 80,
             "trend_type": "growing"
         },
         {
@@ -182,26 +182,20 @@
         },
         {
             "keyword": "november nails ideas",
-            "growth_mom": 1500,
-            "growth_yoy": -50,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "november nail designs",
-            "growth_mom": 1500,
-            "growth_yoy": 100,
+            "growth_mom": 2000,
+            "growth_yoy": -40,
             "trend_type": "growing"
         },
         {
             "keyword": "november nail ideas",
-            "growth_mom": 1000,
-            "growth_yoy": 60,
+            "growth_mom": 1500,
+            "growth_yoy": 8,
             "trend_type": "growing"
         },
         {
             "keyword": "november nails",
             "growth_mom": 1000,
-            "growth_yoy": 50,
+            "growth_yoy": 60,
             "trend_type": "growing"
         },
         {
@@ -211,51 +205,39 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "halloween nails classy",
-            "growth_mom": 1000,
-            "growth_yoy": 60,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "fall thanksgiving nails",
-            "growth_mom": 5500,
+            "growth_mom": 5000,
             "growth_yoy": 300,
             "trend_type": "seasonal"
         },
         {
             "keyword": "fall november nails",
-            "growth_mom": 3500,
-            "growth_yoy": 200,
+            "growth_mom": 3000,
+            "growth_yoy": 100,
             "trend_type": "seasonal"
         },
         {
             "keyword": "november nails ideas",
-            "growth_mom": 1500,
+            "growth_mom": 2000,
             "growth_yoy": -40,
             "trend_type": "seasonal"
         },
         {
             "keyword": "november nails",
             "growth_mom": 1000,
-            "growth_yoy": 60,
+            "growth_yoy": 70,
             "trend_type": "seasonal"
         },
         {
             "keyword": "nails for november",
-            "growth_mom": 900,
-            "growth_yoy": 90,
+            "growth_mom": 1000,
+            "growth_yoy": 100,
             "trend_type": "seasonal"
         },
         {
             "keyword": "late fall nails",
-            "growth_mom": 800,
-            "growth_yoy": 200,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "white halloween nails",
-            "growth_mom": 800,
-            "growth_yoy": -4,
+            "growth_mom": 900,
+            "growth_yoy": 100,
             "trend_type": "seasonal"
         }
     ],
@@ -274,19 +256,19 @@
         },
         {
             "keyword": "hairstyle ideas",
-            "growth_mom": -2,
+            "growth_mom": -3,
             "growth_yoy": 800,
             "trend_type": "monthly"
         },
         {
             "keyword": "hair styles",
             "growth_mom": 4,
-            "growth_yoy": -50,
+            "growth_yoy": -40,
             "trend_type": "monthly"
         },
         {
             "keyword": "hair",
-            "growth_mom": -1,
+            "growth_mom": 0,
             "growth_yoy": 9,
             "trend_type": "monthly"
         },
@@ -299,18 +281,18 @@
         {
             "keyword": "cute hairstyles",
             "growth_mom": -10,
-            "growth_yoy": 7,
+            "growth_yoy": 6,
             "trend_type": "monthly"
         },
         {
             "keyword": "curly hairstyles",
-            "growth_mom": -10,
+            "growth_mom": -20,
             "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
             "keyword": "half up half down hair",
-            "growth_mom": -3,
+            "growth_mom": -4,
             "growth_yoy": 60,
             "trend_type": "monthly"
         },
@@ -322,7 +304,7 @@
         },
         {
             "keyword": "natural hair styles",
-            "growth_mom": 8,
+            "growth_mom": 7,
             "growth_yoy": 20,
             "trend_type": "monthly"
         },
@@ -334,7 +316,7 @@
         },
         {
             "keyword": "natural hairstyles for black women",
-            "growth_mom": -4,
+            "growth_mom": -5,
             "growth_yoy": -10,
             "trend_type": "monthly"
         },
@@ -346,21 +328,27 @@
         },
         {
             "keyword": "ponytail hairstyles",
-            "growth_mom": -9,
+            "growth_mom": -10,
             "growth_yoy": 40,
             "trend_type": "monthly"
         },
         {
             "keyword": "hairstyle",
-            "growth_mom": -3,
+            "growth_mom": -4,
             "growth_yoy": 20,
             "trend_type": "monthly"
         },
         {
             "keyword": "fulani braids",
             "growth_mom": -20,
-            "growth_yoy": -6,
+            "growth_yoy": -7,
             "trend_type": "monthly"
+        },
+        {
+            "keyword": "cute monkey makeup halloween",
+            "growth_mom": 2500,
+            "growth_yoy": 100,
+            "trend_type": "growing"
         },
         {
             "keyword": "pumpkin patch hairstyles",
@@ -371,13 +359,13 @@
         {
             "keyword": "cat makeup halloween",
             "growth_mom": 1000,
-            "growth_yoy": -40,
+            "growth_yoy": -30,
             "trend_type": "growing"
         },
         {
             "keyword": "witch makeup ideas",
             "growth_mom": 1000,
-            "growth_yoy": 7,
+            "growth_yoy": 8,
             "trend_type": "growing"
         },
         {
@@ -387,21 +375,21 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "simple halloween makeup looks",
-            "growth_mom": 1000,
-            "growth_yoy": 4,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "monkey costume makeup",
             "growth_mom": 1000,
             "growth_yoy": -40,
             "trend_type": "growing"
         },
         {
+            "keyword": "simple halloween makeup looks",
+            "growth_mom": 1000,
+            "growth_yoy": 5,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "simple halloween makeup",
-            "growth_mom": 900,
-            "growth_yoy": 6,
+            "growth_mom": 1000,
+            "growth_yoy": 7,
             "trend_type": "growing"
         },
         {
@@ -423,50 +411,44 @@
             "trend_type": "seasonal"
         },
         {
+            "keyword": "bear makeup halloween",
+            "growth_mom": 1000,
+            "growth_yoy": -60,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "simple halloween makeup looks",
             "growth_mom": 1000,
             "growth_yoy": 10,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "easy scarecrow makeup",
+            "keyword": "simple halloween makeup",
             "growth_mom": 1000,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "easy witch makeup",
+            "growth_mom": 900,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "easy scarecrow makeup",
+            "growth_mom": 900,
             "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "simple halloween makeup",
+            "keyword": "leopard makeup halloween",
             "growth_mom": 900,
-            "growth_yoy": 20,
+            "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
             "keyword": "easy halloween makeup",
             "growth_mom": 900,
-            "growth_yoy": 100,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "cheetah makeup halloween",
-            "growth_mom": 800,
-            "growth_yoy": -40,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "easy skull makeup",
-            "growth_mom": 800,
-            "growth_yoy": -5,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "leopard makeup halloween",
-            "growth_mom": 800,
-            "growth_yoy": -20,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "dalmatian makeup",
-            "growth_mom": 800,
             "growth_yoy": 100,
             "trend_type": "seasonal"
         }
@@ -487,12 +469,12 @@
         {
             "keyword": "room decor",
             "growth_mom": -30,
-            "growth_yoy": 60,
+            "growth_yoy": 50,
             "trend_type": "monthly"
         },
         {
             "keyword": "bedroom",
-            "growth_mom": -8,
+            "growth_mom": -7,
             "growth_yoy": 10,
             "trend_type": "monthly"
         },
@@ -504,19 +486,19 @@
         },
         {
             "keyword": "room inspo",
-            "growth_mom": -5,
+            "growth_mom": -4,
             "growth_yoy": 60,
             "trend_type": "monthly"
         },
         {
             "keyword": "room",
-            "growth_mom": -4,
-            "growth_yoy": 5,
+            "growth_mom": 0,
+            "growth_yoy": 7,
             "trend_type": "monthly"
         },
         {
             "keyword": "minecraft house ideas",
-            "growth_mom": 5,
+            "growth_mom": 6,
             "growth_yoy": 300,
             "trend_type": "monthly"
         },
@@ -533,15 +515,15 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "fall decor",
-            "growth_mom": -50,
-            "growth_yoy": -20,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "bedroom decor ideas",
             "growth_mom": -20,
             "growth_yoy": 100,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "fall decor",
+            "growth_mom": -60,
+            "growth_yoy": -20,
             "trend_type": "monthly"
         },
         {
@@ -576,8 +558,8 @@
         },
         {
             "keyword": "wallpaper ideas",
-            "growth_mom": -7,
-            "growth_yoy": 30,
+            "growth_mom": -6,
+            "growth_yoy": 40,
             "trend_type": "monthly"
         },
         {
@@ -588,7 +570,7 @@
         },
         {
             "keyword": "bathroom ideas",
-            "growth_mom": 1,
+            "growth_mom": 2,
             "growth_yoy": -50,
             "trend_type": "monthly"
         },
@@ -600,7 +582,7 @@
         },
         {
             "keyword": "coffee bar ideas",
-            "growth_mom": 0,
+            "growth_mom": -2,
             "growth_yoy": -40,
             "trend_type": "monthly"
         },
@@ -623,9 +605,9 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "fall decor ideas for the home",
-            "growth_mom": -60,
-            "growth_yoy": -20,
+            "keyword": "kitchen decor ideas",
+            "growth_mom": 20,
+            "growth_yoy": 1000,
             "trend_type": "monthly"
         },
         {
@@ -635,15 +617,15 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "kitchen decor ideas",
-            "growth_mom": 20,
-            "growth_yoy": 1000,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "halloween door decorations",
             "growth_mom": 300,
             "growth_yoy": -30,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "fall decor ideas for the home",
+            "growth_mom": -60,
+            "growth_yoy": -20,
             "trend_type": "monthly"
         },
         {
@@ -665,21 +647,21 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "bedding ideas",
-            "growth_mom": -7,
-            "growth_yoy": 50,
+            "keyword": "living room inspo ideas",
+            "growth_mom": 600,
+            "growth_yoy": 10001,
             "trend_type": "monthly"
         },
         {
             "keyword": "halloween decor ideas",
-            "growth_mom": 60,
+            "growth_mom": 50,
             "growth_yoy": 100,
             "trend_type": "monthly"
         },
         {
-            "keyword": "bloxburg house layouts",
-            "growth_mom": 10,
-            "growth_yoy": 60,
+            "keyword": "bedding ideas",
+            "growth_mom": -8,
+            "growth_yoy": 50,
             "trend_type": "monthly"
         },
         {
@@ -689,20 +671,26 @@
             "trend_type": "monthly"
         },
         {
+            "keyword": "bloxburg house layouts",
+            "growth_mom": 9,
+            "growth_yoy": 60,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "bedroom aesthetic",
             "growth_mom": -10,
             "growth_yoy": 200,
             "trend_type": "monthly"
         },
         {
-            "keyword": "living room inspo ideas",
-            "growth_mom": 500,
-            "growth_yoy": 10001,
+            "keyword": "room inspo ideas",
+            "growth_mom": -20,
+            "growth_yoy": 30,
             "trend_type": "monthly"
         },
         {
-            "keyword": "room inspo ideas",
-            "growth_mom": -20,
+            "keyword": "dining room ideas",
+            "growth_mom": -10,
             "growth_yoy": 30,
             "trend_type": "monthly"
         },
@@ -719,21 +707,15 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "dining room ideas",
+            "keyword": "smiski",
             "growth_mom": -10,
-            "growth_yoy": 30,
+            "growth_yoy": 40,
             "trend_type": "monthly"
         },
         {
             "keyword": "diy room decor",
             "growth_mom": -20,
             "growth_yoy": 70,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "smiski",
-            "growth_mom": -10,
-            "growth_yoy": 40,
             "trend_type": "monthly"
         },
         {
@@ -750,7 +732,7 @@
         },
         {
             "keyword": "plant",
-            "growth_mom": -30,
+            "growth_mom": -20,
             "growth_yoy": 40,
             "trend_type": "monthly"
         },
@@ -761,20 +743,20 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "diy halloween decor",
-            "growth_mom": 50,
-            "growth_yoy": 100,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "dorm room ideas",
             "growth_mom": -30,
             "growth_yoy": -10,
             "trend_type": "monthly"
         },
         {
+            "keyword": "diy halloween decor",
+            "growth_mom": 50,
+            "growth_yoy": 100,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "painting pumpkins ideas diy girly",
-            "growth_mom": 2000,
+            "growth_mom": 1500,
             "growth_yoy": -60,
             "trend_type": "growing"
         },
@@ -786,7 +768,7 @@
         },
         {
             "keyword": "living room inspo ideas",
-            "growth_mom": 500,
+            "growth_mom": 600,
             "growth_yoy": 10001,
             "trend_type": "growing"
         },
@@ -827,6 +809,18 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "trick or treat table ideas outside",
+            "growth_mom": 300,
+            "growth_yoy": 300,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "christmas porch decorating ideas",
+            "growth_mom": 300,
+            "growth_yoy": -30,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "christmas front porch ideas",
             "growth_mom": 300,
             "growth_yoy": -20,
@@ -839,33 +833,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "christmas porch decorating ideas",
-            "growth_mom": 300,
-            "growth_yoy": -30,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "trick or treat table ideas outside",
-            "growth_mom": 300,
-            "growth_yoy": 300,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "diy advent calendar ideas",
-            "growth_mom": 200,
-            "growth_yoy": 500,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "christmas mantle ideas",
             "growth_mom": 200,
             "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
-            "keyword": "christmas door decorating contest",
+            "keyword": "christmas bathroom decor",
             "growth_mom": 200,
-            "growth_yoy": -1,
+            "growth_yoy": -30,
             "trend_type": "growing"
         },
         {
@@ -875,7 +851,19 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "christmas bathroom decor",
+            "keyword": "christmas door decorating contest",
+            "growth_mom": 200,
+            "growth_yoy": -2,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "thanksgiving table",
+            "growth_mom": 200,
+            "growth_yoy": -9,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "flocked christmas trees decorated",
             "growth_mom": 200,
             "growth_yoy": -30,
             "trend_type": "growing"
@@ -893,21 +881,15 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "flocked christmas trees decorated",
-            "growth_mom": 200,
-            "growth_yoy": -30,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "thanksgiving table",
-            "growth_mom": 200,
-            "growth_yoy": -10,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "nostalgic christmas tree",
             "growth_mom": 200,
             "growth_yoy": -20,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "christmas garland ideas",
+            "growth_mom": 200,
+            "growth_yoy": -8,
             "trend_type": "growing"
         },
         {
@@ -917,21 +899,15 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "apartment christmas decor",
+            "growth_mom": 200,
+            "growth_yoy": -30,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "trunk decorating ideas",
             "growth_mom": 200,
-            "growth_yoy": 60,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "outdoor christmas decor",
-            "growth_mom": 200,
-            "growth_yoy": -10,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "christmas garland ideas",
-            "growth_mom": 200,
-            "growth_yoy": -7,
+            "growth_yoy": 70,
             "trend_type": "growing"
         },
         {
@@ -941,13 +917,13 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "apartment christmas decor",
+            "keyword": "classic christmas tree",
             "growth_mom": 200,
-            "growth_yoy": -30,
+            "growth_yoy": -20,
             "trend_type": "growing"
         },
         {
-            "keyword": "classic christmas tree",
+            "keyword": "outdoor christmas decor",
             "growth_mom": 200,
             "growth_yoy": -20,
             "trend_type": "growing"
@@ -960,8 +936,20 @@
         },
         {
             "keyword": "red christmas tree ideas",
-            "growth_mom": 200,
+            "growth_mom": 100,
             "growth_yoy": 300,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "christmas mantle",
+            "growth_mom": 100,
+            "growth_yoy": 2,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "lounge",
+            "growth_mom": 100,
+            "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
@@ -977,39 +965,27 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "empty room",
-            "growth_mom": 100,
-            "growth_yoy": 200,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "cottage christmas",
-            "growth_mom": 100,
-            "growth_yoy": 6,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "stockings christmas",
             "growth_mom": 100,
             "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
-            "keyword": "christmas mantle",
-            "growth_mom": 100,
-            "growth_yoy": 3,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "traditional christmas decor",
             "growth_mom": 100,
-            "growth_yoy": -9,
+            "growth_yoy": -10,
             "trend_type": "growing"
         },
         {
-            "keyword": "lounge",
+            "keyword": "ralph lauren christmas tree",
             "growth_mom": 100,
-            "growth_yoy": 50,
+            "growth_yoy": -3,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "classic christmas decor",
+            "growth_mom": 100,
+            "growth_yoy": 70,
             "trend_type": "growing"
         },
         {
@@ -1019,39 +995,9 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "classic christmas decor",
+            "keyword": "burgundy christmas tree ideas",
             "growth_mom": 100,
-            "growth_yoy": 80,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "blue christmas tree ideas",
-            "growth_mom": 100,
-            "growth_yoy": 500,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "ralph lauren christmas tree",
-            "growth_mom": 100,
-            "growth_yoy": -2,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "christmas table decor",
-            "growth_mom": 100,
-            "growth_yoy": -6,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "simmer pot gift ideas",
-            "growth_mom": 100,
-            "growth_yoy": 600,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "thanksgiving tablescapes",
-            "growth_mom": 100,
-            "growth_yoy": -1,
+            "growth_yoy": 1500,
             "trend_type": "growing"
         },
         {
@@ -1061,9 +1007,45 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "cottage christmas",
+            "growth_mom": 100,
+            "growth_yoy": 5,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "blue christmas tree ideas",
+            "growth_mom": 100,
+            "growth_yoy": 500,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "thanksgiving tablescapes",
+            "growth_mom": 100,
+            "growth_yoy": -3,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "christmas table decor",
+            "growth_mom": 100,
+            "growth_yoy": -7,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "90s christmas tree",
             "growth_mom": 100,
             "growth_yoy": 80,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "hot cocoa bar",
+            "growth_mom": 100,
+            "growth_yoy": -30,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "scandinavian christmas",
+            "growth_mom": 100,
+            "growth_yoy": 5,
             "trend_type": "growing"
         },
         {
@@ -1074,14 +1056,8 @@
         },
         {
             "keyword": "painting pumpkins ideas diy girly",
-            "growth_mom": 2000,
+            "growth_mom": 1500,
             "growth_yoy": -60,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "costco trunk or treat",
-            "growth_mom": 600,
-            "growth_yoy": -30,
             "trend_type": "seasonal"
         },
         {
@@ -1091,9 +1067,21 @@
             "trend_type": "seasonal"
         },
         {
+            "keyword": "costco trunk or treat",
+            "growth_mom": 500,
+            "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "christmas entryway table decor",
             "growth_mom": 400,
-            "growth_yoy": -6,
+            "growth_yoy": -9,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas coffee table decor",
+            "growth_mom": 300,
+            "growth_yoy": -40,
             "trend_type": "seasonal"
         },
         {
@@ -1103,27 +1091,27 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "christmas front porch ideas",
-            "growth_mom": 300,
-            "growth_yoy": -1,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "christmas table decor ideas",
             "growth_mom": 300,
             "growth_yoy": 90,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "christmas outdoor decor ideas",
-            "growth_mom": 300,
-            "growth_yoy": 200,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "christmas porch decorating ideas",
             "growth_mom": 300,
             "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas front porch ideas",
+            "growth_mom": 300,
+            "growth_yoy": -2,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas outdoor decor ideas",
+            "growth_mom": 300,
+            "growth_yoy": 200,
             "trend_type": "seasonal"
         },
         {
@@ -1139,21 +1127,21 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "christmas door decorating contest",
+            "keyword": "christmas bathroom decor",
             "growth_mom": 200,
-            "growth_yoy": 10,
+            "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
             "keyword": "kitchen christmas decor",
             "growth_mom": 200,
-            "growth_yoy": 50,
+            "growth_yoy": 40,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "christmas bathroom decor",
+            "keyword": "red and white christmas tree ideas",
             "growth_mom": 200,
-            "growth_yoy": -30,
+            "growth_yoy": 50,
             "trend_type": "seasonal"
         },
         {
@@ -1163,9 +1151,9 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "red and white christmas tree ideas",
+            "keyword": "christmas door decorating contest",
             "growth_mom": 200,
-            "growth_yoy": 50,
+            "growth_yoy": 9,
             "trend_type": "seasonal"
         },
         {
@@ -1181,33 +1169,15 @@
             "trend_type": "seasonal"
         },
         {
+            "keyword": "christmas front door ideas",
+            "growth_mom": 200,
+            "growth_yoy": 80,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "vintage inspired christmas tree",
             "growth_mom": 200,
-            "growth_yoy": 10,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "christmas decor ideas outdoor",
-            "growth_mom": 200,
-            "growth_yoy": -80,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "red and green christmas tree",
-            "growth_mom": 200,
-            "growth_yoy": -20,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "christmas centerpiece",
-            "growth_mom": 200,
-            "growth_yoy": 40,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "flocked christmas trees decorated",
-            "growth_mom": 200,
-            "growth_yoy": -20,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
@@ -1217,27 +1187,21 @@
             "trend_type": "seasonal"
         },
         {
+            "keyword": "christmas decor ideas outdoor",
+            "growth_mom": 200,
+            "growth_yoy": -80,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "thanksgiving table",
             "growth_mom": 200,
-            "growth_yoy": -7,
+            "growth_yoy": -6,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "christmas room decor ideas",
+            "keyword": "flocked christmas trees decorated",
             "growth_mom": 200,
-            "growth_yoy": -40,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "outdoor christmas planter ideas",
-            "growth_mom": 200,
-            "growth_yoy": 70,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "decorated christmas trees ideas",
-            "growth_mom": 200,
-            "growth_yoy": 300,
+            "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
@@ -1247,9 +1211,27 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "homemade christmas decor",
+            "keyword": "christmas decor inspo",
             "growth_mom": 200,
-            "growth_yoy": 70,
+            "growth_yoy": 40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas room decor ideas",
+            "growth_mom": 200,
+            "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas centerpiece",
+            "growth_mom": 200,
+            "growth_yoy": 40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "red and green christmas tree",
+            "growth_mom": 200,
+            "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
@@ -1259,21 +1241,21 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "colorful christmas tree",
+            "keyword": "homemade christmas decor",
             "growth_mom": 200,
-            "growth_yoy": 3,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "christmas mantel decorating ideas",
-            "growth_mom": 200,
-            "growth_yoy": 60,
+            "growth_yoy": 70,
             "trend_type": "seasonal"
         },
         {
             "keyword": "thanksgiving table scape",
             "growth_mom": 200,
             "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "outdoor christmas planter ideas",
+            "growth_mom": 200,
+            "growth_yoy": 60,
             "trend_type": "seasonal"
         },
         {
@@ -1289,27 +1271,21 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "farmhouse christmas decor",
-            "growth_mom": 200,
-            "growth_yoy": -60,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "trunk decorating ideas",
-            "growth_mom": 200,
-            "growth_yoy": 70,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "outdoor christmas decor",
-            "growth_mom": 200,
-            "growth_yoy": -20,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "christmas garland ideas",
             "growth_mom": 200,
             "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "colorful christmas tree",
+            "growth_mom": 200,
+            "growth_yoy": 2,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "farmhouse christmas decor",
+            "growth_mom": 200,
+            "growth_yoy": -60,
             "trend_type": "seasonal"
         },
         {
@@ -1319,39 +1295,39 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "pumpkin house",
-            "growth_mom": 200,
-            "growth_yoy": 5,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "apartment christmas decor",
             "growth_mom": 200,
             "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "traditional christmas tree decor ideas",
+            "keyword": "trunk decorating ideas",
             "growth_mom": 200,
-            "growth_yoy": -20,
+            "growth_yoy": 70,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "christmas lights on house",
+            "keyword": "christmas mantel decorating ideas",
+            "growth_mom": 200,
+            "growth_yoy": 50,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas bedroom decor ideas",
+            "growth_mom": 200,
+            "growth_yoy": 90,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "decorated christmas trees ideas",
             "growth_mom": 200,
             "growth_yoy": 300,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "red and gold christmas tree ideas",
+            "keyword": "pumpkin house",
             "growth_mom": 200,
-            "growth_yoy": 300,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "kitschy christmas",
-            "growth_mom": 200,
-            "growth_yoy": 100,
+            "growth_yoy": 4,
             "trend_type": "seasonal"
         },
         {
@@ -1361,23 +1337,29 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "colorful christmas decor",
+            "keyword": "christmas lights on house",
             "growth_mom": 200,
-            "growth_yoy": 100,
+            "growth_yoy": 300,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "christmas bedroom decor ideas",
+            "keyword": "diy christmas garland",
             "growth_mom": 200,
-            "growth_yoy": 90,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "outdoor christmas decorations ideas",
+            "growth_mom": 200,
+            "growth_yoy": -4,
             "trend_type": "seasonal"
         }
     ],
     "fashion_style": [
         {
             "keyword": "fall outfits",
-            "growth_mom": 80,
-            "growth_yoy": 8,
+            "growth_mom": 70,
+            "growth_yoy": 6,
             "trend_type": "monthly"
         },
         {
@@ -1388,50 +1370,44 @@
         },
         {
             "keyword": "pumpkin patch outfit",
-            "growth_mom": 800,
+            "growth_mom": 700,
             "growth_yoy": 70,
             "trend_type": "monthly"
         },
         {
             "keyword": "outfit inspo",
-            "growth_mom": -6,
+            "growth_mom": -7,
             "growth_yoy": 70,
             "trend_type": "monthly"
         },
         {
             "keyword": "outfit",
-            "growth_mom": -8,
+            "growth_mom": -7,
             "growth_yoy": 70,
             "trend_type": "monthly"
         },
         {
             "keyword": "fall outfits women",
             "growth_mom": 40,
-            "growth_yoy": -2,
+            "growth_yoy": -5,
             "trend_type": "monthly"
         },
         {
             "keyword": "wedding dresses",
-            "growth_mom": -7,
+            "growth_mom": -8,
             "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
-            "keyword": "fall outfit ideas",
-            "growth_mom": 100,
-            "growth_yoy": 400,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "winter outfits",
-            "growth_mom": 100,
+            "growth_mom": 90,
             "growth_yoy": -20,
             "trend_type": "monthly"
         },
         {
-            "keyword": "y2k outfits",
-            "growth_mom": -10,
-            "growth_yoy": 6,
+            "keyword": "fall outfit ideas",
+            "growth_mom": 80,
+            "growth_yoy": 400,
             "trend_type": "monthly"
         },
         {
@@ -1441,8 +1417,14 @@
             "trend_type": "monthly"
         },
         {
+            "keyword": "y2k outfits",
+            "growth_mom": -10,
+            "growth_yoy": 6,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "business casual outfits for women",
-            "growth_mom": -7,
+            "growth_mom": -10,
             "growth_yoy": 60,
             "trend_type": "monthly"
         },
@@ -1454,13 +1436,19 @@
         },
         {
             "keyword": "shoes",
-            "growth_mom": -3,
-            "growth_yoy": -5,
+            "growth_mom": 0,
+            "growth_yoy": -3,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "rainy day outfit",
+            "growth_mom": 90,
+            "growth_yoy": 7,
             "trend_type": "monthly"
         },
         {
             "keyword": "2000s outfits",
-            "growth_mom": 0,
+            "growth_mom": -2,
             "growth_yoy": 400,
             "trend_type": "monthly"
         },
@@ -1471,14 +1459,8 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "rainy day outfit",
-            "growth_mom": 90,
-            "growth_yoy": 0,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "2016 outfits",
-            "growth_mom": 50,
+            "growth_mom": 40,
             "growth_yoy": 1500,
             "trend_type": "monthly"
         },
@@ -1490,32 +1472,14 @@
         },
         {
             "keyword": "clothes",
-            "growth_mom": 1,
+            "growth_mom": 2,
             "growth_yoy": 10,
             "trend_type": "monthly"
         },
         {
             "keyword": "concert outfit ideas",
-            "growth_mom": -10,
+            "growth_mom": -20,
             "growth_yoy": 60,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "wedding dress",
-            "growth_mom": -3,
-            "growth_yoy": 60,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "fall outfits 2026 women",
-            "growth_mom": 60,
-            "growth_yoy": 10001,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "niche halloween costumes",
-            "growth_mom": 80,
-            "growth_yoy": 200,
             "trend_type": "monthly"
         },
         {
@@ -1525,15 +1489,27 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "clown costume",
-            "growth_mom": 200,
-            "growth_yoy": 5,
+            "keyword": "wedding dress",
+            "growth_mom": -4,
+            "growth_yoy": 60,
             "trend_type": "monthly"
         },
         {
-            "keyword": "going out outfits",
-            "growth_mom": -20,
-            "growth_yoy": -10,
+            "keyword": "niche halloween costumes",
+            "growth_mom": 80,
+            "growth_yoy": 200,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "fall outfits 2026 women",
+            "growth_mom": 50,
+            "growth_yoy": 10001,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "clown costume",
+            "growth_mom": 200,
+            "growth_yoy": 5,
             "trend_type": "monthly"
         },
         {
@@ -1543,21 +1519,15 @@
             "trend_type": "monthly"
         },
         {
+            "keyword": "going out outfits",
+            "growth_mom": -20,
+            "growth_yoy": -10,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "mermaid costume",
             "growth_mom": 100,
-            "growth_yoy": -20,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "business casual outfits",
-            "growth_mom": 1,
-            "growth_yoy": -50,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "rave outfits",
-            "growth_mom": 9,
-            "growth_yoy": -3,
+            "growth_yoy": -30,
             "trend_type": "monthly"
         },
         {
@@ -1567,15 +1537,15 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "halloween outfits",
-            "growth_mom": 100,
-            "growth_yoy": 200,
+            "keyword": "business casual outfits",
+            "growth_mom": -1,
+            "growth_yoy": -50,
             "trend_type": "monthly"
         },
         {
-            "keyword": "birthday outfit",
-            "growth_mom": -7,
-            "growth_yoy": -9,
+            "keyword": "rave outfits",
+            "growth_mom": 6,
+            "growth_yoy": -3,
             "trend_type": "monthly"
         },
         {
@@ -1585,15 +1555,27 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "leggings outfit",
-            "growth_mom": 2,
-            "growth_yoy": 3,
+            "keyword": "halloween outfits",
+            "growth_mom": 100,
+            "growth_yoy": 200,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "witch costume",
+            "growth_mom": 200,
+            "growth_yoy": 40,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "birthday outfit",
+            "growth_mom": -8,
+            "growth_yoy": -9,
             "trend_type": "monthly"
         },
         {
             "keyword": "cleopatra halloween costume",
             "growth_mom": 200,
-            "growth_yoy": 0,
+            "growth_yoy": 1,
             "trend_type": "monthly"
         },
         {
@@ -1603,21 +1585,9 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "witch costume",
-            "growth_mom": 300,
-            "growth_yoy": 40,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "fall outfit inspo",
-            "growth_mom": 80,
-            "growth_yoy": 60,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "90s outfits",
-            "growth_mom": 20,
-            "growth_yoy": 40,
+            "keyword": "leggings outfit",
+            "growth_mom": -1,
+            "growth_yoy": 1,
             "trend_type": "monthly"
         },
         {
@@ -1627,9 +1597,15 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "homecoming dresses",
-            "growth_mom": -70,
-            "growth_yoy": -20,
+            "keyword": "90s outfits",
+            "growth_mom": 10,
+            "growth_yoy": 40,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "fall outfit inspo",
+            "growth_mom": 60,
+            "growth_yoy": 50,
             "trend_type": "monthly"
         },
         {
@@ -1639,39 +1615,45 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "concert outfit",
-            "growth_mom": -10,
-            "growth_yoy": -50,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "disney outfits",
-            "growth_mom": 3,
-            "growth_yoy": 40,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "lana del rey",
-            "growth_mom": 5,
-            "growth_yoy": 70,
-            "trend_type": "monthly"
-        },
-        {
-            "keyword": "comfy outfits",
-            "growth_mom": 0,
-            "growth_yoy": -6,
-            "trend_type": "monthly"
-        },
-        {
             "keyword": "sailor costume",
             "growth_mom": 200,
             "growth_yoy": 9,
             "trend_type": "monthly"
         },
         {
+            "keyword": "lana del rey",
+            "growth_mom": 4,
+            "growth_yoy": 70,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "disney outfits",
+            "growth_mom": 1,
+            "growth_yoy": 40,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "concert outfit",
+            "growth_mom": -10,
+            "growth_yoy": -50,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "comfy outfits",
+            "growth_mom": -3,
+            "growth_yoy": -6,
+            "trend_type": "monthly"
+        },
+        {
             "keyword": "fall outfits black women",
             "growth_mom": 200,
             "growth_yoy": 200,
+            "trend_type": "monthly"
+        },
+        {
+            "keyword": "homecoming dresses",
+            "growth_mom": -70,
+            "growth_yoy": -20,
             "trend_type": "monthly"
         },
         {
@@ -1687,9 +1669,15 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "pumpkin patch outfit cold weather",
+            "growth_mom": 2500,
+            "growth_yoy": 10,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "mad scientist costume woman",
             "growth_mom": 2000,
-            "growth_yoy": 9000,
+            "growth_yoy": 8500,
             "trend_type": "growing"
         },
         {
@@ -1699,33 +1687,39 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "calvin harris concert outfit",
+            "growth_mom": 2000,
+            "growth_yoy": 10001,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "scrub costume ideas",
+            "growth_mom": 1500,
+            "growth_yoy": 1500,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "pumpkin picking outfit fall",
             "growth_mom": 1500,
             "growth_yoy": 20,
             "trend_type": "growing"
         },
         {
-            "keyword": "calvin harris concert outfit",
+            "keyword": "fun halloween outfits",
             "growth_mom": 1500,
-            "growth_yoy": 10001,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "pumpkin patch outfit jeans",
-            "growth_mom": 1500,
-            "growth_yoy": 100,
+            "growth_yoy": 200,
             "trend_type": "growing"
         },
         {
             "keyword": "scrub halloween costumes",
             "growth_mom": 1500,
-            "growth_yoy": 7500,
+            "growth_yoy": 6500,
             "trend_type": "growing"
         },
         {
-            "keyword": "haunted house outfit ideas",
+            "keyword": "pumpkin patch outfit jeans",
             "growth_mom": 1000,
-            "growth_yoy": -60,
+            "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
@@ -1735,25 +1729,19 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "haunted house outfit ideas",
+            "growth_mom": 1000,
+            "growth_yoy": -50,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "pumpkin patch outfit women",
             "growth_mom": 1000,
             "growth_yoy": 70,
             "trend_type": "growing"
         },
         {
-            "keyword": "wrong occasion outfit spirit week",
-            "growth_mom": 1000,
-            "growth_yoy": 10001,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "haunted house outfit",
-            "growth_mom": 1000,
-            "growth_yoy": 300,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "pumpkin patch outfit ideas",
+            "keyword": "easy costumes women",
             "growth_mom": 1000,
             "growth_yoy": 200,
             "trend_type": "growing"
@@ -1761,25 +1749,31 @@
         {
             "keyword": "easy halloween costumes for women",
             "growth_mom": 1000,
-            "growth_yoy": 0,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "victoria secret fashion show",
-            "growth_mom": 900,
-            "growth_yoy": 0,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "easy costumes women",
-            "growth_mom": 900,
-            "growth_yoy": 200,
+            "growth_yoy": -1,
             "trend_type": "growing"
         },
         {
             "keyword": "red corset costume idea",
-            "growth_mom": 900,
+            "growth_mom": 1000,
             "growth_yoy": 4500,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "victoria secret fashion show",
+            "growth_mom": 1000,
+            "growth_yoy": 2,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "haunted house outfit",
+            "growth_mom": 900,
+            "growth_yoy": 300,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "pumpkin patch outfit ideas",
+            "growth_mom": 900,
+            "growth_yoy": 200,
             "trend_type": "growing"
         },
         {
@@ -1789,57 +1783,39 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "pumpkin patch fits",
-            "growth_mom": 900,
-            "growth_yoy": 50,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "cold fall outfits",
-            "growth_mom": 900,
-            "growth_yoy": 10,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "cold game day outfit",
-            "growth_mom": 800,
-            "growth_yoy": 90,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "winter going out outfits",
             "growth_mom": 800,
             "growth_yoy": 200,
             "trend_type": "growing"
         },
         {
-            "keyword": "pumping patch outfit",
+            "keyword": "halloween costumes outfits",
             "growth_mom": 800,
-            "growth_yoy": 100,
+            "growth_yoy": 300,
             "trend_type": "growing"
         },
         {
-            "keyword": "casual pumpkin patch outfit",
+            "keyword": "wrong occasion outfit spirit week",
             "growth_mom": 800,
-            "growth_yoy": -1,
+            "growth_yoy": 10001,
             "trend_type": "growing"
         },
         {
-            "keyword": "pumpkin patch outfit",
+            "keyword": "pumpkin patch fits",
             "growth_mom": 800,
-            "growth_yoy": 60,
+            "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
-            "keyword": "outfits for pumpkin patch",
-            "growth_mom": 800,
-            "growth_yoy": 200,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "cute pumpkin patch outfits",
+            "keyword": "white corset costume idea",
             "growth_mom": 700,
-            "growth_yoy": 60,
+            "growth_yoy": 8000,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "pumping patch outfit",
+            "growth_mom": 700,
+            "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
@@ -1849,45 +1825,51 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "cold game day outfit",
+            "growth_mom": 700,
+            "growth_yoy": 80,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "casual pumpkin patch outfit",
+            "growth_mom": 700,
+            "growth_yoy": -1,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "outfits for pumpkin patch",
+            "growth_mom": 700,
+            "growth_yoy": 200,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "simple halloween costumes for women",
             "growth_mom": 700,
             "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
-            "keyword": "flapper halloween costumes",
+            "keyword": "pumpkin patch outfit",
             "growth_mom": 700,
-            "growth_yoy": 300,
+            "growth_yoy": 60,
             "trend_type": "growing"
         },
         {
-            "keyword": "50 degree weather outfit",
+            "keyword": "cute pumpkin patch outfits",
             "growth_mom": 700,
-            "growth_yoy": 20,
+            "growth_yoy": 60,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "cold fall outfits",
+            "growth_mom": 700,
+            "growth_yoy": 10,
             "trend_type": "growing"
         },
         {
             "keyword": "cheetah costume women",
             "growth_mom": 700,
             "growth_yoy": 20,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "white corset costume idea",
-            "growth_mom": 700,
-            "growth_yoy": 8500,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "little red riding hood costume women",
-            "growth_mom": 700,
-            "growth_yoy": 3000,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "pumpkin patch outfits",
-            "growth_mom": 700,
-            "growth_yoy": 70,
             "trend_type": "growing"
         },
         {
@@ -1903,21 +1885,33 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "flapper halloween costumes",
+            "growth_mom": 600,
+            "growth_yoy": 300,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "pumpkin patch outfits",
+            "growth_mom": 600,
+            "growth_yoy": 70,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "little red riding hood costume women",
+            "growth_mom": 600,
+            "growth_yoy": 3000,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "plus size pumpkin patch outfit",
-            "growth_mom": 700,
-            "growth_yoy": 80,
+            "growth_mom": 600,
+            "growth_yoy": 90,
             "trend_type": "growing"
         },
         {
-            "keyword": "pumpkin patch outfit black women",
+            "keyword": "outfit inspos",
             "growth_mom": 600,
-            "growth_yoy": 900,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "cold going out outfits",
-            "growth_mom": 600,
-            "growth_yoy": 200,
+            "growth_yoy": 300,
             "trend_type": "growing"
         },
         {
@@ -1927,15 +1921,9 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "cider mill outfit",
+            "keyword": "pumpkin patch outfit black women",
             "growth_mom": 600,
-            "growth_yoy": 30,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "outfit inspos",
-            "growth_mom": 600,
-            "growth_yoy": 200,
+            "growth_yoy": 900,
             "trend_type": "growing"
         },
         {
@@ -1945,33 +1933,27 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "cold going out outfits",
+            "growth_mom": 600,
+            "growth_yoy": 200,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "cheap halloween costumes",
             "growth_mom": 600,
             "growth_yoy": -10,
             "trend_type": "growing"
         },
         {
-            "keyword": "cold football game outfit",
+            "keyword": "50 degree weather outfit",
             "growth_mom": 600,
-            "growth_yoy": 200,
+            "growth_yoy": 20,
             "trend_type": "growing"
         },
         {
-            "keyword": "mom pumpkin patch outfit",
+            "keyword": "cider mill outfit",
             "growth_mom": 600,
-            "growth_yoy": 60,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "cop costume women",
-            "growth_mom": 600,
-            "growth_yoy": 600,
-            "trend_type": "growing"
-        },
-        {
-            "keyword": "easy work costume ideas",
-            "growth_mom": 500,
-            "growth_yoy": -30,
+            "growth_yoy": 30,
             "trend_type": "growing"
         },
         {
@@ -1983,13 +1965,13 @@
         {
             "keyword": "pumpkin patch outfit women",
             "growth_mom": 1000,
-            "growth_yoy": 80,
+            "growth_yoy": 90,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "40 degree weather outfit",
+            "keyword": "easy costumes women",
             "growth_mom": 1000,
-            "growth_yoy": 40,
+            "growth_yoy": 200,
             "trend_type": "seasonal"
         },
         {
@@ -2000,38 +1982,26 @@
         },
         {
             "keyword": "victoria secret fashion show",
-            "growth_mom": 900,
-            "growth_yoy": 6,
+            "growth_mom": 1000,
+            "growth_yoy": 8,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "easy costumes women",
-            "growth_mom": 900,
-            "growth_yoy": 200,
+            "keyword": "40 degree weather outfit",
+            "growth_mom": 1000,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
             "keyword": "easy womens halloween costumes",
             "growth_mom": 900,
-            "growth_yoy": 0,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "cold fall outfits",
-            "growth_mom": 900,
-            "growth_yoy": 30,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "cold game day outfit",
-            "growth_mom": 800,
-            "growth_yoy": 200,
+            "growth_yoy": -5,
             "trend_type": "seasonal"
         },
         {
             "keyword": "simple vampire costume",
             "growth_mom": 800,
-            "growth_yoy": -1,
+            "growth_yoy": 0,
             "trend_type": "seasonal"
         },
         {
@@ -2041,26 +2011,50 @@
             "trend_type": "seasonal"
         },
         {
+            "keyword": "black skirt halloween costumes",
+            "growth_mom": 800,
+            "growth_yoy": -10,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "easy halloween costumes women",
             "growth_mom": 800,
             "growth_yoy": 30,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "black skirt halloween costumes",
+            "keyword": "closet costumes",
             "growth_mom": 800,
-            "growth_yoy": -8,
+            "growth_yoy": 2,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "easy costume ideas for women",
+            "growth_mom": 700,
+            "growth_yoy": -70,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cold game day outfit",
+            "growth_mom": 700,
+            "growth_yoy": 200,
             "trend_type": "seasonal"
         },
         {
             "keyword": "casual pumpkin patch outfit",
-            "growth_mom": 800,
+            "growth_mom": 700,
             "growth_yoy": 1,
             "trend_type": "seasonal"
         },
         {
+            "keyword": "simple halloween costumes for women",
+            "growth_mom": 700,
+            "growth_yoy": 60,
+            "trend_type": "seasonal"
+        },
+        {
             "keyword": "pumpkin patch outfit",
-            "growth_mom": 800,
+            "growth_mom": 700,
             "growth_yoy": 70,
             "trend_type": "seasonal"
         },
@@ -2071,33 +2065,9 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "easy costume ideas for women",
+            "keyword": "cold fall outfits",
             "growth_mom": 700,
-            "growth_yoy": -70,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "simple halloween costumes for women",
-            "growth_mom": 700,
-            "growth_yoy": 60,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "fall night out outfit bar",
-            "growth_mom": 700,
-            "growth_yoy": -30,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "closet costumes",
-            "growth_mom": 700,
-            "growth_yoy": 1,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "50 degree weather outfit",
-            "growth_mom": 700,
-            "growth_yoy": 50,
+            "growth_yoy": 20,
             "trend_type": "seasonal"
         },
         {
@@ -2107,21 +2077,15 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "pumpkin patch outfits",
-            "growth_mom": 700,
-            "growth_yoy": 80,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "corn maze outfit",
             "growth_mom": 700,
-            "growth_yoy": -9,
+            "growth_yoy": -8,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "cold going out outfits",
-            "growth_mom": 600,
-            "growth_yoy": 300,
+            "keyword": "fall night out outfit bar",
+            "growth_mom": 700,
+            "growth_yoy": -30,
             "trend_type": "seasonal"
         },
         {
@@ -2131,21 +2095,15 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "cider mill outfit",
+            "keyword": "cold going out outfits",
             "growth_mom": 600,
-            "growth_yoy": 60,
+            "growth_yoy": 300,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "fall picture poses",
+            "keyword": "easy diy halloween costumes for women",
             "growth_mom": 600,
-            "growth_yoy": 40,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "white corset costume",
-            "growth_mom": 600,
-            "growth_yoy": -40,
+            "growth_yoy": -20,
             "trend_type": "seasonal"
         },
         {
@@ -2161,33 +2119,15 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "diy vampire costume women",
+            "keyword": "fall picture poses",
             "growth_mom": 600,
-            "growth_yoy": 10,
+            "growth_yoy": 50,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "cold football game outfit",
+            "keyword": "white corset costume",
             "growth_mom": 600,
-            "growth_yoy": 200,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "easy witch costume",
-            "growth_mom": 600,
-            "growth_yoy": -30,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "fall outfits cold",
-            "growth_mom": 600,
-            "growth_yoy": 2,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "mom pumpkin patch outfit",
-            "growth_mom": 600,
-            "growth_yoy": 60,
+            "growth_yoy": -40,
             "trend_type": "seasonal"
         },
         {
@@ -2197,15 +2137,33 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "easy diy halloween costumes for women",
+            "keyword": "50 degree weather outfit",
             "growth_mom": 600,
-            "growth_yoy": -20,
+            "growth_yoy": 40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cider mill outfit",
+            "growth_mom": 600,
+            "growth_yoy": 60,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "diy vampire costume women",
+            "growth_mom": 600,
+            "growth_yoy": 9,
             "trend_type": "seasonal"
         },
         {
             "keyword": "simple costumes for women",
-            "growth_mom": 500,
+            "growth_mom": 600,
             "growth_yoy": 300,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "easy witch costume",
+            "growth_mom": 600,
+            "growth_yoy": -30,
             "trend_type": "seasonal"
         },
         {
@@ -2215,15 +2173,15 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "easy halloween outfits",
+            "keyword": "blue corset halloween costumes",
             "growth_mom": 500,
-            "growth_yoy": 100,
+            "growth_yoy": -5,
             "trend_type": "seasonal"
         },
         {
-            "keyword": "cute casual fall outfits",
+            "keyword": "mom pumpkin patch outfit",
             "growth_mom": 500,
-            "growth_yoy": 40,
+            "growth_yoy": 60,
             "trend_type": "seasonal"
         },
         {
@@ -2233,15 +2191,9 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "rebelde costume",
+            "keyword": "easy halloween outfits",
             "growth_mom": 500,
-            "growth_yoy": 30,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "simple witch costume",
-            "growth_mom": 500,
-            "growth_yoy": -2,
+            "growth_yoy": 100,
             "trend_type": "seasonal"
         },
         {
@@ -2257,21 +2209,51 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "fall tailgate outfit",
+            "keyword": "rebelde costume",
+            "growth_mom": 500,
+            "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "leather jacket halloween costume",
+            "growth_mom": 500,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "simple witch costume",
+            "growth_mom": 500,
+            "growth_yoy": -4,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "fall outfits cold",
+            "growth_mom": 500,
+            "growth_yoy": -3,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "black corset costume",
+            "growth_mom": 500,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "white dress halloween costume",
             "growth_mom": 500,
             "growth_yoy": -2,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "black corset halloween costume",
+            "growth_mom": 500,
+            "growth_yoy": -60,
             "trend_type": "seasonal"
         },
         {
             "keyword": "white dress costume",
             "growth_mom": 500,
             "growth_yoy": -20,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "cold game day outfit football",
-            "growth_mom": 500,
-            "growth_yoy": 90,
             "trend_type": "seasonal"
         }
     ],
