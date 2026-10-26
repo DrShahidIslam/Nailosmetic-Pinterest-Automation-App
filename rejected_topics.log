@@ -819,3 +819,11 @@
    Match Overlap  : 100.0%
    Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 1260] '7 Edgy Black Nail Designs That Are Defining The Season'.
 --------------------------------------------------------------------------------
+[2026-10-26 15:48:24] REJECTED TOPIC: "simple halloween nails"
+   Cleaned Topic  : "halloween nail"
+   Matched Post   : [ID: 2311] "15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style"
+   Post URL       : https://nailosmetic.com/trendy-halloween-nails/
+   Post Date      : 2026-07-22
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2311] '15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style'.
+--------------------------------------------------------------------------------
