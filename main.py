@@ -91,6 +91,12 @@ BOARD_MAP = {
         "niche": "nails",
         "link": "https://nailosmetic.com/chrome-glazed-donut-nails/",
     },
+    "black_cherry_nails": {
+        "board_id": os.getenv("PINTEREST_BOARD_BLACK_CHERRY", ""),
+        "name": "Black Cherry Nails",
+        "niche": "nails",
+        "link": "https://nailosmetic.com/best-black-nail-designs/",
+    },
     "minimalist_clean": {
         "board_id": os.getenv("PINTEREST_BOARD_MINIMALIST", ""),
         "name": "Minimalist & Clean Girl Nails",
@@ -238,7 +244,9 @@ def auto_discover_boards():
                 b_id = b.get("id")
                 if not b_id:
                     continue
-                if ("fall" in name or "autumn" in name) and not BOARD_MAP.get("fall_autumn_trends", {}).get("board_id"):
+                if ("black cherry" in name) and not BOARD_MAP.get("black_cherry_nails", {}).get("board_id"):
+                    BOARD_MAP["black_cherry_nails"]["board_id"] = b_id
+                elif ("fall" in name or "autumn" in name) and not BOARD_MAP.get("fall_autumn_trends", {}).get("board_id"):
                     BOARD_MAP["fall_autumn_trends"]["board_id"] = b_id
                 elif ("halloween" in name or "spooky" in name) and not BOARD_MAP.get("halloween_spooky", {}).get("board_id"):
                     BOARD_MAP["halloween_spooky"]["board_id"] = b_id
@@ -1801,6 +1809,8 @@ def main():
 
         # Resolve the target board
         category = content["board_category"]
+        if chosen_topic and "black cherry" in str(chosen_topic).lower():
+            category = "black_cherry_nails"
         board_info = BOARD_MAP.get(category, BOARD_MAP[DEFAULT_BOARD_CATEGORY])
 
         # If the chosen board isn't configured, fall back to default
