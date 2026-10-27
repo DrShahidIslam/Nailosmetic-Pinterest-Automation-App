@@ -15,7 +15,7 @@ Checks (failures — block publishing):
      (catches prompt/HTML drift)
   6. No lorem ipsum / TODO / [insert ...] / "coming soon" filler
   7. FAQ section present (preferred_format == 'faq' required for AEO/GEO)
-  8. Focus keyword appears in the first 100 words of the introduction
+  8. Focus keyword appears in the first 50 words of the introduction
   9. Focus keyword appears in at least one section heading (H2)
   10. Keyword stuffing check (maximum 7 occurrences per 1000 words)
 
@@ -36,6 +36,8 @@ from html import unescape
 MIN_SECTIONS = 6
 MIN_SECTION_WORDS = 80
 MIN_TOTAL_WORDS = 1200
+MIN_INTERNAL_LINKS = 8
+MAX_EXTERNAL_LINKS = 3
 MIN_INTRO_WORDS = 40
 MIN_CONCLUSION_WORDS = 30
 MAX_KEYWORD_DENSITY_PER_1000 = 7.0
@@ -150,7 +152,7 @@ def run_quality_gate(plan: dict, html_content: str):
 
         # 8. Keyword in first 100 words of introduction
         intro_stripped = _strip_html(plan.get("introduction", ""))
-        first_100_intro = " ".join(intro_stripped.split()[:100]).lower()
+        first_100_intro = " ".join(intro_stripped.split()[:50]).lower()
         if kw_lower not in first_100_intro:
             failures.append(f"Focus keyword '{focus_kw}' not found in the first 100 words of the introduction.")
 
@@ -167,6 +169,37 @@ def run_quality_gate(plan: dict, html_content: str):
             if per_1000 > MAX_KEYWORD_DENSITY_PER_1000:
                 count_disp = f"{per_1000:.1f}" if per_1000 % 1 != 0 else f"{int(per_1000)}"
                 failures.append(f"Focus keyword appears {count_disp} times per 1000 words (maximum 7).")
+
+    # 11. Title Case: post title must not be all-lowercase (hurts CTR on Google + Pinterest)
+    post_title = (plan.get("title", "") or seo.get("title", "")).strip()
+    if post_title and post_title == post_title.lower() and any(c.isalpha() for c in post_title):
+        failures.append("Post title is all-lowercase — use Title Case before publishing.")
+
+    # 12. Internal links: minimum 8 for a long post (silo: hub + siblings + pillar)
+    internal_links = re.findall(r'href=["\']https?://(?:www\.)?nailosmetic\.com[^"\']+', html_content, re.I)
+    if len(internal_links) < MIN_INTERNAL_LINKS:
+        failures.append(f"Only {len(internal_links)} internal links (minimum {MIN_INTERNAL_LINKS}).")
+
+    # 13. External links: maximum 3 authoritative citations (8-11 dilutes the page)
+    external_links = re.findall(r'href=["\']https?://(?!(?:www\.)?nailosmetic\.com)[^"\']+', html_content, re.I)
+    if len(external_links) > MAX_EXTERNAL_LINKS:
+        failures.append(f"{len(external_links)} external links (maximum {MAX_EXTERNAL_LINKS}).")
+
+    # 14. Meta title/description are failures, not warnings, and must carry the keyword
+    seo_title = seo.get("title", "")
+    if not seo_title or len(seo_title) > 60:
+        failures.append(f"SEO title must be 1-60 chars (got {len(seo_title)}).")
+    elif focus_kw and focus_kw.lower() not in seo_title.lower():
+        failures.append("Focus keyword missing from SEO title.")
+    seo_desc = seo.get("description", "")
+    if not (140 <= len(seo_desc) <= 160):
+        failures.append(f"Meta description must be 140-160 chars (got {len(seo_desc)}).")
+    elif focus_kw and focus_kw.lower() not in seo_desc.lower():
+        failures.append("Focus keyword missing from meta description.")
+
+    # 15. Table of Contents required for posts over 2000 words
+    if total_words > 2000 and not re.search(r'href=["\']#[^"\']+["\']', html_content, re.I):
+        failures.append("No Table of Contents (jump links) in a post over 2000 words.")
 
     # WARNINGS: Logged, do not block publishing
 
