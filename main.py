@@ -64,19 +64,19 @@ BOARD_MAP = {
         "board_id": os.getenv("PINTEREST_BOARD_FALL") or "1106689377123778680",
         "name": "Fall Nails & Autumn Aesthetic Inspo",
         "niche": "nails",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/fall-nails-inspo-2026/",
     },
     "halloween_spooky": {
         "board_id": os.getenv("PINTEREST_BOARD_HALLOWEEN") or "1106689377123778682",
         "name": "Halloween Nails, Spooky Glam & Decor",
         "niche": "nails",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/best-black-nail-designs/",
     },
     "holiday_winter": {
         "board_id": os.getenv("PINTEREST_BOARD_HOLIDAY") or "1106689377123778685",
         "name": "Holiday & Winter Nails, Glam & Home",
         "niche": "nails",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/fall-nails-inspo-2026/",
     },
     # --- Nail Boards ---
     "aesthetic_nail_art": {
@@ -95,7 +95,7 @@ BOARD_MAP = {
         "board_id": os.getenv("PINTEREST_BOARD_MINIMALIST", ""),
         "name": "Minimalist & Clean Girl Nails",
         "niche": "nails",
-        "link": "https://nailosmetic.com/minimalist-clean-girl-nails/",
+        "link": "https://nailosmetic.com/best-black-nail-designs/"  # was a redirect loser post, do not send new pins there,
     },
     "spring_trends": {
         "board_id": os.getenv("PINTEREST_BOARD_SPRING", ""),
@@ -114,39 +114,39 @@ BOARD_MAP = {
         "board_id": os.getenv("PINTEREST_BOARD_HAIR", ""),
         "name": "Ethereal & Clean Hair Aesthetics",
         "niche": "hair_beauty",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/face-framing-highlights-trends/",
     },
     "beauty_skincare": {
         "board_id": os.getenv("PINTEREST_BOARD_BEAUTY", ""),
         "name": "Luxury Beauty & Skincare Inspo",
         "niche": "hair_beauty",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/dolly-parton-makeup/",
     },
     # --- Home & Garden Boards ---
     "home_decor": {
         "board_id": os.getenv("PINTEREST_BOARD_HOME", ""),
         "name": "Minimalist & Modern Home Decor",
         "niche": "home_garden",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/weighted-blanket-bedroom-ideas/",
     },
     "garden_outdoor": {
         "board_id": os.getenv("PINTEREST_BOARD_GARDEN", ""),
         "name": "Zen Garden & Outdoor Living",
         "niche": "home_garden",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/fall-home-decor-ideas/",
     },
     "bedroom_bedding": {
         "board_id": os.getenv("PINTEREST_BOARD_BEDDING", ""),
         "name": "Bedroom Decor Ideas | Cozy & Luxury Bedding",
         "niche": "home_garden",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/fall-decor-bedroom-ideas/",
     },
     # --- Fashion & Style Boards ---
     "fashion_style": {
         "board_id": os.getenv("PINTEREST_BOARD_FASHION", ""),
         "name": "Chic & Timeless Fashion Style",
         "niche": "fashion_style",
-        "link": "https://nailosmetic.com/",
+        "link": "https://nailosmetic.com/new-summer-nails-for-vacation-aesthetic/",
     },
 }
 
@@ -1904,6 +1904,9 @@ def main():
         # invest API credits into generating the full image pipeline.
         published_article_count = get_published_article_count()
         clean_destination = destination_link.split("?")[0].rstrip("/") if destination_link else ""
+        if clean_destination.rstrip("/") == "https://nailosmetic.com":
+            print("   ⛔ Skipping pin: destination is homepage only — no post-level link. Fix BOARD_MAP, do not publish to homepage.")
+            return
         url_safe, url_reason = is_url_safe_to_pin(clean_destination, published_article_count)
         if not url_safe:
             print(f"\n   🛡️ SAFETY GATE: {url_reason}")
