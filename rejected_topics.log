@@ -827,3 +827,11 @@
    Match Overlap  : 100.0%
    Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 2311] '15 Eerie & Elegant Halloween Nail Ideas to Elevate Your Spooky Season Style'.
 --------------------------------------------------------------------------------
+[2026-10-27 00:13:10] REJECTED TOPIC: "halloween witch makeup ideas"
+   Cleaned Topic  : "halloween witch makeup"
+   Matched Post   : [ID: 3290] "Creative Halloween Makeup 2026"
+   Post URL       : https://nailosmetic.com/creative-halloween-makeup-2026/
+   Post Date      : 2026-09-17
+   Match Overlap  : 66.7%
+   Reason         : Recency rule: 'Creative Halloween Makeup 2026' published 40 days ago (<= 45 days) with 66.7% topic match.
+--------------------------------------------------------------------------------
