@@ -1423,6 +1423,15 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
     # Clean access token
     clean_access_token = str(access_token).strip("'").strip('"')
 
+    # Pin template (Oct 2026 plan): Title Case title, description ends with a
+    # specific click reason only the page delivers, alt text defaults to title.
+    if title and title == title.lower():
+        title = title.title()
+    title = title[:100]
+    if "Full guide at the link" not in (description or ""):
+        description = ((description or "").strip() + " Full guide at the link.").strip()
+    if not alt_text:
+        alt_text = title
     print(f"   🔗 Destination link: {destination_link}")
     print(f"   📋 Board ID: {board_id}")
 
