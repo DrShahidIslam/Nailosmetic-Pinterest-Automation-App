@@ -281,7 +281,7 @@
         {
             "keyword": "braids",
             "growth_mom": -10,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "monthly"
         },
         {
@@ -399,12 +399,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "halloween witch makeup ideas",
-            "growth_mom": 2000,
-            "growth_yoy": -6,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "bear makeup halloween",
             "growth_mom": 1500,
             "growth_yoy": -50,
@@ -442,6 +436,12 @@
         },
         {
             "keyword": "halloween crazy hair day ideas",
+            "growth_mom": 1000,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "leopard makeup halloween",
             "growth_mom": 1000,
             "growth_yoy": -20,
             "trend_type": "seasonal"
@@ -949,7 +949,7 @@
         {
             "keyword": "christmas mantle",
             "growth_mom": 200,
-            "growth_yoy": 2,
+            "growth_yoy": 1,
             "trend_type": "growing"
         },
         {
@@ -961,7 +961,7 @@
         {
             "keyword": "ralph lauren christmas tree",
             "growth_mom": 200,
-            "growth_yoy": -3,
+            "growth_yoy": -4,
             "trend_type": "growing"
         },
         {
@@ -1479,7 +1479,7 @@
         {
             "keyword": "clown costume",
             "growth_mom": 200,
-            "growth_yoy": 6,
+            "growth_yoy": 5,
             "trend_type": "monthly"
         },
         {
@@ -1544,7 +1544,7 @@
         },
         {
             "keyword": "rave outfits",
-            "growth_mom": 1,
+            "growth_mom": 0,
             "growth_yoy": -3,
             "trend_type": "monthly"
         },
@@ -1586,7 +1586,7 @@
         },
         {
             "keyword": "dress",
-            "growth_mom": -7,
+            "growth_mom": -8,
             "growth_yoy": 2,
             "trend_type": "monthly"
         },
@@ -1743,7 +1743,7 @@
         {
             "keyword": "easy halloween costumes for women",
             "growth_mom": 1000,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "growing"
         },
         {
@@ -2193,7 +2193,7 @@
         {
             "keyword": "simple witch costume",
             "growth_mom": 500,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "seasonal"
         },
         {

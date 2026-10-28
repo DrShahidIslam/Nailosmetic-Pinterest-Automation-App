@@ -843,3 +843,11 @@
    Match Overlap  : 66.7%
    Reason         : Recency rule: 'Creative Halloween Makeup 2026' published 40 days ago (<= 45 days) with 66.7% topic match.
 --------------------------------------------------------------------------------
+[2026-10-28 00:13:25] REJECTED TOPIC: "quick halloween makeup"
+   Cleaned Topic  : "quick halloween makeup"
+   Matched Post   : [ID: 3290] "Creative Halloween Makeup 2026"
+   Post URL       : https://nailosmetic.com/creative-halloween-makeup-2026/
+   Post Date      : 2026-09-17
+   Match Overlap  : 66.7%
+   Reason         : Recency rule: 'Creative Halloween Makeup 2026' published 41 days ago (<= 45 days) with 66.7% topic match.
+--------------------------------------------------------------------------------
