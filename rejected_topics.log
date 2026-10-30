@@ -883,3 +883,11 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Fall Sunflower Nails' published 45 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-30 15:30:01] REJECTED TOPIC: "november nails"
+   Cleaned Topic  : "november nail"
+   Matched Post   : [ID: 3261] "Fall Sunflower Nails"
+   Post URL       : https://nailosmetic.com/fall-sunflower-nails/
+   Post Date      : 2026-09-15
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Fall Sunflower Nails' published 45 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
