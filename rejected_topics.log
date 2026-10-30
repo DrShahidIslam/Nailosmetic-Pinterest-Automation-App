@@ -875,3 +875,11 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Pumpkin Spice Latte Makeup Look' published 44 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-10-30 00:33:40] REJECTED TOPIC: "thanksgiving nail designs"
+   Cleaned Topic  : "thanksgiving nail"
+   Matched Post   : [ID: 3261] "Fall Sunflower Nails"
+   Post URL       : https://nailosmetic.com/fall-sunflower-nails/
+   Post Date      : 2026-09-15
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Fall Sunflower Nails' published 45 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
