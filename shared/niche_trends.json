@@ -287,7 +287,7 @@
         {
             "keyword": "braids",
             "growth_mom": -20,
-            "growth_yoy": -6,
+            "growth_yoy": -7,
             "trend_type": "monthly"
         },
         {
@@ -403,6 +403,12 @@
             "growth_mom": 2000,
             "growth_yoy": -20,
             "trend_type": "seasonal"
+        },
+        {
+            "keyword": "black cat costume makeup",
+            "growth_mom": 2000,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
         }
     ],
     "home_garden": [
@@ -415,7 +421,7 @@
         {
             "keyword": "room ideas",
             "growth_mom": -10,
-            "growth_yoy": -6,
+            "growth_yoy": -7,
             "trend_type": "monthly"
         },
         {
@@ -672,7 +678,7 @@
         },
         {
             "keyword": "bedroom inspo",
-            "growth_mom": -9,
+            "growth_mom": -10,
             "growth_yoy": 40,
             "trend_type": "monthly"
         },
@@ -919,7 +925,7 @@
         {
             "keyword": "room inspiration bedroom",
             "growth_mom": 200,
-            "growth_yoy": 7,
+            "growth_yoy": 6,
             "trend_type": "growing"
         },
         {
@@ -961,7 +967,7 @@
         {
             "keyword": "christmas door ideas",
             "growth_mom": 200,
-            "growth_yoy": 80,
+            "growth_yoy": 70,
             "trend_type": "growing"
         },
         {
@@ -1075,7 +1081,7 @@
         {
             "keyword": "christmas bathroom decor",
             "growth_mom": 300,
-            "growth_yoy": -20,
+            "growth_yoy": -30,
             "trend_type": "seasonal"
         },
         {
@@ -1383,7 +1389,7 @@
         {
             "keyword": "y2k outfits",
             "growth_mom": -20,
-            "growth_yoy": 7,
+            "growth_yoy": 6,
             "trend_type": "monthly"
         },
         {
@@ -1635,7 +1641,7 @@
         {
             "keyword": "simple vampire costume",
             "growth_mom": 1500,
-            "growth_yoy": 1,
+            "growth_yoy": 0,
             "trend_type": "growing"
         },
         {
@@ -2191,12 +2197,6 @@
             "trend_type": "seasonal"
         },
         {
-            "keyword": "pink corset costume",
-            "growth_mom": 600,
-            "growth_yoy": -30,
-            "trend_type": "seasonal"
-        },
-        {
             "keyword": "work costumes",
             "growth_mom": 500,
             "growth_yoy": 50,
@@ -2206,6 +2206,12 @@
             "keyword": "basic halloween costumes",
             "growth_mom": 500,
             "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "rebelde costume",
+            "growth_mom": 500,
+            "growth_yoy": 30,
             "trend_type": "seasonal"
         }
     ],
