@@ -899,3 +899,11 @@
    Match Overlap  : 66.7%
    Reason         : Recency rule: 'Creative Halloween Makeup 2026' published 44 days ago (<= 45 days) with 66.7% topic match.
 --------------------------------------------------------------------------------
+[2026-10-31 14:58:29] REJECTED TOPIC: "simple november nails"
+   Cleaned Topic  : "november nail"
+   Matched Post   : [ID: 3281] "Fall Checkered Nails"
+   Post URL       : https://nailosmetic.com/fall-checkered-nails/
+   Post Date      : 2026-09-16
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Fall Checkered Nails' published 45 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
