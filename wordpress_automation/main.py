@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import sys
 import tempfile
@@ -24,6 +25,93 @@ from image_manager import ImageManager
 from quality_gate import run_quality_gate
 from topic_gate import check_topic
 from shared_data_manager import SmartJSON
+
+# ============================================================================
+# AUTO-FIX (Oct 2026 traffic sprint): teach the flow to satisfy the QA gate
+# deterministically instead of drafting every post. The gate failures seen
+# 28-31 Oct were: lowercase titles (generator emits them), 4 internal links
+# (min 8), 9 external links (max 3), and no TOC in 2000+ word posts. All four
+# are mechanical and fixable in code; the gate itself is NOT weakened.
+# ============================================================================
+_MINOR_WORDS = {"a", "an", "the", "and", "or", "but", "of", "for", "with", "to", "in", "on", "at", "by", "from", "vs"}
+
+def _smart_title_case(title):
+    words = (title or "").split()
+    out = []
+    for i, w in enumerate(words):
+        lw = w.lower()
+        if 0 < i < len(words) - 1 and lw in _MINOR_WORDS:
+            out.append(lw)
+        elif any(c.isupper() for c in w[1:]) or any(c.isdigit() for c in w):
+            out.append(w)
+        else:
+            out.append(w[:1].upper() + w[1:])
+    return " ".join(out)
+
+def _autofix_article(plan, html_content, published_entries, current_slug=""):
+    """Returns (plan, html_content) with mechanical gate issues fixed."""
+    # 1. Title Case (only when the title is all-lowercase, as generated)
+    t = (plan.get("title") or "").strip()
+    if t and t == t.lower() and any(c.isalpha() for c in t):
+        plan["title"] = _smart_title_case(t)
+        print(f"   Auto-fix: title Title-Cased -> {plan['title']}")
+
+    # 2. External links: keep the first 3, unwrap the rest (anchor text stays)
+    ext_iter = list(re.finditer(r'<a\b[^>]*href=["\'](https?://(?!(?:www\.)?nailosmetic\.com)[^"\']+)["\'][^>]*>(.*?)</a>', html_content, re.I | re.S))
+    if len(ext_iter) > 3:
+        pieces, last = [], 0
+        for i, m in enumerate(ext_iter):
+            if i < 3:
+                continue
+            pieces.append(html_content[last:m.start()])
+            pieces.append(re.sub(r"<[^>]+>", "", m.group(2)))
+            last = m.end()
+        pieces.append(html_content[last:])
+        html_content = "".join(pieces)
+        print(f"   Auto-fix: external links trimmed {len(ext_iter)} -> 3 (extra links unwrapped to text)")
+
+    # 3. Internal links: top up to 8 with a Related section from published
+    # posts (real URLs + descriptive anchors; never homepage, never current).
+    internal = re.findall(r'href=["\']https?://(?:www\.)?nailosmetic\.com[^"\']+', html_content, re.I)
+    if len(internal) < 8:
+        need = 8 - len(internal)
+        seen = set(re.findall(r'nailosmetic\.com/([^/"\'\s]+)/?', html_content))
+        cands = []
+        for p in published_entries or []:
+            slug = p.get("slug") or ""
+            url = p.get("url") or (f"https://nailosmetic.com/{slug}/" if slug else "")
+            if not url or slug == current_slug or slug in seen:
+                continue
+            anchor = (p.get("topic") or slug.replace("-", " ")).strip()
+            cands.append((url, anchor))
+            if len(cands) >= need:
+                break
+        if cands:
+            items = "".join(f'<li><a href="{u}">{a}</a></li>' for u, a in cands)
+            html_content += f'<h2>More Ideas You Will Love</h2><ul>{items}</ul>'
+            print(f"   Auto-fix: internal links topped up {len(internal)} -> {len(internal) + len(cands)} (Related section)")
+
+    # 4. TOC for long posts: add ids to H2s and prepend a jump-link TOC
+    # when no jump links exist yet.
+    words = len(re.sub(r"<[^>]+>", " ", html_content).split())
+    if words > 2000 and not re.search(r'href=["\']#[^"\']+["\']', html_content):
+        heads = []
+        def _repl(m):
+            attrs, inner = m.group(1) or "", m.group(2)
+            text = re.sub(r"<[^>]+>", "", inner).strip()
+            slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:60] or f"section-{len(heads)+1}"
+            heads.append((slug, text))
+            if "id=" in attrs:
+                return m.group(0)
+            return f'<h2 id="{slug}"{attrs}>{inner}</h2>'
+        html_content = re.sub(r"<h2([^>]*)>(.*?)</h2>", _repl, html_content, flags=re.I | re.S)
+        if heads:
+            toc_items = "".join(f'<li><a href="#{slug}">{text}</a></li>' for slug, text in heads)
+            toc = f'<nav class="toc"><h2>Table of Contents</h2><ul>{toc_items}</ul></nav>'
+            html_content = toc + html_content
+            print(f"   Auto-fix: TOC inserted with {len(heads)} jump links")
+    return plan, html_content
+
 
 def validate_and_fix_category(title: str, current_category: str, chosen_niche: str) -> str:
     """
@@ -430,6 +518,18 @@ def main():
     # 3. Pre-build HTML & Run Publish QA Gate BEFORE image generation
     # Fail-closed: thin/skeleton articles become drafts and cost ZERO image credits.
     html_content = gen.build_elite_html(plan)
+
+    # 3b. Auto-fix mechanical gate issues (title case, link counts, TOC)
+    try:
+        _pub_entries = []
+        if published_links_path.exists():
+            with open(published_links_path, "r") as f:
+                _all_pub = json.load(f)
+            _pub_entries = [p for p in _all_pub if p.get("niche") == chosen_niche] or list(_all_pub)
+        plan, html_content = _autofix_article(plan, html_content, _pub_entries)
+    except Exception as e:
+        print(f"   Auto-fix skipped ({e}); gate will judge the original article.")
+
     feat_media_id = None
 
     print("🛡️ Running publish QA gate...")
