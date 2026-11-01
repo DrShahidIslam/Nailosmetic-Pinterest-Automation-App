@@ -1431,15 +1431,25 @@ def publish_to_pinterest(image_path: str, title: str, description: str, board_id
     # Clean access token
     clean_access_token = str(access_token).strip("'").strip('"')
 
-    # Pin template (Oct 2026 plan): Title Case title, description ends with a
-    # specific click reason only the page delivers, alt text defaults to title.
+    # Pin template (Nov 2026 research refresh): Title Case title; description
+    # ~200+ chars with only a handful of keywords and NO hashtags (deprecated
+    # for ranking), ending with the specific click reason; descriptive alt
+    # text on EVERY pin (Tailwind benchmark: alt text correlated with about
+    # +123% outbound clicks), never a bare title.
     if title and title == title.lower():
         title = title.title()
     title = title[:100]
-    if "Full guide at the link" not in (description or ""):
-        description = ((description or "").strip() + " Full guide at the link.").strip()
-    if not alt_text:
-        alt_text = title
+    description = " ".join(w for w in (description or "").split() if not w.startswith("#")).strip()
+    if "Full guide at the link" in description:
+        description = description.replace("Full guide at the link.", "").replace("Full guide at the link", "").strip()
+    if len(description) < 180 and "shade names" not in description:
+        description = (description + " Every design with shade names, shape and finish details, plus how to ask for it, is inside.").strip()
+    description = (description + " Full guide at the link.").strip()[:500]
+    _alt = (alt_text or "").strip()
+    if len(_alt) < 50 or _alt.lower() == title.lower():
+        alt_text = f"{title} — design ideas shown in detail with colours, finishes and styling notes. The full guide with every design is on nailosmetic.com."
+    else:
+        alt_text = _alt
     print(f"   🔗 Destination link: {destination_link}")
     print(f"   📋 Board ID: {board_id}")
 
