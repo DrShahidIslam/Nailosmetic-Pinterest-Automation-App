@@ -56,6 +56,73 @@ def _autofix_article(plan, html_content, published_entries, current_slug=""):
         plan["title"] = _smart_title_case(t)
         print(f"   Auto-fix: title Title-Cased -> {plan['title']}")
 
+    # 1b. Focus keyword sanity (Nov 2026): the generator sets the focus
+    # keyword to the whole long topic phrase (e.g. 7 words, 46 chars). The
+    # gate then demands that exact phrase inside a <=60-char SEO title and
+    # inside one section heading — jointly near-impossible, so posts drafted
+    # on 1-2 Nov even after the other fixes. Shorten an over-long keyword to
+    # its core noun phrase (cut at the first stopword after 3+ words). The
+    # full phrase in the intro/meta contains the core as a substring, so the
+    # intro and meta keyword checks still pass on the real text.
+    seo = plan.get("seo") or {}
+    kw = (seo.get("focus_keyword") or "").strip()
+    if len(kw) > 30:
+        words = kw.split()
+        cut = len(words)
+        for i, w in enumerate(words):
+            if i >= 3 and w.lower() in _MINOR_WORDS:
+                cut = i
+                break
+        core = " ".join(words[:max(3, min(cut, 5))]).strip()
+        if 0 < len(core) < len(kw):
+            seo["focus_keyword"] = core
+            plan["seo"] = seo
+            kw = core
+            print(f"   Auto-fix: focus keyword shortened -> '{core}'")
+
+    # 1c. SEO title: hard gate is 1-60 chars AND must contain the keyword.
+    st = (seo.get("title") or "").strip()
+    if len(st) > 60:
+        trimmed = st[:60].rsplit(" ", 1)[0].strip(" :-|")
+        if trimmed:
+            st = trimmed
+            seo["title"] = st
+            plan["seo"] = seo
+            print(f"   Auto-fix: SEO title trimmed to {len(st)} chars")
+    if kw and st and kw.lower() not in st.lower():
+        seo["title"] = _smart_title_case(kw)[:60]
+        plan["seo"] = seo
+        st = seo["title"]
+        print(f"   Auto-fix: SEO title rebuilt around keyword -> '{st}'")
+
+    # 1d. Keyword in a section heading: the gate checks plan section
+    # headings; the generator writes question-style headings that rarely
+    # contain the exact phrase. Prefix the FAQ section's heading (or the
+    # first section's) with the keyword, in the plan AND in the built HTML
+    # together, so the page itself carries the fix — never plan-only.
+    if kw:
+        sections = plan.get("sections") or []
+        if sections and not any(kw.lower() in (sec.get("heading") or "").lower() for sec in sections):
+            target = next((sec for sec in sections if sec.get("preferred_format") == "faq"), sections[0])
+            old_h = (target.get("heading") or "").strip()
+            if old_h:
+                new_h = f"{_smart_title_case(kw)}: {old_h}"
+                state = {"done": False}
+                def _h2_repl(m):
+                    if state["done"]:
+                        return m.group(0)
+                    inner_text = re.sub(r"<[^>]+>", "", m.group(2)).strip()
+                    if inner_text == old_h:
+                        state["done"] = True
+                        return f"{m.group(1)}{new_h}{m.group(3)}"
+                    return m.group(0)
+                html_content = re.sub(r"(<h2[^>]*>)(.*?)(</h2>)", _h2_repl, html_content, flags=re.I | re.S)
+                if state["done"]:
+                    target["heading"] = new_h
+                    print(f"   Auto-fix: keyword prefixed into section heading -> '{new_h}'")
+                else:
+                    print(f"   Auto-fix: WARNING heading '{old_h}' not found as an H2 in HTML; heading fix skipped")
+
     # 2. External links: keep the first 3, unwrap the rest (anchor text stays)
     ext_iter = list(re.finditer(r'<a\b[^>]*href=["\'](https?://(?!(?:www\.)?nailosmetic\.com)[^"\']+)["\'][^>]*>(.*?)</a>', html_content, re.I | re.S))
     if len(ext_iter) > 3:
