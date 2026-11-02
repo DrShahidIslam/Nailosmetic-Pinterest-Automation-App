@@ -347,7 +347,7 @@
         {
             "keyword": "halloween crazy hair day ideas",
             "growth_mom": 3000,
-            "growth_yoy": -4,
+            "growth_yoy": -5,
             "trend_type": "seasonal"
         },
         {
@@ -793,7 +793,7 @@
         {
             "keyword": "christmas outdoor decor ideas",
             "growth_mom": 300,
-            "growth_yoy": 200,
+            "growth_yoy": 100,
             "trend_type": "growing"
         },
         {
@@ -1177,7 +1177,7 @@
         {
             "keyword": "christmas front porch ideas",
             "growth_mom": 200,
-            "growth_yoy": -8,
+            "growth_yoy": -9,
             "trend_type": "seasonal"
         },
         {
@@ -1293,7 +1293,7 @@
         {
             "keyword": "outfit ideas",
             "growth_mom": -20,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "monthly"
         },
         {
@@ -1647,7 +1647,7 @@
         {
             "keyword": "halloween scrubs outfit",
             "growth_mom": 1500,
-            "growth_yoy": 4000,
+            "growth_yoy": 3500,
             "trend_type": "growing"
         },
         {
@@ -1857,7 +1857,7 @@
         {
             "keyword": "white dress halloween costume",
             "growth_mom": 700,
-            "growth_yoy": -9,
+            "growth_yoy": -10,
             "trend_type": "growing"
         },
         {
@@ -1900,12 +1900,6 @@
             "keyword": "easy costumes women",
             "growth_mom": 1500,
             "growth_yoy": 200,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "simple halloween costumes for work",
-            "growth_mom": 1500,
-            "growth_yoy": -40,
             "trend_type": "seasonal"
         },
         {
@@ -2182,6 +2176,12 @@
             "keyword": "basic halloween costumes",
             "growth_mom": 600,
             "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "diy costumes women",
+            "growth_mom": 600,
+            "growth_yoy": -30,
             "trend_type": "seasonal"
         }
     ],
