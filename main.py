@@ -95,7 +95,7 @@ BOARD_MAP = {
         "board_id": os.getenv("PINTEREST_BOARD_BLACK_CHERRY", ""),
         "name": "Black Cherry Nails",
         "niche": "nails",
-        "link": "https://nailosmetic.com/best-black-nail-designs/",
+        "link": "https://nailosmetic.com/black-cherry-nails-complete-guide/",
     },
     "minimalist_clean": {
         "board_id": os.getenv("PINTEREST_BOARD_MINIMALIST", ""),
