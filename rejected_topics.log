@@ -931,3 +931,11 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Hoco Makeup Inspo' published 43 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-11-04 01:01:10] REJECTED TOPIC: "simple november nails"
+   Cleaned Topic  : "november nail"
+   Matched Post   : [ID: 3376] "September Fall Nails"
+   Post URL       : https://nailosmetic.com/september-fall-nails/
+   Post Date      : 2026-09-21
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'September Fall Nails' published 44 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------

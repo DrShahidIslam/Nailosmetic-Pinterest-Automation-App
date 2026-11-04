@@ -671,12 +671,6 @@
             "trend_type": "monthly"
         },
         {
-            "keyword": "refresh my living room",
-            "growth_mom": 1500,
-            "growth_yoy": 10001,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "painting pumpkins ideas diy girly",
             "growth_mom": 1000,
             "growth_yoy": -50,
@@ -968,6 +962,12 @@
             "keyword": "christmas decor ideas bedroom",
             "growth_mom": 200,
             "growth_yoy": -60,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "anthropologie christmas",
+            "growth_mom": 200,
+            "growth_yoy": -10,
             "trend_type": "growing"
         },
         {
@@ -1729,12 +1729,6 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "outfits for a south of france trip",
-            "growth_mom": 1000,
-            "growth_yoy": 10001,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "halloween scrubs outfit",
             "growth_mom": 1000,
             "growth_yoy": 3000,
@@ -1861,15 +1855,21 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "date night look",
-            "growth_mom": 900,
-            "growth_yoy": 1000,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "cheetah costume women",
             "growth_mom": 800,
             "growth_yoy": 50,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "simple costumes for women",
+            "growth_mom": 800,
+            "growth_yoy": 200,
+            "trend_type": "growing"
+        },
+        {
+            "keyword": "deer costume outfit",
+            "growth_mom": 800,
+            "growth_yoy": 20,
             "trend_type": "growing"
         },
         {
