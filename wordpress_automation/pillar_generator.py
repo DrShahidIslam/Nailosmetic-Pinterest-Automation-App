@@ -34,7 +34,7 @@ def _kid() -> str:
 # Gemini call wrapper with key-cycling and model fallback
 # ─────────────────────────────────────────────────────────────────────────────
 def _gemini_call(api_keys: List[str], prompt: str, label: str = "") -> str:
-    models = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-3.1-flash-lite-preview"]
+    models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.1-flash-lite-preview", "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.7-flash", "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
     for key in api_keys:
         key_hint = f"...{key[-4:]}"
         client = genai.Client(api_key=key)
