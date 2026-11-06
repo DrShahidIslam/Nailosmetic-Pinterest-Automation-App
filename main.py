@@ -412,7 +412,7 @@ Available board categories (pick the MOST relevant key):
 Ensure the 'board_category' value in your JSON response is EXACTLY one of the keys listed above."""
 
     import re
-    models_to_try = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.1-flash-lite-preview", "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.7-flash", "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+    models_to_try = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.8-flash", "gemini-3.6-flash"]
     max_retries_per_model = 3
     success = False
     raw_text = ""
@@ -585,7 +585,7 @@ def analyze_image_for_text_placement(image_path: str) -> str:
             "Return ONLY a JSON object with this key: 'placement' which can be 'top' or 'bottom'."
         )
         
-        models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.1-flash-lite-preview", "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.7-flash", "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+        models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.8-flash", "gemini-3.6-flash"]
         for m in models:
             try:
                 response = client.models.generate_content(

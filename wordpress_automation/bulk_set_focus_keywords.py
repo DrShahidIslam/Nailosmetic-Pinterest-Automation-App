@@ -36,7 +36,7 @@ def derive_keyword(api_keys: List[str], post_title: str, post_slug: str) -> str:
     Ask Gemini to pick the single best SEO focus keyword for this post.
     Returns a short keyword string (2-5 words).
     """
-    models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.1-flash-lite-preview", "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.7-flash", "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+    models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.8-flash", "gemini-3.6-flash"]
     prompt = f"""
 You are an SEO expert. Given the blog post title and URL slug below, return the
 single BEST focus keyword for Rank Math SEO — the exact phrase real users type
