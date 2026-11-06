@@ -138,5 +138,15 @@
     "candidate_attempted": "black nails for edgy aesthetic",
     "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 1260] '7 Edgy Black Nail Designs That Are Defining The Season'.",
     "queued_at": "2026-10-25 22:59:55"
+  },
+  {
+    "id": "3186",
+    "title": "Cute Nails for Fall",
+    "slug": "cute-nails-for-fall",
+    "link": "https://nailosmetic.com/cute-nails-for-fall/",
+    "date": "2026-09-11",
+    "candidate_attempted": "fall thanksgiving nails",
+    "reason": "High topic overlap (80.0% >= 80%) with existing post [ID: 3186] 'Cute Nails for Fall'.",
+    "queued_at": "2026-11-06 16:33:51"
   }
 ]
