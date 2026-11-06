@@ -76,7 +76,7 @@ BOARD_MAP = {
         "board_id": os.getenv("PINTEREST_BOARD_HOLIDAY") or "1106689377123778685",
         "name": "Holiday & Winter Nails, Glam & Home",
         "niche": "nails",
-        "link": "https://nailosmetic.com/fall-nails-inspo-2026/",
+        "link": "https://nailosmetic.com/winter-nail-designs-complete-guide/",
     },
     # --- Nail Boards ---
     "aesthetic_nail_art": {
@@ -2095,3 +2095,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
