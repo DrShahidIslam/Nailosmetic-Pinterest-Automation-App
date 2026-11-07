@@ -1,5 +1,5 @@
 {
-  "next_index": 8,
+  "next_index": 9,
   "published": [
     {
       "index": 0,
@@ -40,6 +40,11 @@
       "index": 7,
       "slug": "coffee-caramel-nails-complete-guide",
       "url": "https://nailosmetic.com/coffee-caramel-nails-complete-guide/"
+    },
+    {
+      "index": 8,
+      "slug": "pedicure-ideas-complete-guide",
+      "url": "https://nailosmetic.com/pedicure-ideas-complete-guide/"
     }
   ]
 }
