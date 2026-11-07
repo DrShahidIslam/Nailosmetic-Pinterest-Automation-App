@@ -955,3 +955,11 @@
    Match Overlap  : 80.0%
    Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 3186] 'Cute Nails for Fall'.
 --------------------------------------------------------------------------------
+[2026-11-07 00:35:41] REJECTED TOPIC: "november nails ideas 2026"
+   Cleaned Topic  : "november nail"
+   Matched Post   : [ID: 3408] "Fall Nails Inspo 2026"
+   Post URL       : https://nailosmetic.com/fall-nails-inspo-2026/
+   Post Date      : 2026-09-23
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Fall Nails Inspo 2026' published 45 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
