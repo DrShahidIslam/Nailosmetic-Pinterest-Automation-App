@@ -971,3 +971,11 @@
    Match Overlap  : 80.0%
    Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 3186] 'Cute Nails for Fall'.
 --------------------------------------------------------------------------------
+[2026-11-08 00:09:37] REJECTED TOPIC: "simple november nails"
+   Cleaned Topic  : "november nail"
+   Matched Post   : [ID: 3423] "Trendy Halloween Nails"
+   Post URL       : https://nailosmetic.com/trendy-halloween-nails/
+   Post Date      : 2026-09-24
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Trendy Halloween Nails' published 45 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
