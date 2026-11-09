@@ -233,7 +233,7 @@
         {
             "keyword": "hairstyles",
             "growth_mom": -30,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "monthly"
         },
         {
@@ -359,7 +359,7 @@
         {
             "keyword": "black cat makeup halloween",
             "growth_mom": 4000,
-            "growth_yoy": 7,
+            "growth_yoy": 6,
             "trend_type": "growing"
         },
         {
@@ -499,7 +499,7 @@
         {
             "keyword": "bathroom",
             "growth_mom": -6,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "monthly"
         },
         {
@@ -793,7 +793,7 @@
         {
             "keyword": "bedroom christmas decor",
             "growth_mom": 700,
-            "growth_yoy": -20,
+            "growth_yoy": -30,
             "trend_type": "growing"
         },
         {
@@ -1063,7 +1063,7 @@
         {
             "keyword": "christmas chalkboard ideas",
             "growth_mom": 1000,
-            "growth_yoy": 70,
+            "growth_yoy": 60,
             "trend_type": "seasonal"
         },
         {
@@ -1123,7 +1123,7 @@
         {
             "keyword": "tv stand christmas decor",
             "growth_mom": 700,
-            "growth_yoy": -40,
+            "growth_yoy": -50,
             "trend_type": "seasonal"
         },
         {
@@ -1371,7 +1371,7 @@
         {
             "keyword": "shoes",
             "growth_mom": 90,
-            "growth_yoy": 70,
+            "growth_yoy": 60,
             "trend_type": "monthly"
         },
         {
@@ -1467,7 +1467,7 @@
         {
             "keyword": "group halloween costumes",
             "growth_mom": -20,
-            "growth_yoy": -7,
+            "growth_yoy": -8,
             "trend_type": "monthly"
         },
         {
@@ -1491,7 +1491,7 @@
         {
             "keyword": "rainy day outfit",
             "growth_mom": -1,
-            "growth_yoy": -1,
+            "growth_yoy": -2,
             "trend_type": "monthly"
         },
         {
@@ -1521,7 +1521,7 @@
         {
             "keyword": "sailor costume",
             "growth_mom": 100,
-            "growth_yoy": 10,
+            "growth_yoy": 9,
             "trend_type": "monthly"
         },
         {
@@ -1923,7 +1923,7 @@
         {
             "keyword": "red dress halloween costume",
             "growth_mom": 700,
-            "growth_yoy": -5,
+            "growth_yoy": -6,
             "trend_type": "growing"
         },
         {
@@ -2199,7 +2199,7 @@
         {
             "keyword": "diy vampire costume women",
             "growth_mom": 600,
-            "growth_yoy": 20,
+            "growth_yoy": 10,
             "trend_type": "seasonal"
         },
         {
