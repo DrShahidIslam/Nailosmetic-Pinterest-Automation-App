@@ -995,3 +995,11 @@
    Match Overlap  : 80.0%
    Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 3186] 'Cute Nails for Fall'.
 --------------------------------------------------------------------------------
+[2026-11-11 16:51:40] REJECTED TOPIC: "simple cat makeup"
+   Cleaned Topic  : "cat makeup"
+   Matched Post   : [ID: 3490] "Fall Cat Eye Nail Designs"
+   Post URL       : https://nailosmetic.com/fall-cat-eye-nail-designs/
+   Post Date      : 2026-09-27
+   Match Overlap  : 50.0%
+   Reason         : Recency rule: 'Fall Cat Eye Nail Designs' published 45 days ago (<= 45 days) with 50.0% topic match.
+--------------------------------------------------------------------------------
