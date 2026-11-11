@@ -45,7 +45,7 @@
         {
             "keyword": "thanksgiving nails",
             "growth_mom": 1000,
-            "growth_yoy": 40,
+            "growth_yoy": 30,
             "trend_type": "monthly"
         },
         {
@@ -279,7 +279,7 @@
         {
             "keyword": "nov nails",
             "growth_mom": 3000,
-            "growth_yoy": 60,
+            "growth_yoy": 50,
             "trend_type": "growing"
         },
         {
@@ -555,12 +555,6 @@
             "trend_type": "growing"
         },
         {
-            "keyword": "bear nose makeup",
-            "growth_mom": 3500,
-            "growth_yoy": -20,
-            "trend_type": "growing"
-        },
-        {
             "keyword": "dalmation makeup",
             "growth_mom": 3000,
             "growth_yoy": 300,
@@ -621,6 +615,12 @@
             "trend_type": "growing"
         },
         {
+            "keyword": "easy catrina makeup",
+            "growth_mom": 2500,
+            "growth_yoy": 70,
+            "trend_type": "growing"
+        },
+        {
             "keyword": "easy cat makeup",
             "growth_mom": 6000,
             "growth_yoy": 60,
@@ -648,12 +648,6 @@
             "keyword": "black cat makeup halloween",
             "growth_mom": 3500,
             "growth_yoy": 20,
-            "trend_type": "seasonal"
-        },
-        {
-            "keyword": "bear nose makeup",
-            "growth_mom": 3500,
-            "growth_yoy": -10,
             "trend_type": "seasonal"
         },
         {
@@ -774,6 +768,12 @@
             "keyword": "black cat halloween makeup",
             "growth_mom": 2000,
             "growth_yoy": 7,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "easy skeleton makeup",
+            "growth_mom": 2000,
+            "growth_yoy": -10,
             "trend_type": "seasonal"
         }
     ],
@@ -985,7 +985,7 @@
         {
             "keyword": "apartment decor",
             "growth_mom": -20,
-            "growth_yoy": 30,
+            "growth_yoy": 20,
             "trend_type": "monthly"
         },
         {
@@ -1573,7 +1573,7 @@
         {
             "keyword": "christmas room decor ideas",
             "growth_mom": 700,
-            "growth_yoy": -20,
+            "growth_yoy": -30,
             "trend_type": "seasonal"
         },
         {
@@ -1725,7 +1725,7 @@
         {
             "keyword": "thanksgiving outfit",
             "growth_mom": 400,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "monthly"
         },
         {
@@ -1959,7 +1959,7 @@
         {
             "keyword": "leggings outfit",
             "growth_mom": -20,
-            "growth_yoy": -2,
+            "growth_yoy": -3,
             "trend_type": "monthly"
         },
         {
@@ -2499,7 +2499,7 @@
         {
             "keyword": "thanksgiving outfit",
             "growth_mom": 400,
-            "growth_yoy": 4,
+            "growth_yoy": 3,
             "trend_type": "seasonal"
         },
         {
