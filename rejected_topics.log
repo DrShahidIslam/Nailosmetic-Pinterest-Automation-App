@@ -1003,3 +1003,19 @@
    Match Overlap  : 50.0%
    Reason         : Recency rule: 'Fall Cat Eye Nail Designs' published 45 days ago (<= 45 days) with 50.0% topic match.
 --------------------------------------------------------------------------------
+[2026-11-12 17:18:30] REJECTED TOPIC: "november nails designs fall"
+   Cleaned Topic  : "november nail fall"
+   Matched Post   : [ID: 3186] "Cute Nails for Fall"
+   Post URL       : https://nailosmetic.com/cute-nails-for-fall/
+   Post Date      : 2026-09-11
+   Match Overlap  : 80.0%
+   Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 3186] 'Cute Nails for Fall'.
+--------------------------------------------------------------------------------
+[2026-11-12 17:18:30] REJECTED TOPIC: "early fall nails designs"
+   Cleaned Topic  : "early fall nail"
+   Matched Post   : [ID: 3312] "Early Autumn Nails"
+   Post URL       : https://nailosmetic.com/fall-nails-inspo-2026/
+   Post Date      : 2026-09-18
+   Match Overlap  : 100.0%
+   Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 3312] 'Early Autumn Nails'.
+--------------------------------------------------------------------------------

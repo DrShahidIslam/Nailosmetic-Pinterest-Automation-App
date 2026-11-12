@@ -148,5 +148,15 @@
     "candidate_attempted": "fall thanksgiving nails",
     "reason": "High topic overlap (80.0% >= 80%) with existing post [ID: 3186] 'Cute Nails for Fall'.",
     "queued_at": "2026-11-06 16:33:51"
+  },
+  {
+    "id": "3312",
+    "title": "Early Autumn Nails",
+    "slug": "fall-nails-inspo-2026",
+    "link": "https://nailosmetic.com/fall-nails-inspo-2026/",
+    "date": "2026-09-18",
+    "candidate_attempted": "early fall nails designs",
+    "reason": "High topic overlap (100.0% >= 80%) with existing post [ID: 3312] 'Early Autumn Nails'.",
+    "queued_at": "2026-11-12 17:18:30"
   }
 ]
