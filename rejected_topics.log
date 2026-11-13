@@ -1019,3 +1019,11 @@
    Match Overlap  : 100.0%
    Reason         : High topic overlap (100.0% >= 80%) with existing post [ID: 3312] 'Early Autumn Nails'.
 --------------------------------------------------------------------------------
+[2026-11-13 01:38:43] REJECTED TOPIC: "november nails designs fall"
+   Cleaned Topic  : "november nail fall"
+   Matched Post   : [ID: 3186] "Cute Nails for Fall"
+   Post URL       : https://nailosmetic.com/cute-nails-for-fall/
+   Post Date      : 2026-09-11
+   Match Overlap  : 80.0%
+   Reason         : High topic overlap (80.0% >= 80%) with existing post [ID: 3186] 'Cute Nails for Fall'.
+--------------------------------------------------------------------------------
