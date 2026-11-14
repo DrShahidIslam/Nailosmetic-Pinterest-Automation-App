@@ -1347,6 +1347,306 @@
             "growth_mom": 600,
             "growth_yoy": 50,
             "trend_type": "growing"
+        },
+        {
+            "keyword": "christmas wallpaper home screen",
+            "growth_mom": 3500,
+            "growth_yoy": 0,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas chalkboard ideas",
+            "growth_mom": 2500,
+            "growth_yoy": 80,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas home screen",
+            "growth_mom": 2000,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "kitchen table christmas decor",
+            "growth_mom": 1500,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cozy christmas wallpaper",
+            "growth_mom": 1500,
+            "growth_yoy": 60,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "dorm christmas decor",
+            "growth_mom": 1500,
+            "growth_yoy": 10,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "snowman door",
+            "growth_mom": 1500,
+            "growth_yoy": 200,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas coffee table decor",
+            "growth_mom": 1500,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas chalkboard",
+            "growth_mom": 1500,
+            "growth_yoy": -1,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "coffee table christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "bathroom christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": -7,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "winter window art",
+            "growth_mom": 1000,
+            "growth_yoy": 200,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "tv stand christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "dining table christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "window christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": 50,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "bedroom christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": -10,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "room christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": 3,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "kitchen island christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": 90,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "garland on mantle",
+            "growth_mom": 1000,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "hallway christmas lights",
+            "growth_mom": 1000,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mantle christmas decor ideas",
+            "growth_mom": 1000,
+            "growth_yoy": -50,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "classroom christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": 6,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mantel christmas decor",
+            "growth_mom": 1000,
+            "growth_yoy": 70,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cardboard christmas decorations",
+            "growth_mom": 1000,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "tension rod garland",
+            "growth_mom": 1000,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "tree topper ideas",
+            "growth_mom": 1000,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas dorm decor",
+            "growth_mom": 1000,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas hallway decorations",
+            "growth_mom": 900,
+            "growth_yoy": -60,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "kitchen cabinet christmas decor",
+            "growth_mom": 900,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "brown and gold christmas tree",
+            "growth_mom": 900,
+            "growth_yoy": 40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "thanksgiving window painting",
+            "growth_mom": 900,
+            "growth_yoy": -5,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "kitchen window christmas decor",
+            "growth_mom": 900,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas lights wallpaper",
+            "growth_mom": 900,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "entry table christmas decor ideas",
+            "growth_mom": 900,
+            "growth_yoy": -60,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas entryway table decor",
+            "growth_mom": 900,
+            "growth_yoy": -10,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "cabinet christmas decor",
+            "growth_mom": 900,
+            "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "garland christmas",
+            "growth_mom": 900,
+            "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas mirror",
+            "growth_mom": 900,
+            "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas plaid wallpaper",
+            "growth_mom": 900,
+            "growth_yoy": -6,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "mantle garland",
+            "growth_mom": 900,
+            "growth_yoy": 4,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas shelf styling",
+            "growth_mom": 800,
+            "growth_yoy": -10,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas decor room",
+            "growth_mom": 800,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "kitchen christmas decor",
+            "growth_mom": 800,
+            "growth_yoy": 30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas island decor",
+            "growth_mom": 800,
+            "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas shelf decor",
+            "growth_mom": 800,
+            "growth_yoy": -40,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas decor bedroom",
+            "growth_mom": 800,
+            "growth_yoy": 20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "christmas room decor ideas",
+            "growth_mom": 800,
+            "growth_yoy": -20,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "living room christmas decor",
+            "growth_mom": 800,
+            "growth_yoy": -30,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "hallway christmas decorating ideas",
+            "growth_mom": 800,
+            "growth_yoy": -10,
+            "trend_type": "seasonal"
+        },
+        {
+            "keyword": "dining room christmas decor",
+            "growth_mom": 800,
+            "growth_yoy": -40,
+            "trend_type": "seasonal"
         }
     ],
     "fashion_style": [
