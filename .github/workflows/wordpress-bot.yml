@@ -11,11 +11,8 @@ env:
   PYTHONUNBUFFERED: "1"
 
 on:
-  schedule:
-    # Run 2 times a day (09:00, 21:00 UTC) to meet the daily article target
-    - cron: "0 9,21 * * *"
-
-  # Allow manual triggering
+  # Schedule removed 2026-11-14 — Shahid manages nailosmetic.com himself now.
+  # Manual runs only; no scheduled articles.
   workflow_dispatch:
 
 concurrency:
